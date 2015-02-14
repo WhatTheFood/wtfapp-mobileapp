@@ -2,12 +2,13 @@
  * Created by Rony on 14/02/2015.
  */
 
-wtf.factory('rulistservice', function($http, $location, $q) {
+wtf.factory('rucontentservice', function($http, $location, $q) {
 
     var req = {
         method: 'GET',
         url: 'http://94.125.162.140:5000/api/restaurants'
     };
+
 
     var factory = {
 

@@ -18,7 +18,7 @@ wtf.controller('rulistctrl', ['$scope', 'rulistservice', function($scope, rulist
 	
 	$scope.clickRU = function(ruID){
 		console.log(ruID); //TODO Load the detailed view
-    }
+    };
 		
     rulistservice.getrulist().then(function(result){
         console.log(result);
@@ -31,11 +31,14 @@ wtf.controller('rulistctrl', ['$scope', 'rulistservice', function($scope, rulist
                     val.distance = Math.round(val.distance * 6378.137);
                     return val ;
                 });
-
                 $scope.rulist = data2;
-                $scope.geomsg = "Voici les RU près de vous";
+                $scope.msg = "Voici les RUs près de vous";
             });
         });
+    },function(e){
+        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.rulist = []
+        
     });
 
 }]);

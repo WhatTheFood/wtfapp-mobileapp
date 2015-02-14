@@ -22,9 +22,6 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
         });
 
 
-        
-
-
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
