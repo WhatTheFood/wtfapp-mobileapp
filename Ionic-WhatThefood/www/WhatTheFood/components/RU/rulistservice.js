@@ -50,7 +50,7 @@ wtf.factory('rulistservice', function($http, $location, $q) {
                 return "error";
             });
         }
-
+		
     };
 
     return factory;

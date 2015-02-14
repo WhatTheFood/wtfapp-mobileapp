@@ -13,7 +13,7 @@
         </div>
 
         <div class="list">
-            <a class="item item-icon-left item-icon-right" href="#" ng-repeat="item in rulist  | filter: data.searchQuery">
+            <a class="item item-icon-left item-icon-right" href="#" ng-repeat="item in rulist  | filter: data.searchQuery" ng-click="clickRU(item.id)">
                 <i class="icon ion-ios7-clock-outline"></i>
                 {{item.title}}
                 <span class="item-note">
