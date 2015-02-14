@@ -1,0 +1,40 @@
+/* Empty. Add your own CSS if you like */
+
+.bar.item-input-inset .item-input-wrapper input {
+    width: 100%;
+}
+
+.search-wrapper-light {
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    background: none;
+    border-radius: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.search-wrapper-light input, .search-wrapper-light input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
+.bar.bar-positive {
+    border: 1px solid rgba(255,136,113, 1);
+    color: #ff9c84;
+    background: #fff;
+}
+
+.bar-positive .button.button-clear {
+    color: #ff9c84;
+    font-weight: bold;
+}
+
+.bar.bar-positive .title {
+    color: #ff9c84;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.bar .title {
+    color: #ff9c84;
+    font-size: 16pt;
+    font-weight: bold;
+}
