@@ -18,8 +18,26 @@ wtf.controller('rulistctrl', ['$scope', 'rulistservice', function($scope, rulist
 	
 	$scope.clickRU = function(ruID){
 		console.log(ruID); //TODO Load the detailed view
-    };
-		
+    }
+
+	$scope.fbLogin = function() {
+		openFB.login(
+        function(response) {
+            if (response.status === 'connected') {
+                console.log('Login Facebook reussie !');
+				openFB.api({path: '/me/friends',
+					success: function(nb) {
+						console.log(nb);
+					},
+					error: function() {alert('Impossible de r�cup�rer la liste d\'amis');}});
+                $scope.closeLogin();
+            } else {
+                alert('Login Facebook impossible...');
+            }
+        },
+        {scope: 'email,user_friends'});
+	}
+
     rulistservice.getrulist().then(function(result){
         console.log(result);
         $scope.rulist = result.data;
