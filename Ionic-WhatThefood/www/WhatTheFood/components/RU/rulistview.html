@@ -17,23 +17,25 @@
             
             <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
                 <div>
-                <i class="icon ion-ios7-clock-outline"></i>
+                <img src="/img/clock_green.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
-                <div>PH Ouvert le midi</div>
+                <div class="subtitle">PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
                 </div>
-            </a>  
-            <div class="list" ng-if="$first" >
-                <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
-                    <div class="item" ng-repeat="dish in category.dishes">
-                        {{dish.name}}
-                    </div>
-                </div>
-            </div>
+                <div class="list" ng-if="$first" >
+					<strong>Plats du jour :</strong>
+					<div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
+						<div ng-repeat="dish in category.dishes">
+							- {{dish.name}}
+						</div>
+					</div>
+				</div>
+            </a>
+          
             <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
-                <i class="icon ion-ios7-clock-outline"></i>
+                <img src="/img/clock_grey.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
-                <div>PH Ouvert le midi</div>
+                <div class="subtitle">PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
             </a>
         </div>

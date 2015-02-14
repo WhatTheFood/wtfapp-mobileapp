@@ -1,7 +1,43 @@
 /* Empty. Add your own CSS if you like */
 
-.bar.item-input-inset .item-input-wrapper input {
+.bar.item-input-inset .item-input-wrapper {
     width: 100%;
+    background-color: #ff9c84;
+    color: white;
+}
+
+.has-header, #search-box {
+	width: 100%;
+    background-color: #ff9c84;
+}
+
+.ion-chevron-right {
+	color: #D3D3D3;
+}
+
+.ion-ios7-search {
+	color: white;
+}
+
+.item {
+	border-color: #ff9c84;
+}
+
+.clock {
+	width: 42px;
+	height: 42px;
+	float: left;
+	margin-left: -47px;
+}
+
+.bar-header {
+	background-color: white;
+	color: #ff9c84;
+}
+
+.subtitle {
+	color: #696969;
+	font-size: 0.8em;
 }
 
 .search-wrapper-light {
