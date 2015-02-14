@@ -23,6 +23,9 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 
 .config(function($stateProvider, $urlRouterProvider) {
 
+	// FB init
+	openFB.init({appId: '576723975798203'});
+
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -56,45 +59,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
           controller: 'ChatsCtrl'
         }
       }
-    })
-    .state('wtf.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('wtf.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('wtf.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
-
-  .state('wtf.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/wtf/rulist');
