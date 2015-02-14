@@ -43,8 +43,20 @@ wtf.factory('rulistservice', function($http, $location, $q) {
             return $http(req).success(function (data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
-                factory.restaurants = data;
-                return data;
+                factory.restaurants = data.map(function(restaurant){
+                    console.log(restaurant);
+                    //Force the date to a date where there is a menu (no menu on week-ends)
+                    var now = new Date(Date.parse("2015-02-10T00:00:00.000Z"));
+                    var menus = restaurant.menus.filter(function(menu) {
+                        var menuDate = new Date(Date.parse(menu.date));
+                        return (now.getDate() == menuDate.getDate() 
+                        && now.getMonth() == menuDate.getMonth()
+                        && now.getFullYear() == menuDate.getFullYear());
+                    })
+                    restaurant.menu = menus[0];
+                    return restaurant;
+                });
+                return factory.restaurants;
             }).error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
