@@ -36,6 +36,13 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
         $stateProvider
 
             // setup an abstract state for the tabs directive
+            .state('login', {
+                url: "/login",
+                templateUrl: "WhatTheFood/components/Login/loginview.html",
+                controller: 'loginctrl'
+            })
+            
+            // setup an abstract state for the tabs directive
             .state('wtf', {
                 url: "/wtf",
                 abstract: true,
@@ -113,7 +120,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/wtf/rulist');
+        $urlRouterProvider.otherwise('/login');
 
     });
 
