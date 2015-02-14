@@ -13,11 +13,13 @@ wtf.factory('loginservice', function($http, $q) {
 								console.log(user);
 								
 								var req = {
-									method: 'GET',
+									method: 'PUT',
+									dataType: "json",
 									url: 'http://94.125.162.140:5000/api/users/login/facebook',
-									params: '{"email":'+user.email+',"token":'+response.authResponse.token+'}'
+									data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
+									headers: { "Content-Type" : "application/json" }
 								};
-								
+
 								$http(req)
 								.success(function (data, status, headers, config) {
 									// this callback will be called asynchronously
