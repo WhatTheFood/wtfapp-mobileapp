@@ -8,9 +8,10 @@ wtf.factory('rulistservice', function($http, $location, $q) {
         method: 'GET',
         url: 'http://94.125.162.140:5000/api/restaurants'
     };
-
+    
     var factory = {
-
+        restaurants: [],
+        
         getPosition: function(){
             var defer = $q.defer();
             
@@ -33,7 +34,7 @@ wtf.factory('rulistservice', function($http, $location, $q) {
         },
         
         getrulist : function(lat,lng){
-
+            console.log('Requesting restaurants');
             req.params = {
                 lat:lat, 
                 lng:lng
@@ -42,6 +43,7 @@ wtf.factory('rulistservice', function($http, $location, $q) {
             return $http(req).success(function (data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
+                factory.restaurants = data;
                 return data;
             }).error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs

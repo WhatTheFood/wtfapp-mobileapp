@@ -1,5 +1,22 @@
-<ion-view view-title="Restaurant">
+<ion-view view-title="{{ru.title}}">
     <ion-content class="padding">
-        {{ruId}}
+        <div class="list item-text-wrap">
+            <a class="item item-thumbnail-left" href="#">
+              <img src="{{ru.photo.src}}">
+              <h2>{{ru.access}}</h2>
+              <p>{{ru.description}}</p>
+            </a>
+            <div class="item item-divider">
+              <p>+ en apprendre plus sur ce RU</p>
+            </div>
+            <div ng-repeat="category in ru.menu.meal[0].foodcategory">
+                <div class="item item-divider">
+                    {{category.name}}
+                </div>
+                <div class="item" ng-repeat="dish in category.dishes">
+                    {{dish.name}}
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
