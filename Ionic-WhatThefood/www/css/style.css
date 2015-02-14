@@ -38,3 +38,32 @@
     font-size: 16pt;
     font-weight: bold;
 }
+
+.ion-chevron-right {
+	color: #D3D3D3;
+}
+
+.ion-ios7-search {
+	color: white;
+}
+
+.item {
+	border-color: #ff9c84;
+}
+
+.clock {
+	width: 42px;
+	height: 42px;
+	float: left;
+	margin-left: -47px;
+}
+
+.bar-header {
+	background-color: white;
+	color: #ff9c84;
+}
+
+.subtitle {
+	color: #696969;
+	font-size: 0.8em;
+}
