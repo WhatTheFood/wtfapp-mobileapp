@@ -1,0 +1,26 @@
+<ion-view view-title="Restaurants">
+    <ion-content class="padding">
+
+        <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
+            <div class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="data.searchQuery">
+                <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+            </div>
+            <!--<button class="button button-clear">-->
+            <!--Cancel-->
+            <!--</button>-->
+        </div>
+
+        <div class="list">
+            <a class="item item-icon-left item-icon-right" href="#" ng-repeat="item in rulist  | filter: data.searchQuery">
+                <i class="icon ion-ios7-clock-outline"></i>
+                {{item.title}}
+
+                <i class="icon ion-chevron-right"></i>
+            </a>
+        </div>
+
+
+    </ion-content>
+</ion-view>

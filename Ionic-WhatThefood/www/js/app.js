@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,25 +30,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: "/tab",
+    .state('wtf', {
+    url: "/wtf",
     abstract: true,
-    templateUrl: "templates/tabs.html"
+    templateUrl: "WhatTheFood/shared/basecontent.html"
   })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('wtf.rulist', {
+    url: '/rulist',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'menuContent': {
+        templateUrl: 'WhatTheFood/components/RU/rulistview.html',
+        controller: 'rulistctrl'
       }
     }
   })
 
-  .state('tab.chats', {
+  .state('wtf.chats', {
       url: '/chats',
       views: {
         'tab-chats': {
@@ -57,7 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.chat-detail', {
+    .state('wtf.chat-detail', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
@@ -67,7 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-  .state('tab.friends', {
+  .state('wtf.friends', {
       url: '/friends',
       views: {
         'tab-friends': {
@@ -76,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.friend-detail', {
+    .state('wtf.friend-detail', {
       url: '/friend/:friendId',
       views: {
         'tab-friends': {
@@ -86,7 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-  .state('tab.account', {
+  .state('wtf.account', {
     url: '/account',
     views: {
       'tab-account': {
@@ -97,6 +97,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/wtf/rulist');
 
 });
+
+
