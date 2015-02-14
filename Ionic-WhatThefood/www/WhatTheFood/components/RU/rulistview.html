@@ -4,7 +4,7 @@
         <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
             <div class="item-input-wrapper">
                 <i class="icon ion-ios7-search placeholder-icon"></i>
-                <input type="search" placeholder="Search" ng-model="data.searchQuery">
+                <input type="search" placeholder="Rechercher un RU" ng-model="data.searchQuery">
                 <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
             </div>
         </div>
@@ -15,13 +15,25 @@
                 {{msg}}
             </div>
             
-            
-            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{item.id}}" ng-repeat="item in rulist  | filter: data.searchQuery" ng-click="clickRU(item.id)">
+            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
+                <div>
                 <i class="icon ion-ios7-clock-outline"></i>
-                {{item.title}}
-                <span class="item-note">
-                  {{item.distance}}km
-                </span>
+                <div>{{ru.title}}</div>
+                <div>PH Ouvert le midi</div>
+                <i class="icon ion-chevron-right"></i>
+                </div>
+            </a>  
+            <div class="list" ng-if="$first" >
+                <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
+                    <div class="item" ng-repeat="dish in category.dishes">
+                        {{dish.name}}
+                    </div>
+                </div>
+            </div>
+            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
+                <i class="icon ion-ios7-clock-outline"></i>
+                <div>{{ru.title}}</div>
+                <div>PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
             </a>
         </div>

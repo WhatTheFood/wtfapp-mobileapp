@@ -19,6 +19,11 @@ wtf.controller('rulistctrl', ['$scope', 'rulistservice', function($scope, rulist
 	$scope.clickRU = function(ruID){
 		console.log(ruID); //TODO Load the detailed view
     };
+    
+    $scope.showDishCategory = function(category){
+    return category.name == 'Plats' || 
+        category.name == 'Grillades';
+    };
 
     rulistservice.getrulist().then(function(result){
         console.log(result);
