@@ -23,7 +23,7 @@ wtf.factory('rulistservice', function($http) {
                 return "error";
             });
         }
-
+		
     };
 
     return factory;
