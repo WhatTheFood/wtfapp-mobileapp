@@ -67,3 +67,14 @@
 	color: #696969;
 	font-size: 0.8em;
 }
+
+.bar.item-input-inset .item-input-wrapper {
+    width: 100%;
+    background-color: #ff9c84;
+    color: white;
+}
+
+.has-header, #search-box {
+	width: 100%;
+    background-color: #ff9c84;
+}
