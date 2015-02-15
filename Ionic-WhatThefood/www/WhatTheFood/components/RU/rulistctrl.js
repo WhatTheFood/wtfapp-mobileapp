@@ -34,6 +34,12 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
 		});
 	};
 
+    $scope.swipeleft = function(ruId){
+        setTimeout(function() {
+            console.log("rueat");
+            $state.go('wtf.rueat', {ruId: ruId});
+        }, 500);
+    };
 
     $scope.showDishCategory = function(category){
 		return category.name == 'Plats' ||
