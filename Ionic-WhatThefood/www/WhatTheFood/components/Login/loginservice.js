@@ -17,7 +17,7 @@ wtf.factory('loginservice', function($http, $q) {
 							var req = {
 								method: 'PUT',
 								dataType: "json",
-								url: 'http://192.168.2.126:5000/api/users/login/facebook',
+								url: 'http://192.168.2.122:5000/api/users/login/facebook',
 								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
@@ -27,7 +27,6 @@ wtf.factory('loginservice', function($http, $q) {
 								// this callback will be called asynchronously
 								// when the response is available
 								tokenAPI = data;
-								console.log("DATA received: "+data);
 								defer.resolve(data);
 							})
 							.error(function (data, status, headers, config) {
