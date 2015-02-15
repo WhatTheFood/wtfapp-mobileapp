@@ -1,15 +1,31 @@
 <ion-view view-title="Mon profil">
     <ion-content>
-		<div id="profile">
-			<img src="http://dummyimage.com/160/160/000" alt="photo" align="left" />
-			<ul>
-				<li>NOM</li>
-				<li>PRENOM</li>
-				<li>SEXE</li>
-			</ul>
-		</div>
-		<div class="item university">
+        <div class="item" id="profile">
+            <img src="http://dummyimage.com/160/160/000" alt="photo" align="left" />
+            <ul>
+                <li>Prénom</li>
+                <li>Nom</li>
+                <li><i class="ion-male">&nbsp;</i>Chou</li>
+            </ul>
+        </div>
+        <div class="item university">
             Université
         </div>
+        <ion-list>
+            <div ng-repeat="group in groups">
+                <ion-item class="item-stable item-icon-right"
+                          ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+                    &nbsp;
+                    {{group.name}}
+                </ion-item>
+                <ion-checkbox class="item-accordion"
+                        ng-repeat="item in group.items"
+                        ng-show="isGroupShown(group)">
+                    {{item}}
+                </ion-checkbox>
+            </div>
+        </ion-list>
     </ion-content>
 </ion-view>

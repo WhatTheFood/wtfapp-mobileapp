@@ -20,19 +20,22 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     $scope.access = $sce.trustAsHtml(restaurant[0].access.replace(/[?]/g, "?<br />"));
     console.log($scope.ru);
 
-    function InfoRu($scope) {
-      $scope.visible = false;
-      $scope.toggle = function() {
-        $scope.visible = !$scope.visible;
-      };
-    }
-}]);
+    $scope.groups = [
+        {'name': 'En apprendre plus sur ce RU', 'items': []}
+    ];
 
-
-wtf.controller('InfoRu', ['$scope', '$sce', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', function($scope, $sce, $stateParams, rulistservice, loginservice, $ionicScrollDelegate) {
-    $scope.visible = false;
-    $scope.toggle = function() {
-      $scope.visible = !$scope.visible;
-      $ionicScrollDelegate.scrollBottom();
+    /*
+    * if given group is the selected group, deselect it
+    * else, select the given group
+    */
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
     };
 }]);

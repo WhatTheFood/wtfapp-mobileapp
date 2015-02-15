@@ -1,10 +1,10 @@
 @font-face {
-	font-family: OpenSans; /* Edit this line */
-	src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
+  font-family: OpenSans; /* Edit this line */
+  src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
 }
 
 * {
-	font-family: OpenSans;
+  font-family: OpenSans;
 }
 
 .bar.item-input-inset .item-input-wrapper input {
@@ -52,11 +52,11 @@
 }
 
 .ion-chevron-right {
-	color: #D3D3D3;
+  color: #D3D3D3;
 }
 
 .ion-ios7-search {
-	color: white;
+  color: white;
 }
 
 body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
@@ -75,7 +75,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
 
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.item {
     background: #ff9c84;
-	border-color: #ff9c84;
+  border-color: #ff9c84;
     color: #fff;
     font-weight: 800;
     border: 1px solid white;
@@ -100,22 +100,22 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .clock {
-	width: 42px;
-	height: 42px;
-	float: left;
-	margin-left: -47px;
+  width: 42px;
+  height: 42px;
+  float: left;
+  margin-left: -47px;
 }
 
 .bar-header {
-	background-color: white;
-	color: #ff9c84;
+  background-color: white;
+  color: #ff9c84;
 }
 .bar.bar-assertive {
     background-color: #ff9c84;
 }
 .subtitle {
-	color: #696969;
-	font-size: 0.8em;
+  color: #696969;
+  font-size: 0.8em;
 }
 
 .bar.item-input-inset .item-input-wrapper {
@@ -125,7 +125,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .has-header, #search-box {
-	width: 100%;
+  width: 100%;
     background-color: #ff9c84;
 }
 
@@ -163,34 +163,56 @@ input[placeholder] {
 }
 
 .scroll {
-	width: 100%;
+  width: 100%;
 }
 
 .avatar-min {
   height: 50px;
 }
 
-#profile {
-	background-color: white;
-	width: 100%;
-	height: 162px;
-}
-
 #profile img {
-	width: 160px;
-	height: 160px;
-	margin-left: 3%;
-}
-
-#profile ul {
-	font-size: 2em;
-	line-height: 100%;
+  width: 160px;
+  height: 160px;
+  margin-right: 16px;
 }
 
 .university {
-	background-color: #ff9c84;
-	color: white;
-	font-style: italic;
+  background-color: #ff9c84;
+  color: white;
+  font-style: italic;
+}
+
+.checkbox-hidden > .checkbox {
+  display: none;
+}
+
+/* accordion */
+.list .item.item-accordion {
+  line-height: 57px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.list .item-image.item-accordion > img {
+  max-height: 400px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item-image.item-accordion.ng-hide > img {
+  max-height: 0px;
+}
+.list .item-image.item-accordion.ng-hide-add > img,
+.list .item-image.item-accordion.ng-hide-remove > img {
+  display: block !important;
 }
 
 .item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
