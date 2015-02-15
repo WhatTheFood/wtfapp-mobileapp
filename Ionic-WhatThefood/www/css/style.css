@@ -106,3 +106,7 @@ input[placeholder] {
    color: white;
    font-weight: 900;
 }
+
+.scroll {
+	width: 100%;
+}
