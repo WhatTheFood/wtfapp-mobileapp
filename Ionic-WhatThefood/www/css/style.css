@@ -78,3 +78,31 @@
 	width: 100%;
     background-color: #ff9c84;
 }
+
+input::-webkit-input-placeholder {
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+}
+
+input:-ms-input-placeholder {
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+}
+input[placeholder] {
+   color: white;
+   font-weight: 900;
+}
