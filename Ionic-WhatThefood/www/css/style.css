@@ -1,4 +1,11 @@
-/* Empty. Add your own CSS if you like */
+@font-face {
+	font-family: OpenSans; /* Edit this line */
+	src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
+}
+
+* {
+	font-family: OpenSans;
+}
 
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
@@ -14,4 +21,139 @@
 
 .search-wrapper-light input, .search-wrapper-light input::-webkit-input-placeholder {
     color: #ffffff;
+}
+
+.bar.bar-positive {
+    border: 0;
+    border-bottom: 1px solid rgba(255,136,113, 1);
+    color: #ff9c84;
+    background: #fff;
+}
+
+.bar-positive .button.button-clear {
+    color: #ff9c84;
+    font-weight: bold;
+}
+
+.bar.bar-positive .title {
+    color: #ff9c84;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.bar .title {
+    color: #ff9c84;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.ion-chevron-right {
+	color: #D3D3D3;
+}
+
+.ion-ios7-search {
+	color: white;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
+    border-color: #ddd;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.item {
+    background: #ff9c84;
+	border-color: #ff9c84;
+    color: #fff;
+    font-weight: 800;
+    border: 1px solid white;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.menu-text-item {
+    padding-left: 15px;
+}
+
+.menu-icon {
+    width: 30px;
+}
+
+.clock {
+	width: 42px;
+	height: 42px;
+	float: left;
+	margin-left: -47px;
+}
+
+.bar-header {
+	background-color: white;
+	color: #ff9c84;
+}
+.bar.bar-assertive {
+    background-color: #ff9c84;
+}
+.subtitle {
+	color: #696969;
+	font-size: 0.8em;
+}
+
+.bar.item-input-inset .item-input-wrapper {
+    width: 100%;
+    background-color: #ff9c84;
+    color: white;
+}
+
+.has-header, #search-box {
+	width: 100%;
+    background-color: #ff9c84;
+}
+
+input::-webkit-input-placeholder {
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+   font-family: OpenSans;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+   font-family: OpenSans;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+   font-family: OpenSans;
+}
+
+input:-ms-input-placeholder {
+   color: white;
+   font-weight: 900;
+   font-style: italic;
+   font-family: OpenSans;
+}
+input[placeholder] {
+   color: white;
+   font-weight: 900;
+   font-family: OpenSans;
+}
+
+.scroll {
+	width: 100%;
 }

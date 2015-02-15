@@ -6,7 +6,7 @@ wtf.controller('loginctrl', ['$scope','$state', '$http', 'loginservice', functio
 	
 	$scope.fbLogin = function()  {
 		loginservice.loginfb().then(function(user) {
-			console.log("Token FB : "+user);
+			console.log("Token API : "+user);
 			if(user == "error") {
 				alert("Erreur login");
 			} else {

@@ -1,27 +1,43 @@
-/**
- * Created by Rony on 14/02/2015.
- */
-
-
-wtf.controller('rulistctrl', ['$scope', '$state', 'rulistservice', '$location', function($scope, $state, rulistservice, $location) {
-
+wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
+	
     $scope.data = {};
     $scope.data.showSearch = true;
-
-    $scope.clearSearch = function() {
-        $scope.data.searchQuery = '';
-    };
-
-    $scope.clearSearch = function() {
-        $scope.data.searchQuery = '';
-    };
 	
-	$scope.clickRU = function(ruID){
-		console.log(ruID); //TODO Load the detailed view
-    };
+    $scope.clearSearch = function() {
+        $scope.data.searchQuery = '';
+	};
+	
+    $scope.eathere = function(id) {
+		
+		var req = {
+			method: 'POST',
+			dataType: "json",
+			url: loginservice.getServerAPI()+'/users/me/restaurant',
+			data: '{"restaurantId":'+id+'}',
+			headers: {
+				"Content-Type" : "application/json",
+				"Authorization" : "Bearer "+loginservice.gettoken()
+			}
+		};
+		
+        console.log(req);
+
+		$http(req)
+		.success(function (data, status, headers, config) {
+			// this callback will be called asynchronously
+			// when the response is available
+			return data;
+		})
+		.error(function (data, status, headers, config) {
+			// called asynchronously if an error occurs
+			// or server returns response with an error status.
+			console.log(data);
+			return "error";
+		});
+	};
     
     $scope.showDishCategory = function(category){
-    return category.name == 'Plats' || 
+		return category.name == 'Plats' || 
         category.name == 'Grillades';
     };
     
@@ -39,15 +55,15 @@ wtf.controller('rulistctrl', ['$scope', '$state', 'rulistservice', '$location', 
                     console.log(val);
                     val.distance = Math.round(val.distance * 6378.137);
                     return val ;
-                });
+				});
                 $scope.rulist = data2;
                 $scope.msg = "Voici les RUs près de vous";
-            });
-        });
-    },function(e){
+			});
+		});
+		},function(e){
         $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
         $scope.rulist = []
         
-    });
-
+	});
+	
 }]);

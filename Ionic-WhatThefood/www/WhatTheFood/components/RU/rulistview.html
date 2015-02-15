@@ -1,5 +1,5 @@
 <ion-view view-title="Restaurants">
-    <ion-content class="padding">
+    <ion-content>
 
         <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
             <div class="item-input-wrapper">
@@ -9,43 +9,39 @@
             </div>
         </div>
 
-        <ion-list class="list">
-            <div class="item item-icon-left energized-bg item-text-wrap" ng-if="msg">
-                <i class="icon ion-ios7-information-outline"></i>
-                {{msg}}
-            </div>
-            
-            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
+        <ion-list class="list" can-swipe="true">
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
                 <div>
-                <i class="icon ion-ios7-clock-outline"></i>
+                <img src="img/clock_green.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
-                <div>PH Ouvert le midi</div>
+                <div class="subtitle">PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
                 </div>
-                <ion-option-button class="button-positive"
-                                   ng-click="goEatAt(ru.id)">
-                  J'y mange ce midi
-                </ion-option-button>
-            </ion-item>  
-            <div class="list" ng-if="$first" >
-                <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
-                    <div class="item" ng-repeat="dish in category.dishes">
-                        {{dish.name}}
+                <div class="list" ng-if="$first" >
+                    <strong>Plats du jour :</strong>
+                    <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
+                        <div ng-repeat="dish in category.dishes">
+                            - {{dish.name}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
-                <i class="icon ion-ios7-clock-outline"></i>
-                <div>{{ru.title}}</div>
-                <div>PH Ouvert le midi</div>
-                <i class="icon ion-chevron-right"></i>
-                <ion-option-button class="button-positive"
-                                   ng-click="goEatAt(ru.id)">
-                  J'y mange ce midi
-                </ion-option-button>
+				<ion-option-button class="button-info"
+                       ng-click="eathere(ru.id)">
+				  Je mange ici ce midi !
+				</ion-option-button>
             </ion-item>
-        </div>
-
+          
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
+                <img src="img/clock_grey.png" class="clock" alt="clock" />
+                <div>{{ru.title}}</div>
+                <div class="subtitle">PH Ouvert le midi</div>
+                <i class="icon ion-chevron-right"></i>
+				<ion-option-button class="button-info"
+                       ng-click="eathere(ru.id)">
+				  Je mange ici ce midi !
+				</ion-option-button>
+            </ion-item>
+        </ion-list>
 
     </ion-content>
 </ion-view>
