@@ -13,15 +13,15 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
         //Don't execute if there is no token
 		if(loginservice.gettoken() == "") return "not connected";
 		var req = {
-			method: 'POST',
-			dataType: "json",
-			url: loginservice.getServerAPI()+'/users/me/restaurant',
-			data: '{"restaurantId":'+id+', "when":"' + "11h30" + '"}',
-			headers: {
-				"Content-Type" : "application/json",
-				"Authorization" : "Bearer "+loginservice.gettoken()
-			}
-		};
+            method: 'POST',
+            dataType: "json",
+            url: loginservice.getServerAPI()+'/users/me/restaurant',
+            data: '{"when":"11h30", "restaurantId":'+id+ '}',
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer "+loginservice.gettoken()
+            }
+        };
 
         console.log(req);
 
