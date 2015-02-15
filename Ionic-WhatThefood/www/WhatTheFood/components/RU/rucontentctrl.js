@@ -18,6 +18,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$stateParams', 'rulistservic
     console.log("operational hoursssss : ");
     //$scope.ru.operationalhours = 
     $scope.operationalhours = $sce.trustAsHtml(restaurant[0].operationalhours.replace(/  /g, "<br />"));
+    $scope.access = $sce.trustAsHtml(restaurant[0].access.replace(/[?]/g, "?<br />"));
     console.log($scope.ru);
 
     function InfoRu($scope) {
@@ -29,9 +30,10 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$stateParams', 'rulistservic
 }]);
 
 
-wtf.controller('InfoRu', ['$scope', '$sce', '$stateParams', 'rulistservice', 'loginservice', function($scope, $sce, $stateParams, rulistservice, loginservice) {
+wtf.controller('InfoRu', ['$scope', '$sce', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', function($scope, $sce, $stateParams, rulistservice, loginservice, $ionicScrollDelegate) {
     $scope.visible = false; 
     $scope.toggle = function() {
       $scope.visible = !$scope.visible;
+      $ionicScrollDelegate.scrollBottom();
     };
 }]);

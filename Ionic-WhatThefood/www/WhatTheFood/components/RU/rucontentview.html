@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <ion-view view-title="{{ru.title}}" ng-app>
     <ion-content class="padding">
         <div class="list item-text-wrap">
@@ -9,10 +5,6 @@
               <img src="img/pictos_calandrier.png">
               <p ng-bind-html="operationalhours"></p>
             </a>
-            <div ng-controller="InfoRu">
-                <div class="item" ng-click="toggle()">+ en apprendre plus sur ce RU</div>
-                <div class="item item-divider" style="padding:0; margin:0;" ng-show="visible"><img src="{{ru.photo.src}}" style="width:100%; padding:0; margin:0;" /></div>
-            </div>
 
             <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
 
@@ -41,9 +33,24 @@
                 </div>
             </div>
 
-            <div class="item">
-              <h2>{{ru.access}}</h2>
-              <p>{{ru.description}}</p>
+            <div ng-controller="InfoRu">
+                <div class="item" ng-click="toggle()" style="font-weight: bold;">+ en apprendre plus sur ce RU</div>
+                <div ng-show="visible">
+                    <div class="item item-divider" style="padding:0; margin:0;">
+                    <img src="{{ru.photo.src}}" style="width:100%; padding:0; margin:0;" />
+                    </div>
+
+                    <div class="item item-divider">
+                        <h2 ng-bind-html="access"></h2>
+                        <br />
+                        {{ru.description}}
+                        <br /><br />
+                        <div style="text-align: center;">
+                        <p><a href="mailto:{{ru.contact.email}}"><button style="padding: 15px 10px;">&Eacute;crire ({{ru.contact.email}})</button></a></p>
+                        <p><a href="tel:{{ru.contact.tel}}"><button style="margin: 15px 0px; padding: 15px 30px;">Appeler ({{ru.contact.tel}})</button></a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </ion-content>
