@@ -8,6 +8,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
 	};
 
     $scope.eathere = function(id) {
+        /*
         //Don't execute if there is no token
 		if(loginservice.gettoken() == "") return "not connected";
 		var req = {
@@ -33,6 +34,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
 			console.log(data);
 			return "error";
 		});
+        */
 	};
 
     $scope.swipeleft = function(ruId){
