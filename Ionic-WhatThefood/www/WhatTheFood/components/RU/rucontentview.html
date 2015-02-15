@@ -1,24 +1,22 @@
-<script>
-
-</script>
-
-<ion-view view-title="{{ru.title}}">
+<ion-view view-title="{{ru.title}}" ng-app>
     <ion-content class="padding">
         <div class="list item-text-wrap">
             <a class="item item-thumbnail-left" href="#">
-              <img src="{{ru.photo.src}}">
+              <img src="img/picto_calendrier.png">
               <p ng-bind-html="operationalhours"></p>
             </a>
-            <div class="item item-divider">
-              <p>+ en apprendre plus sur ce RU</p>
-            </div>
 
-            <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0">
-              <p>Y retrouver mes amis</p>
-            </div>
+            <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
+
             <div class="item"  ng-if="facebookFriendsAtThisRu.length > 0">
-                <div ng-repeat="friend in facebookFriendsAtThisRu">
+                <div ng-repeat="friend in facebookFriendsAtThisRu" class="center">
                     <img src="" ng-src="{{ friend.avatar }}" class="avatar-min" data-userid="{{friend.id}}"/>
+                    <br />
+                    {{ friend.first_name}}
+                    <br />
+                    {{ friend.last_name}}
+                    <br />
+                    {{ friend.booking.when}}
                 </div>
             </div>
             <div class="item">
@@ -41,9 +39,24 @@
                 </div>
             </div>
 
-            <div class="item">
-              <h2>{{ru.access}}</h2>
-              <p>{{ru.description}}</p>
+            <div ng-controller="InfoRu">
+                <div class="item" ng-click="toggle()" style="font-weight: bold;">+ en apprendre plus sur ce RU</div>
+                <div ng-show="visible">
+                    <div class="item item-divider" style="padding:0; margin:0;">
+                    <img src="{{ru.photo.src}}" style="width:100%; padding:0; margin:0;" />
+                    </div>
+
+                    <div class="item item-divider">
+                        <h2 ng-bind-html="access"></h2>
+                        <br />
+                        {{ru.description}}
+                        <br /><br />
+                        <div style="text-align: center;">
+                        <p><a href="mailto:{{ru.contact.email}}"><button style="padding: 15px 10px;">&Eacute;crire ({{ru.contact.email}})</button></a></p>
+                        <p><a href="tel:{{ru.contact.tel}}"><button style="margin: 15px 0px; padding: 15px 30px;">Appeler ({{ru.contact.tel}})</button></a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </ion-content>

@@ -1,4 +1,4 @@
-<ion-view view-title="Restaurants">
+<ion-view view-title="Liste des RUs">
     <ion-content>
 
         <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
@@ -9,18 +9,18 @@
             </div>
         </div>
 
-        <ion-list class="list" can-swipe="true">
+        <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
             <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
                 <div>
                 <img src="img/clock_green.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
-                <div class="subtitle">PH Ouvert le midi</div>
+                <div class="subtitle">{{ru.openingNow}}</div>
                 <i class="icon ion-chevron-right"></i>
                 </div>
                 <div class="list" ng-if="$first" >
                     <strong>Plats du jour :</strong>
                     <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
-                        <div ng-repeat="dish in category.dishes">
+                        <div ng-repeat="dish in category.dishes" style="white-space: normal;">
                             - {{dish.name}}
                         </div>
                     </div>
@@ -34,7 +34,7 @@
             <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
                 <img src="img/clock_grey.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
-                <div class="subtitle">PH Ouvert le midi</div>
+                <div class="subtitle">{{ru.openingNow}}</div>
                 <i class="icon ion-chevron-right"></i>
 				<ion-option-button class="button-info"
                        ng-click="goEatAt(ru.id)">

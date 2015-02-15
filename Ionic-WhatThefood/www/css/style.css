@@ -87,6 +87,10 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
     float: none;
 }
 
+.center {
+  text-align: center;
+}
+
 .menu-text-item {
     padding-left: 15px;
 }
