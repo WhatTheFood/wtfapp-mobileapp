@@ -1,7 +1,3 @@
-192.168.2.126 by Rony on 14/02/2015.
-*/
-
-
 wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
 	
     $scope.data = {};
