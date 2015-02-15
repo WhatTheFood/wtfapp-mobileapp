@@ -5,8 +5,10 @@
 wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', function($scope, $sce, $state, $stateParams, rulistservice, loginservice) {
     console.log($stateParams);
 
-    if(rulistservice.restaurants.length == 0)
+    if(rulistservice.restaurants.length == 0) {
         $state.go('wtf.rulist');
+        return;
+    }
     console.log(rulistservice.restaurants);
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
@@ -18,7 +20,6 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     });
     $scope.ru = restaurant[0];
 
-    console.log("operational hoursssss : ");
     //$scope.ru.operationalhours = 
     $scope.operationalhours = $sce.trustAsHtml(restaurant[0].operationalhours.replace(/  /g, "<br />"));
     $scope.access = $sce.trustAsHtml(restaurant[0].access.replace(/[?]/g, "?<br />"));
