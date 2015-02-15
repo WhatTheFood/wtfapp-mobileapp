@@ -1,5 +1,5 @@
-wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
 
+wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
     $scope.data = {};
     $scope.data.showSearch = true;
 
@@ -34,10 +34,15 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice'
 		});
 	};
 
+
     $scope.showDishCategory = function(category){
 		return category.name == 'Plats' ||
         category.name == 'Grillades';
 	};
+
+    $scope.goEatAt = function ( ruId ) {
+        $state.go('wtf.rueat', {ruId: ruId});
+    };
 
     rulistservice.getrulist().then(function(result){
         $scope.rulist = result.data;
