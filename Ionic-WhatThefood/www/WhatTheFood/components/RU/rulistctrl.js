@@ -8,7 +8,8 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
 	};
 
     $scope.eathere = function(id) {
-
+        //Don't execute if there is no token
+		if(loginservice.gettoken() == "") return "not connected";
 		var req = {
 			method: 'POST',
 			dataType: "json",
@@ -34,6 +35,12 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
 		});
 	};
 
+    $scope.swipeleft = function(ruId){
+        setTimeout(function() {
+            console.log("rueat");
+            $state.go('wtf.rueat', {ruId: ruId});
+        }, 500);
+    };
 
     $scope.showDishCategory = function(category){
 		return category.name == 'Plats' ||
