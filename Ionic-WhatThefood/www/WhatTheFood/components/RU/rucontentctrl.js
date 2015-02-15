@@ -5,12 +5,6 @@
 wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', function($scope, $sce, $state, $stateParams, rulistservice, loginservice) {
     console.log($stateParams);
 
-    if(rulistservice.restaurants.length == 0) {
-        $state.go('wtf.rulist');
-        return;
-    }
-    console.log(rulistservice.restaurants);
-
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
         return restaurant.id == $stateParams.ruId;
     })
