@@ -1,14 +1,14 @@
 wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
-	
+
     $scope.data = {};
     $scope.data.showSearch = true;
-	
+
     $scope.clearSearch = function() {
         $scope.data.searchQuery = '';
 	};
-	
+
     $scope.eathere = function(id) {
-		
+
 		var req = {
 			method: 'POST',
 			dataType: "json",
@@ -19,8 +19,6 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice'
 				"Authorization" : "Bearer "+loginservice.gettoken()
 			}
 		};
-		
-        console.log(req);
 
 		$http(req)
 		.success(function (data, status, headers, config) {
@@ -35,20 +33,17 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice'
 			return "error";
 		});
 	};
-    
+
     $scope.showDishCategory = function(category){
-		return category.name == 'Plats' || 
+		return category.name == 'Plats' ||
         category.name == 'Grillades';
 	};
-	
+
     rulistservice.getrulist().then(function(result){
-        console.log(result);
         $scope.rulist = result.data;
         rulistservice.getPosition().then(function(coord){
-            console.log(coord);
             rulistservice.getrulist(coord.latitude,coord.longitude).then(function(result){
                 var data2 =  result.data.map(function(val){
-                    console.log(val);
                     val.distance = Math.round(val.distance * 6378.137);
                     return val ;
 				});
@@ -59,7 +54,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice'
 		},function(e){
         $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
         $scope.rulist = []
-        
+
 	});
-	
+
 }]);

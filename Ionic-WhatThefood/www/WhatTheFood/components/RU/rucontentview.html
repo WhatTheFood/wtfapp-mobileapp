@@ -9,6 +9,15 @@
             <div class="item item-divider">
               <p>+ en apprendre plus sur ce RU</p>
             </div>
+            <div class="item item-divider">
+              <p>Y retrouver mes amis</p>
+
+            </div>
+            <div class="item">
+                <div ng-repeat="friend in facebookFriendsAtThisRu">
+                    <img src="" ng-src="{{ friend.avatar }}" class="avatar-min" data-userid="{{friend.id}}"/>
+                </div>
+           </div>
             <div ng-repeat="category in ru.menu.meal[0].foodcategory">
                 <div class="item item-divider">
                     {{category.name}}
