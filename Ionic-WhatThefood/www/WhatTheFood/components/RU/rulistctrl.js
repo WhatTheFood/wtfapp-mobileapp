@@ -1,5 +1,5 @@
 
-wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'loginservice', function($scope, $http, $state, rulistservice, loginservice) {
     $scope.data = {};
     $scope.data.showSearch = true;
 
