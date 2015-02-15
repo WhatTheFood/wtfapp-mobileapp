@@ -13,6 +13,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
     });
     $scope.ru = restaurant[0];
+    $scope.setContextRu($scope.ru);
 
     //$scope.ru.operationalhours =
 
