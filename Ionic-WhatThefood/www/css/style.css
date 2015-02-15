@@ -165,3 +165,26 @@ input[placeholder] {
 .avatar-min {
   height: 50px;
 }
+
+#profile {
+	background-color: white;
+	width: 100%;
+	height: 162px;
+}
+
+#profile img {
+	width: 160px;
+	height: 160px;
+	margin-left: 3%;
+}
+
+#profile ul {
+	font-size: 2em;
+	line-height: 100%;
+}
+
+.university {
+	background-color: #ff9c84;
+	color: white;
+	font-style: italic;
+}
