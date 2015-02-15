@@ -43,8 +43,11 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             // setup an abstract state for the tabs directive
             .state('login', {
                 url: "/login",
-                templateUrl: "WhatTheFood/components/Login/loginview.html",
-                controller: 'loginctrl'
+                views: {
+                    '': {
+                    templateUrl: "WhatTheFood/components/Login/loginview.html",
+                    controller: 'loginctrl'}
+                }
             })
             
             // setup an abstract state for the tabs directive
