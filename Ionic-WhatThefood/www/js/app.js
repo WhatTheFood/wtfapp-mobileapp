@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', ])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage'])
 
     .run(function($ionicPlatform) {
 
@@ -51,7 +51,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             .state('wtf', {
                 url: "/wtf",
                 abstract: true,
-                templateUrl: "WhatTheFood/shared/basecontent.html"
+                templateUrl: "WhatTheFood/shared/basecontent.html",
+                controller: 'basectrl'
             })
 
             // Each tab has its own nav history stack:
@@ -82,6 +83,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                     'menuContent': {
                         templateUrl: 'WhatTheFood/components/RU/rueatview.html',
                         controller: 'rueatctrl'
+                    }
+                }
+            })
+                        
+            .state('wtf.ruqueue', {
+                url: '/ruqueue/:ruId',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/RU/ruqueueview.html',
+                        controller: 'ruqueuectrl'
                     }
                 }
             })

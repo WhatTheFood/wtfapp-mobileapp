@@ -2,9 +2,13 @@ wtf.factory('loginservice', function($http, $q) {
 
 	var tokenAPI = "";
 
-	var serverAPI = "http://192.168.2.122:5000/api";
+	//var serverAPI = "http://192.168.2.122:5000/api";
 	//var serverAPI = "http://localhost:5000/api";
 	//var serverAPI = "http://94.125.162.140:5000/api";
+	//var serverAPI = "http://192.168.2.126:5000/api";
+	//var serverAPI = "http://localhost:5000/api";
+    //var serverAPI = "http://94.125.162.140:5000/api";
+    var serverAPI = "http://192.168.2.122:5000/api";
 
     var factory = {
 		getServerAPI : function() {
@@ -44,7 +48,7 @@ wtf.factory('loginservice', function($http, $q) {
 							});
 						},
 						error: function() {
-							defer.reject('Impossible de récupérer l\'email');
+							defer.reject('Impossible de rï¿½cupï¿½rer l\'email');
 						}
 					});
 					} else {
@@ -66,7 +70,7 @@ wtf.factory('loginservice', function($http, $q) {
 					defer.resolve(friendlist);
 				},
 				error: function() {
-					defer.reject('Impossible de récupérer la liste d\'amis');
+					defer.reject('Impossible de rï¿½cupï¿½rer la liste d\'amis');
 				}
 				});
 
@@ -76,8 +80,25 @@ wtf.factory('loginservice', function($http, $q) {
 		gettoken : function() {
 			return tokenAPI;
 		}
-	}
+	};
 
 	return factory;
 });
 
+/*wtf.factory('$localStorage', ['$window', function($window) {
+    return {
+        accessToken: "",
+        set: function(key, value) {
+            $window.localStorage[key] = value;
+        },
+        get: function(key, defaultValue) {
+            return $window.localStorage[key] || defaultValue;
+        },
+        setObject: function(key, value) {
+            $window.localStorage[key] = JSON.stringify(value);
+        },
+        getObject: function(key) {
+            return JSON.parse($window.localStorage[key] || '{}');
+        }
+    }
+}]);*/
