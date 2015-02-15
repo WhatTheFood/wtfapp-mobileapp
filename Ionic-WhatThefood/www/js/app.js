@@ -54,8 +54,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                 templateUrl: "WhatTheFood/shared/basecontent.html"
             })
 
-            // Each tab has its own nav history stack:
+            .state('wtf.about', {
+                url: "/about",
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/About/about.html'
+                    }
+                }
+            })
 
+            // Each tab has its own nav history stack:
             .state('wtf.rulist', {
                 url: '/rulist',
                 views: {
