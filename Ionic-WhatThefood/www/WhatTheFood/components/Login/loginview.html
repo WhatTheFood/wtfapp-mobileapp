@@ -1,28 +1,30 @@
-<ion-view view-title="Connexion" style="background-image: url(img/home_bg.png); background-repeat: no-repeat; background-size:cover;" >
-    <ion-content class="padding" style="background: none;">
 
-        <img src="img/logo_wtf.png" width="100" />
-        <br /><br /><br />
-        <div style="text-align: center;">
-        <img src="img/separator.png" height="20" /><br />
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-view name="menuContent">
+            <ion-view view-title="À propos" ng-app>
+                <ion-content style="background-image: url(img/home_bg.png); background-repeat: no-repeat; background-size:cover;" >
 
-        <label style="margin:10px; ">
-            <button class="button button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
-                Connexion avec Facebook
-            </button>
-        </label>
+                    <img src="img/logo_wtf.png" width="100" />
+                    <br /><br /><br />
+                    <div style="text-align: center;">
+                        <img src="img/separator.png" height="20" /><br />
 
-<!--        <label style="margin:10px">
-            <button class="button button-block button-positive" ng-click="fblogin()">
-                Connexion avec Facebook -2
-            </button>
-        </label>
-        -->
-        <label style="margin:10px;">
-            <button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="gohome()">
-               Continuer sans se connecter
-            </button>
-        </label>
-        </div>
-    </ion-content>
-</ion-view>
+                        <label style="margin:10px; ">
+                            <button class="button button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
+                                Connexion avec Facebook
+                            </button>
+                        </label>
+
+                        <label style="margin:10px;">
+                            <button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="gohome()">
+                               Continuer sans se connecter
+                            </button>
+                        </label>
+                    </div>
+                </ion-content>
+            </ion-view>
+        </ion-nav-view>
+    </ion-side-menu-content>
+
+</ion-side-menus>
