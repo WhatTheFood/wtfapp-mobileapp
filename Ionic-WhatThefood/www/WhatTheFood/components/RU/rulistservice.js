@@ -6,7 +6,7 @@ wtf.factory('rulistservice', function($http, $location, $q) {
 
     var req = {
         method: 'GET',
-        url: 'http://127.0.0.1:5000/api/restaurants'
+        url: 'http://192.168.2.126:5000/api/restaurants'
     };
     
     var factory = {

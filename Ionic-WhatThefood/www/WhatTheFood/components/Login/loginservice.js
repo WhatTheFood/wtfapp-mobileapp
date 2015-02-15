@@ -7,6 +7,7 @@ wtf.factory('loginservice', function($http, $q) {
             var defer = $q.defer();
 			
 			openFB.login(
+
 			function(response) {
 				if (response.status === 'connected') {
 					console.log('Login Facebook reussie !');
@@ -42,7 +43,6 @@ wtf.factory('loginservice', function($http, $q) {
 							defer.reject('Impossible de récupérer l\'email');
 						}
 					});
-					
 					} else {
 					alert('Login Facebook impossible...');
 					
