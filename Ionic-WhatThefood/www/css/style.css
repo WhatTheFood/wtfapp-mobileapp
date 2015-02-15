@@ -161,3 +161,7 @@ input[placeholder] {
 .scroll {
 	width: 100%;
 }
+
+.avatar-min {
+  height: 50px;
+}

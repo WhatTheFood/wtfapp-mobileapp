@@ -8,15 +8,14 @@ wtf.factory('rulistservice', function($http, $location, $q) {
         method: 'GET',
         url: 'http://94.125.162.140:5000/api/restaurants'
     };
-    
+
     var factory = {
         restaurants: [],
-        
+
         getPosition: function(){
             var defer = $q.defer();
-            
+
             navigator.geolocation.getCurrentPosition(function(result) {
-                console.log("localisation", result);
                 defer.resolve(result.coords);
             }, function(err) {
                 if(err.code && err.code === 1) {
@@ -29,27 +28,26 @@ wtf.factory('rulistservice', function($http, $location, $q) {
                 }
                 console.log(err);
             },{enableHighAccuracy:true, timeout:60*1000});
-            
+
             return defer.promise;
         },
-        
+
         getrulist : function(lat,lng){
             console.log('Requesting restaurants');
             req.params = {
-                lat:lat, 
+                lat:lat,
                 lng:lng
             };
-            
+
             return $http(req).success(function (data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
                 factory.restaurants = data.map(function(restaurant){
-                    console.log(restaurant);
                     //Force the date to a date where there is a menu (no menu on week-ends)
                     var now = new Date(Date.parse("2015-02-10T00:00:00.000Z"));
                     var menus = restaurant.menus.filter(function(menu) {
                         var menuDate = new Date(Date.parse(menu.date));
-                        return (now.getDate() == menuDate.getDate() 
+                        return (now.getDate() == menuDate.getDate()
                         && now.getMonth() == menuDate.getMonth()
                         && now.getFullYear() == menuDate.getFullYear());
                     })
@@ -62,8 +60,28 @@ wtf.factory('rulistservice', function($http, $location, $q) {
                 // or server returns response with an error status.
                 return "error";
             });
+    },
+    facebookFriendsAtThisRu : function(id, loginservice)
+    {
+        console.log('facebookFriendsAtThisRu');
+        var req = {
+            method: 'PUT',
+            dataType: "json",
+            url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
+            data: {"restaurantId":id},
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer "+ loginservice.gettoken()
+            }
+        };
+        return $http(req).success(function (data, status, headers, config) {
+                return data;
+            }).error(function (data, status, headers, config) {
+                console.log("Error: " + data);
+            });
         }
-		
+
+
     };
 
     return factory;
