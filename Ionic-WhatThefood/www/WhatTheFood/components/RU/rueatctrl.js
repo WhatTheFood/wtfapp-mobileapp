@@ -8,15 +8,22 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
     console.log('$scope.ru');
     console.log($scope.ru);
 
+    $scope.hour = "";
+
     $scope.hours = ['11h30', '12h00', '12h30', '13h00', '13h30'];
-    $scope.eathere = function(id) {
+    $scope.eathere = function(id, when) {
+
+        if (when === undefined) {
+            when = $scope.hour
+        }
         //Don't execute if there is no token
 		if(loginservice.gettoken() == "") return "not connected";
+        // TODO verify when
 		var req = {
             method: 'PUT',
             dataType: "json",
             url: loginservice.getServerAPI()+'/users/me/restaurant',
-            data: '{ "when":"11h30", "restaurantId":'+id+ '}',
+            data: '{ "when":"'+ when +'", "restaurantId":'+id+ '}',
             headers: {
                 "Content-Type" : "application/json",
                 "Authorization" : "Bearer "+loginservice.gettoken()
@@ -38,4 +45,8 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
 			return "error";
 		});
 	};
+
+    $scope.getHour = function(hour) {
+        $scope.hour = hour;
+    };
 }]);
