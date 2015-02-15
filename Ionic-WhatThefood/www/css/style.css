@@ -1,4 +1,11 @@
-/* Empty. Add your own CSS if you like */
+@font-face {
+	font-family: OpenSans; /* Edit this line */
+	src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
+}
+
+* {
+	font-family: OpenSans;
+}
 
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
@@ -118,28 +125,33 @@ input::-webkit-input-placeholder {
    color: white;
    font-weight: 900;
    font-style: italic;
+   font-family: OpenSans;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
    color: white;
    font-weight: 900;
    font-style: italic;
+   font-family: OpenSans;
 }
 
 input::-moz-placeholder {  /* Firefox 19+ */
    color: white;
    font-weight: 900;
    font-style: italic;
+   font-family: OpenSans;
 }
 
 input:-ms-input-placeholder {
    color: white;
    font-weight: 900;
    font-style: italic;
+   font-family: OpenSans;
 }
 input[placeholder] {
    color: white;
    font-weight: 900;
+   font-family: OpenSans;
 }
 
 .scroll {
