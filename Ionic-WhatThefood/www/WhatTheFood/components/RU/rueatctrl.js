@@ -11,7 +11,7 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
     $scope.hours = ['11h30', '12h00', '12h30', '13h00', '13h30'];
     $scope.eathere = function(id) {
         //Don't execute if there is no token
-		if(loginservice.gettoken() == null) return "not connected";
+		if(loginservice.gettoken() == "") return "not connected";
 		var req = {
 			method: 'POST',
 			dataType: "json",

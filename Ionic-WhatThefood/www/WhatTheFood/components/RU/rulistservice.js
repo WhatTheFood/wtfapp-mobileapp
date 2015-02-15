@@ -77,6 +77,13 @@ wtf.factory('rulistservice', function($http, $location, $q) {
     },
     facebookFriendsAtThisRu : function(id, loginservice)
     {
+        //Don't execute if there is no token
+		if(loginservice.gettoken() == "")
+		{
+            var deferred = $q.defer();
+            deferred.resolve("not connected");
+            return deferred.promise;
+		}
         console.log('facebookFriendsAtThisRu');
         var req = {
             method: 'PUT',
