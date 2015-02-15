@@ -1,5 +1,4 @@
-/**
-	* Created by Rony on 14/02/2015.
+192.168.2.126 by Rony on 14/02/2015.
 */
 
 
@@ -18,7 +17,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', function($scop
 		var req = {
 			method: 'POST',
 			dataType: "json",
-			url: 'http://127.0.0.1:5000/api/users/me/restaurant',
+			url: 'http://192.168.2.126:5000/api/users/me/restaurant',
 			data: '{"restaurantId":'+id+'}',
 			headers: { "Content-Type" : "application/json" }
 		};
