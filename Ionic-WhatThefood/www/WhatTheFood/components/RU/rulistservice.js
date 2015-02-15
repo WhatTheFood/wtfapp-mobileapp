@@ -52,8 +52,22 @@ wtf.factory('rulistservice', function($http, $location, $q) {
                         && now.getFullYear() == menuDate.getFullYear());
                     })
                     restaurant.menu = menus[0];
+                    var openingCodes = restaurant.opening.split(',');
+                    restaurant.openingString = openingCodes.map(function(openingCode) {
+                        if(openingCode == "000") return "Fermé";
+                        else if(openingCode == "100") return "Ouvert ce matin";
+                        else if(openingCode == "010") return "Ouvert ce midi";
+                        else if(openingCode == "001") return "Ouvert ce soir";
+                        else if(openingCode == "110") return "Ouvert ce matin et ce midi";
+                        else if(openingCode == "011") return "Ouvert ce midi et ce soir";
+                        else if(openingCode == "101") return "Ouvert ce matin et ce soir";
+                        else if(openingCode == "111") return "Ouvert ce matin, ce midi et ce soir";
+                        return "Pas d'informations"
+                    })
+                    restaurant.openingNow = restaurant.openingString[now.getDay()];
                     return restaurant;
                 });
+                console.log(factory.restaurants);
                 return factory.restaurants;
             }).error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs
