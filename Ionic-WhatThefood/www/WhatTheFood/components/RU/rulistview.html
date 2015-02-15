@@ -9,13 +9,8 @@
             </div>
         </div>
 
-        <div class="list">
-            <!--<div class="item item-icon-left energized-bg item-text-wrap" ng-if="msg">
-                <i class="icon ion-ios7-information-outline"></i>
-                {{msg}}
-            </div>-->
-            
-            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
+        <ion-list class="list" can-swipe="true">            
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
                 <div>
                 <img src="img/clock_green.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
@@ -30,15 +25,23 @@
                         </div>
                     </div>
                 </div>
-            </a>
+				<ion-option-button class="button-info"
+                       ng-click="eathere(ru.id)">
+				  Je mange ici ce midi !
+				</ion-option-button>
+            </ion-item>
           
-            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
                 <img src="img/clock_grey.png" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
                 <div class="subtitle">PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
-            </a>
-        </div>
+				<ion-option-button class="button-info"
+                       ng-click="eathere(ru.id)">
+				  Je mange ici ce midi !
+				</ion-option-button>
+            </ion-item>
+        </ion-list>
 
 
     </ion-content>
