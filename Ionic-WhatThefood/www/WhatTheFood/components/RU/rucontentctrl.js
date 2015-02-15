@@ -2,14 +2,21 @@
  * Created by Rony on 14/02/2015.
  */
 
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate) {
+wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
+    function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+
     console.log($stateParams);
+
+    $ionicLoading.show({
+        template: '<i class="button-icon icon ion-loading-a"></i><br> Please wait.'
+    });
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
         return restaurant.id == $stateParams.ruId;
     })
     rulistservice.facebookFriendsAtThisRu(restaurant[0].id, loginservice).then(function(result){
         $scope.facebookFriendsAtThisRu = result.data;
+        $ionicLoading.hide();
         console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
     });
     $scope.ru = restaurant[0];
