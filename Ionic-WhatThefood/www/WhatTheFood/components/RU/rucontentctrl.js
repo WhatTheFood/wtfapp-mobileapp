@@ -8,7 +8,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     console.log($stateParams);
 
     $ionicLoading.show({
-        template: '<i class="button-icon icon ion-loading-a"></i><br> Please wait.'
+        template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
     });
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
