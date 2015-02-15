@@ -16,6 +16,7 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.geolocation",
-    "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git"
+    "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
+    "https://github.com/Philcartmell/cordova-plugin-local-storage.git"
   ]
 }

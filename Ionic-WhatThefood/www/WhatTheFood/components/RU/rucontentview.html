@@ -2,8 +2,8 @@
     <ion-content class="padding">
         <div class="list item-text-wrap">
             <a class="item item-thumbnail-left" href="#">
-              <img src="img/picto_calendrier.png">
-              <p ng-bind-html="operationalhours"></p>
+              <img src="img/picto_calendrier.png" class="vcenter">
+              <p ng-bind-html="operationalhours" class="vcenter"></p>
             </a>
 
             <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
@@ -38,26 +38,34 @@
                     </div>
                 </div>
             </div>
-
-            <div ng-controller="InfoRu">
-                <div class="item" ng-click="toggle()" style="font-weight: bold;">+ en apprendre plus sur ce RU</div>
-                <div ng-show="visible">
-                    <div class="item item-divider" style="padding:0; margin:0;">
-                    <img src="{{ru.photo.src}}" style="width:100%; padding:0; margin:0;" />
+            <ion-list>
+                <div ng-repeat="group in groups">
+                    <ion-item class="item-stable item-icon-right"
+                              ng-click="toggleGroup(group)"
+                              ng-class="{active: isGroupShown(group)}">
+                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                        &nbsp;
+                        {{group.name}}
+                    </ion-item>
+                    <div class="item item-accordion item-image" ng-show="isGroupShown(group)">
+                        <img src="{{ru.photo.src}}" />
                     </div>
-
-                    <div class="item item-divider">
-                        <h2 ng-bind-html="access"></h2>
-                        <br />
+                    <div class="item item-accordion" ng-show="isGroupShown(group)">
                         {{ru.description}}
-                        <br /><br />
-                        <div style="text-align: center;">
-                        <p><a href="mailto:{{ru.contact.email}}"><button style="padding: 15px 10px;">&Eacute;crire ({{ru.contact.email}})</button></a></p>
-                        <p><a href="tel:{{ru.contact.tel}}"><button style="margin: 15px 0px; padding: 15px 30px;">Appeler ({{ru.contact.tel}})</button></a></p>
-                        </div>
                     </div>
-                </div>
-            </div>
+                    <div class="item item-accordion" ng-show="isGroupShown(group)">
+                        <a href="tel:{{ru.contact.tel}}"
+                           class="button button-full button-positive">
+                            Appeler ({{ru.contact.tel}})
+                        </a>
+                    </div>
+                    <div class="item item-accordion" ng-show="isGroupShown(group)">
+                        <a href="mailto:{{ru.contact.email}}"
+                           class="button button-full button-positive">
+                            &Eacute;crire ({{ru.contact.email}})
+                        </a>
+                    </div>
+            </ion-list>
         </div>
     </ion-content>
 </ion-view>

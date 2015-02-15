@@ -5,8 +5,7 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
         return restaurant.id == $stateParams.ruId;
     })
     $scope.ru = restaurant[0];
-    console.log('$scope.ru');
-    console.log($scope.ru);
+    $scope.setContextRu($scope.ru);
 
     $scope.hour = "";
 
