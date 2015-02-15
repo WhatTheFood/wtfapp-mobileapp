@@ -69,6 +69,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                         controller: 'rucontentctrl'
                     }
                 }
+            })
+                        
+            .state('wtf.rueat', {
+                url: '/rueat/:ruId',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/RU/rueatview.html',
+                        controller: 'rueatctrl'
+                    }
+                }
             });
 
         // if none of the above states are matched, use this as the fallback
