@@ -2,7 +2,13 @@ wtf.factory('loginservice', function($http, $q) {
 	
 	var tokenAPI = "";
 	
+	var serverAPI = "http://192.168.2.126:5000/api";
+	
     var factory = {
+		getServerAPI : function() {
+			return serverAPI;
+		},
+		
 		loginfb : function() {
             var defer = $q.defer();
 			
@@ -17,7 +23,7 @@ wtf.factory('loginservice', function($http, $q) {
 							var req = {
 								method: 'PUT',
 								dataType: "json",
-								url: 'http://192.168.2.122:5000/api/users/login/facebook',
+								url: serverAPI+'/users/login/facebook',
 								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
