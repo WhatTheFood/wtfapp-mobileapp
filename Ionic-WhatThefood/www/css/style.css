@@ -23,6 +23,10 @@
     color: #ffffff;
 }
 
+.paddingtop-menuitem {
+  padding-top: 10px;
+}
+
 .bar.bar-positive {
     border: 0;
     border-bottom: 1px solid rgba(255,136,113, 1);
