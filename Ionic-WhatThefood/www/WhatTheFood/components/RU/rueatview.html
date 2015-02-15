@@ -1,0 +1,25 @@
+<ion-view view-title="{{ru.title}}">
+    <ion-content class="padding">
+        <div class="list">
+            <h2>
+                Je mange ici ce midi
+            </h2>
+        
+            <button class="button button-balanced" ng-click="eathere(ru.id)">
+                J'y suis
+            </button>
+            <ion-list class="list" can-swipe="true">
+                <label class="item item-radio" ng-repeat="hour in hours">
+                    <input type="radio" name="group">
+                    <div class="item-content">
+                      {{hour}}
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </ion-list>
+            <button class="button button-balanced" ng-click="validateeathere(ru.id)">
+                Me le rappeler
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
