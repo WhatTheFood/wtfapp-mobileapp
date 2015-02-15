@@ -21,7 +21,7 @@ wtf.factory('loginservice', function($http, $q) {
 							var req = {
 								method: 'PUT',
 								dataType: "json",
-								url: 'http://94.125.162.140:5000/api/users/login/facebook',
+								url: 'http://192.168.2.126:5000/api/users/login/facebook',
 								data: '{"email":"'+user.email+'","token":"'+tokenFB+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
@@ -64,15 +64,16 @@ wtf.factory('loginservice', function($http, $q) {
 				error: function() {
 					defer.reject('Impossible de récupérer la liste d\'amis');
 				}
-			});
+				});
+				
+				return defer.promise;
+				},
+				
+				gettoken : function() {
+					return tokenFB;
+				}
+			}
 			
-			return defer.promise;
-		},
+			return factory;
+		});
 		
-		gettoken : function() {
-			return tokenFB;
-		}
-	}
-	
-	return factory;
-});

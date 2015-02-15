@@ -17,7 +17,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice'
 		var req = {
 			method: 'POST',
 			dataType: "json",
-			url: 'http://94.125.162.140:5000/api/users/me/restaurant',
+			url: 'http://192.168.2.126:5000/api/users/me/restaurant',
 			data: '{"restaurantId":'+id+'}',
 			headers: {
 				"Content-Type" : "application/json",

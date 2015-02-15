@@ -17,7 +17,8 @@
 }
 
 .bar.bar-positive {
-    border: 1px solid rgba(255,136,113, 1);
+    border: 0;
+    border-bottom: 1px solid rgba(255,136,113, 1);
     color: #ff9c84;
     background: #fff;
 }
@@ -47,8 +48,40 @@
 	color: white;
 }
 
-.item {
+body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
+    border-color: #ddd;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.item {
+    background: #ff9c84;
 	border-color: #ff9c84;
+    color: #fff;
+    font-weight: 800;
+    border: 1px solid white;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.menu-text-item {
+    padding-left: 15px;
+}
+
+.menu-icon {
+    width: 30px;
 }
 
 .clock {
@@ -62,7 +95,9 @@
 	background-color: white;
 	color: #ff9c84;
 }
-
+.bar.bar-assertive {
+    background-color: #ff9c84;
+}
 .subtitle {
 	color: #696969;
 	font-size: 0.8em;
