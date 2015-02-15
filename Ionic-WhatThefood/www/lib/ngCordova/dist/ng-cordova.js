@@ -4424,6 +4424,7 @@ angular.module("ngCordova.plugins.oauth", ["ngCordova.plugins.oauthUtility"])
         * @return   promise
         */
         facebook: function(clientId, appScope) {
+            console.log(clientId, appScope);
             var deferred = $q.defer();
             if(window.cordova) {
                 var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
