@@ -20,7 +20,7 @@
                 <div class="list" ng-if="$first" >
                     <strong>Plats du jour :</strong>
                     <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
-                        <div ng-repeat="dish in category.dishes">
+                        <div ng-repeat="dish in category.dishes" style="white-space: normal;">
                             - {{dish.name}}
                         </div>
                     </div>

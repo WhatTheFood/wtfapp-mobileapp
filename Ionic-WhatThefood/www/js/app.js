@@ -26,6 +26,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 
     .config(function($ionicConfigProvider) {
         $ionicConfigProvider.backButton.text('');
+        $ionicConfigProvider.backButton.icon('ion-chevron-left');
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
