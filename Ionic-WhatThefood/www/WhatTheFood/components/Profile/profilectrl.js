@@ -1,4 +1,4 @@
-wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', function($scope, $state, $http, loginservice) {
+wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', '$ionicScrollDelegate', function($scope, $state, $http, loginservice, $ionicScrollDelegate) {
 
     $scope.gohome = function(){
         $state.go('wtf.rulist');
@@ -7,20 +7,20 @@ wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', funct
     $scope.groups = [
         {'name': 'Mes habitudes alimentaires',
         'items': [
-            'Végétarien',
-            'Végétalien',
-            'Pas de porc',
-            'Pas de veau',
-            'Halal',
-            'Cacher'
+            {'name': 'Végétarien', 'checked': false},
+            {'name': 'Végétalien', 'checked': false},
+            {'name': 'Pas de porc', 'checked': true},
+            {'name': 'Pas de veau', 'checked': false},
+            {'name': 'Halal', 'checked': true},
+            {'name': 'Cacher', 'checked': false}
         ]},
         {'name': 'Mes alergies',
         'items': [
-            'Gluten',
-            'Crustacés',
-            'Œufs',
-            'Poisson',
-            'Soja'
+            {'name': 'Gluten', 'checked': true},
+            {'name': 'Crustacés', 'checked': false},
+            {'name': 'Œufs', 'checked': false},
+            {'name': 'Poisson', 'checked': false},
+            {'name': 'Soja', 'checked': false}
         ]}
     ];
 
@@ -34,6 +34,9 @@ wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', funct
         } else {
             $scope.shownGroup = group;
         }
+        setTimeout(function () {
+          $ionicScrollDelegate.scrollBottom(true);
+        }, 120);
     };
     $scope.isGroupShown = function(group) {
         return $scope.shownGroup === group;
