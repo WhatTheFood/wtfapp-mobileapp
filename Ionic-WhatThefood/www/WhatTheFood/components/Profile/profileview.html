@@ -22,8 +22,9 @@
                 </ion-item>
                 <ion-checkbox class="item-accordion"
                         ng-repeat="item in group.items"
-                        ng-show="isGroupShown(group)">
-                    {{item}}
+                        ng-show="isGroupShown(group)"
+                        ng-model="item.checked">
+                    {{item.name}}
                 </ion-checkbox>
             </div>
         </ion-list>

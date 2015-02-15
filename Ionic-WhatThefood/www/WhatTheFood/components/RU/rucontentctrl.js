@@ -2,7 +2,7 @@
  * Created by Rony on 14/02/2015.
  */
 
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', function($scope, $sce, $state, $stateParams, rulistservice, loginservice) {
+wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate) {
     console.log($stateParams);
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
@@ -13,6 +13,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
     });
     $scope.ru = restaurant[0];
+    $scope.setContextRu($scope.ru);
 
     //$scope.ru.operationalhours =
 
@@ -34,6 +35,9 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         } else {
             $scope.shownGroup = group;
         }
+        setTimeout(function () {
+          $ionicScrollDelegate.scrollBottom(true);
+        }, 120);
     };
     $scope.isGroupShown = function(group) {
         return $scope.shownGroup === group;
