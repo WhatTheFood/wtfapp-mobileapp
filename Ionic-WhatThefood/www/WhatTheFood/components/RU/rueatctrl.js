@@ -16,7 +16,7 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
             method: 'PUT',
             dataType: "json",
             url: loginservice.getServerAPI()+'/users/me/restaurant',
-            data: '{"when":"11h30", "restaurantId":'+id+ '}',
+            data: '{ "when":"11h30", "restaurantId":'+id+ '}',
             headers: {
                 "Content-Type" : "application/json",
                 "Authorization" : "Bearer "+loginservice.gettoken()
