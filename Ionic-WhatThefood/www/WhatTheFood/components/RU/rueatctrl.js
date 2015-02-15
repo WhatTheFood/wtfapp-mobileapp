@@ -7,7 +7,7 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
     $scope.ru = restaurant[0];
     console.log('$scope.ru');
     console.log($scope.ru);
-	
+
     $scope.hours = ['11h30', '12h00', '12h30', '13h00', '13h30'];
     $scope.eathere = function(id) {
         //Don't execute if there is no token
@@ -16,13 +16,13 @@ wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice',
 			method: 'POST',
 			dataType: "json",
 			url: loginservice.getServerAPI()+'/users/me/restaurant',
-			data: '{"restaurantId":'+id+'}',
+			data: '{"restaurantId":'+id+', "when":"' + "11h30" + '"}',
 			headers: {
 				"Content-Type" : "application/json",
 				"Authorization" : "Bearer "+loginservice.gettoken()
 			}
 		};
-		
+
         console.log(req);
 
 		$http(req)
