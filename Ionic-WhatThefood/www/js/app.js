@@ -71,6 +71,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                 }
             })
 
+            .state('wtf.rueat', {
+                url: '/rueat/:ruId',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/RU/rueatview.html',
+                        controller: 'rueatctrl'
+                    }
+                }
+            })
+
             .state('wtf.chats', {
                 url: '/chats',
                 views: {

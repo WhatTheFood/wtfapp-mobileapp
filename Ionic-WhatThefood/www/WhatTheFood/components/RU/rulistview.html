@@ -9,20 +9,24 @@
             </div>
         </div>
 
-        <div class="list">
+        <ion-list class="list">
             <div class="item item-icon-left energized-bg item-text-wrap" ng-if="msg">
                 <i class="icon ion-ios7-information-outline"></i>
                 {{msg}}
             </div>
             
-            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first" ng-click="clickRU(ru.id)">
                 <div>
                 <i class="icon ion-ios7-clock-outline"></i>
                 <div>{{ru.title}}</div>
                 <div>PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
                 </div>
-            </a>  
+                <ion-option-button class="button-positive"
+                                   ng-click="goEatAt(ru.id)">
+                  J'y mange ce midi
+                </ion-option-button>
+            </ion-item>  
             <div class="list" ng-if="$first" >
                 <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
                     <div class="item" ng-repeat="dish in category.dishes">
@@ -30,12 +34,16 @@
                     </div>
                 </div>
             </div>
-            <a class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
+            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first"  ng-click="clickRU(ru.id)">
                 <i class="icon ion-ios7-clock-outline"></i>
                 <div>{{ru.title}}</div>
                 <div>PH Ouvert le midi</div>
                 <i class="icon ion-chevron-right"></i>
-            </a>
+                <ion-option-button class="button-positive"
+                                   ng-click="goEatAt(ru.id)">
+                  J'y mange ce midi
+                </ion-option-button>
+            </ion-item>
         </div>
 
 
