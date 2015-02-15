@@ -201,3 +201,16 @@ input[placeholder] {
   display: block !important;
 }
 
+.list .item-image.item-accordion > img {
+  max-height: 400px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item-image.item-accordion.ng-hide > img {
+  max-height: 0px;
+}
+.list .item-image.item-accordion.ng-hide-add > img,
+.list .item-image.item-accordion.ng-hide-remove > img {
+  display: block !important;
+}
