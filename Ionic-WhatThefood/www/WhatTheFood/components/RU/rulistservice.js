@@ -96,6 +96,7 @@ wtf.factory('rulistservice', function($http, $location, $q) {
             }
         };
         return $http(req).success(function (data, status, headers, config) {
+                console.log(data);
                 return data;
             }).error(function (data, status, headers, config) {
                 console.log("Error: " + data);

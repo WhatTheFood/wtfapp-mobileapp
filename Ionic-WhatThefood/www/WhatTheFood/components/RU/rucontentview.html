@@ -9,8 +9,14 @@
             <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
 
             <div class="item"  ng-if="facebookFriendsAtThisRu.length > 0">
-                <div ng-repeat="friend in facebookFriendsAtThisRu">
+                <div ng-repeat="friend in facebookFriendsAtThisRu" class="center">
                     <img src="" ng-src="{{ friend.avatar }}" class="avatar-min" data-userid="{{friend.id}}"/>
+                    <br />
+                    {{ friend.first_name}}
+                    <br />
+                    {{ friend.last_name}}
+                    <br />
+                    {{ friend.booking.when}}
                 </div>
             </div>
             <div class="item">
