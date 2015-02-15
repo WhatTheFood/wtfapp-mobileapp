@@ -1,6 +1,6 @@
 wtf.factory('loginservice', function($http, $q) {
 	
-	var tokenFB = "";
+	var tokenAPI = "";
 	
     var factory = {
 		loginfb : function() {
@@ -10,20 +10,15 @@ wtf.factory('loginservice', function($http, $q) {
 
 			function(response) {
 				if (response.status === 'connected') {
-					console.log('Login Facebook reussie !');
-					
-					tokenFB = response.authResponse.token;
+					console.log('Login Facebook reussie : '+response.authResponse.token);
 					
 					openFB.api({path: '/me',
 						success: function(user) {
-							console.log(user);
-							
-							
 							var req = {
 								method: 'PUT',
 								dataType: "json",
 								url: 'http://192.168.2.126:5000/api/users/login/facebook',
-								data: '{"email":"'+user.email+'","token":"'+tokenFB+'"}',
+								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
 							
@@ -31,6 +26,8 @@ wtf.factory('loginservice', function($http, $q) {
 							.success(function (data, status, headers, config) {
 								// this callback will be called asynchronously
 								// when the response is available
+								tokenAPI = data;
+								console.log("DATA received: "+data);
 								defer.resolve(data);
 							})
 							.error(function (data, status, headers, config) {
@@ -69,11 +66,11 @@ wtf.factory('loginservice', function($http, $q) {
 				return defer.promise;
 				},
 				
-				gettoken : function() {
-					return tokenFB;
-				}
-			}
-			
-			return factory;
-		});
+		gettoken : function() {
+			return tokenAPI;
+		}
+	}
+		
+	return factory;
+});
 		
