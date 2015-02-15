@@ -3,7 +3,7 @@
 */
 
 
-wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', function($scope, $http, rulistservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', 'loginservice', function($scope, $http, rulistservice, loginservice) {
 	
     $scope.data = {};
     $scope.data.showSearch = true;
@@ -13,16 +13,20 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', function($scop
 	};
 	
     $scope.eathere = function(id) {
-        console.log(id);
 		
 		var req = {
 			method: 'POST',
 			dataType: "json",
 			url: 'http://94.125.162.140:5000/api/users/me/restaurant',
 			data: '{"restaurantId":'+id+'}',
-			headers: { "Content-Type" : "application/json" }
+			headers: {
+				"Content-Type" : "application/json",
+				"Authorization" : "Bearer "+loginservice.gettoken()
+			}
 		};
 		
+        console.log(req);
+
 		$http(req)
 		.success(function (data, status, headers, config) {
 			// this callback will be called asynchronously
@@ -32,6 +36,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', 'rulistservice', function($scop
 		.error(function (data, status, headers, config) {
 			// called asynchronously if an error occurs
 			// or server returns response with an error status.
+			console.log(data);
 			return "error";
 		});
 	};
