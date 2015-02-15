@@ -19,4 +19,19 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$stateParams', 'rulistservic
     //$scope.ru.operationalhours = 
     $scope.operationalhours = $sce.trustAsHtml(restaurant[0].operationalhours.replace(/  /g, "<br />"));
     console.log($scope.ru);
+
+    function InfoRu($scope) {
+      $scope.visible = false; 
+      $scope.toggle = function() {
+        $scope.visible = !$scope.visible;
+      };
+    }
+}]);
+
+
+wtf.controller('InfoRu', ['$scope', '$sce', '$stateParams', 'rulistservice', 'loginservice', function($scope, $sce, $stateParams, rulistservice, loginservice) {
+    $scope.visible = false; 
+    $scope.toggle = function() {
+      $scope.visible = !$scope.visible;
+    };
 }]);
