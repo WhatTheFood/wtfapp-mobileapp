@@ -243,3 +243,28 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > ion-nav-view > io
   margin-left: 10px;
   font-size: 10pt;
 }
+
+body > ion-nav-view > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > div.scroll > div > ion-list > div > div > div {
+  text-align: center;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu-content > ion-nav-view > ion-view > ion-content > div.scroll > div > ion-list > div > div > div > a > button {
+  border-color: #b2b2b2;
+  background-color: #f8f8f8;
+  color: #444;
+  position: relative;
+  display: inline-block;
+  margin: 5px auto;
+  /* padding: 0 12px; */
+  min-width: 52px;
+  min-height: 47px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+  vertical-align: top;
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
