@@ -13,12 +13,12 @@ wtf.controller('loginctrl', ['$scope','$state','$http','loginservice','$cordovaO
             });
 
 
-            loginservice.loginfb().then(function(user) {
+            loginservice.loginfb().then(function(res, msg) {
                     $ionicLoading.hide()
-                    console.log("Token API : "+user);
-                    if(user == "error") {
-                        alert("Erreur login");
-                    } else {
+                    if (res != true) {
+                        alert("Erreur: " + msg);
+                    }
+                    else {
                         loginservice.getfriendlist();
                         $state.go("wtf.rulist");
                     }

@@ -1,99 +1,101 @@
 wtf.factory('loginservice', function($http, $q) {
 
-	var tokenAPI = "";
+    var tokenAPI = "";
 
-	var serverAPI = "http://localhost:5000/api";
+    var serverAPI = "http://localhost:5000/api";
     //var serverAPI = "http://192.168.2.122:5000/api";
 
     var factory = {
-		getServerAPI : function() {
-			return serverAPI;
-		},
+        getServerAPI : function() {
+            return serverAPI;
+        },
 
-		loginfb : function() {
+        loginfb : function() {
             var defer = $q.defer();
 
-			openFB.login(
+            openFB.login(
 
-			function(response) {
-				if (response.status === 'connected') {
-					console.log('Login Facebook reussie : '+response.authResponse.token);
+                function(response) {
+                    if (response.status === 'connected') {
+                        console.log('Login Facebook reussie : '+response.authResponse.token);
 
-					openFB.api({path: '/me',
-						success: function(user) {
-							var req = {
-								method: 'PUT',
-								dataType: "json",
-								url: serverAPI+'/users/login/facebook',
-								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
-								headers: { "Content-Type" : "application/json" }
-							};
+                        openFB.api({path: '/me',
+                                   success: function(user) {
+                                       var req = {
+                                           method: 'PUT',
+                                           dataType: "json",
+                                           url: serverAPI+'/users/login/facebook',
+                                           data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
+                                           headers: { "Content-Type" : "application/json" }
+                                       };
 
-							$http(req)
-							.success(function (data, status, headers, config) {
-								// this callback will be called asynchronously
-								// when the response is available
-								tokenAPI = data;
-								defer.resolve(data);
-							})
-							.error(function (data, status, headers, config) {
-								// called asynchronously if an error occurs
-								// or server returns response with an error status.
-								defer.reject("error");
-							});
-						},
-						error: function() {
-							defer.reject('Impossible de r�cup�rer l\'email');
-						}
-					});
-					} else {
-					alert('Login Facebook impossible...');
+                                       $http(req)
+                                       .success(function (data, status, headers, config) {
+                                           // this callback will be called asynchronously
+                                           // when the response is available
+                                           tokenAPI = data;
+                                           defer.resolve(true, data);
+                                       })
+                                       .error(function (data, status, headers, config) {
+                                           // called asynchronously if an error occurs
+                                           // or server returns response with an error status.
+                                           console.log("Facebook connection error on api: ")
+                                           console.log(data);
+                                           defer.reject(false, data);
+                                       });
+                                   },
+                                   error: function() {
+                                       defer.reject(false, 'Impossible de r�cup�rer l\'email');
+                                   }
+                        });
+                    }
+                    else {
+                        alert('Login Facebook impossible...');
+                    }
+                },
+                {scope: 'email,user_friends'});
+                console.log('Login Facebook en cours...');
 
-				}
-			},
-			{scope: 'email,user_friends'});
-			console.log('Login Facebook en cours...');
+                return defer.promise;
+        },
 
-			return defer.promise;
-		},
+        getfriendlist : function() {
+            var defer = $q.defer();
+            openFB.api({path: '/me/friends',
+                       success: function(friendlist) {
+                           console.log(friendlist);
+                           defer.resolve(friendlist);
+                       },
+                       error: function() {
+                           defer.reject('Impossible de r�cup�rer la liste d\'amis');
+                       }
+            });
 
-		getfriendlist : function() {
-			var defer = $q.defer();
-			openFB.api({path: '/me/friends',
-				success: function(friendlist) {
-					console.log(friendlist);
-					defer.resolve(friendlist);
-				},
-				error: function() {
-					defer.reject('Impossible de r�cup�rer la liste d\'amis');
-				}
-				});
+            return defer.promise;
+        },
 
-				return defer.promise;
-				},
+        gettoken : function() {
+            return tokenAPI;
+        }
+    };
 
-		gettoken : function() {
-			return tokenAPI;
-		}
-	};
-
-	return factory;
+    return factory;
 });
 
 /*wtf.factory('$localStorage', ['$window', function($window) {
-    return {
-        accessToken: "",
-        set: function(key, value) {
-            $window.localStorage[key] = value;
-        },
-        get: function(key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        },
-        setObject: function(key, value) {
-            $window.localStorage[key] = JSON.stringify(value);
-        },
-        getObject: function(key) {
-            return JSON.parse($window.localStorage[key] || '{}');
-        }
-    }
+  return {
+accessToken: "",
+set: function(key, value) {
+$window.localStorage[key] = value;
+},
+get: function(key, defaultValue) {
+return $window.localStorage[key] || defaultValue;
+},
+setObject: function(key, value) {
+$window.localStorage[key] = JSON.stringify(value);
+},
+getObject: function(key) {
+return JSON.parse($window.localStorage[key] || '{}');
+}
+}
 }]);*/
