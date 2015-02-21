@@ -3,3 +3,6 @@
 .DS_Store
 .idea/
 Ionic-WhatThefood/www/WhatTheFood/shared/#basecontent.html#
+
+platforms/
+plugins/
