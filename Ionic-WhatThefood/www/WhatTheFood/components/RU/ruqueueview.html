@@ -6,12 +6,12 @@
                 <div class="input-label">
                     Du RU :
                 </div>
-                <select ng-change="_change()" ng-model="modelru">
-                    <option ng-repeat="restaurant in rulist" ng-value="{{restaurant.id}}" ng-selected="restaurant.id == preselectruId">{{restaurant.title}}</option>
-                </select>
+                <select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist"></select>
             </label>
             <ion-list class="list">
-                <ion-item class="item item-icon-left item-icon-right" ng-repeat="time in waitingTimes">
+                <ion-item class="item item-icon-left item-icon-right"
+                          ng-repeat="time in waitingTimes"
+                          ng-click="sendVote({{time.index}})">
                     <div>
                         <img src="" ng-src="{{time.img}}" class="clock" alt="clock"/>
                         <div>{{time.title}}</div>
