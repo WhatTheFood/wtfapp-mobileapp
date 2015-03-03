@@ -1,4 +1,5 @@
-wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice', function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
+wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$http', 'rulistservice', 'loginservice',
+    function($scope, $state, $stateParams, $ionicHistory, $http, rulistservice, loginservice) {
 
     /* populate combobox */
     $scope.rulist = rulistservice.restaurants;
@@ -36,6 +37,7 @@ wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$http', 'rul
         .success(function (data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
+            $ionicHistory.goBack();
             return data;
         })
         .error(function (data, status, headers, config) {
