@@ -1,6 +1,11 @@
 <ion-view view-title="{{ru.title}}" ng-app>
     <ion-content class="padding">
         <div class="list item-text-wrap">
+            <ion-item class="item-stable item-icon-left" ng-if="clockIndex > -1">
+                <img src="" ng-src="{{clockImage}}" class="clock" width="32" height="32" alt="clock"/>
+                {{clockTitle}}
+            </ion-item>
+
             <a class="item item-thumbnail-left" href="#">
               <img src="img/picto_calendrier.png" class="vcenter">
               <p ng-bind-html="operationalhours" class="vcenter"></p>

@@ -22,6 +22,33 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     $scope.ru = restaurant[0];
     $scope.setContextRu($scope.ru);
 
+    /* estimated time */
+    var waitingTimes = [
+        {title:'Tu rentres dans le RU en moonwalk', img:'img/clock_green.png'},
+        {title:'Juste le temps de rêvasser', img:'img/clock_orange.png'},
+        {title:'On peut y réviser ses partiels', img:'img/clock_red.png'}
+    ];
+
+    /**
+     * Get the current time estimation as a timeSlot index
+     */
+    var getQueueIndex = function(ru) {
+        if(ru.queue.value == 0)
+            return -1;
+
+        if(ru.queue.value > 66)
+            return 2;
+        else if(ru.queue.value > 33)
+            return 1;
+        else
+            return 0;
+    };
+    $scope.clockIndex = getQueueIndex($scope.ru);
+    if($scope.clockIndex > -1) {
+        $scope.clockImage = waitingTimes[$scope.clockIndex].img;
+        $scope.clockTitle = waitingTimes[$scope.clockIndex].title;
+    }
+
     //$scope.ru.operationalhours =
 
     $scope.operationalhours = $sce.trustAsHtml('<b>' + restaurant[0].operationalhours.replace(/:/g, ":</b><br />").replace(/  /g, "<br /><b>"));
