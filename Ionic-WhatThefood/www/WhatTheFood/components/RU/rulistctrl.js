@@ -3,6 +3,24 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
     $scope.data = {};
     $scope.data.showSearch = true;
 
+    /* estimated time */
+    var clockImages = ['img/clock_green.png', 'img/clock_orange.png', 'img/clock_red.png'];
+
+    /**
+     * Get the current time estimation as a timeSlot index
+     */
+    $scope.getClockImage = function(queuevalue) {
+        if(queuevalue == 0)
+            return 'img/clock_grey.png';
+
+        if(queuevalue > 66)
+            return clockImages[2];
+        else if(queuevalue > 33)
+            return clockImages[1];
+        else
+            return clockImages[0];
+    };
+
     $scope.clearSearch = function() {
         $scope.data.searchQuery = '';
 	};
