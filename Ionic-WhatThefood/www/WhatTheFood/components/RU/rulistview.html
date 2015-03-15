@@ -10,26 +10,27 @@
         </div>
 
         <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
-            <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
-                <div>
-                <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
-                <div>{{ru.title}}</div>
-                <div class="subtitle">{{ru.openingNow}}</div>
-                <i class="icon ion-chevron-right"></i>
-                </div>
-                <div class="list" ng-if="$first" >
-                    <strong>Plats du jour :</strong>
+            <div ng-repeat-start="ru in rulist  | filter: data.searchQuery">
+                <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-if="$first">
+                    <div>
+                        <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
+                        <div>{{ru.title}}</div>
+                        <div class="subtitle">{{ru.openingNow}}</div>
+                        <i class="icon ion-chevron-right"></i>
+                    </div>
+    				<ion-option-button class="button-info"
+                           ng-click="goEatAt(ru.id)">
+    				  Je mange ici ce midi !
+    				</ion-option-button>
+                </ion-item>
+                <div class="rumenu list" ng-if="$first" >
                     <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
                         <div ng-repeat="dish in category.dishes" style="white-space: normal;">
-                            - {{dish.name}}
+                            {{dish.name}}
                         </div>
                     </div>
                 </div>
-				<ion-option-button class="button-info"
-                       ng-click="goEatAt(ru.id)">
-				  Je mange ici ce midi !
-				</ion-option-button>
-            </ion-item>
+            </div>
 
             <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
                 <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
