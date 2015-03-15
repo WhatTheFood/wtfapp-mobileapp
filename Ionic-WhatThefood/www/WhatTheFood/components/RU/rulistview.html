@@ -1,4 +1,4 @@
-<ion-view view-title="Liste des RUs">
+<ion-view view-title="Mes RUs">
     <ion-content>
 
         <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
@@ -10,7 +10,7 @@
         </div>
 
         <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
-            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
+            <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-start="ru in rulist  | filter: data.searchQuery" ng-if="$first">
                 <div>
                 <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
@@ -31,7 +31,7 @@
 				</ion-option-button>
             </ion-item>
 
-            <ion-item class="item item-icon-left item-icon-right" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
+            <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
                 <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
                 <div>{{ru.title}}</div>
                 <div class="subtitle">{{ru.openingNow}}</div>

@@ -30,23 +30,23 @@
 .bar.bar-positive {
     border: 0;
     border-bottom: 1px solid rgba(255,136,113, 1);
-    color: #ff9c84;
+    color: #eb5d3d;
     background: #fff;
 }
 
 .bar-positive .button.button-clear {
-    color: #ff9c84;
+    color: #eb5d3d;
     font-weight: bold;
 }
 
 .bar.bar-positive .title {
-    color: #ff9c84;
+    color: #eb5d3d;
     font-weight: bold;
     font-size: 20pt;
 }
 
 .bar .title {
-    color: #ff9c84;
+    color: #eb5d3d;
     font-size: 16pt;
     font-weight: bold;
 }
@@ -56,6 +56,19 @@
 }
 
 .ion-ios7-search {
+  color: white;
+}
+
+.item-ru > a {
+  background: -webkit-linear-gradient(left, #943b27, #ea5d3d);
+}
+
+.item-ru {
+  border-color: #eb5d3d;
+  color: white;
+}
+
+.item-ru .ion-chevron-right {
   color: white;
 }
 
@@ -108,25 +121,25 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 
 .bar-header {
   background-color: white;
-  color: #ff9c84;
+  color: #eb5d3d;
 }
 .bar.bar-assertive {
     background-color: #ff9c84;
 }
 .subtitle {
-  color: #696969;
+  color: white;
   font-size: 0.8em;
 }
 
 .bar.item-input-inset .item-input-wrapper {
     width: 100%;
-    background-color: #ff9c84;
+    background-color: #eb5d3d;
     color: white;
 }
 
 .has-header, #search-box {
   width: 100%;
-    background-color: #ff9c84;
+    background-color: #eb5d3d;
 }
 
 input::-webkit-input-placeholder {
@@ -177,7 +190,7 @@ input[placeholder] {
 }
 
 .university {
-  background-color: #ff9c84;
+  background-color: #eb5d3d;
   color: white;
   font-style: italic;
 }
@@ -267,4 +280,8 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > ion-nav-view > io
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
+  background-color: #ff9c84 !important;
 }
