@@ -6,6 +6,15 @@ wtf.controller('loginctrl', ['$scope','$state','$http','loginservice','$cordovaO
             $state.go('wtf.rulist');
         };
 
+        $scope.submitForm = function(){
+
+			/*
+				TODO add callback to server
+			*/
+			
+			$scope.gohome();
+        };
+
         $scope.fblogin = function()  {
 
             $ionicLoading.show({

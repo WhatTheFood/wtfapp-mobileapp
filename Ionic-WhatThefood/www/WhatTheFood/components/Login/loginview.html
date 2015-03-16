@@ -10,17 +10,53 @@
                     <div style="text-align: center;">
                         <img src="img/separator.png" height="20" /><br />
 
-                        <label style="margin:10px; ">
-                            <button class="button button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
-                                Connexion avec Facebook
-                            </button>
-                        </label>
+						<div ng-hide="signup">
+							<label style="margin:10px;">
+								<button class="button button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
+									Connexion avec Facebook
+								</button>
+							</label>
 
-                        <label style="margin:10px;">
-                            <button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="gohome()">
-                               Continuer sans se connecter
-                            </button>
-                        </label>
+							<label style="margin:10px;">
+								<button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="gohome()">
+								   Continuer sans se connecter
+								</button>
+							</label>
+							
+							<a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = true;">Créer un compte par email</a>
+						</div>
+						<div style="margin-top:10px;" ng-show="signup">
+							
+							<label style="margin:10px;">
+								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
+									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Email</span>
+									<input type="text">
+								</div>
+							</label>
+
+							<label style="margin:10px;">
+								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
+									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Mot de passe</span>
+									<input type="text">
+								</div>
+							</label>
+
+							<label style="margin:10px;">
+								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
+									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Confirmer</span>
+									<input type="text">
+								</div>
+							</label>
+
+							<label style="margin:10px;">
+								<button class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;"  ng-click="submitForm()">
+								   Créer mon profil
+								</button>
+							</label>
+							
+							<a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = false;">Retour</a>
+							
+						</div>
                     </div>
                 </ion-content>
             </ion-view>
