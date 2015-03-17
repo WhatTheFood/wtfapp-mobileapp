@@ -4,63 +4,72 @@
         <ion-nav-view name="menuContent">
             <ion-view view-title="À propos" ng-app>
                 <ion-content style="background-image: url(img/home_bg.png); background-repeat: no-repeat; background-size:cover;" >
-
+					
                     <img src="img/logo_wtf.png" width="100" />
                     <br /><br /><br />
                     <div style="text-align: center;">
                         <img src="img/separator.png" height="20" /><br />
-
+						
 						<div ng-hide="signup">
 							<label style="margin:10px;">
 								<button class="button button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
 									Connexion avec Facebook
 								</button>
 							</label>
-
+							
 							<label style="margin:10px;">
 								<button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="gohome()">
-								   Continuer sans se connecter
+									Continuer sans se connecter
 								</button>
 							</label>
 							
 							<a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = true;">Créer un compte par email</a>
 						</div>
-						<div style="margin-top:10px;" ng-show="signup">
+						<form name="form" style="margin-top:10px;" ng-show="signup" novalidate>
 							
 							<label style="margin:10px;">
 								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Email</span>
-									<input type="text">
+									<span class="input-label" style="font-style: italic; text-align: left; width: 0px; padding:0px;" ng-show="form.email.$pristine">Email</span>
+									<input type="email" name="email" ng-model="email" ng-focus="form.email.$pristine = false" required>
+								</div>
+								<div ng-show="form.email.$invalid && (form.email.$touched || form.$submitted)">
+									<span ng-show="form.email.$error.required">Email indispensable !</span>
+									<span ng-show="form.email.$error.email">Email invalide !</span>
 								</div>
 							</label>
-
+							
 							<label style="margin:10px;">
 								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Mot de passe</span>
-									<input type="text">
+									<span class="input-label" style="font-style: italic; text-align: left; width: 0px; padding:0px;" ng-show="form.pwd.$pristine">Mot de passe</span>
+									<input type="password" name="pwd" ng-model="pwd" ng-focus="form.pwd.$pristine = false" required>
+								</div>
+								<div ng-show="form.pwd.$invalid && (form.pwd.$touched || form.$submitted)">
+									<span ng-show="form.pwd.$error.required">Mot de passe indispensable !</span>
+									<span ng-show="form.pwd.$error.email">Mot de passe invalide !</span>
 								</div>
 							</label>
-
+							
 							<label style="margin:10px;">
 								<div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-									<span class="input-label" style="font-style: italic; text-align: left; min-width:120px;">Confirmer</span>
-									<input type="text">
+									<span class="input-label" style="font-style: italic; text-align: left; width: 0px; padding:0px;" ng-show="form.pwd_confirm.$pristine">Confirmer</span>
+									<input type="password" name="pwd_confirm" ng-model="pwd_confirm" ng-focus="form.pwd_confirm.$pristine = false" required>
+								</div>
+								<div ng-show="pwd!=pwd_confirm && (form.pwd_confirm.$touched || form.$submitted)">
+									<span ng-show="pwd!=pwd_confirm">Les mots de passe ne sont pas les mêmes !</span>
 								</div>
 							</label>
-
+							
 							<label style="margin:10px;">
-								<button class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;"  ng-click="submitForm()">
-								   Créer mon profil
-								</button>
+								<input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Créer mon profil" ng-click="submitForm(form)">
 							</label>
 							
 							<a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = false;">Retour</a>
 							
-						</div>
-                    </div>
-                </ion-content>
-            </ion-view>
-        </ion-nav-view>
-    </ion-side-menu-content>
-
+						</form>
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-nav-view>
+	</ion-side-menu-content>
+	
 </ion-side-menus>

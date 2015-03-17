@@ -6,13 +6,17 @@ wtf.controller('loginctrl', ['$scope','$state','$http','loginservice','$cordovaO
             $state.go('wtf.rulist');
         };
 
-        $scope.submitForm = function(){
+        $scope.submitForm = function(form){
 
-			/*
-				TODO add callback to server
-			*/
-			
-			$scope.gohome();
+			if(form.email.$valid && form.pwd.$valid && $scope.pwd==$scope.pwd_confirm) {
+				
+				/*
+					TODO add callback to server
+				*/
+				
+				$scope.gohome();
+			}
+				
         };
 
         $scope.fblogin = function()  {
