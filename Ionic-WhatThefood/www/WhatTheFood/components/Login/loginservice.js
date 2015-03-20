@@ -2,7 +2,7 @@ wtf.factory('loginservice', function($http, $q) {
 
     var tokenAPI = "";
 
-    var serverAPI = "http://localhost:5000/api";
+    var serverAPI = "http://loiclefloch.fr:5000/api";
     //var serverAPI = "http://192.168.2.122:5000/api";
 
     var factory = {
