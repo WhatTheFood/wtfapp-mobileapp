@@ -1,23 +1,29 @@
 wtf.factory('loginservice', function($http, $q) {
 	
-    var tokenAPI = "";
+		var tokenAPI = "";
 	
-    var serverAPI = "http://loiclefloch.fr:5000/api";
-    //var serverAPI = "http://192.168.2.122:5000/api";
+		var serverAPIHTTPS = true;
+		var serverAPI = "whatthefood.herokuapp.com/api";
+		//var serverAPIHTTPS = false;
+		//var serverAPI = "127.0.0.1:5000/api";
 	
-    var factory = {
-        getServerAPI : function() {
-            return serverAPI;
+		var factory = {
+
+		getServerAPI : function() {
+				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
+		},
+		getServerAPILogin : function(user,password) {
+				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user + ":" + password + serverAPI;
 		},
 		
 		signup : function(email, pwd)
 		{
 			/**
 				ATTENTION : jamais testé avec un serveur en marche (mais cas d'erreur testé) - nicol3as
+				Inscription testée par NicoZG : Fonctionnelle.
 			**/
-			
 			var req = {
-				method: 'PUT',
+				method: 'POST',
 				dataType: "json",
 				url: factory.getServerAPI()+'/users/',
 				data: {"email": email, "password": pwd},
@@ -42,8 +48,8 @@ wtf.factory('loginservice', function($http, $q) {
 			
 			var req = {
 				method: 'GET',
-				url: "http://"+email+":"+pwd+"@"+factory.getServerAPI().substring(7)+'/users/login'
-			};  // Get the URL by removing 'http://' from the server API URL
+				url: factory.getServerAPI(email, pwd) + '/users/login'
+			};	// Get the URL by removing 'http://' from the server API URL
 			
 			return $http(req)
 			.success(function (data, status, headers, config) {
@@ -57,10 +63,10 @@ wtf.factory('loginservice', function($http, $q) {
 			});
 		},
 		
-        loginfb : function() {
-            var defer = $q.defer();
+				loginfb : function() {
+						var defer = $q.defer();
 			
-            openFB.login(
+						openFB.login(
 			
 			function(response) {
 				if (response.status === 'connected') {
@@ -106,9 +112,9 @@ wtf.factory('loginservice', function($http, $q) {
 			return defer.promise;
 		},
 		
-        getfriendlist : function() {
-            var defer = $q.defer();
-            openFB.api({path: '/me/friends',
+				getfriendlist : function() {
+						var defer = $q.defer();
+						openFB.api({path: '/me/friends',
 				success: function(friendlist) {
 					console.log(friendlist);
 					defer.resolve(friendlist);
@@ -118,15 +124,15 @@ wtf.factory('loginservice', function($http, $q) {
 				}
 			});
 			
-            return defer.promise;
+						return defer.promise;
 		},
 		
-        gettoken : function() {
-            return tokenAPI;
+				gettoken : function() {
+						return tokenAPI;
 		}
 	};
 	
-    return factory;
+		return factory;
 });
 
 /*wtf.factory('$localStorage', ['$window', function($window) {
