@@ -49,7 +49,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                     controller: 'loginctrl'}
                 }
             })
-            
+
             // setup an abstract state for the tabs directive
             .state('wtf', {
                 url: "/wtf",
@@ -87,7 +87,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                     }
                 }
             })
-                        
+
             .state('wtf.rueat', {
                 url: '/rueat/:ruId',
                 views: {
@@ -97,13 +97,23 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                     }
                 }
             })
-                        
+
             .state('wtf.ruqueue', {
                 url: '/ruqueue/:ruId',
                 views: {
                     'menuContent': {
                         templateUrl: 'WhatTheFood/components/RU/ruqueueview.html',
                         controller: 'ruqueuectrl'
+                    }
+                }
+            })
+
+            .state('wtf.lunch', {
+                url: '/lunch',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/Lunch/lunchstartview.html',
+                        controller: 'lunchstartctrl'
                     }
                 }
             })
