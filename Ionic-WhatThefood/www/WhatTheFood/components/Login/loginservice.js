@@ -13,7 +13,7 @@ wtf.factory('loginservice', function($http, $q) {
 				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
 		},
 		getServerAPILogin : function(user,password) {
-				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user + ":" + password + serverAPI;
+				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
 		},
 		
 		signup : function(email, pwd)
@@ -44,13 +44,15 @@ wtf.factory('loginservice', function($http, $q) {
 		{
 			/**
 				ATTENTION : jamais testé avec un serveur en marche (mais cas d'erreur testé) - nicol3as
+				Ne fonctionne pas, à voir pourquoi.
 			**/
 			
+			console.log(factory.getServerAPILogin(email, pwd) + '/users/login');
 			var req = {
 				method: 'GET',
-				url: factory.getServerAPI(email, pwd) + '/users/login'
+				url: factory.getServerAPILogin(email, pwd) + '/users/login'
 			};	// Get the URL by removing 'http://' from the server API URL
-			
+			console.log(req.url);
 			return $http(req)
 			.success(function (data, status, headers, config) {
 				console.log(data);
