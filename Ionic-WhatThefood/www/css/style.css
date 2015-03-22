@@ -30,17 +30,17 @@
 .bar.bar-positive {
     border: 0;
     border-bottom: 1px solid rgba(255,136,113, 1);
-    color: #eb5d3d;
-    background: #fff;
+    color: white;
+    background: #eb5d3d;
 }
 
 .bar-positive .button.button-clear {
-    color: #eb5d3d;
+    color: white;
     font-weight: bold;
 }
 
 .bar.bar-positive .title {
-    color: #eb5d3d;
+    color: white;
     font-weight: bold;
     font-size: 20pt;
 }
@@ -56,7 +56,7 @@
 }
 
 .ion-ios7-search {
-  color: white;
+  color: #eb5d3d;
 }
 
 .item-ru > a {
@@ -93,11 +93,14 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
 }
 
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.item {
-    background: #ff9c84;
-  border-color: #ff9c84;
+    background: -webkit-linear-gradient(left, #943b27, #ea5d3d);
     color: #fff;
     font-weight: 800;
-    border: 1px solid white;
+    border-width: 0px;
+}
+
+body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.activated {
+  background: #761818;
 }
 
 .vcenter {
@@ -126,11 +129,11 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .bar-header {
-  background-color: white;
-  color: #eb5d3d;
+  background-color: #eb5d3d;
+  color: white;
 }
 .bar.bar-assertive {
-    background-color: #ff9c84;
+    background-color: #eb5d3d;
 }
 .subtitle {
   color: white;
@@ -139,44 +142,55 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 
 .bar.item-input-inset .item-input-wrapper {
     width: 100%;
-    background-color: #eb5d3d;
-    color: white;
+    color: #eb5d3d;
+    background-color: white;
 }
 
-.has-header, #search-box {
+.has-header {
   width: 100%;
-    background-color: #eb5d3d;
+  background-color: #eb5d3d;
+  color: #eb5d3d;
+}
+
+.clear-search {
+  font-size: 2em;
+}
+
+#search-box {
+  width: 100%;
+  background-color: white;
+  color: #eb5d3d;
 }
 
 input::-webkit-input-placeholder {
-   color: white;
+   color: #eb5d3d;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-   color: white;
+   color: #eb5d3d;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input::-moz-placeholder {  /* Firefox 19+ */
-   color: white;
+   color: #eb5d3d;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input:-ms-input-placeholder {
-   color: white;
+   color: #eb5d3d;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 input[placeholder] {
-   color: white;
+   color: #eb5d3d;
    font-weight: 900;
    font-family: OpenSans;
 }
@@ -289,5 +303,5 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > ion-nav-view > io
 }
 
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
-  background-color: #ff9c84 !important;
+  background-color: #eb5d3d !important;
 }
