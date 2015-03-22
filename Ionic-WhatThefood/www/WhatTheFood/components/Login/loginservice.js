@@ -18,10 +18,6 @@ wtf.factory('loginservice', function($http, $q) {
 		
 		signup : function(email, pwd)
 		{
-			/**
-				ATTENTION : jamais testé avec un serveur en marche (mais cas d'erreur testé) - nicol3as
-				Inscription testée par NicoZG : Fonctionnelle.
-			**/
 			var req = {
 				method: 'POST',
 				dataType: "json",
@@ -42,13 +38,6 @@ wtf.factory('loginservice', function($http, $q) {
 		
 		signin : function(email, pwd)
 		{
-			/**
-				ATTENTION : jamais testé avec un serveur en marche (mais cas d'erreur testé) - nicol3as
-				Ne fonctionne pas, à voir pourquoi.
-			**/
-			
-			console.log(factory.getServerAPI() + '/users/login');
-
 			function utf8_to_b64( str ) {
 			  return window.btoa(unescape(encodeURIComponent( str )));
 			}
@@ -59,8 +48,7 @@ wtf.factory('loginservice', function($http, $q) {
 				headers: {
 					Authorization: "Basic " + utf8_to_b64(email + ":" + pwd)
 				}
-			};	// Get the URL by removing 'http://' from the server API URL
-			console.log(req.url);
+			};
 			return $http(req)
 			.success(function (data, status, headers, config) {
 				console.log(data);
