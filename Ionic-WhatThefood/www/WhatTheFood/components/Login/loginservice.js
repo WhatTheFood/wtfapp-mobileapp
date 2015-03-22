@@ -47,10 +47,18 @@ wtf.factory('loginservice', function($http, $q) {
 				Ne fonctionne pas, à voir pourquoi.
 			**/
 			
-			console.log(factory.getServerAPILogin(email, pwd) + '/users/login');
+			console.log(factory.getServerAPI() + '/users/login');
+
+			function utf8_to_b64( str ) {
+			  return window.btoa(unescape(encodeURIComponent( str )));
+			}
+
 			var req = {
 				method: 'GET',
-				url: factory.getServerAPILogin(email, pwd) + '/users/login'
+				url: factory.getServerAPI() + '/users/login',
+				headers: {
+					Authorization: "Basic " + utf8_to_b64(email + ":" + pwd)
+				}
 			};	// Get the URL by removing 'http://' from the server API URL
 			console.log(req.url);
 			return $http(req)
