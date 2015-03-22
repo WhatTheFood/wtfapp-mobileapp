@@ -75,7 +75,7 @@ wtf.factory('loginservice', function($http, $q) {
 							var req = {
 								method: 'PUT',
 								dataType: "json",
-								url: serverAPI+'/users/login/facebook',
+								url: factory.getServerAPI() +'/users/login/facebook',
 								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
