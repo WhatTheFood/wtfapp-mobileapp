@@ -13,109 +13,113 @@
                     <div class="item">
                         <div class="list no-padding no-margin lunch-scale-list">
                             <label class="item item-radio item-lunch-check check-empty-plate">
-                                <input type="radio" name="group1">
+                                <input ng-model="entree" value="0" type="radio" name="group1">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-empty-plate">
-                                <input type="radio" name="group1">
+                                <input ng-model="entree" value="1" type="radio" name="group1">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-full-plate">
-                                <input type="radio" name="group1">
+                                <input ng-model="entree" value="2" type="radio" name="group1">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-full-plate">
-                                <input type="radio" name="group1">
+                                <input ng-model="entree" value="3" type="radio" name="group1">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                         </div>
                         <div class="lunch-scale"></div>
-                        <img class="plate-image" src="" ng-src="img/plate_empty.png" />
+                        <img class="plate-image" src=""
+                        ng-src="{{entree == 0 ? 'img/plate_empty.png' : entree == 1 ? 'img/plate_quite_empty.png' : entree == 2 ? 'img/plate_quite_full.png' : entree == 3 ? 'img/plate_full.png' : 'img/plate_empty.png'}}" />
                     </div>
                     <div class="item">Plat</div>
                     <div class="item">
                         <div class="list no-padding no-margin lunch-scale-list">
                             <label class="item item-radio item-lunch-check check-empty-plate">
-                                <input type="radio" name="group2">
+                                <input ng-model="plat" value="0" type="radio" name="group2">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-empty-plate">
-                                <input type="radio" name="group2">
+                                <input ng-model="plat" value="1" type="radio" name="group2">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-full-plate">
-                                <input type="radio" name="group2">
+                                <input ng-model="plat" value="2" type="radio" name="group2">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-full-plate">
-                                <input type="radio" name="group2">
+                                <input ng-model="plat" value="3" type="radio" name="group2">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                         </div>
                         <div class="lunch-scale"></div>
-                        <img class="plate-image" src="" ng-src="img/plate_empty.png" />
+                        <img class="plate-image" src=""
+                        ng-src="{{plat == 0 ? 'img/plate_empty.png' : plat == 1 ? 'img/plate_quite_empty.png' : plat == 2 ? 'img/plate_quite_full.png' : plat == 3 ? 'img/plate_full.png' : 'img/plate_empty.png'}}" />
                     </div>
                     <div class="item">Dessert</div>
                     <div class="item">
                         <div class="list no-padding no-margin lunch-scale-list">
                             <label class="item item-radio item-lunch-check check-empty-plate">
-                                <input type="radio" name="group3">
+                                <input ng-model="dessert" value="0" type="radio" name="group3">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-empty-plate">
-                                <input type="radio" name="group3">
+                                <input ng-model="dessert" value="1" type="radio" name="group3">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-full-plate">
-                                <input type="radio" name="group3">
+                                <input ng-model="dessert" value="2" type="radio" name="group3">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-full-plate">
-                                <input type="radio" name="group3">
+                                <input ng-model="dessert" value="3" type="radio" name="group3">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                         </div>
                         <div class="lunch-scale"></div>
-                        <img class="plate-image" src="" ng-src="img/plate_empty.png" />
+                        <img class="plate-image" src=""
+                        ng-src="{{dessert == 0 ? 'img/plate_empty.png' : dessert == 1 ? 'img/plate_quite_empty.png' : dessert == 2 ? 'img/plate_quite_full.png' : dessert == 3 ? 'img/plate_full.png' : 'img/plate_empty.png'}}" />
                     </div>
                     <div class="item">Pain</div>
                     <div class="item">
                         <div class="list no-padding no-margin lunch-scale-list">
                             <label class="item item-radio item-lunch-check check-empty-plate">
-                                <input type="radio" name="group4">
+                                <input ng-model="pain" value="0" type="radio" name="group4">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-empty-plate">
-                                <input type="radio" name="group4">
+                                <input ng-model="pain" value="1" type="radio" name="group4">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-quite-full-plate">
-                                <input type="radio" name="group4">
+                                <input ng-model="pain" value="2" type="radio" name="group4">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio item-lunch-check check-full-plate">
-                                <input type="radio" name="group4">
+                                <input ng-model="pain" value="3" type="radio" name="group4">
                                 <div class="item-content"></div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
                         </div>
                         <div class="lunch-scale"></div>
-                        <img class="plate-image" src="" ng-src="img/plate_empty.png" />
+                        <img class="plate-image" src=""
+                        ng-src="{{pain == 0 ? 'img/plate_empty.png' : pain == 1 ? 'img/plate_quite_empty.png' : pain == 2 ? 'img/plate_quite_full.png' : pain == 3 ? 'img/plate_full.png' : 'img/plate_empty.png'}}" />
                     </div>
                 </div>
             </div>
