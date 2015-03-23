@@ -72,16 +72,6 @@
   color: white;
 }
 
-.no-border-list > .item {
-  border: none;
-}
-
-.question-lunch {
-  background: -webkit-linear-gradient(left, #ffffff, #8C8C8C);
-  font-size: 1.5em;
-  text-align: center;
-}
-
 .lunch-scale {
   background: -webkit-linear-gradient(left, #13E6A4, #B3D72B, #FB4D26);
   height: 10px;
@@ -112,9 +102,7 @@
 }
 
 .item-lunch-check .item-content {
-  background-color: white;
-  padding: 16px 0px 16px 16px;
-  border-radius: 50%;
+  background-color: transparent;
 }
 
 .check-empty-plate {
@@ -125,6 +113,7 @@
   background: transparent;
   padding: 16px 16px 16px 16px;
   border-radius: 50%;
+  border-color: black;
 }
 
 .check-empty-plate input:checked ~ .item-content {
@@ -172,35 +161,6 @@
 
 .no-margin {
   margin: 0px;
-}
-
-.button.button-block, .button.button-full.no-margin {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.button.button-positive {
-  border: none;
-  background-color: #64F0C3;
-  color: black;
-}
-
-.button.button-positive.active, .button.button-positive.activated {
-  border: none;
-  background-color: #44A385;
-  color: black;
-}
-
-.fork-red-bg {
-  background-image: url(../img/fork_red_bg.png);
-}
-
-.lunchmenu {
-  background-image: url(../img/fork_bg.png);
-}
-
-.lunchmenu .item {
-  background-color: transparent;
 }
 
 .rumenu {
@@ -253,6 +213,13 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .clock {
+  width: 42px;
+  height: 42px;
+  float: left;
+  margin-left: -47px;
+}
+
+.clock-queue {
   width: 32px;
   height: 32px;
   float: left;
