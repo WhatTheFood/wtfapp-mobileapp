@@ -118,6 +118,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                 }
             })
 
+            .state('wtf.quizz', {
+                url: '/quizz',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/Lunch/lunchquizzview.html',
+                        controller: 'lunchquizzctrl'
+                    }
+                }
+            })
+
             .state('wtf.profile', {
                 url: '/profile',
                 views: {
