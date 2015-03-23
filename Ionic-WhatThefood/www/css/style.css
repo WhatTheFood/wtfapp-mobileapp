@@ -213,10 +213,11 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .clock {
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   float: left;
-  margin-left: -47px;
+  margin-top: -5px;
+  margin-left: -45px;
 }
 
 .bar-header {
