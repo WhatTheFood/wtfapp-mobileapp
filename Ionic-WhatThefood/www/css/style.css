@@ -72,6 +72,17 @@
   color: white;
 }
 
+.no-border-list > .item {
+  border: none;
+}
+
+.question-lunch {
+  background: -webkit-linear-gradient(left, #ffffff, #8C8C8C);
+  font-size: 1.5em;
+  text-align: center;
+  color: black;
+}
+
 .lunch-scale {
   background: -webkit-linear-gradient(left, #13E6A4, #B3D72B, #FB4D26);
   height: 10px;
@@ -102,7 +113,9 @@
 }
 
 .item-lunch-check .item-content {
-  background-color: transparent;
+  background-color: white;
+  padding: 16px 0px 16px 16px;
+  border-radius: 50%;
 }
 
 .check-empty-plate {
@@ -161,6 +174,40 @@
 
 .no-margin {
   margin: 0px;
+}
+
+.button.button-block, .button.button-full.no-margin {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.button.button-positive {
+  border: none;
+  background-color: #64F0C3;
+  color: black;
+}
+
+.button.button-positive.active, .button.button-positive.activated {
+  border: none;
+  background-color: #44A385;
+  color: black;
+}
+
+.fork-red-content {
+  color: white;
+  text-align: center;
+}
+
+.fork-red-bg {
+  background-image: url(../img/fork_red_bg.png);
+}
+
+.lunchmenu {
+  background-image: url(../img/fork_bg.png);
+}
+
+.lunchmenu .item {
+  background-color: transparent;
 }
 
 .rumenu {
@@ -262,36 +309,55 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 input::-webkit-input-placeholder {
-   color: #eb5d3d;
+   color: white;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-   color: #eb5d3d;
+   color: white;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input::-moz-placeholder {  /* Firefox 19+ */
-   color: #eb5d3d;
+   color: white;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 
 input:-ms-input-placeholder {
-   color: #eb5d3d;
+   color: white;
    font-weight: 900;
    font-style: italic;
    font-family: OpenSans;
 }
 input[placeholder] {
-   color: #eb5d3d;
+   color: white;
    font-weight: 900;
    font-family: OpenSans;
+}
+
+#search-box input::-webkit-input-placeholder {
+   color: #eb5d3d;
+}
+
+#search-box  input:-moz-placeholder { /* Firefox 18- */
+   color: #eb5d3d;
+}
+
+#search-box  input::-moz-placeholder {  /* Firefox 19+ */
+   color: #eb5d3d;
+}
+
+#search-box  input:-ms-input-placeholder {
+   color: #eb5d3d;
+}
+#search-box  input[placeholder] {
+   color: #eb5d3d;
 }
 
 .scroll {
