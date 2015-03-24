@@ -3,7 +3,6 @@
  */
 
 wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
-
     var req = {
         method: 'GET',
         url: loginservice.getServerAPI()+'/restaurants'
@@ -11,6 +10,7 @@ wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
 
     var factory = {
         restaurants: [],
+		feedback: [],
 
         getPosition: function(){
             var defer = $q.defer();

@@ -1,6 +1,11 @@
 wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
     function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
-		
+		$scope.entree = 0;
+		$scope.plat = 0;
+		$scope.dessert = 0;
+		$scope.pain = 0;
+	
+		/* Update the date at the top */
 		$scope.updateDate = function() {
 			var d = new Date();
 
@@ -29,4 +34,9 @@ wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 
 			$scope.date = weekDaysArr[d.getDay()] + " " + d.getDate() + " " + monthArr[d.getMonth()] + " - " + (d.getHours() < 17 ? "midi" : "soir");
 		}
+		
+		$scope.rememberFeedback = function(entree, plat, dessert, pain) {
+			rulistservice.feedback = [entree, plat, dessert, pain];
+		}
+		
 }]);
