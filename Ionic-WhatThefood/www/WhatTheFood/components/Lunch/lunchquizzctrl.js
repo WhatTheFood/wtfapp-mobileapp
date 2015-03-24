@@ -4,6 +4,7 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 		$scope.rulist = rulistservice.restaurants;
 		$scope.currentRu = $scope.rulist[0];
 		
+
 		/* Update the date at the top */
 		$scope.updateDate = function() {
 			var d = new Date();
@@ -19,17 +20,17 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 
 			var monthArr = new Array();
 			monthArr[0] = "janvier";
-			monthArr[1] = "février";
+			monthArr[1] = "fï¿½vrier";
 			monthArr[2] = "mars";
 			monthArr[3] = "avril";
 			monthArr[4] = "mai";
 			monthArr[5] = "juin";
 			monthArr[6] = "juillet";
-			monthArr[7] = "août";
+			monthArr[7] = "aoï¿½t";
 			monthArr[8] = "septembre";
 			monthArr[9] = "octobre";
 			monthArr[10] = "novembre";
-			monthArr[11] = "décembre";
+			monthArr[11] = "dï¿½cembre";
 
 			$scope.date = weekDaysArr[d.getDay()] + " " + d.getDate() + " " + monthArr[d.getMonth()] + " - " + (d.getHours() < 17 ? "midi" : "soir");
 			
@@ -70,17 +71,17 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 				],
 				"feedback": [
 				  {
-					"ate_alone": false,     --> C'est quoi ça ?
-					"convivial_restaurant": true,     --> C'est quoi ça ?
-					"enough_time_to_eat": true,     --> Ok ça je vois ce que c'est (vue 2 : "As-tu eu assez de temps pour manger ?")
-					"seasoning": 2,     --> C'est quoi ça ?
-					"cooking": 2,     --> C'est quoi ça ?
-					"hot_meal": 2,     --> C'est quoi ça ?
-					"meal_quality": 3,     --> C'est quoi ça ?
-					"enjoyed_my_meal": 2,     --> C'est quoi ça ?
-					"threw_away_food_itook": false,     --> C'est quoi ça ?
-					"threw_away_food_was_served": true,     --> C'est quoi ça ?
-					"bread_thrown": 2     --> C'est quoi ça ?
+					"ate_alone": false,     --> C'est quoi ï¿½a ?
+					"convivial_restaurant": true,     --> C'est quoi ï¿½a ?
+					"enough_time_to_eat": true,     --> Ok ï¿½a je vois ce que c'est (vue 2 : "As-tu eu assez de temps pour manger ?")
+					"seasoning": 2,     --> C'est quoi ï¿½a ?
+					"cooking": 2,     --> C'est quoi ï¿½a ?
+					"hot_meal": 2,     --> C'est quoi ï¿½a ?
+					"meal_quality": 3,     --> C'est quoi ï¿½a ?
+					"enjoyed_my_meal": 2,     --> C'est quoi ï¿½a ?
+					"threw_away_food_itook": false,     --> C'est quoi ï¿½a ?
+					"threw_away_food_was_served": true,     --> C'est quoi ï¿½a ?
+					"bread_thrown": 2     --> C'est quoi ï¿½a ?
 				  }
 				]
 			  }

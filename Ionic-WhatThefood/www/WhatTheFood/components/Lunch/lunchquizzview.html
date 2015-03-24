@@ -1,31 +1,25 @@
 <ion-view view-title="Mon plateau" ng-app>
     <ion-content>
         <div class="list item-text-wrap no-border-list">
-            <div class="item fork-red-bg fork-red-content" ng-init="updateDate()">
-                {{ date }}
-				<label class="item item-input item-select">
-					<select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist"></select>
-				</label>
+            <div class="item fork-red-bg fork-red-content">
+                <div class="current-date" ng-init="updateDate()">{{ date }}</div>
+				<select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist"></select>
             </div>
             <div class="item question-lunch">
                 Pourquoi n'as-tu pas terminé ton plateau ?
             </div>
-            <div class="item">
-                <p>Serais-tu prêt(e) à reprendre ces plats ?</p>
-				<div class="list no-padding no-margin quizz-scale-list">
-					<label class="item item-radio item-quizz-check">
-						Oui <input ng-model="takeAgain" value="0" type="radio" name="group1">
-						<i class="radio-icon ion-checkmark"></i>
-					</label>
-					<label class="item item-radio item-quizz-check">
-						Non ce n'était pas bon <input ng-model="takeAgain" value="1" type="radio" name="group1">
-						<i class="radio-icon ion-checkmark"></i>
-					</label>
-					<label class="item item-radio item-quizz-check">
-						Non je n'aime pas ça <input ng-model="takeAgain" value="2" type="radio" name="group1">
-						<i class="radio-icon ion-checkmark"></i>
-					</label>
-				</div>
+            <div class="item response-lunch">
+                <label class="item item-quizz-check">
+					<div>Serais-tu prêt(e) à reprendre ces plats ?</div>
+					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="0">Oui</ion-radio>
+					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="1">Non ce n'était pas bon</ion-radio>
+					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="2">Non je n'aime pas ça</ion-radio>
+				</label>
+                <label class="item item-quizz-check">
+					<div>As-tu assez de temps pour manger ?</div>
+					<ion-radio name="enoughTime" ng-model="enoughTime" ng-value="0">Oui</ion-radio>
+					<ion-radio name="enoughTime" ng-model="enoughTime" ng-value="1">Non</ion-radio>
+				</label>
             </div>
             <a href="#" class="item button button-full button-positive no-margin" ng-click="sendFeedback()">
                 Suivant
