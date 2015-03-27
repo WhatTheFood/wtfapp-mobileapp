@@ -9,14 +9,12 @@ wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', '$ion
         'items': [
             {'name': 'Végétarien', 'checked': false},
             {'name': 'Végétalien', 'checked': false},
-            {'name': 'Pas de porc', 'checked': true},
+            {'name': 'Pas de porc', 'checked': false},
             {'name': 'Pas de veau', 'checked': false},
-            {'name': 'Halal', 'checked': true},
-            {'name': 'Cacher', 'checked': false}
         ]},
         {'name': 'Mes alergies',
         'items': [
-            {'name': 'Gluten', 'checked': true},
+            {'name': 'Gluten', 'checked': false},
             {'name': 'Crustacés', 'checked': false},
             {'name': 'Œufs', 'checked': false},
             {'name': 'Poisson', 'checked': false},
