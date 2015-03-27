@@ -475,19 +475,26 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   margin-top: 10px;
 }
 
+.item-quizz {
+  border: 0px;
+}
+
+.item-quizz > div {
+  font-weight: bold;
+}
+
+.item-quizz > .item-radio {
+  border: 0px;
+}
+
 .item-quizz-select {
   border: 0px;
 }
 
-.item-quizz-check {
+.item-quizz-select > input-label {
   display: inline-block;
-  border: 0px;
 }
 
-.item-quizz-check > div {
-  font-weight: bold;
-}
-
-.item-quizz-check > .item-radio {
-  border: 0px;
+.item-quizz-select > .select-food {
+  text-decoration: underline;
 }
