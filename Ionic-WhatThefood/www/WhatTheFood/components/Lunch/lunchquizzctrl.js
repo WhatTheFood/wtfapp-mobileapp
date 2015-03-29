@@ -68,7 +68,26 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 					}
 				}
 
-				// TODO: random choices
+                /*
+                 * Gâché 1 plat : 1 question bonus aléatoire nourriture
+                 * Gâché 2 plats : 1 question bonus aléatoire nourriture et 1 contexte
+                 * Gâché 3 ou 4 plats : 2 questions bonus aléatoires nourriture et 1 contexte
+                */
+                $scope.questions = [];
+                if(counter == 1)
+                {
+                    $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
+                } else if(counter == 2){
+                    $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
+                    $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
+                } else if(counter >= 3){
+                    rand1 = (Math.random() * questions['food'].length | 0);
+                    rand2 = rand1;
+                    while(rand1 == rand2) {rand2 = (Math.random() * questions['food'].length | 0)}
+                    $scope.questions.push(questions['food'][rand1]);
+                    $scope.questions.push(questions['food'][rand2]);
+                    $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
+                }
 			}
     	}
 
@@ -83,17 +102,17 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
         questions = {
             'food': [
                 {
-                    'question': 'Serais-tu prèt à reprendre ce X la prochaine fois ?',
+                    'question': 'Serais-tu prèt à reprendre ce plat la prochaine fois ?',
                     'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
                     'target': enjoyed_my_meal
                 },
                 {
-                    'question': 'Comment était la préparation de X ?',
+                    'question': 'Comment était la préparation de ce plat ?',
                     'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
                     'target': cooking
                 },
                 {
-                    'question': 'Comment était la préparation de X ?',
+                    'question': 'Comment était la préparation de ce plat ?',
                     'answers': {0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop huileux', 3: 'Trop fade', 4: 'Pas assez chaud'},
                     'target': seasoning
                 }
@@ -121,8 +140,6 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
                 }
             ]
         }
-
-        $scope.questions = [questions['food'][0], questions['context'][0]];
 
 		/* Update the date at the top */
 		$scope.updateDate = function() {
