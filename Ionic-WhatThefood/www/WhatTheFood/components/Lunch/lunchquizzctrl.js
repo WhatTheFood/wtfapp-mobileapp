@@ -1,5 +1,5 @@
-wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-    function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
+    function($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 		/* return to login if not connected */
         if(loginservice.gettoken() == "") {$state.go('login'); return;}
 
@@ -92,51 +92,51 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
     	}
 
         /* quizz questions */
-        enjoyed_my_meal = null;
-        cooking = null;
-        seasoning = null;
-        enough_time_to_eat = null;
-        ate_alone = null;
-        took_twice = null;
-        convivial_restaurant = null;
         questions = {
             'food': [
                 {
                     'question': 'Serais-tu prèt à reprendre ce plat la prochaine fois ?',
                     'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
-                    'target': enjoyed_my_meal
+                    'target': 'enjoyed_my_meal',
+                    'value': null
                 },
                 {
                     'question': 'Comment était la préparation de ce plat ?',
                     'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
-                    'target': cooking
+                    'target': 'cooking',
+                    'value': null
                 },
                 {
                     'question': 'Comment était la préparation de ce plat ?',
                     'answers': {0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop huileux', 3: 'Trop fade', 4: 'Pas assez chaud'},
-                    'target': seasoning
+                    'target': 'seasoning',
+                    'value': null
                 }
             ],
             'context': [
                 {
                     'question': 'As-tu eu suffisamment de temps pour manger ?',
                     'answers': {true: 'Oui', false: 'Non'},
-                    'target': enough_time_to_eat
+                    'target': 'enough_time_to_eat',
+                    'value': null
                 },
                 {
                     'question': 'Avec qui as-tu mangé ?',
                     'answers': {true: 'Seul', false: 'Avec des amis'},
-                    'target': ate_alone
+                    'target': 'ate_alone',
+                    'value': null
                 },
                 {
                     'question': 'Est-ce que tu t\'es resservi ?',
                     'answers': {true: 'Oui', false: 'Non'},
-                    'target': took_twice
+                    'target': 'took_twice',
+                    'value': null
                 },
                 {
                     'question': 'Est-ce que tu trouves le RU convivial ?',
                     'answers': {true: 'Oui', false: 'Non'},
-                    'target': convivial_restaurant
+                    'target': 'convivial_restaurant',
+                    'value': null
                 }
             ]
         }
@@ -178,56 +178,103 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 		}
 
 		$scope.sendFeedback = function() {
-			alert(rulistservice.feedback);
-			// TODO Send data to server
+            response = {'menus': $scope.currentRu.menu};
+
+            /* get thrown values */
+            user_id = ''; // TODO: how do I get that ?
+            if(rulistservice.feedback[0] > -1)
+                $scope.currentEntree.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[0]});
+            if(rulistservice.feedback[1] > -1)
+                $scope.currentPlat.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[1]});
+            if(rulistservice.feedback[2] > -1)
+                $scope.currentGrillade.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[2]});
+            if(rulistservice.feedback[3] > -1)
+                $scope.currentDessert.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[3]});
+
+            /* get quizz answers */
+            quizz = {}
+            questions['food'].forEach(function(q, index){
+                if(q.value != null) {
+                    quizz[q.target] = q.value;
+                }
+            });
+
+            /* compile everything */
+            response.menus.feedback.push(quizz);
+
+            /* send feedback outta spaaace */
+            var req = {
+            method: 'PUT',
+            dataType: "json",
+            url: loginservice.getServerAPI()+'/restaurants/'+$scope.currentRu.id+'/menu',
+            data: response,
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer "+loginservice.gettoken()
+                }
+            };
+
+            console.log(req);
+
+            $http(req)
+            .success(function (data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $state.go('wtf.thanks');
+                return data;
+            })
+            .error(function (data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                console.log(data);
+                return "error";
+            });
 		}
 
-		/*
-		EXEMPLE de feedback au serveur : PUT /restaurants/{id}/menu
-			{
-			  "menus": {
-				"date": "2015-03-05T00:00:00.000Z",
-				"meal": [
-				  {
-					"_id": "54df23b6842142426fdf9ff4",
-					"name": "midi",
-					"foodcategory": [
-					  {
-						"name": "Entrées",
-						"_id": "54df23b6842142426fdfa000",
-						"dishes": [
-						  {
-							"name": "Salade crétoise",
-							"_id": "54df23b6842142426fdfa003",
-							"feedback": [
-							  {
-								"thrown": 3,
-								"user_id": "54def8a5769859a454e39974"
-							  }
-							]
-						  }
-						]
-					  }
-					]
-				  }
-				],
-				"feedback": [
-				  {
-					"ate_alone": false,
-					"convivial_restaurant": true,
-					"enough_time_to_eat": true,
-					"seasoning": 2,
-					"cooking": 2,
-					"hot_meal": 2,     --> C'est quoi ?
-					"meal_quality": 3,     --> C'est quoi ?
-					"enjoyed_my_meal": 2,     --> C'est quoi ?
-					"threw_away_food_itook": false,     --> C'est quoi ?
-					"threw_away_food_was_served": true,     --> C'est quoi ?
-					"bread_thrown": 2
-				  }
-				]
-			  }
-			}
-		*/
+        /* Query example:
+        PUT http://localhost:5000/api/restaurants/747/menu -H "Content-Type:application/json" -H "Authorization: Bearer [[TOKEN]]"
+        {
+            "menus": {
+                "date": "2015-03-05T00:00:00.000Z",
+                "meal": [
+                    {
+                        "_id": "54df23b6842142426fdf9ff4",
+                        "name": "midi",
+                        "foodcategory": [
+                            {
+                                "name":"Entrées",
+                                "_id":"54df23b6842142426fdfa000",
+                                "dishes": [
+                                    {
+                                        "name":"Salade crétoise",
+                                        "_id":"54df23b6842142426fdfa003",
+                                        "feedback": [
+                                            {
+                                                "thrown": 3,
+                                                "user_id":"54def8a5769859a454e39974"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "feedback" : [
+                    {
+                        "ate_alone": false,
+                        "convivial_restaurant": true,
+                        "enough_time_to_eat": true,
+                        "seasoning": 2,
+                        "cooking": 2,
+                        "hot_meal": 2,
+                        "took_twice": true,
+                        "enjoyed_my_meal": 2,
+                        "bread_thrown": 2
+                    }
+                ]
+            }
+        }
+        */
 
 }]);

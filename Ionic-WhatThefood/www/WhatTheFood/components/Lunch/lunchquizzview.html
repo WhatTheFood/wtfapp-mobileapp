@@ -38,7 +38,7 @@
 				</label>
                 <label class="item item-quizz" ng-repeat="q in questions">
 					<div>{{q.question}}</div>
-					<ion-radio ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.target" ng-value="{{i}}">{{a}}</ion-radio>
+					<ion-radio ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.value" ng-value="{{i}}">{{a}}</ion-radio>
 				</label>
             </div>
             <a href="#" class="item button button-full button-positive no-margin" ng-click="sendFeedback()">
