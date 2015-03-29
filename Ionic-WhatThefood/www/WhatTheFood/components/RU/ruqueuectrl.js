@@ -1,6 +1,9 @@
 wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$http', 'rulistservice', 'loginservice',
     function($scope, $state, $stateParams, $ionicHistory, $http, rulistservice, loginservice) {
 
+    /* return to login if not connected */
+    if(loginservice.gettoken() == "") {$state.go('login'); return;}
+
     /* populate combobox */
     $scope.rulist = rulistservice.restaurants;
     $scope.currentRu = $scope.rulist[0];
@@ -14,9 +17,6 @@ wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistor
 
     $scope.sendVote = function(index) {
         console.log(index);
-
-        /* don't execute if there is no token */
-        //if(loginservice.gettoken() == "") return "not connected";
 
         if($scope.currentRu == null) return "error";
 

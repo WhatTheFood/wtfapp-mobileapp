@@ -5,7 +5,8 @@
 wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
     function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
-    console.log($stateParams);
+    /* return to login if not connected */
+    if(loginservice.gettoken() == "") {$state.go('login'); return;}
 
     $ionicLoading.show({
         template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'

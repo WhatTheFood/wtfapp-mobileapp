@@ -1,24 +1,44 @@
 <ion-view view-title="Mon plateau" ng-app>
-    <ion-content>
+    <ion-content ng-init="init()">
         <div class="list item-text-wrap no-border-list">
             <div class="item fork-red-bg fork-red-content">
-                <div class="current-date" ng-init="updateDate()">{{ date }}</div>
-				<select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist"></select>
+                <div class="current-date">{{ date }}</div>
+				<select class="select-ru" ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist" ng-change="updateDishes()"></select>
             </div>
             <div class="item question-lunch">
                 Pourquoi n'as-tu pas terminé ton plateau ?
             </div>
             <div class="item response-lunch">
-                <label class="item item-quizz-check">
-					<div>Serais-tu prêt(e) à reprendre ces plats ?</div>
-					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="0">Oui</ion-radio>
-					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="1">Non ce n'était pas bon</ion-radio>
-					<ion-radio name="takeAgain" ng-model="takeAgain" ng-value="2">Non je n'aime pas ça</ion-radio>
+                <label class="item item-quizz">
+					<div>Tu as pris</div>
+					<label class="item item-input item-select item-quizz-select" ng-hide="$parent.entree==null || feedback[0]==0">
+						<div class="input-label">
+							Entrée
+						</div>
+						<select class="select-food" ng-model="$parent.currentEntree" ng-options="r as r.name for r in entree"></select>
+					</label>
+					<label class="item item-input item-select item-quizz-select" ng-hide="$parent.plat==null">
+						<div class="input-label">
+							Plat
+						</div>
+						<select class="select-food" ng-model="$parent.currentPlat" ng-options="r as r.name for r in plat"></select>
+					</label>
+					<label class="item item-input item-select item-quizz-select" ng-hide="$parent.grillade==null">
+						<div class="input-label">
+							Grillade
+						</div>
+						<select class="select-food" ng-model="$parent.currentGrillade" ng-options="r as r.name for r in grillade"></select>
+					</label>
+					<label class="item item-input item-select item-quizz-select" ng-hide="$parent.dessert==null">
+						<div class="input-label">
+							Dessert
+						</div>
+						<select class="select-food" ng-model="$parent.currentDessert" ng-options="r as r.name for r in dessert"></select>
+					</label>
 				</label>
-                <label class="item item-quizz-check">
-					<div>As-tu assez de temps pour manger ?</div>
-					<ion-radio name="enoughTime" ng-model="enoughTime" ng-value="0">Oui</ion-radio>
-					<ion-radio name="enoughTime" ng-model="enoughTime" ng-value="1">Non</ion-radio>
+                <label class="item item-quizz" ng-repeat="q in questions">
+					<div>{{q.question}}</div>
+					<ion-radio ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.value" ng-value="{{i}}">{{a}}</ion-radio>
 				</label>
             </div>
             <a href="#" class="item button button-full button-positive no-margin" ng-click="sendFeedback()">

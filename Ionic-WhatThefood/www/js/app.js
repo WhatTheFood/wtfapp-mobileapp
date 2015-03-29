@@ -128,6 +128,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
                 }
             })
 
+            .state('wtf.thanks', {
+                url: '/thanks',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'WhatTheFood/components/Lunch/lunchthanksview.html',
+                        controller: 'lunchthanksctrl'
+                    }
+                }
+            })
+
             .state('wtf.profile', {
                 url: '/profile',
                 views: {

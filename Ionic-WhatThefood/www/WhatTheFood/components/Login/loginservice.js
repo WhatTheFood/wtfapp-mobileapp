@@ -1,12 +1,14 @@
-wtf.factory('loginservice', function($http, $q) {
-	
-		var tokenAPI = "";
-	
+wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
+
+		var tokenAPI = $sessionStorage.$default({
+          token: ""
+        });
+
 		var serverAPIHTTPS = true;
 		var serverAPI = "whatthefood.herokuapp.com/api";
 		//var serverAPIHTTPS = false;
 		//var serverAPI = "127.0.0.1:5000/api";
-	
+
 		var factory = {
 
 		getServerAPI : function() {
@@ -15,7 +17,7 @@ wtf.factory('loginservice', function($http, $q) {
 		getServerAPILogin : function(user,password) {
 				return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
 		},
-		
+
 		signup : function(email, pwd)
 		{
 			var req = {
@@ -35,7 +37,7 @@ wtf.factory('loginservice', function($http, $q) {
 				return data;
 			});
 		},
-		
+
 		signin : function(email, pwd)
 		{
 			function utf8_to_b64( str ) {
@@ -61,16 +63,16 @@ wtf.factory('loginservice', function($http, $q) {
 				return data;
 			});
 		},
-		
+
 				loginfb : function() {
 						var defer = $q.defer();
-			
+
 						openFB.login(
-			
+
 			function(response) {
 				if (response.status === 'connected') {
 					console.log('Login Facebook reussie : '+response.authResponse.token);
-					
+
 					openFB.api({path: '/me',
 						success: function(user) {
 							var req = {
@@ -80,12 +82,12 @@ wtf.factory('loginservice', function($http, $q) {
 								data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
 								headers: { "Content-Type" : "application/json" }
 							};
-							
+
 							$http(req)
 							.success(function (data, status, headers, config) {
 								// this callback will be called asynchronously
 								// when the response is available
-								tokenAPI = data;
+								tokenAPI.token = data;
 								defer.resolve(true, data);
 							})
 							.error(function (data, status, headers, config) {
@@ -107,10 +109,10 @@ wtf.factory('loginservice', function($http, $q) {
 			},
 			{scope: 'email,user_friends'});
 			console.log('Login Facebook en cours...');
-			
+
 			return defer.promise;
 		},
-		
+
 				getfriendlist : function() {
 						var defer = $q.defer();
 						openFB.api({path: '/me/friends',
@@ -122,17 +124,17 @@ wtf.factory('loginservice', function($http, $q) {
 					defer.reject('Impossible de r�cup�rer la liste d\'amis');
 				}
 			});
-			
+
 						return defer.promise;
 		},
-		
+
 				gettoken : function() {
-						return tokenAPI;
+						return tokenAPI.token;
 		}
 	};
-	
+
 		return factory;
-});
+}]);
 
 /*wtf.factory('$localStorage', ['$window', function($window) {
 	return {

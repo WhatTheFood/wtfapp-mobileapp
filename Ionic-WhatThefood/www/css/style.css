@@ -122,43 +122,43 @@
   margin-left: 0px !important;
 }
 
-.item-radio input:checked ~ .item-content {
+.item-lunch-check.item-radio input:checked ~ .item-content {
   background: transparent;
   padding: 16px 16px 16px 16px;
   border-radius: 50%;
   border-color: black;
 }
 
-.check-empty-plate input:checked ~ .item-content {
+.check-empty-plate.item-radio input:checked ~ .item-content {
   background: #13E6A4;
 }
 
-.check-empty-plate {
+.check-empty-plate.item-radio {
   border-color: #13E6A4;
 }
 
 
-.check-quite-empty-plate input:checked ~ .item-content {
+.check-quite-empty-plate.item-radio input:checked ~ .item-content {
   background: #71E057;
 }
 
-.check-quite-empty-plate {
+.check-quite-empty-plate.item-radio {
   border-color: #71E057;
 }
 
-.check-quite-full-plate input:checked ~ .item-content {
+.check-quite-full-plate.item-radio input:checked ~ .item-content {
   background: #EAA412;
 }
 
-.check-quite-full-plate {
+.check-quite-full-plate.item-radio {
   border-color: #EAA412;
 }
 
-.check-full-plate input:checked ~ .item-content {
+.check-full-plate.item-radio input:checked ~ .item-content {
   background: #FB4D26;
 }
 
-.check-full-plate {
+.check-full-plate.item-radio {
   border-color: #FB4D26;
 }
 
@@ -214,6 +214,16 @@
   color: black;
   padding: 20px;
   background-image: url(../img/fork_bg.png);
+}
+
+.jumbotron {
+  background-image: url(../img/fork_bg.png);
+  padding: 20px;
+}
+
+.jumbotron h2 {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
@@ -475,19 +485,30 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   margin-top: 10px;
 }
 
+.item-quizz {
+  border: 0px;
+}
+
+.item-quizz > div {
+  font-weight: bold;
+}
+
+.item-quizz > .item-radio {
+  border: 0px;
+}
+
+.item-radio input:checked ~ .item-content {
+  background-color: #EFECEC;
+}
+
 .item-quizz-select {
   border: 0px;
 }
 
-.item-quizz-check {
+.item-quizz-select > input-label {
   display: inline-block;
-  border: 0px;
 }
 
-.item-quizz-check > div {
-  font-weight: bold;
-}
-
-.item-quizz-check > .item-radio {
-  border: 0px;
+.item-quizz-select > .select-food {
+  text-decoration: underline;
 }

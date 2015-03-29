@@ -2,15 +2,17 @@
  * Created by Rony on 14/02/2015.
  */
 
-wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
+wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'loginservice', function($http, $location, $q, $localStorage, loginservice) {
     var req = {
         method: 'GET',
         url: loginservice.getServerAPI()+'/restaurants'
     };
 
     var factory = {
-        restaurants: [],
-		feedback: [],
+        storage: $localStorage.$default({
+            restaurants: [],
+            feedback: [],
+        }),
 
         getPosition: function(){
             var defer = $q.defer();
@@ -42,9 +44,10 @@ wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
             return $http(req).success(function (data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
-                factory.restaurants = data.map(function(restaurant){
+                factory.storage.restaurants = data.map(function(restaurant){
                     //Force the date to a date where there is a menu (no menu on week-ends)
-                    var now = new Date(Date.parse("2015-02-10T00:00:00.000Z"));
+                    //var now = new Date(Date.parse("2015-02-10T00:00:00.000Z")); // DEBUG HANDY!
+                    var now = new Date();
                     var menus = restaurant.menus.filter(function(menu) {
                         var menuDate = new Date(Date.parse(menu.date));
                         return (now.getDate() == menuDate.getDate()
@@ -64,39 +67,39 @@ wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
                         else if(openingCode == "111") return "Ouvert ce matin, ce midi et ce soir";
                         return "Pas d'informations"
                     })
-                    restaurant.openingNow = restaurant.openingString[now.getDay()];
+                    restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
                     return restaurant;
                 });
-                console.log(factory.restaurants);
-                return factory.restaurants;
+                console.log(factory.storage.restaurants);
+                return factory.storage.restaurants;
             }).error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
-				alert("Désolé, nous n'arrivons pas à accéder au serveur par internet...");
+                alert("Désolé, nous n'arrivons pas à accéder au serveur par internet...");
                 return "error";
             });
-    },
-    facebookFriendsAtThisRu : function(id, loginservice)
-    {
-        //Don't execute if there is no token
-		if(loginservice.gettoken() == "")
-		{
-            var deferred = $q.defer();
-            deferred.resolve("not connected");
-            return deferred.promise;
-		}
-        console.log('facebookFriendsAtThisRu');
-        var req = {
-            method: 'PUT',
-            dataType: "json",
-            url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
-            data: {"restaurantId":id},
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer "+ loginservice.gettoken()
+        },
+        facebookFriendsAtThisRu : function(id, loginservice)
+        {
+            //Don't execute if there is no token
+            if(loginservice.gettoken() == "")
+            {
+                var deferred = $q.defer();
+                deferred.resolve("not connected");
+                return deferred.promise;
             }
-        };
-        return $http(req).success(function (data, status, headers, config) {
+            console.log('facebookFriendsAtThisRu');
+            var req = {
+                method: 'PUT',
+                dataType: "json",
+                url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
+                data: {"restaurantId":id},
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Bearer "+ loginservice.gettoken()
+                }
+            };
+            return $http(req).success(function (data, status, headers, config) {
                 console.log(data);
                 return data;
             }).error(function (data, status, headers, config) {
@@ -107,6 +110,10 @@ wtf.factory('rulistservice', function($http, $location, $q, loginservice) {
 
     };
 
+    /* convenient shortcut links */
+    factory.restaurants = factory.storage.restaurants;
+    factory.feedback = factory.storage.feedback;
+
     return factory;
 
-});
+}]);
