@@ -216,6 +216,16 @@
   background-image: url(../img/fork_bg.png);
 }
 
+.jumbotron {
+  background-image: url(../img/fork_bg.png);
+  padding: 20px;
+}
+
+.jumbotron h2 {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
     border-color: #ddd;
     background-color: #fff;
