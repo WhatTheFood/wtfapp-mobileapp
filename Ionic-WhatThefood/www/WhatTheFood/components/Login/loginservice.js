@@ -54,7 +54,7 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 			return $http(req)
 			.success(function (data, status, headers, config) {
 				console.log(data);
-				tokenAPI = data['http_token'];
+				tokenAPI.token = data['user_token'];
 				userId = data['user_id'];
 				return data;
 			})
@@ -87,7 +87,8 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 							.success(function (data, status, headers, config) {
 								// this callback will be called asynchronously
 								// when the response is available
-								tokenAPI.token = data;
+								tokenAPI.token = data['user_token'];
+								userId = data['user_id'];
 								defer.resolve(true, data);
 							})
 							.error(function (data, status, headers, config) {
