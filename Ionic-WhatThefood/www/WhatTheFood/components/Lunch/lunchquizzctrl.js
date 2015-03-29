@@ -1,6 +1,9 @@
 wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
     function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
-		/* populate combobox */
+		/* return to login if not connected */
+        if(loginservice.gettoken() == "") {$state.go('login'); return;}
+
+        /* populate combobox */
 		$scope.rulist = rulistservice.restaurants;
 		$scope.currentRu = $scope.rulist[0];
 
