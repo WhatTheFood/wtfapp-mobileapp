@@ -104,6 +104,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                 return data;
             }).error(function (data, status, headers, config) {
                 console.log("Error: " + data);
+                return data;
             });
         }
 

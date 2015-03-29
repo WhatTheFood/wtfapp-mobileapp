@@ -19,6 +19,9 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         $scope.facebookFriendsAtThisRu = result.data;
         $ionicLoading.hide();
         console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
+    }, function(data){
+        // In case of error, just hide the loading
+        $ionicLoading.hide();
     });
     $scope.ru = restaurant[0];
     $scope.setContextRu($scope.ru);
