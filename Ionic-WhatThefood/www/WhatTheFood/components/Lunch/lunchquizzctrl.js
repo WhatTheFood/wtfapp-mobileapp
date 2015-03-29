@@ -69,6 +69,58 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 			}
     	}
 
+        /* quizz questions */
+        enjoyed_my_meal = null;
+        cooking = null;
+        seasoning = null;
+        enough_time_to_eat = null;
+        ate_alone = null;
+        took_twice = null;
+        convivial_restaurant = null;
+        questions = {
+            'food': [
+                {
+                    'question': 'Serais-tu prèt à reprendre ce X la prochaine fois ?',
+                    'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
+                    'target': enjoyed_my_meal
+                },
+                {
+                    'question': 'Comment était la préparation de X ?',
+                    'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
+                    'target': cooking
+                },
+                {
+                    'question': 'Comment était la préparation de X ?',
+                    'answers': {0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop huileux', 3: 'Trop fade', 4: 'Pas assez chaud'},
+                    'target': seasoning
+                }
+            ],
+            'context': [
+                {
+                    'question': 'As-tu eu suffisamment de temps pour manger ?',
+                    'answers': {true: 'Oui', false: 'Non'},
+                    'target': enough_time_to_eat
+                },
+                {
+                    'question': 'Avec qui as-tu mangé ?',
+                    'answers': {true: 'Seul', false: 'Avec des amis'},
+                    'target': ate_alone
+                },
+                {
+                    'question': 'Est-ce que tu t\'es resservi ?',
+                    'answers': {true: 'Oui', false: 'Non'},
+                    'target': took_twice
+                },
+                {
+                    'question': 'Est-ce que tu trouves le RU convivial ?',
+                    'answers': {true: 'Oui', false: 'Non'},
+                    'target': convivial_restaurant
+                }
+            ]
+        }
+
+        $scope.questions = [questions['food'][0], questions['context'][0]];
+
 		/* Update the date at the top */
 		$scope.updateDate = function() {
 			var d = new Date();
@@ -84,34 +136,34 @@ wtf.controller('lunchquizzctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 
 			var monthArr = new Array();
 			monthArr[0] = "janvier";
-			monthArr[1] = "f�vrier";
+			monthArr[1] = "février";
 			monthArr[2] = "mars";
 			monthArr[3] = "avril";
 			monthArr[4] = "mai";
 			monthArr[5] = "juin";
 			monthArr[6] = "juillet";
-			monthArr[7] = "ao�t";
+			monthArr[7] = "août";
 			monthArr[8] = "septembre";
 			monthArr[9] = "octobre";
 			monthArr[10] = "novembre";
-			monthArr[11] = "d�cembre";
+			monthArr[11] = "décembre";
 
 			$scope.date = weekDaysArr[d.getDay()] + " " + d.getDate() + " " + monthArr[d.getMonth()] + " - " + (d.getHours() < 17 ? "midi" : "soir");
-			
+
 		}
 
 		$scope.init = function() {
 			$scope.updateDate();
 			$scope.updateDishes();
 		}
-		
+
 		$scope.sendFeedback = function() {
 			alert(rulistservice.feedback);
 			// TODO Send data to server
 		}
-		
+
 		/*
-		EXEMPLE de feedback au serveur : PUT /restaurants/{id}/menu			
+		EXEMPLE de feedback au serveur : PUT /restaurants/{id}/menu
 			{
 			  "menus": {
 				"date": "2015-03-05T00:00:00.000Z",

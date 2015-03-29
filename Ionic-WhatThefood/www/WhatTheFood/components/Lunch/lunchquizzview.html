@@ -36,45 +36,9 @@
 						<select class="select-food" ng-model="$parent.currentDessert" ng-options="r as r.name for r in dessert"></select>
 					</label>
 				</label>
-                <label class="item item-quizz">
-					<div>Serais-tu prêt(e) à reprendre ces plats ?</div>
-					<ion-radio name="enjoyed_my_meal" ng-model="enjoyed_my_meal" ng-value="0">Oui</ion-radio>
-					<ion-radio name="enjoyed_my_meal" ng-model="enjoyed_my_meal" ng-value="1">Non ce n'était pas bon</ion-radio>
-					<ion-radio name="enjoyed_my_meal" ng-model="enjoyed_my_meal" ng-value="2">Non je n'aime pas ça</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>Comment était la préparation de ces plats ?</div>
-					<ion-radio name="cooking" ng-model="cooking" ng-value="0">Pas assez cuit</ion-radio>
-					<ion-radio name="cooking" ng-model="cooking" ng-value="1">Bien cuit</ion-radio>
-					<ion-radio name="cooking" ng-model="cooking" ng-value="2">Trop cuit</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>Comment était la préparation de ces plats ?</div>
-					<ion-radio name="seasoning" ng-model="seasoning" ng-value="0">Trop salé</ion-radio>
-					<ion-radio name="seasoning" ng-model="seasoning" ng-value="1">Trop sucré</ion-radio>
-					<ion-radio name="seasoning" ng-model="seasoning" ng-value="2">Trop huileux</ion-radio>
-					<ion-radio name="seasoning" ng-model="seasoning" ng-value="3">Trop fade</ion-radio>
-					<ion-radio name="seasoning" ng-model="seasoning" ng-value="4">Pas assez chaud</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>As-tu assez de temps pour manger ?</div>
-					<ion-radio name="enough_time_to_eat" ng-model="enough_time_to_eat" ng-value=true>Oui</ion-radio>
-					<ion-radio name="enough_time_to_eat" ng-model="enough_time_to_eat" ng-value=false>Non</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>Avec qui as-tu mangé ?</div>
-					<ion-radio name="ate_alone" ng-model="ate_alone" ng-value=true>Seul</ion-radio>
-					<ion-radio name="ate_alone" ng-model="ate_alone" ng-value=false>A plusieurs</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>Est-ce que tu t'es resservi ?</div>
-					<ion-radio name="took_twice" ng-model="took_twice" ng-value=true>Oui</ion-radio>
-					<ion-radio name="took_twice" ng-model="took_twice" ng-value=false>Non</ion-radio>
-				</label>
-                <label class="item item-quizz">
-					<div>Est-ce que tu trouves le RU convivial ?</div>
-					<ion-radio name="convivial_restaurant" ng-model="convivial_restaurant" ng-value=true>Oui</ion-radio>
-					<ion-radio name="convivial_restaurant" ng-model="convivial_restaurant" ng-value=false>Non</ion-radio>
+                <label class="item item-quizz" ng-repeat="q in questions">
+					<div>{{q.question}}</div>
+					<ion-radio ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.target" ng-value="{{i}}">{{a}}</ion-radio>
 				</label>
             </div>
             <a href="#" class="item button button-full button-positive no-margin" ng-click="sendFeedback()">
