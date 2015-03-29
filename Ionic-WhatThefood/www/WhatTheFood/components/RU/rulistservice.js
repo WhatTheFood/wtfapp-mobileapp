@@ -46,7 +46,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                 // when the response is available
                 factory.storage.restaurants = data.map(function(restaurant){
                     //Force the date to a date where there is a menu (no menu on week-ends)
-                    var now = new Date(Date.parse("2015-02-10T00:00:00.000Z"));
+                    var now = new Date();
                     var menus = restaurant.menus.filter(function(menu) {
                         var menuDate = new Date(Date.parse(menu.date));
                         return (now.getDate() == menuDate.getDate()
@@ -66,7 +66,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                         else if(openingCode == "111") return "Ouvert ce matin, ce midi et ce soir";
                         return "Pas d'informations"
                     })
-                    restaurant.openingNow = restaurant.openingString[now.getDay()];
+                    restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
                     return restaurant;
                 });
                 console.log(factory.storage.restaurants);
