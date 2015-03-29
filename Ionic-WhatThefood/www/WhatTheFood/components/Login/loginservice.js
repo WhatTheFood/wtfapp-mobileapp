@@ -1,6 +1,6 @@
-wtf.factory('loginservice', ['$http', '$q', '$localStorage', function($http, $q, $localStorage) {
+wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
 
-		var tokenAPI = $localStorage.$default({
+		var tokenAPI = $sessionStorage.$default({
           token: ""
         });
 
