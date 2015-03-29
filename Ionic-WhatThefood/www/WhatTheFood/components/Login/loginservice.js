@@ -52,7 +52,8 @@ wtf.factory('loginservice', function($http, $q) {
 			return $http(req)
 			.success(function (data, status, headers, config) {
 				console.log(data);
-				tokenAPI = data;
+				tokenAPI = data['http_token'];
+				userId = data['user_id'];
 				return data;
 			})
 			.error(function (data, status, headers, config) {
