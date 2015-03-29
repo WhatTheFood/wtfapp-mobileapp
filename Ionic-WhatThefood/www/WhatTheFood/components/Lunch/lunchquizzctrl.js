@@ -198,6 +198,11 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
                     quizz[q.target] = q.value;
                 }
             });
+            questions['context'].forEach(function(q, index){
+                if(q.value != null) {
+                    quizz[q.target] = q.value;
+                }
+            });
 
             /* compile everything */
             response.menus.feedback.push(quizz);
