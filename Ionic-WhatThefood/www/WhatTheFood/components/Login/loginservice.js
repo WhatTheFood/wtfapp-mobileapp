@@ -1,11 +1,13 @@
 wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
 
 		var tokenAPI = $sessionStorage.$default({
-          token: ""
-        });
+      token: "",
+      facebook: false
+    });
 
 		var serverAPIHTTPS = true;
 		var serverAPI = "whatthefood.herokuapp.com/api";
+		// Debug handy
 		//var serverAPIHTTPS = false;
 		//var serverAPI = "127.0.0.1:5000/api";
 
@@ -54,7 +56,7 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 			return $http(req)
 			.success(function (data, status, headers, config) {
 				console.log(data);
-				tokenAPI.token = data['user_token'];
+				factory.settoken(data['user_token']);
 				userId = data['user_id'];
 				return data;
 			})
@@ -87,8 +89,9 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 							.success(function (data, status, headers, config) {
 								// this callback will be called asynchronously
 								// when the response is available
-								tokenAPI.token = data['user_token'];
+								factory.settoken(data['user_token']);
 								userId = data['user_id'];
+								tokenAPI.facebook = true;
 								defer.resolve(true, data);
 							})
 							.error(function (data, status, headers, config) {
@@ -126,11 +129,21 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 				}
 			});
 
-						return defer.promise;
+			return defer.promise;
 		},
 
-				gettoken : function() {
-						return tokenAPI.token;
+		gettoken : function() {
+			console.log("token-get : " + tokenAPI.token.substring(0, 20));
+			return tokenAPI.token;
+		},
+
+		isfbconnected : function() {
+			return tokenAPI.facebook;
+		},
+
+		settoken : function(data) {
+			tokenAPI.token = data;
+			console.log("token-set : " + tokenAPI.token.substring(0, 20));
 		}
 	};
 

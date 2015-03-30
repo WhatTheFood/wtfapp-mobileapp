@@ -2,7 +2,9 @@
 wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'loginservice', function($scope, $http, $state, rulistservice, loginservice) {
 
     /* return to login if not connected */
-    if(loginservice.gettoken() == "") {$state.go('login'); return;}
+    console.log("checking connection")
+    if(loginservice.gettoken() == "") { console.log("not connected"); $state.go('login'); return;}
+    console.log("connected;")
 
     $scope.data = {};
     $scope.data.showSearch = true;

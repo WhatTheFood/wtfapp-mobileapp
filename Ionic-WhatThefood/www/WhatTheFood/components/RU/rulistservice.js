@@ -70,7 +70,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                     restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
                     return restaurant;
                 });
-                console.log(factory.storage.restaurants);
+                console.log("Restaurants : " + factory.storage.restaurants);
                 return factory.storage.restaurants;
             }).error(function (data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -82,10 +82,10 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         facebookFriendsAtThisRu : function(id, loginservice)
         {
             //Don't execute if there is no token
-            if(loginservice.gettoken() == "")
+            if(loginservice.gettoken() == "" || !loginservice.isfbconnected())
             {
                 var deferred = $q.defer();
-                deferred.resolve("not connected");
+                deferred.resolve("not facebook connected");
                 return deferred.promise;
             }
             console.log('facebookFriendsAtThisRu');
@@ -103,7 +103,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                 console.log(data);
                 return data;
             }).error(function (data, status, headers, config) {
-                console.log("Error: " + data);
+                console.log("Error - fbfriend: " + data);
                 return data;
             });
         }
