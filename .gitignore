@@ -8,3 +8,5 @@ www/WhatTheFood/shared/#basecontent.html#
 platforms/
 plugins/
 node_modules/
+
+package.json
