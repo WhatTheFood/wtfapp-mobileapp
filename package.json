@@ -16,12 +16,14 @@
   },
   "cordovaPlugins": [
     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
-    "https://github.com/Philcartmell/cordova-plugin-local-storage.git",
     "com.ionic.keyboard",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.inappbrowser"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios",
+    "android"
+  ]
 }
