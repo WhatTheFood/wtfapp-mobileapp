@@ -3,7 +3,7 @@ wtf.controller('loginctrl', ['$scope','$state','$http','loginservice','$cordovaO
 function($scope, $state, $http, loginservice, $cordovaOauth, $localStorage, $ionicLoading, $ionicPopup) {
 
 	/* go to rulist if already connected */
-    if(loginservice.gettoken() != "") {$state.go('wtf.rulist'); return;}
+  if(loginservice.gettoken() != "") {$state.go('wtf.rulist'); return;}
 
 	$scope.gohome = function(){
 		$state.go('wtf.rulist');
@@ -18,16 +18,17 @@ function($scope, $state, $http, loginservice, $cordovaOauth, $localStorage, $ion
 			});
 
 			loginservice.signup(email,pwd).then(
-			function(result){
-				$ionicLoading.hide();
-				$scope.gohome();
-			},
-			function(e){
-				$ionicLoading.hide();
-				$ionicPopup.alert({
-					title: 'Erreur de connexion...'
-				});
-			});
+				function(result){
+					$ionicLoading.hide();
+					$scope.gohome();
+				},
+				function(e){
+					$ionicLoading.hide();
+					$ionicPopup.alert({
+						title: 'Erreur de connexion...'
+					});
+				}
+		  );
 
 		} else {
 			$ionicPopup.alert({
