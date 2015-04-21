@@ -50,10 +50,15 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         else
             return 0;
     };
-    $scope.clockIndex = getQueueIndex($scope.ru);
-    if($scope.clockIndex > -1) {
-        $scope.clockImage = waitingTimes[$scope.clockIndex].img;
-        $scope.clockTitle = waitingTimes[$scope.clockIndex].title;
+
+    if ($scope.ru) {
+      $scope.clockIndex = getQueueIndex($scope.ru);
+      if($scope.clockIndex > -1) {
+          $scope.clockImage = waitingTimes[$scope.clockIndex].img;
+          $scope.clockTitle = waitingTimes[$scope.clockIndex].title;
+      }
+    } else {
+      $scope.clockIndex = 3;
     }
 
     //$scope.ru.operationalhours =
