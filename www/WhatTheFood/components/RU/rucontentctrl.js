@@ -6,7 +6,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
     /* return to login if not connected */
-    if(loginservice.gettoken() == "") {$state.go('login'); return;}
+    if(loginservice.gettoken() === "") {$state.go('login'); return;}
 
     $ionicLoading.show({
         template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
@@ -14,15 +14,18 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
         return restaurant.id == $stateParams.ruId;
-    })
-    rulistservice.facebookFriendsAtThisRu(restaurant[0].id, loginservice).then(function(result){
-        $scope.facebookFriendsAtThisRu = result.data;
-        $ionicLoading.hide();
-        console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
-    }, function(data){
-        // In case of error, just hide the loading
-        $ionicLoading.hide();
     });
+
+    if (restaurant.length > 0) {
+      rulistservice.facebookFriendsAtThisRu(restaurant[0].id, loginservice).then(function(result){
+          $scope.facebookFriendsAtThisRu = result.data;
+          $ionicLoading.hide();
+          console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
+      }, function(data){
+          // In case of error, just hide the loading
+          $ionicLoading.hide();
+      });
+    }
     $scope.ru = restaurant[0];
     $scope.setContextRu($scope.ru);
 
@@ -37,7 +40,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
      * Get the current time estimation as a timeSlot index
      */
     var getQueueIndex = function(ru) {
-        if(ru.queue.value == 0)
+        if(ru.queue.value === 0)
             return -1;
 
         if(ru.queue.value > 66)

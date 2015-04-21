@@ -1,32 +1,32 @@
 <ion-view view-title="{{ru.title}}">
-    <ion-content class="padding">
-        <div class="list">
+  <ion-content class="padding">
+    <div class="list">
 
-            <h2>
-                Je mange ici ce midi
-            </h2>
+      <h2>
+        Je mange ici ce midi
+      </h2>
 
-            <button class="button button-balanced" ng-click="eathere(ru.id, 'now')">
-                J'y suis
-            </button>
-            <br />
-            OU
-            <br />
-            <ion-list class="list" can-swipe="true">
-                <label class="item item-radio" ng-repeat="hour in hours" ng-click="getHour(hour)">
-                    <input type="radio" name="group">
-                    <div class="item-content">
-                      {{hour}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </ion-list>
-            <input type="checkbox" /> Me le rappeler
-            <!--ng-click="validateeathere(ru.id)"-->
-            <br />
-            <button class="button button-balanced" ng-click="eathere(ru.id)">
-                OK
-            </button>
-        </div>
-    </ion-content>
+      <button class="button button-balanced" ng-click="eatHere(ru.id, 'now')">
+        J'y suis
+      </button>
+      <br />
+      OU
+      <br />
+      <ion-list class="list" can-swipe="true">
+        <label class="item item-radio" ng-repeat="hour in hours" ng-click="getHour(hour)">
+          <input type="radio" name="group">
+          <div class="item-content">
+            {{hour}}
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      </ion-list>
+      <input type="checkbox" /> Me le rappeler
+      <!--ng-click="validateeatHere(ru.id)"-->
+      <br />
+      <button class="button button-balanced" ng-click="eatHere(ru.id)">
+        OK
+      </button>
+    </div>
+  </ion-content>
 </ion-view>

@@ -14,7 +14,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
       feedback: [],
     }),
 
-    getPosition: function(){
+    getPosition: function() {
       var defer = $q.defer();
 
       navigator.geolocation.getCurrentPosition(function(result) {
@@ -34,18 +34,18 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
       return defer.promise;
     },
 
-    getrulist : function(lat,lng){
+    getrulist : function(lat,lng) {
       console.log('Requesting restaurants');
       req.params = {
-        lat:lat,
-        lng:lng
+        lat: lat,
+        lng: lng
       };
 
       return $http(req).success(function (data, status, headers, config) {
         // this callback will be called asynchronously
         // when the response is available
         factory.storage.restaurants = data.map(function(restaurant){
-          //Force the date to a date where there is a menu (no menu on week-ends)
+          // Force the date to a date where there is a menu (no menu on week-ends)
           //var now = new Date(Date.parse("2015-02-10T00:00:00.000Z")); // DEBUG HANDY!
           var now = new Date();
           var menus = restaurant.menus.filter(function(menu) {
@@ -71,8 +71,10 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
           restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
           return restaurant;
         });
+
         console.log("Restaurants : " + factory.storage.restaurants);
         return factory.storage.restaurants;
+
       }).error(function (data, status, headers, config) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
@@ -80,9 +82,8 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         return "error";
       });
     },
-    facebookFriendsAtThisRu : function(id, loginservice)
-    {
-      //Don't execute if there is no token
+    facebookFriendsAtThisRu : function(id, loginservice) {
+      // Don't execute if there is no token
       if(loginservice.gettoken() === "" || !loginservice.isfbconnected())
         {
           var deferred = $q.defer();
