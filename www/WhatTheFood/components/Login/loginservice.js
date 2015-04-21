@@ -11,40 +11,42 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
   var serverAPIHTTPS = false;
   var serverAPI = "127.0.0.1:5000/api";
 
+  function utf8_to_b64( str ) {
+    return window.btoa(unescape(encodeURIComponent( str )));
+  }
+
   var factory = {
 
-    getServerAPI : function() {
+    getServerAPI: function() {
       return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
     },
 
-    getServerAPILogin : function(user,password) {
+    getServerAPILogin: function(user,password) {
       return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
     },
 
-    signup : function(email, pwd) {
+    signup: function (email, pwd) {
       var req = {
         method: 'POST',
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
-        data: {"email": email, "password": pwd},
-        headers: { "Content-Type" : "application/json" }
+        data: {"email": email, "password": pwd, auth_token: utf8_to_b64(email + ":" + pwd)},
+        headers: {"Content-Type" : "application/json"}
       };
+
       return $http(req)
       .success(function (data, status, headers, config) {
-        console.log(data);
+        console.log("Success: ", data);
+        factory.settoken(data['token']);
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.log("Error: " + data);
+        console.log("Error: ", data);
         return data;
       });
     },
 
-    signin : function(email, pwd) {
-      function utf8_to_b64( str ) {
-        return window.btoa(unescape(encodeURIComponent( str )));
-      }
-
+    signin: function (email, pwd) {
       var req = {
         method: 'GET',
         url: factory.getServerAPI() + '/users/login',
