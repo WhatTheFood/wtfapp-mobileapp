@@ -5,6 +5,7 @@
 .python-version
 
 www/WhatTheFood/shared/#basecontent.html#
+www/lib
 
 platforms/
 plugins/
