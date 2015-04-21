@@ -1,4 +1,4 @@
-wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'loginservice', function($scope, $http, $state, rulistservice, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice', function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
   /* return to login if not connected */
   console.log("checking connection");
@@ -76,6 +76,10 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
     $state.go('wtf.rueat', {ruId: ruId});
   };
 
+  $ionicLoading.show({
+    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+  });
+
   rulistservice.getPosition().then(function (coord) {
     rulistservice.getrulist(coord.latitude, coord.longitude).then(function (result) {
       $scope.rulist = [];
@@ -95,10 +99,12 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', 'log
       }
 
       $scope.msg = "Voici les RUs près de vous";
+      $ionicLoading.hide();
 
     }, function (e) {
       $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
       $scope.rulist = [];
+      $ionicLoading.hide();
     });
   });
 }]);
