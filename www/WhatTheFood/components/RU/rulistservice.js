@@ -19,16 +19,20 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
 
       navigator.geolocation.getCurrentPosition(function(result) {
         defer.resolve(result.coords);
+
       }, function(err) {
-        if(err.code && err.code === 1) {
+        if (err.code && err.code === 1) {
           defer.reject("Vous devez autoriser la géolocalisation \npour que cette application fonctionne.");
           alert("Vous devez autoriser la géolocalisation \npour que cette application fonctionne.");
+
         } else {
-          //more generic error
+          // more generic error
           defer.reject("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
           alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
         }
+
         console.log(err);
+
       }, {enableHighAccuracy: true, timeout: 60*1000});
 
       return defer.promise;
