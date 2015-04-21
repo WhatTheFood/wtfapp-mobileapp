@@ -69,12 +69,12 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
     loginfb : function() {
       var defer = $q.defer();
 
-      var facebookApiRequestSuccessHandler = function (user) {
+      var facebookApiRequestSuccessHandler = function (response, user) {
         var req = {
           method: 'PUT',
           dataType: "json",
           url: factory.getServerAPI() +'/users/login/facebook',
-          data: '{"email":"'+user.email+'","token":"'+response.authResponse.token+'"}',
+          data: '{"email":"'+ user.email +'","token":"'+ response.authResponse.token +'"}',
           headers: { "Content-Type" : "application/json" }
         };
 
@@ -102,7 +102,7 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 
           openFB.api({path: '/me',
                      success: function(user) {
-                       return facebookApiRequestSuccessHandler(user);
+                       return facebookApiRequestSuccessHandler(response, user);
                      },
                      error: function() {
                        defer.reject(false, 'Impossible de récupérer l\'email');
@@ -115,10 +115,11 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 
       openFB.login(
         function(response) { return facebookLoginHandler(response); },
-        {scope: 'email,user_friends'});
-        console.log('Login Facebook en cours...');
+        {scope: 'email,user_friends'}
+      );
+      console.log('Login Facebook en cours...');
 
-        return defer.promise;
+      return defer.promise;
     },
 
     getfriendlist : function() {
