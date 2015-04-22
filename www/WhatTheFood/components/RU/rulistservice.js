@@ -1,7 +1,3 @@
-/**
- * Created by Rony on 14/02/2015.
- */
-
 wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'loginservice', function($http, $location, $q, $localStorage, loginservice) {
   var req = {
     method: 'GET',
@@ -38,7 +34,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
       return defer.promise;
     },
 
-    getrulist : function(lat,lng) {
+    getrulist : function (lat,lng) {
       console.log('Requesting restaurants');
       req.params = {
         lat: lat,
@@ -77,6 +73,9 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         });
 
         console.log("Restaurants : " + factory.storage.restaurants);
+        /* convenient shortcut link */
+        factory.restaurants = factory.storage.restaurants;
+
         return factory.storage.restaurants;
 
       }).error(function (data, status, headers, config) {
@@ -88,37 +87,32 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
     },
     facebookFriendsAtThisRu : function(id, loginservice) {
       // Don't execute if there is no token
-      if(loginservice.gettoken() === "" || !loginservice.isfbconnected())
-        {
-          var deferred = $q.defer();
-          deferred.resolve("not facebook connected");
-          return deferred.promise;
+      if (loginservice.gettoken() === "" || !loginservice.isfbconnected()) {
+        var deferred = $q.defer();
+        deferred.resolve("not facebook connected");
+        return deferred.promise;
+      }
+      console.log('facebookFriendsAtThisRu');
+      var req = {
+        method: 'PUT',
+        dataType: "json",
+        url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
+        data: {"restaurantId":id},
+        headers: {
+          "Content-Type" : "application/json",
+          "Authorization" : "Bearer "+ loginservice.gettoken()
         }
-        console.log('facebookFriendsAtThisRu');
-        var req = {
-          method: 'PUT',
-          dataType: "json",
-          url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
-          data: {"restaurantId":id},
-          headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Bearer "+ loginservice.gettoken()
-          }
-        };
-        return $http(req).success(function (data, status, headers, config) {
-          console.log(data);
-          return data;
-        }).error(function (data, status, headers, config) {
-          console.log("Error - fbfriend: " + data);
-          return data;
-        });
+      };
+      return $http(req).success(function (data, status, headers, config) {
+        console.log(data);
+        return data;
+      }).error(function (data, status, headers, config) {
+        console.log("Error - fbfriend: " + data);
+        return data;
+      });
     }
-
-
   };
 
-  /* convenient shortcut links */
-  factory.restaurants = factory.storage.restaurants;
   factory.feedback = factory.storage.feedback;
 
   return factory;
