@@ -55,16 +55,16 @@
             {{group.name}}
           </ion-item>
           <div class="group-items" ng-show="isGroupShown(group)">
-            <div class="item item-accordion item-image">
-              <img ng-src="{{ru.photo.src}}" />
+            <div class="item item-accordion item-image" ng-show="ru.photo.src">
+              <img ng-src="{{ru.photo.src}}"/>
             </div>
-            <div class="item item-accordion">
+            <div class="item item-accordion" ng-show="ru.description">
               {{ru.description}}
             </div>
-            <div class="item item-accordion">
+            <div class="item item-accordion" ng-show="ru.contact.tel">
               <a href="tel:{{ru.contact.tel}}"><button class="button button-stable">Appeler ({{ru.contact.tel}})</button></a>
             </div>
-            <div class="item item-accordion">
+            <div class="item item-accordion" ng-show="ru.contact.email">
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
               </a>
             </div>
