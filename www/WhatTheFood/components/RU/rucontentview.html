@@ -1,73 +1,75 @@
 <ion-view view-title="{{ru.title}}" ng-app>
-    <ion-content>
-        <div class="list item-text-wrap">
-            <ion-item class="item-stable item-icon-left" ng-if="clockIndex > -1">
-              <div class="queue-status-container">
-                <img src="" ng-src="{{clockImage}}" class="clock" alt="clock"/>
-                <p>{{clockTitle}}</p>
-              </div>
-            </ion-item>
-
-            <div class="item item-thumbnail-left">
-              <img src="img/picto_calendrier.png" class="vcenter">
-              <p ng-bind-html="operationalhours" class="vcenter"></p>
-            </div>
-
-            <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
-
-            <div class="item"  ng-if="facebookFriendsAtThisRu.length > 0">
-                <div ng-repeat="friend in facebookFriendsAtThisRu" class="center">
-                    <img src="" ng-src="{{ friend.avatar }}" class="avatar-min" data-userid="{{friend.id}}"/>
-                    <br />
-                    {{ friend.first_name}}
-                    <br />
-                    {{ friend.last_name}}
-                    <br />
-                    {{ friend.booking.when}}
-                </div>
-            </div>
-            <div class="item">
-                <div ng-repeat-start="category in ru.menu.meal[0].foodcategory" ng-if="$first">
-                    <strong>{{category.name}}</strong>
-                    <br />
-                    <div ng-repeat="dish in category.dishes">
-                        - {{dish.name}}
-                    </div>
-                </div>
-
-                <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
-                    <div ng-class="paddingtop-menuitem">
-                    <strong>{{category.name}}</strong>
-                    <br />
-                    <div ng-repeat="dish in category.dishes">
-                        - {{dish.name}}
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <ion-list>
-                <div ng-repeat="group in groups">
-                    <ion-item class="item-stable item-icon-right"
-                              ng-click="toggleGroup(group)"
-                              ng-class="{active: isGroupShown(group)}">
-                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-                        &nbsp;
-                        {{group.name}}
-                    </ion-item>
-                    <div class="item item-accordion item-image" ng-show="isGroupShown(group)">
-                        <img ng-src="{{ru.photo.src}}" />
-                    </div>
-                    <div class="item item-accordion" ng-show="isGroupShown(group)">
-                        {{ru.description}}
-                    </div>
-                    <div class="item item-accordion" ng-show="isGroupShown(group)">
-                        <a href="tel:{{ru.contact.tel}}"><button class="button button-stable">Appeler ({{ru.contact.tel}})</button></a>
-                    </div>
-                    <div class="item item-accordion" ng-show="isGroupShown(group)">
-                        <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
-                        </a>
-                    </div>
-            </ion-list>
+  <ion-content>
+    <div class="list item-text-wrap">
+      <ion-item class="item-stable item-icon-left" ng-if="clockIndex > -1">
+        <div class="queue-status-container">
+          <img src="" ng-src="{{clockImage}}" class="clock" alt="clock"/>
+          <p>{{clockTitle}}</p>
         </div>
+      </ion-item>
+
+      <div class="item item-thumbnail-left">
+        <img src="img/picto_calendrier.png" class="vcenter">
+        <p ng-bind-html="operationalhours" class="vcenter"></p>
+      </div>
+
+      <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Y retrouver mes amis</p></div>
+
+      <div class="item"  ng-if="facebookFriendsAtThisRu.length > 0">
+        <div ng-repeat="friend in facebookFriendsAtThisRu" class="center">
+          <img src="" ng-src="{{ friend.avatar }}" class="avatar-min" data-userid="{{friend.id}}"/>
+          <br />
+          {{ friend.first_name}}
+          <br />
+          {{ friend.last_name}}
+          <br />
+          {{ friend.booking.when}}
+        </div>
+      </div>
+      <div class="item">
+        <div ng-repeat-start="category in ru.menu.meal[0].foodcategory" ng-if="$first">
+          <strong>{{category.name}}</strong>
+          <br />
+          <div ng-repeat="dish in category.dishes">
+            - {{dish.name}}
+          </div>
+        </div>
+
+        <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
+          <div ng-class="paddingtop-menuitem">
+            <strong>{{category.name}}</strong>
+            <br />
+            <div ng-repeat="dish in category.dishes">
+              - {{dish.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <ion-list>
+        <div ng-repeat="group in groups">
+          <ion-item class="item-stable item-icon-right"
+            ng-click="toggleGroup(group)"
+            ng-class="{active: isGroupShown(group)}">
+            <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            {{group.name}}
+          </ion-item>
+          <div class="group-items" ng-show="isGroupShown(group)">
+            <div class="item item-accordion item-image">
+              <img ng-src="{{ru.photo.src}}" />
+            </div>
+            <div class="item item-accordion">
+              {{ru.description}}
+            </div>
+            <div class="item item-accordion">
+              <a href="tel:{{ru.contact.tel}}"><button class="button button-stable">Appeler ({{ru.contact.tel}})</button></a>
+            </div>
+            <div class="item item-accordion">
+              <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
+              </a>
+            </div>
+          </div>
+        </ion-list>
+      </div>
     </ion-content>
-</ion-view>
+  </ion-view>
