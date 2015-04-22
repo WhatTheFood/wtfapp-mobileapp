@@ -35,7 +35,6 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
     },
 
     getrulist : function (lat,lng) {
-      console.log('Requesting restaurants');
       req.params = {
         lat: lat,
         lng: lng
@@ -72,7 +71,6 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
           return restaurant;
         });
 
-        console.log("Restaurants : " + factory.storage.restaurants);
         /* convenient shortcut link */
         factory.restaurants = factory.storage.restaurants;
 
@@ -92,7 +90,6 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         deferred.resolve("not facebook connected");
         return deferred.promise;
       }
-      console.log('facebookFriendsAtThisRu');
       var req = {
         method: 'PUT',
         dataType: "json",
@@ -104,7 +101,6 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         }
       };
       return $http(req).success(function (data, status, headers, config) {
-        console.log(data);
         return data;
       }).error(function (data, status, headers, config) {
         console.log("Error - fbfriend: " + data);

@@ -60,7 +60,7 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
     }
 
     if ($scope.ru) {
-      $scope.operationalhours = $sce.trustAsHtml('<b>' + $scope.ru.operationalhours.replace(/:/g, ":</b><br />").replace(/  /g, "<br /><b>"));
+      $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/:/g, ":<br />").replace(/  /g, "<br />"));
       $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
     }
   }

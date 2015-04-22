@@ -2,11 +2,9 @@ wtf.controller('rueatctrl', ['$scope', '$state', '$stateParams', '$http', 'rulis
 function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
 
   /* return to login if not connected */
-  if(loginservice.gettoken() === "") {$state.go('login'); return;}
+  if (loginservice.gettoken() === "") { $state.go('login'); return; }
 
-  console.log($stateParams);
-  console.log(rulistservice.restaurants);
-  var restaurant = rulistservice.restaurants.filter(function(restaurant) {
+  var restaurant = rulistservice.restaurants.filter(function (restaurant) {
     return restaurant.id == $stateParams.ruId;
   });
 

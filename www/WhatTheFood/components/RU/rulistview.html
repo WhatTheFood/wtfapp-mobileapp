@@ -10,7 +10,7 @@
     </div>
 
     <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
-      <div ng-repeat-start="ru in rulist  | filter: data.searchQuery">
+      <div ng-repeat-start="ru in rulist | filter: data.searchQuery">
         <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-if="$first">
           <div>
             <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
