@@ -49,7 +49,7 @@ function($scope, $stateParams, $http, rulistservice, loginservice) {
     }
   };
 
-  $scope.getHour = function(hour) {
+  $scope.setHour = function(hour) {
     $scope.hour = hour;
   };
 
