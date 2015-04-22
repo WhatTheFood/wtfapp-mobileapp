@@ -26,7 +26,8 @@
           {{ friend.booking.when}}
         </div>
       </div>
-      <div class="item">
+
+      <div class="item" ng-if="ru.menu.meal[0].foodcategory">
         <div ng-repeat-start="category in ru.menu.meal[0].foodcategory" ng-if="$first">
           <strong>{{category.name}}</strong>
           <br />
@@ -45,6 +46,7 @@
           </div>
         </div>
       </div>
+
       <ion-list>
         <div ng-repeat="group in groups">
           <ion-item class="item-stable item-icon-right"
