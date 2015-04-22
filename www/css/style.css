@@ -7,6 +7,10 @@
   font-family: OpenSans;
 }
 
+p , h1, h2, h3, h4, h5{
+  color: white;
+}
+
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
 }
@@ -394,6 +398,11 @@ input[placeholder] {
   display: none;
 }
 
+.list-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /* accordion */
 .list .item.item-accordion {
   line-height: 57px;
@@ -511,4 +520,10 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
 
 .item-quizz-select > .select-food {
   text-decoration: underline;
+}
+
+.actions {}
+.actions .action {
+  display: inline-block;
+  vertical-align: middle;
 }

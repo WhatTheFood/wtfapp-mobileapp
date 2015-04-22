@@ -63,11 +63,11 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
       $scope.operationalhours = $sce.trustAsHtml('<b>' + $scope.ru.operationalhours.replace(/:/g, ":</b><br />").replace(/  /g, "<br /><b>"));
       $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
     }
-
-    $scope.groups = [
-      {'name': 'En apprendre plus sur ce RU', 'items': []}
-    ];
   }
+
+  $scope.groups = [
+    {'name': 'En apprendre plus sur ce RU', 'items': []}
+  ];
 
   /*
    * if given group is the selected group, deselect it
@@ -83,6 +83,7 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
       $ionicScrollDelegate.scrollBottom(true);
     }, 120);
   };
+
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
   };
