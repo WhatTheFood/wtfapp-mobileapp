@@ -532,4 +532,8 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   position: relative;
   height: 42px;
 }
-.queue-status-container p { vertical-align: middle; }
+.queue-status-container p {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
