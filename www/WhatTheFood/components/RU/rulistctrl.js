@@ -30,46 +30,14 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$io
     $scope.data.searchQuery = '';
   };
 
-  $scope.eatHere = function(id) {
-    /*
-    // Don't execute if there is no token
-    if(loginservice.gettoken() == "") return "not connected";
-    var req = {
-      method: 'POST',
-      dataType: "json",
-      url: loginservice.getServerAPI()+'/users/me/restaurant',
-      data: '{"restaurantId":'+id+'}',
-      headers: {
-        "Content-Type" : "application/json",
-        "Authorization" : "Bearer "+loginservice.gettoken()
-      }
-    };
-
-    $http(req)
-    .success(function (data, status, headers, config) {
-      // this callback will be called asynchronously
-      // when the response is available
-      return data;
-    })
-    .error(function (data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(data);
-      return "error";
-    });
-    */
-  };
-
   $scope.swipeleft = function(ruId) {
     setTimeout(function() {
-      console.log("rueat");
       $state.go('wtf.rueat', {ruId: ruId});
     }, 500);
   };
 
   $scope.showDishCategory = function(category){
-    return category.name == 'Plats' ||
-      category.name == 'Grillades';
+    return category.name == 'Plats' || category.name == 'Grillades';
   };
 
   $scope.goEatAt = function ( ruId ) {

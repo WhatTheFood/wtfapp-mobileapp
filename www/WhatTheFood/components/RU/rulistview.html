@@ -1,48 +1,48 @@
 <ion-view view-title="Mes RUs">
-    <ion-content>
+  <ion-content>
 
-        <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
-            <div class="item-input-wrapper">
-                <i class="icon ion-ios7-search placeholder-icon"></i>
-                <input type="search" placeholder="Rechercher un RU" ng-model="data.searchQuery">
-                <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+    <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
+      <div class="item-input-wrapper">
+        <i class="icon ion-ios7-search placeholder-icon"></i>
+        <input type="search" placeholder="Rechercher un RU" ng-model="data.searchQuery">
+        <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+      </div>
+    </div>
+
+    <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
+      <div ng-repeat-start="ru in rulist  | filter: data.searchQuery">
+        <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-if="$first">
+          <div>
+            <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
+            <div>{{ru.title}}</div>
+            <div class="subtitle">{{ru.openingNow}}</div>
+            <i class="icon ion-chevron-right"></i>
+          </div>
+          <ion-option-button class="button-info"
+            ng-click="goEatAt(ru.id)">
+            Je mange ici ce midi !
+          </ion-option-button>
+        </ion-item>
+        <div class="rumenu list" ng-if="$first" >
+          <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
+            <div ng-repeat="dish in category.dishes" style="white-space: normal;">
+              {{dish.name}}
             </div>
+          </div>
         </div>
+      </div>
 
-        <ion-list class="list" can-swipe="true" on-swipe-left="swipeleft(ru.id)">
-            <div ng-repeat-start="ru in rulist  | filter: data.searchQuery">
-                <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-if="$first">
-                    <div>
-                        <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
-                        <div>{{ru.title}}</div>
-                        <div class="subtitle">{{ru.openingNow}}</div>
-                        <i class="icon ion-chevron-right"></i>
-                    </div>
-    				<ion-option-button class="button-info"
-                           ng-click="goEatAt(ru.id)">
-    				  Je mange ici ce midi !
-    				</ion-option-button>
-                </ion-item>
-                <div class="rumenu list" ng-if="$first" >
-                    <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
-                        <div ng-repeat="dish in category.dishes" style="white-space: normal;">
-                            {{dish.name}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
+        <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
+        <div>{{ru.title}}</div>
+        <div class="subtitle">{{ru.openingNow}}</div>
+        <i class="icon ion-chevron-right"></i>
+        <ion-option-button class="button-info"
+          ng-click="goEatAt(ru.id)">
+          Je mange ici ce midi !
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
 
-            <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-repeat-end ng-if="!$first">
-                <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
-                <div>{{ru.title}}</div>
-                <div class="subtitle">{{ru.openingNow}}</div>
-                <i class="icon ion-chevron-right"></i>
-				<ion-option-button class="button-info"
-                       ng-click="goEatAt(ru.id)">
-				  Je mange ici ce midi !
-				</ion-option-button>
-            </ion-item>
-        </ion-list>
-
-    </ion-content>
+  </ion-content>
 </ion-view>
