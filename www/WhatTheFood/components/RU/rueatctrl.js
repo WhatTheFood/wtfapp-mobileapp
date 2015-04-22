@@ -1,5 +1,5 @@
-wtf.controller('rueatctrl', ['$scope', '$stateParams', '$http', 'rulistservice', 'loginservice',
-function($scope, $stateParams, $http, rulistservice, loginservice) {
+wtf.controller('rueatctrl', ['$scope', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice',
+function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
 
   /* return to login if not connected */
   if(loginservice.gettoken() === "") {$state.go('login'); return;}
@@ -36,8 +36,7 @@ function($scope, $stateParams, $http, rulistservice, loginservice) {
 
       $http(req)
       .success(function (data, status, headers, config) {
-        // this callback will be called asynchronously
-        // when the response is available
+        $state.go('wtf.rulist');
         return data;
       })
       .error(function (data, status, headers, config) {
