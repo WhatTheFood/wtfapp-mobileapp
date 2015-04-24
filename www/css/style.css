@@ -537,3 +537,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.popup h3 {
+  color: black;
+}
