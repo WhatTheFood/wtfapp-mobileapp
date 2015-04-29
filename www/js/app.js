@@ -46,7 +46,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
     views: {
       '': {
         templateUrl: "WhatTheFood/components/Login/loginview.html",
-        controller: 'loginctrl'}
+        controller: 'loginctrl'
+      }
     }
   })
 

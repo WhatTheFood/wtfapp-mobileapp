@@ -5,11 +5,13 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
     facebook: false
   });
 
-  var serverAPIHTTPS = true;
-  var serverAPI = "whatthefood.herokuapp.com/api";
+  // var serverAPIHTTPS = true;
+  // var serverAPI = "whatthefood.herokuapp.com/api";
   // Debug handy
-  // var serverAPIHTTPS = false;
-  // var serverAPI = "192.168.2.36:5000/api";
+  var serverAPIHTTPS = false;
+  //var serverAPI = "192.168.0.23:5000/api"; // Home
+  var serverAPI = "localhost:5000/api"; // Home
+  //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
 
   function utf8_to_b64( str ) {
     return window.btoa(unescape(encodeURIComponent( str )));

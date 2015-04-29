@@ -34,7 +34,34 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
       return defer.promise;
     },
 
-    getrulist : function (lat,lng) {
+    defineRUList: function (successCallback, errorCallback) {
+      var self = this;
+      return self.getPosition().then(function (coord) {
+        return self.getrulist(coord.latitude, coord.longitude).then(function (result) {
+          var rulist = [];
+
+          if (result.data.length > 0) {
+            var data2 = result.data.map(function(val){
+              val.distance = Math.round(val.distance * 6378.137);
+              return val;
+            });
+
+
+            if (successCallback) { successCallback(data2); }
+
+          } else {
+            self.getrulist().then(function (result) {
+              if (successCallback) { successCallback(result.data); }
+            });
+          }
+
+        }, function (e) {
+          if (errorCallback) { errorCallback(e, []); }
+        });
+      });
+    },
+
+    getrulist: function (lat, lng) {
       req.params = {
         lat: lat,
         lng: lng
@@ -45,8 +72,8 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
         // when the response is available
         factory.storage.restaurants = data.map(function(restaurant){
           // Force the date to a date where there is a menu (no menu on week-ends)
-          //var now = new Date(Date.parse("2015-02-10T00:00:00.000Z")); // DEBUG HANDY!
-          var now = new Date();
+          var now = new Date(Date.parse("2015-03-30T00:00:00.000Z")); // DEBUG HANDY!
+          //var now = new Date();
           var menus = restaurant.menus.filter(function(menu) {
             var menuDate = new Date(Date.parse(menu.date));
             return (now.getDate() == menuDate.getDate()
@@ -54,7 +81,7 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
                     && now.getFullYear() == menuDate.getFullYear());
           });
 
-          restaurant.menu = menus[0];
+          restaurant.menus = menus;
           var openingCodes = restaurant.opening.split(',');
           restaurant.openingString = openingCodes.map(function(openingCode) {
             if(openingCode == "000") return "Fermé";
