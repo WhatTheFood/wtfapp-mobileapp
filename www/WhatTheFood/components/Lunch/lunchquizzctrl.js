@@ -72,6 +72,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
             if (rulistservice.feedback[0]>0) {
               $scope.entree = foodcategories[i].dishes;
               $scope.currentEntree = $scope.entree[0];
+              $scope.currentEntree.feedback = [];
               counter++;
             }
             break;
@@ -82,6 +83,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
             if (rulistservice.feedback[1]>0) {
               $scope.plat = foodcategories[i].dishes;
               $scope.currentPlat = $scope.plat[0];
+              $scope.currentPlat.feedback = [];
               counter++;
             }
             break;
@@ -92,6 +94,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
             if (rulistservice.feedback[1]>0) {
               $scope.grillade = foodcategories[i].dishes;
               $scope.currentGrillade = $scope.grillade[0];
+              $scope.currentGrillade.feedback = [];
               counter++;
             }
             break;
@@ -102,6 +105,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
             if (rulistservice.feedback[2]>0) {
               $scope.dessert = foodcategories[i].dishes;
               $scope.currentDessert = $scope.dessert[0];
+              $scope.currentDessert.feedback = [];
               counter++;
             }
             break;
@@ -222,18 +226,19 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
   };
 
   $scope.sendFeedback = function() {
-    response = {'menus': $scope.currentRu.menu};
+    response = {'menus': $scope.currentRu.menus};
+    response.menus.feedback = response.menus.feedback || [];
 
     /* get thrown values */
     user_id = ''; // TODO: how do I get that ?
     if(rulistservice.feedback[0] > -1)
-      $scope.currentEntree.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[0]});
+      $scope.currentEntree && $scope.currentEntree.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[0]});
     if(rulistservice.feedback[1] > -1)
-      $scope.currentPlat.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[1]});
+      $scope.currentPlat && $scope.currentPlat.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[1]});
     if(rulistservice.feedback[2] > -1)
-      $scope.currentGrillade.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[2]});
+      $scope.currentGrillage && $scope.currentGrillade.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[2]});
     if(rulistservice.feedback[3] > -1)
-      $scope.currentDessert.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[3]});
+      $scope.currentDessert && $scope.currentDessert.feedback.push({'user_id': user_id, 'thrown': rulistservice.feedback[3]});
 
     /* get quizz answers */
     quizz = {};
@@ -262,8 +267,6 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
         "Authorization" : "Bearer "+loginservice.gettoken()
       }
     };
-
-    console.log(req);
 
     $http(req)
     .success(function (data, status, headers, config) {
