@@ -33,7 +33,7 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
         data: {"email": email, "password": pwd, auth_token: utf8_to_b64(email + ":" + pwd)},
-        headers: {"Content-Type" : "application/json"}
+        headers: {"Content-Type": "application/json"}
       };
 
       return $http(req)
@@ -61,7 +61,7 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
       .success(function (data, status, headers, config) {
         console.log(data);
         factory.settoken(data['user_token']);
-        userId = data['user_id'];
+        $storage.userId = data['user_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
