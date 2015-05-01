@@ -1,11 +1,11 @@
 wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', '$ionicScrollDelegate', function($scope, $state, $http, loginservice, $ionicScrollDelegate) {
 
     /* return to login if not connected */
-    if(loginservice.gettoken() == "") {$state.go('login'); return;}
+    if (loginservice.gettoken() === "") { $state.go('login'); return; }
 
     $scope.gohome = function(){
         $state.go('wtf.rulist');
-    }
+    };
 
     $scope.groups = [
         {'name': 'Mes habitudes alimentaires',
