@@ -1,6 +1,6 @@
 wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
 
-  var tokenAPI = $sessionStorage.$default({
+  var $storage = $sessionStorage.$default({
     token: "",
     facebook: false
   });
@@ -87,8 +87,8 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
           // this callback will be called asynchronously
           // when the response is available
           factory.settoken(data['user_token']);
-          userId = data['user_id'];
-          tokenAPI.facebook = true;
+          $storage.userId = data['user_id'];
+          $storage.facebook = true;
           defer.resolve(true, data);
         })
         .error(function (data, status, headers, config) {
@@ -142,17 +142,17 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
     },
 
     gettoken : function() {
-      console.log("token-get : " + tokenAPI.token.substring(0, 20));
-      return tokenAPI.token;
+      console.log("token-get : " + $storage.token.substring(0, 20));
+      return $storage.token;
     },
 
     isfbconnected : function() {
-      return tokenAPI.facebook;
+      return $storage.facebook;
     },
 
     settoken : function(data) {
-      tokenAPI.token = data;
-      console.log("token-set : " + tokenAPI.token.substring(0, 20));
+      $storage.token = data;
+      console.log("token-set : " + $storage.token.substring(0, 20));
     }
   };
 

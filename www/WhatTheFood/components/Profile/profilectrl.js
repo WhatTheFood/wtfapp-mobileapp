@@ -39,6 +39,7 @@ wtf.controller('profilectrl', ['$scope','$state', '$http', 'loginservice', '$ion
           $ionicScrollDelegate.scrollBottom(true);
         }, 120);
     };
+
     $scope.isGroupShown = function(group) {
         return $scope.shownGroup === group;
     };
