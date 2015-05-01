@@ -4,6 +4,8 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
   /* return to login if not connected */
   if (loginservice.gettoken() === "") { $state.go('login'); return; }
 
+  if (rulistservice.feedback === undefined || rulistservice.feedback.length === 0) { $state.go('wtf.lunch'); return; }
+
   $ionicLoading.show({
     template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
   });
@@ -29,6 +31,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
   };
 
   defineRestaurants();
+
   /* populate combobox */
   $scope.$watch('rulist', function (newValue, oldValue) {
     if (newValue === undefined && oldValue === undefined) { return; }
