@@ -227,7 +227,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
 
   $scope.sendFeedback = function() {
     response = {'menus': $scope.currentRu.menus};
-    response.menus.feedback = response.menus.feedback || [];
+    response.menus[0].feedback = [];
 
     /* get thrown values */
     user_id = ''; // TODO: how do I get that ?
@@ -254,7 +254,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
     });
 
     /* compile everything */
-    response.menus.feedback.push(quizz);
+    response.menus[0].feedback.push(quizz);
 
     /* send feedback outta spaaace */
     var req = {
