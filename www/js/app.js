@@ -7,8 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+.run(['$ionicConfigProvider', function($ionicPlatform) {
+  $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,14 +20,14 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
       StatusBar.styleDefault();
     }
   });
-})
+}])
 
-.config(function($ionicConfigProvider) {
+.config(['$ionicConfigProvider', function ($ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('');
   $ionicConfigProvider.backButton.icon('ion-chevron-left');
-})
+}])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
   // FB init
   openFB.init({appId: '576723975798203'});
@@ -149,4 +149,4 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
-});
+}]);
