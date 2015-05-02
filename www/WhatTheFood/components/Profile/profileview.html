@@ -1,32 +1,35 @@
 <ion-view view-title="Mon profil">
-    <ion-content>
-        <div class="item" id="profile">
-            <img src="img/photo_profil.png" alt="photo" align="left" />
-            <ul>
-                <li>Prénom</li>
-                <li>Nom</li>
-                <li><i class="ion-male">&nbsp;</i>Chou</li>
-            </ul>
-        </div>
-        <div class="item university">
-            Université
-        </div>
-        <ion-list>
-            <div ng-repeat="group in groups">
-                <ion-item class="item-stable item-icon-right"
-                          ng-click="toggleGroup(group)"
-                          ng-class="{active: isGroupShown(group)}">
-                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
-                    &nbsp;
-                    {{group.name}}
-                </ion-item>
-                <ion-checkbox class="item-accordion"
-                        ng-repeat="item in group.items"
-                        ng-show="isGroupShown(group)"
-                        ng-model="item.checked">
-                    {{item.name}}
-                </ion-checkbox>
-            </div>
-        </ion-list>
-    </ion-content>
+  <ion-content>
+    <div class="item" id="profile">
+      <img ng-src="{{user.avatar}}" alt="photo" align="left" ng-show="user.avatar" />
+      <ul ng-show="user.first_name && user.last_name">
+        <li ng-show="user.first_name">{{user.first_name}}</li>
+        <li ng-show="user.last_name">{{user.last_name}}</li>
+      </ul>
+    </div>
+
+    <div ng-show="user.university" class="item university">
+      {{user.university}}
+    </div>
+
+    <ion-list>
+      <div ng-repeat="group in groups">
+        <ion-item class="item-stable item-icon-right"
+          ng-click="toggleGroup(group)"
+          ng-class="{active: isGroupShown(group)}">
+          <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+          &nbsp;
+          {{group.name}}
+        </ion-item>
+
+        <ion-checkbox class="item-accordion"
+          ng-repeat="item in group.items"
+          ng-show="isGroupShown(group)"
+          ng-click="updatePreferences(item)"
+          ng-model="item.checked">
+          {{item.name}}
+        </ion-checkbox>
+      </div>
+    </ion-list>
+  </ion-content>
 </ion-view>
