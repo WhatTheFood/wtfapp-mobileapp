@@ -2,7 +2,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
 function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
   /* return to login if not connected */
-  if (loginservice.gettoken() === "") { $state.go('login'); return; }
+  if (loginservice.gettoken() === null) { $state.go('login'); return; }
 
   if (rulistservice.restaurants.length > 0) {
     $ionicLoading.show({

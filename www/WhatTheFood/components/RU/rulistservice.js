@@ -112,23 +112,26 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
     },
     facebookFriendsAtThisRu : function(id, loginservice) {
       // Don't execute if there is no token
-      if (loginservice.gettoken() === "" || !loginservice.isfbconnected()) {
+      if (loginservice.gettoken() === null || !loginservice.isfbconnected()) {
         var deferred = $q.defer();
         deferred.resolve("not facebook connected");
         return deferred.promise;
       }
+
       var req = {
         method: 'PUT',
         dataType: "json",
-        url: loginservice.getServerAPI()+'/users/me/friends/restaurant',
-        data: {"restaurantId":id},
+        url: loginservice.getServerAPI() +'/users/me/friends/restaurant',
+        data: {"restaurantId": id},
         headers: {
           "Content-Type" : "application/json",
           "Authorization" : "Bearer "+ loginservice.gettoken()
         }
       };
+
       return $http(req).success(function (data, status, headers, config) {
         return data;
+
       }).error(function (data, status, headers, config) {
         console.log("Error - fbfriend: " + data);
         return data;

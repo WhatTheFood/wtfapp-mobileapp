@@ -2,9 +2,7 @@ wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistor
     function($scope, $state, $stateParams, $ionicHistory, $http, rulistservice, loginservice) {
 
     /* return to login if not connected */
-    console.log("checking connection")
-    if(loginservice.gettoken() == "") { console.log("not connected"); $state.go('login'); return;}
-    console.log("connected;")
+    if (loginservice.gettoken() === null) { $state.go('login'); return; }
 
     /* populate combobox */
     $scope.rulist = rulistservice.restaurants;

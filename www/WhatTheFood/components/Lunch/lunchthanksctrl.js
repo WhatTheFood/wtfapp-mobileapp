@@ -2,6 +2,6 @@ wtf.controller('lunchthanksctrl', ['$http', '$scope', '$sce', '$state', '$stateP
   function($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
   /* return to login if not connected */
-  if (loginservice.gettoken() === "") { $state.go('login'); return; }
+  if (loginservice.gettoken() === null) { $state.go('login'); return; }
 
 }]);
