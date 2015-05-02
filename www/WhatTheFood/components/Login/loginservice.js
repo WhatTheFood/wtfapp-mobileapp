@@ -1,8 +1,9 @@
 wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
 
   var $storage = $sessionStorage.$default({
-    token: "",
-    facebook: false
+    facebook: false,
+    token: null,
+    userId: null
   });
 
   // var serverAPIHTTPS = true;
@@ -32,18 +33,23 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
         method: 'POST',
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
-        data: {"email": email, "password": pwd, auth_token: utf8_to_b64(email + ":" + pwd)},
+        data: {
+          email: email,
+          password: pwd,
+          auth_token: utf8_to_b64(email + ":" + pwd)
+        },
         headers: {"Content-Type": "application/json"}
       };
 
       return $http(req)
       .success(function (data, status, headers, config) {
-        console.log("Success: ", data);
+        console.debug("Success: ", data);
         factory.settoken(data['token']);
+        $storage.userId = data['user_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.log("Error: ", data);
+        console.error("Error: ", data);
         return data;
       });
     },
@@ -59,18 +65,17 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 
       return $http(req)
       .success(function (data, status, headers, config) {
-        console.log(data);
         factory.settoken(data['user_token']);
         $storage.userId = data['user_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.log("Error: " + data);
+        console.error("Error: " + data);
         return data;
       });
     },
 
-    loginfb : function() {
+    loginfb: function () {
       var defer = $q.defer();
 
       var facebookApiRequestSuccessHandler = function (response, user) {
@@ -84,8 +89,6 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
 
         $http(req)
         .success(function (data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
           factory.settoken(data['user_token']);
           $storage.userId = data['user_id'];
           $storage.facebook = true;
@@ -94,15 +97,14 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
         .error(function (data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          console.log("Facebook connection error on api: ");
-          console.log(data);
+          console.error("Facebook connection error on api: ", data);
           defer.reject(false, data);
         });
       };
 
       var facebookLoginHandler = function (response) {
         if (response.status === 'connected') {
-          console.log('Login Facebook reussie : '+response.authResponse.token);
+          console.debug('Login Facebook reussie : '+response.authResponse.token);
 
           openFB.api({path: '/me',
                      success: function(user) {
@@ -121,16 +123,16 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
         function(response) { return facebookLoginHandler(response); },
         {scope: 'email,user_friends'}
       );
-      console.log('Login Facebook en cours...');
+      console.debug('Login Facebook en cours...');
 
       return defer.promise;
     },
 
-    getfriendlist : function() {
+    getfriendlist: function() {
       var defer = $q.defer();
       openFB.api({path: '/me/friends',
                  success: function(friendlist) {
-                   console.log(friendlist);
+                   console.debug(friendlist);
                    defer.resolve(friendlist);
                  },
                  error: function() {
@@ -141,18 +143,18 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
       return defer.promise;
     },
 
-    gettoken : function() {
-      console.log("token-get : " + $storage.token.substring(0, 20));
+    gettoken: function () {
+      console.info("token-get: ", $storage.token);
       return $storage.token;
     },
 
-    isfbconnected : function() {
+    isfbconnected: function () {
       return $storage.facebook;
     },
 
-    settoken : function(data) {
+    settoken: function (data) {
       $storage.token = data;
-      console.log("token-set : " + $storage.token.substring(0, 20));
+      console.info("token-set: ", $storage.token);
     }
   };
 

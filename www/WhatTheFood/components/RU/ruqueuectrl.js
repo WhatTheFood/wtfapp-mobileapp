@@ -25,11 +25,11 @@ wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistor
         var req = {
             method: 'POST',
             dataType: "json",
-            url: loginservice.getServerAPI()+'/restaurants/'+$scope.currentRu.id+'/queue/votes',
+            url: loginservice.getServerAPI() +'/restaurants/'+ $scope.currentRu.id +'/queue/votes',
             data: '{"timeSlotIndex": '+ index +'}',
             headers: {
                 "Content-Type" : "application/json",
-                "Authorization" : "Bearer "+loginservice.gettoken()
+                "Authorization" : "Bearer "+ loginservice.gettoken()
             }
         };
 

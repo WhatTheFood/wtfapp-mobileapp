@@ -260,11 +260,11 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
     var req = {
       method: 'PUT',
       dataType: "json",
-      url: loginservice.getServerAPI()+'/restaurants/'+$scope.currentRu.id+'/menu',
+      url: loginservice.getServerAPI() +'/restaurants/'+ $scope.currentRu.id +'/menu',
       data: response,
       headers: {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer "+loginservice.gettoken()
+        "Authorization" : "Bearer "+ loginservice.gettoken()
       }
     };
 
