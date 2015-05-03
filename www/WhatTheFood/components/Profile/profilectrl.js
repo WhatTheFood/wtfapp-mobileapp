@@ -15,7 +15,6 @@ wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', '
   });
 
   var initGroups = function (groups, userPreferences) {
-    debugger;
     groups.forEach(function (group) {
       group.items.forEach(function (item) {
         userPreference = userPreferences.filter(function (value) {
@@ -30,7 +29,6 @@ wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', '
   };
 
   var isChecked = function (group, item) {
-    debugger;
     var itemToCheck = $scope.user.preferences[group].items.filter(function (value, index) {
       return items[value] === item[value];
     })[0];
