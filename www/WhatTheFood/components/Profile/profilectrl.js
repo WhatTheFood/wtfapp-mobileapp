@@ -45,7 +45,7 @@ wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', '
       ]
     },
     {
-      'name': 'Mes alergies',
+      'name': 'Mes allergies',
       'items': [
         {'name': 'Gluten',    'checked': false},
         {'name': 'Crustacés', 'checked': false},
