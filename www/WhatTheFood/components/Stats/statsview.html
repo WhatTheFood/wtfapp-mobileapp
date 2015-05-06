@@ -1,26 +1,24 @@
 <ion-view view-title="Statistiques">
   <ion-content>
 
-    <div class="item">
+    <div class="item most-wasted-element" ng-show="user.mostWastedElement">
       <p>Je laisse principalement du {{user.mostWastedElement}}.</p>
     </div>
 
-    <div class="item">
+    <div class="item less-wasted-element" ng-show="user.lessWastedElement">
       <p>Je ne laisse jamais du {{user.lessWastedElement}}.</p>
     </div>
 
-    <div class="item stats-points">
+    <div class="item stats-points" ng-show="user.points">
       <p>{{user.points}} points</p>
     </div>
 
-    <div class="stats-feedbacks">
-      <div class="item queue-feedback">
-        <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount}}x</span></p>
-      </div>
+    <div class="item queue-feedbacks-count" ng-show="user.queueFeedbacksCount">
+      <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount}}x</span></p>
+    </div>
 
-      <div class="item lunch-feedback">
-        <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount}}x</span></p>
-      </div>
+    <div class="item lunch-feedbacks-count" ng-show="user.lunchFeedbacksCount">
+      <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount}}x</span></p>
     </div>
 
   </ion-content>
