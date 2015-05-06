@@ -8,7 +8,6 @@ wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', '
   });
 
   $scope.$watch('user', function (newValue) {
-    console.debug(newValue);
     if (newValue !== undefined) {
       initGroups($scope.groups, newValue.preferences);
     }

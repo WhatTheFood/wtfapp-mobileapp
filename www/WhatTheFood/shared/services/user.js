@@ -27,6 +27,24 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
       }
     },
 
+    updatePoints: function () {
+      var req = {
+        method: 'PUT',
+        dataType: 'json',
+        data: { action: 'increase_points' },
+        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + loginservice.gettoken()
+        }
+      };
+
+      return $http(req)
+      .error(function (data, status, headers, config) {
+        console.error('Error: ', data);
+      });
+    },
+
     updatePreferences: function (item) {
       var req = {
         method: 'PUT',
