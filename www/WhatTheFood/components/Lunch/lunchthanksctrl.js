@@ -15,6 +15,7 @@ function($scope, $sessionStorage, $state, loginservice, User) {
         execute();
       }
     });
+
   } else {
     execute();
   }

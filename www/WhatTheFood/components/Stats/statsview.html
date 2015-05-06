@@ -1,0 +1,28 @@
+<ion-view view-title="Statistiques">
+  <ion-content>
+
+    <div class="item">
+      <p>Je laisse principalement du {{user.mostWastedElement}}.</p>
+    </div>
+
+    <div class="item">
+      <p>Je ne laisse jamais du {{user.lessWastedElement}}.</p>
+    </div>
+
+    <div class="item stats-points">
+      <p>{{user.points}} points</p>
+    </div>
+
+    <div class="stats-feedbacks">
+      <div class="item queue-feedback">
+        <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount}}x</span></p>
+      </div>
+
+      <div class="item lunch-feedback">
+        <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount}}x</span></p>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
+

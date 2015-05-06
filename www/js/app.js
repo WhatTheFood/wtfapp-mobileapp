@@ -145,6 +145,16 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
         controller: 'profilectrl'
       }
     }
+  })
+
+  .state('wtf.stats', {
+    url: '/stats',
+    views: {
+      'menuContent': {
+        templateUrl: 'WhatTheFood/components/Stats/statsview.html',
+        controller: 'statsctrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
