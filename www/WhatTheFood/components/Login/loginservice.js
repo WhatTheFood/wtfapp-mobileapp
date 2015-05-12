@@ -43,7 +43,6 @@ function($http, $q, $sessionStorage) {
 
       return $http(req)
       .success(function (data, status, headers, config) {
-        console.debug("Success: ", data);
         factory.settoken(data['token']);
         $storage.userId = data['user_id'];
         return data;
@@ -110,8 +109,6 @@ function($http, $q, $sessionStorage) {
 
       var facebookLoginHandler = function (response) {
         if (response.status === 'connected') {
-          console.debug('Login Facebook reussie : '+response.authResponse.token);
-
           openFB.api({path: '/me',
                      success: function(user) {
                        return facebookApiRequestSuccessHandler(response, user);
@@ -129,7 +126,6 @@ function($http, $q, $sessionStorage) {
         function(response) { return facebookLoginHandler(response); },
         {scope: 'email,user_friends'}
       );
-      console.debug('Login Facebook en cours...');
 
       return defer.promise;
     },
@@ -138,7 +134,6 @@ function($http, $q, $sessionStorage) {
       var defer = $q.defer();
       openFB.api({path: '/me/friends',
                  success: function(friendlist) {
-                   console.debug(friendlist);
                    defer.resolve(friendlist);
                  },
                  error: function() {
@@ -150,7 +145,6 @@ function($http, $q, $sessionStorage) {
     },
 
     gettoken: function () {
-      console.info("token-get: ", $storage.token);
       return $storage.token;
     },
 
@@ -160,7 +154,6 @@ function($http, $q, $sessionStorage) {
 
     settoken: function (data) {
       $storage.token = data;
-      console.info("token-set: ", $storage.token);
     }
   };
 
