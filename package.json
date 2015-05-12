@@ -23,7 +23,6 @@
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
-    "android",
     {
       "platform": "android",
       "version": "4.0.0",
