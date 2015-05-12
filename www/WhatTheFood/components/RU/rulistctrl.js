@@ -56,7 +56,7 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$io
       };
 
       var errorCallback = function (error, data) {
-        $scope.msg = "impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
         $scope.rulist = data;
         $ionicLoading.hide();
       };
