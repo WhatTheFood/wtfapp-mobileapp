@@ -27,21 +27,25 @@
         </div>
       </div>
 
-      <div class="item" ng-if="ru.menus.meal[0].foodcategory">
-        <div ng-repeat-start="category in ru.menus.meal[0].foodcategory" ng-if="$first">
-          <strong>{{category.name}}</strong>
-          <br />
-          <div ng-repeat="dish in category.dishes">
-            - {{dish.name}}
-          </div>
-        </div>
+      <div ng-repeat="menu in ru.menus">
+        <div ng-repeat="meal in menu.meal">
+          <div class="item" ng-if="meal.foodcategory">
+            <div ng-repeat-start="category in meal.foodcategory" ng-if="$first">
+              <strong>{{category.name}}</strong>
+              <br />
+              <div ng-repeat="dish in category.dishes">
+                - {{dish.name}}
+              </div>
+            </div>
 
-        <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
-          <div ng-class="paddingtop-menuitem">
-            <strong>{{category.name}}</strong>
-            <br />
-            <div ng-repeat="dish in category.dishes">
-              - {{dish.name}}
+            <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
+              <div ng-class="paddingtop-menuitem">
+                <strong>{{category.name}}</strong>
+                <br />
+                <div ng-repeat="dish in category.dishes">
+                  - {{dish.name}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
