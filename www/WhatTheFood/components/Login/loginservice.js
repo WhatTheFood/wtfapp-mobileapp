@@ -14,8 +14,8 @@ function($http, $q, $sessionStorage) {
   //var serverAPI = "192.168.0.23:5000/api"; // Home
   //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
 
-  function utf8_to_b64( str ) {
-    return window.btoa(unescape(encodeURIComponent( str )));
+  function utf8_to_b64(str) {
+    return window.btoa(unescape(encodeURIComponent(str)));
   }
 
   var factory = {

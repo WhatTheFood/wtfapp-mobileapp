@@ -19,7 +19,8 @@
     "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-geolocation",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
     "android",
