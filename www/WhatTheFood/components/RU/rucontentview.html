@@ -27,8 +27,8 @@
         </div>
       </div>
 
-      <div class="item" ng-if="ru.menu.meal[0].foodcategory">
-        <div ng-repeat-start="category in ru.menu.meal[0].foodcategory" ng-if="$first">
+      <div class="item" ng-if="ru.menus.meal[0].foodcategory">
+        <div ng-repeat-start="category in ru.menus.meal[0].foodcategory" ng-if="$first">
           <strong>{{category.name}}</strong>
           <br />
           <div ng-repeat="dish in category.dishes">
