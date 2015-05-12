@@ -1,4 +1,6 @@
-wtf.factory('rulistservice', ['$http', '$q', '$localStorage', 'loginservice', function($http, $q, $localStorage, loginservice) {
+wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '$q', 'loginservice',
+function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
+
   var req = {
     method: 'GET',
     url: loginservice.getServerAPI()+'/restaurants'
@@ -13,7 +15,14 @@ wtf.factory('rulistservice', ['$http', '$q', '$localStorage', 'loginservice', fu
     getPosition: function() {
       var defer = $q.defer();
 
-      navigator.geolocation.getCurrentPosition(function(result) {
+      var positionOptions = {
+        timeout: 10000,
+        enableHighAccuracy: false // may cause errors if true
+      };
+
+      $cordovaGeolocation
+      .getCurrentPosition(positionOptions)
+      .then(function(result) {
         defer.resolve(result.coords);
 
       }, function(err) {
