@@ -1,8 +1,7 @@
 wtf.controller('loginctrl', ['$scope', '$state', '$http', 'loginservice', '$cordovaOauth', '$sessionStorage', '$ionicLoading', '$ionicPopup',
 function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $ionicLoading, $ionicPopup) {
 
-  /* go to rulist if already connected */
-  if (loginservice.gettoken() !== null) { $state.go('wtf.rulist'); return; }
+  if (loginservice.gettoken() !== null && $sessionStorage.userId !== null && $sessionStorage.userId !== undefined) { $state.go('login'); return; }
 
   $scope.gohome = function(){
     $state.go('wtf.rulist');
