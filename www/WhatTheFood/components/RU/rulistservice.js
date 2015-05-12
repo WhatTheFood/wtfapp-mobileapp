@@ -32,8 +32,8 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
 
         } else {
           // more generic error
-          defer.reject("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
-          alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
+          defer.reject("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.");
+          alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.");
         }
 
         if (errorCallback) { return errorCallback(err); }
