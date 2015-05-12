@@ -53,9 +53,16 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
         },
         function(e){
           $ionicLoading.hide();
-          $ionicPopup.alert({
-            title: 'Erreur de connexion...'
-          });
+          if (e.status === 401) {
+            $ionicPopup.alert({
+              title: 'Mauvais identifiant ou mot de passe.'
+            });
+
+          } else {
+            $ionicPopup.alert({
+              title: 'Erreur de connexion.'
+            });
+          }
         });
 
     } else {
@@ -63,11 +70,9 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
         title: 'Il y a des erreurs dans le formulaire !'
       });
     }
-
   };
 
   $scope.fblogin = function () {
-
     $ionicLoading.show({
       template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
     });
