@@ -49,8 +49,14 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.error("Error: ", data);
-        return data;
+        if (data === null || data === undefined) {
+          alert('Assurez vous d\'être connecté à internet.');
+          return null;
+
+        } else {
+          console.error("Error: ", data);
+          return data;
+        }
       });
     },
 
