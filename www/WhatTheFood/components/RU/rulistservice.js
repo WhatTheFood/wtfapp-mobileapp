@@ -12,7 +12,7 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
       feedback: [],
     }),
 
-    getPosition: function() {
+    getPosition: function (errorCallback) {
       var defer = $q.defer();
 
       var positionOptions = {
@@ -36,16 +36,16 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
           alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
         }
 
+        if (errorCallback) { return errorCallback(); }
         console.log(err);
-
-      }, {enableHighAccuracy: true, timeout: 60*1000});
+      });
 
       return defer.promise;
     },
 
     defineRUList: function (successCallback, errorCallback) {
       var self = this;
-      return self.getPosition().then(function (coord) {
+      return self.getPosition(errorCallback).then(function (coord) {
         return self.getrulist(coord.latitude, coord.longitude).then(function (result) {
           var rulist = [];
 
