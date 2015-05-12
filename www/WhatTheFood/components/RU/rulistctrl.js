@@ -46,17 +46,28 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$io
     template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
   });
 
-  var successCallback = function (data) {
-    $scope.msg = "Voici les RUs près de vous";
-    $scope.rulist = data;
-    $ionicLoading.hide();
+  var defineRestaurants = function () {
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        $scope.msg = "Voici les RUs près de vous";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        $scope.msg = "impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+    } else {
+      $scope.msg = "Voici les RUs près de vous";
+      $scope.rulist = rulistservice.restaurants;
+      $ionicLoading.hide();
+    }
   };
 
-  var errorCallback = function (error, data) {
-    $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-    $scope.rulist = data;
-    $ionicLoading.hide();
-  };
-
-  rulistservice.defineRUList(successCallback, errorCallback);
+  defineRestaurants();
 }]);
