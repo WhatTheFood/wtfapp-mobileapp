@@ -1,4 +1,5 @@
-wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $q, $sessionStorage) {
+wtf.factory('loginservice', ['$http', '$q', '$sessionStorage',
+function($http, $q, $sessionStorage) {
 
   var $storage = $sessionStorage.$default({
     facebook: false,
@@ -6,11 +7,11 @@ wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', function($http, $
     userId: null
   });
 
-  //var serverAPIHTTPS = true;
-  //var serverAPI = "whatthefood.herokuapp.com/api";
+  var serverAPIHTTPS = true;
+  var serverAPI = "whatthefood.herokuapp.com/api";
   // Debug handy
-  var serverAPIHTTPS = false;
-  var serverAPI = "192.168.0.23:5000/api"; // Home
+  //var serverAPIHTTPS = false;
+  //var serverAPI = "192.168.0.23:5000/api"; // Home
   //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
 
   function utf8_to_b64( str ) {
