@@ -16,13 +16,17 @@
   },
   "cordovaPlugins": [
     "com.ionic.keyboard",
-    "org.apache.cordova.console",
-    "org.apache.cordova.device",
-    "org.apache.cordova.geolocation",
-    "org.apache.cordova.inappbrowser"
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-geolocation",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    {
+      "platform": "android",
+      "version": "4.0.0",
+      "locator": "android"
+    }
   ]
 }
