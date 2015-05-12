@@ -9,6 +9,7 @@ If you have some issues, try the following :
 
 $ ionic platform remove android
 $ ionic platform add android
+$ ionic state restore
 $ ionic run android
 
 To build a release APK, you need the 'my-release-key.keystore' file. If you got it, just do the following :
