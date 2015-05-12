@@ -36,8 +36,7 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
           alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.\n" + "Err Code: "+err.code);
         }
 
-        if (errorCallback) { return errorCallback(); }
-        console.log(err);
+        if (errorCallback) { return errorCallback(err); }
       });
 
       return defer.promise;
