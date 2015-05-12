@@ -9,16 +9,16 @@
       <p>Je ne laisse jamais du {{user.lessWastedElement}}.</p>
     </div>
 
-    <div class="item stats-points" ng-show="user.points">
-      <p>{{user.points}} points</p>
+    <div class="item stats-points">
+      <p>{{user.points || 0}} points</p>
     </div>
 
-    <div class="item queue-feedbacks-count" ng-show="user.queueFeedbacksCount">
-      <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount}}x</span></p>
+    <div class="item queue-feedbacks-count">
+      <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount || 0}}x</span></p>
     </div>
 
-    <div class="item lunch-feedbacks-count" ng-show="user.lunchFeedbacksCount">
-      <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount}}x</span></p>
+    <div class="item lunch-feedbacks-count">
+      <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount || 0}}x</span></p>
     </div>
 
   </ion-content>
