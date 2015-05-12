@@ -1,4 +1,4 @@
-wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'loginservice', function($http, $location, $q, $localStorage, loginservice) {
+wtf.factory('rulistservice', ['$http', '$q', '$localStorage', 'loginservice', function($http, $q, $localStorage, loginservice) {
   var req = {
     method: 'GET',
     url: loginservice.getServerAPI()+'/restaurants'
@@ -142,5 +142,4 @@ wtf.factory('rulistservice', ['$http', '$location', '$q', '$localStorage', 'logi
   factory.feedback = factory.storage.feedback;
 
   return factory;
-
 }]);
