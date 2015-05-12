@@ -83,8 +83,8 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
           $ionicPopup.alert({
             title: "Erreur: " + msg
           });
-        }
-        else {
+
+        } else {
           loginservice.getfriendlist();
           $state.go("wtf.rulist");
         }

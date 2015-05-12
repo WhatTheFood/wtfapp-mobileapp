@@ -3,6 +3,36 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
 
   if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
 
+  $ionicLoading.show({
+    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+  });
+
+  var defineRestaurants = function () {
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        $scope.msg = "Voici les RUs près de vous";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+
+    } else {
+      $scope.msg = "Voici les RUs près de vous";
+      $scope.rulist = rulistservice.restaurants;
+      $ionicLoading.hide();
+    }
+  };
+
+  defineRestaurants();
+
   $scope.data = {};
   $scope.data.showSearch = true;
 
@@ -41,33 +71,4 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
   $scope.goEatAt = function ( ruId ) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
-
-  $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
-  });
-
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.msg = "Voici les RUs près de vous";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      var errorCallback = function (error, data) {
-        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-    } else {
-      $scope.msg = "Voici les RUs près de vous";
-      $scope.rulist = rulistservice.restaurants;
-      $ionicLoading.hide();
-    }
-  };
-
-  defineRestaurants();
 }]);
