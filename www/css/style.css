@@ -546,3 +546,14 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
 .button.facebook {
   color: white;
 }
+
+.item h2 {
+  color: black;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.item p {
+  margin: 10px 0;
+  text-align: justify;
+}
