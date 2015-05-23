@@ -387,6 +387,7 @@ input[placeholder] {
   width: 160px;
   height: 160px;
   margin-right: 16px;
+  background: #666;
 }
 
 .university {
