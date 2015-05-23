@@ -557,3 +557,10 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   margin: 10px 0;
   text-align: justify;
 }
+
+#about img.toque {
+   width: 50px;
+   height: 50px;
+   background: #666;
+   margin: 5px;
+}

@@ -1,6 +1,6 @@
 <ion-view view-title="À propos" ng-app>
   <ion-content class="padding">
-    <div class="list item-text-wrap">
+    <div class="list item-text-wrap" id="about">
       <div class="item">
         <h2>What the Food, c'est quoi ?</h2>
 
@@ -40,13 +40,14 @@
       <div>
         <img src="img/wtf_title.png">
       </div>
-    </div>
 
-    <div class="item">
-      <h2>MILLE MERCIS</h2>
-      <h2>À nos contributeurs les plus Toqués !</h2>
-      <h2>À nos partenaires dans cette RUvolution</h2>
-      <img src="img/partners.png">
+      <div class="item">
+        <h2>MILLE MERCIS</h2>
+        <h2>À nos contributeurs les plus Toqués !</h2>
+        <img class="toque" ng-src="{{user.avatar || 'img/picto_profil.png'}}" ng-repeat="user in toques">
+        <h2>À nos partenaires dans cette RUvolution</h2>
+        <img src="img/partners.png">
+      </div>
     </div>
   </ion-content>
 </ion-view>

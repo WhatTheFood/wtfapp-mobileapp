@@ -10,7 +10,8 @@ function($http, $q, $sessionStorage) {
   var serverAPIHTTPS = true;
   var serverAPI = "whatthefood.herokuapp.com/api";
   // Debug handy
-  //var serverAPIHTTPS = false;
+  var serverAPIHTTPS = false;
+  var serverAPI = "192.168.8.100:5000/api"; // Nomad
   //var serverAPI = "192.168.0.23:5000/api"; // Home
   //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
 
