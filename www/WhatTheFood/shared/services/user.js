@@ -3,6 +3,24 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
   var factory = {
     storage: {},
 
+    getToques: function () {
+      var req = {
+        method: 'GET',
+        dataType: 'json',
+        url: loginservice.getServerAPI() +'/users/toques',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer "+ loginservice.gettoken()
+        }
+      };
+
+      return $http(req)
+      .success(function (data, status, headers, config) {
+        factory.storage.toques = data;
+        return data;
+      });
+    },
+
     query: function (userId) {
       if (userId !== null && userId !== undefined) {
         var req = {

@@ -61,6 +61,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
     url: "/about",
     views: {
       'menuContent': {
+        controller: 'aboutctrl',
         templateUrl: 'WhatTheFood/components/About/about.html'
       }
     }

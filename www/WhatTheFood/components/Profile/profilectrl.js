@@ -1,4 +1,6 @@
-wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User', function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDelegate, User) {
+wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
+
+function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
   if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
 
