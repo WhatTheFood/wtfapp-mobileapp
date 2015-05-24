@@ -47,7 +47,7 @@ function($http, $q, $sessionStorage) {
       return $http(req)
       .success(function (data, status, headers, config) {
         factory.settoken(data['token']);
-        $storage.userId = data['user_id'];
+        $storage.userId = data['_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
