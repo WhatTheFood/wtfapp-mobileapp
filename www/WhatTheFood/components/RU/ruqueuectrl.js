@@ -1,12 +1,38 @@
-wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$http', 'rulistservice', 'loginservice',
+wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
 
-function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $http, rulistservice, loginservice) {
+function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
 
   if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
 
-  /* populate combobox */
-  $scope.rulist = rulistservice.restaurants;
-  $scope.currentRu = $scope.rulist[0];
+  $ionicLoading.show({
+    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+  });
+
+  var defineRestaurants = function () {
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        $scope.rulist = data;
+        $scope.currentRu = $scope.rulist[0];
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+
+    } else {
+      $scope.rulist = rulistservice.restaurants;
+      $scope.currentRu = $scope.rulist[0];
+      $ionicLoading.hide();
+    }
+  };
+
+  defineRestaurants();
 
   /* waiting times */
   $scope.waitingTimes = [
