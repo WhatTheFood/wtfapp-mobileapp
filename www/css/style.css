@@ -390,6 +390,10 @@ input[placeholder] {
   background: #666;
 }
 
+#profile .firstname, #profile .lastname {
+  font-weight: bold;
+}
+
 .university {
   background-color: #eb5d3d;
   color: white;
