@@ -1,4 +1,5 @@
 wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$http', 'rulistservice', 'loginservice',
+
 function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $http, rulistservice, loginservice) {
 
   if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
@@ -15,7 +16,6 @@ function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $http, r
   ];
 
   $scope.sendVote = function (index) {
-    console.log(index);
 
     if($scope.currentRu == null) return "error";
 

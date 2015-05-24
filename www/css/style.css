@@ -570,7 +570,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
    margin: 5px;
 }
 
-.score { overflow: auto; }
+.score { overflow: auto !important; }
   .score span, .score img {
     float: left;
   }
