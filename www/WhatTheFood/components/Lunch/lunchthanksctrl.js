@@ -5,6 +5,10 @@ function ($scope, $sessionStorage, $state, loginservice, User) {
   /* return to login if not connected */
   if (loginservice.gettoken() === null) { $state.go('login'); return; }
 
+  $scope.goToStats = function () {
+    $state.go('wtf.stats');
+  };
+
   var execute = function () {
     User.updatePoints();
   };
