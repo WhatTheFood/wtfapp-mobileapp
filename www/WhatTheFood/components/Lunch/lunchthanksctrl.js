@@ -10,7 +10,7 @@ function ($scope, $sessionStorage, $state, loginservice, User) {
   };
 
   var execute = function () {
-    User.updatePoints();
+    User.updatePoints('lunch-quizz');
   };
 
   if (!User.storage._id) {

@@ -45,11 +45,14 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
       }
     },
 
-    updatePoints: function () {
+    updatePoints: function (action) {
       var req = {
         method: 'PUT',
         dataType: 'json',
-        data: { action: 'increase_points' },
+        data: {
+          action: 'increase_points',
+          reason: action
+        },
         url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
         headers: {
           "Content-Type": "application/json",
