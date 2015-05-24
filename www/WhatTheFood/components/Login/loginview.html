@@ -30,6 +30,18 @@
 
               <label style="margin:10px;">
                 <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
+                  <input type="text" name="lastname" ng-model="lastname" placeholder="Nom" required>
+                </div>
+              </label>
+
+              <label style="margin:10px;">
+                <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
+                  <input type="text" name="firstname" ng-model="firstname" placeholder="Prénom" required>
+                </div>
+              </label>
+
+              <label style="margin:10px;">
+                <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
                   <input type="email" name="email" ng-model="email" placeholder="Email" required>
                 </div>
                 <div ng-show="formSignUp.email.$invalid && (formSignUp.email.$touched || formSignUp.$submitted)">
@@ -40,24 +52,24 @@
 
               <label style="margin:10px;">
                 <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-                  <input type="password" name="pwd" ng-model="pwd" placeholder="Mot de passe" required>
+                  <input type="password" name="password" ng-model="password" placeholder="Mot de passe" required>
                 </div>
-                <div ng-show="formSignUp.pwd.$invalid && (formSignUp.pwd.$touched || formSignUp.$submitted)">
-                  <span ng-show="formSignUp.pwd.$error.required">Mot de passe indispensable !</span>
+                <div ng-show="formSignUp.password.$invalid && (formSignUp.password.$touched || formSignUp.$submitted)">
+                  <span ng-show="formSignUp.password.$error.required">Mot de passe indispensable !</span>
                 </div>
               </label>
 
               <label style="margin:10px;">
                 <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-                  <input type="password" name="pwd_confirm" ng-model="pwd_confirm" placeholder="Confirmer" required>
+                  <input type="password" name="password_confirmation" ng-model="password_confirmation" placeholder="Confirmer" required>
                 </div>
-                <div ng-show="pwd!=pwd_confirm && (formSignUp.pwd_confirm.$touched || formSignUp.$submitted)">
-                  <span ng-show="pwd!=pwd_confirm">Les mots de passe ne sont pas les mêmes !</span>
+                <div ng-show="password!=password_confirmation && (formSignUp.password_confirmation.$touched || formSignUp.$submitted)">
+                  <span ng-show="password!=password_confirmation">Les mots de passe ne sont pas les mêmes !</span>
                 </div>
               </label>
 
               <label style="margin:10px;">
-                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Créer mon profil" ng-click="submitFormSignUp(formSignUp, email, pwd, pwd_confirm)">
+                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Créer mon profil" ng-click="submitFormSignUp(formSignUp)">
               </label>
 
               <a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = false;">Retour</a>
@@ -79,15 +91,15 @@
 
               <label style="margin:10px;">
                 <div class="item item-input" style="background-color: #dcb2a8; opacity: 0.9;">
-                  <input type="password" name="pwd" ng-model="pwd" placeholder="Mot de passe" required>
+                  <input type="password" name="password" ng-model="password" placeholder="Mot de passe" required>
                 </div>
-                <div ng-show="formSignIn.pwd.$invalid && (formSignIn.pwd.$touched || formSignIn.$submitted)">
-                  <span ng-show="formSignIn.pwd.$error.required">Mot de passe indispensable !</span>
+                <div ng-show="formSignIn.password.$invalid && (formSignIn.password.$touched || formSignIn.$submitted)">
+                  <span ng-show="formSignIn.password.$error.required">Mot de passe indispensable !</span>
                 </div>
               </label>
 
               <label style="margin:10px;">
-                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Se connecter" ng-click="submitFormSignIn(formSignIn,email,pwd)">
+                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Se connecter" ng-click="submitFormSignIn(formSignIn,email,password)">
               </label>
 
               <a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signin = false;">Retour</a>

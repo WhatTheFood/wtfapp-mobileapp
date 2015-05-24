@@ -1,7 +1,11 @@
 wtf.controller('rulistctrl', ['$scope', '$sessionStorage', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
 function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  console.info('Accessing list of RU.');
+
+  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) {
+    console.info('Redirecting user to login form.');
+    $state.go('login'); return; }
 
   $ionicLoading.show({
     template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'

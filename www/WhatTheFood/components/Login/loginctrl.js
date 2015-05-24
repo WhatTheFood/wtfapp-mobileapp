@@ -3,21 +3,36 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
 
   if (loginservice.gettoken() !== null && $sessionStorage.userId !== null && $sessionStorage.userId !== undefined) { $state.go('login'); return; }
 
-  $scope.gohome = function(){
+  $scope.gohome = function (){
+    console.info('Redirecting user to list of RU.');
     $state.go('wtf.rulist');
   };
 
-  $scope.submitFormSignUp = function(form, email, pwd, pwd_confirm) {
+  $scope.submitFormSignUp = function (form) {
 
-    if(form.email.$valid && form.pwd.$valid && pwd == pwd_confirm) {
+    var firstname             = form.firstname.$modelValue;
+    var lastname              = form.lastname.$modelValue;
+    var email                 = form.email.$modelValue;
+    var password              = form.password.$modelValue;
+    var password_confirmation = form.password_confirmation.$modelValue;
+
+    if (form.email.$valid && form.password.$valid && password == password_confirmation) {
 
       $ionicLoading.show({
         template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
       });
 
+      var user = {
+        email:     email,
+        firstname: firstname,
+        lastname:  lastname,
+        password:  password
+      };
+
       $scope.signup = false;
-      loginservice.signup(email, pwd).then(
+      loginservice.signup(user).then(
         function (result) {
+          console.info('User is successfully signed up.');
           $ionicLoading.hide();
           $scope.gohome();
         },
@@ -37,20 +52,20 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     }
   };
 
-  $scope.submitFormSignIn = function ( form, email, pwd) {
+  $scope.submitFormSignIn = function (form, email, password) {
 
-    if (form.email.$valid && form.pwd.$valid) {
+    if (form.email.$valid && form.password.$valid) {
 
       $ionicLoading.show({
         template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
       });
 
-      loginservice.signin(email, pwd).then(
-        function(result){
+      loginservice.signin(email, password).then(
+        function (result){
           $ionicLoading.hide();
           $scope.gohome();
         },
-        function(e){
+        function (e){
           $ionicLoading.hide();
           if (e.status === 401) {
             $ionicPopup.alert({
@@ -77,7 +92,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     });
 
     loginservice.loginfb().then(
-      function(res, msg) {
+      function (res, msg) {
         $ionicLoading.hide();
         if (res !== true) {
           $ionicPopup.alert({
@@ -89,7 +104,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
           $state.go("wtf.rulist");
         }
       },
-      function(e) {
+      function (e) {
         $ionicLoading.hide();
         $ionicPopup.alert({
           title: "Erreur lors de la connexion Facebook..."

@@ -25,19 +25,21 @@ function($http, $q, $sessionStorage) {
       return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
     },
 
-    getServerAPILogin: function(user,password) {
+    getServerAPILogin: function(user, password) {
       return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
     },
 
-    signup: function (email, pwd) {
+    signup: function (data) {
       var req = {
         method: 'POST',
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
         data: {
-          email: email,
-          password: pwd,
-          auth_token: utf8_to_b64(email + ":" + pwd)
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          password: data.password,
+          auth_token: utf8_to_b64(data.email + ":" + data.password)
         },
         headers: {"Content-Type": "application/json"}
       };
