@@ -1,9 +1,13 @@
 wtf.controller('lunchthanksctrl', ['$scope', '$sessionStorage', '$state', 'loginservice', 'User',
 
-function($scope, $sessionStorage, $state, loginservice, User) {
+function ($scope, $sessionStorage, $state, loginservice, User) {
 
   /* return to login if not connected */
   if (loginservice.gettoken() === null) { $state.go('login'); return; }
+
+  var execute = function () {
+    User.updatePoints();
+  };
 
   if (!User.storage._id) {
     User.query($sessionStorage.userId).then(function (response) {
@@ -19,8 +23,4 @@ function($scope, $sessionStorage, $state, loginservice, User) {
   } else {
     execute();
   }
-
-  var execute = function () {
-    User.updatePoints();
-  };
 }]);
