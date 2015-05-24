@@ -569,3 +569,17 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
    background: #666;
    margin: 5px;
 }
+
+#lunch-thanks .score { overflow: auto; }
+  #lunch-thanks .score span, #lunch-thanks .score img {
+    float: left;
+  }
+  #lunch-thanks .score img {
+    height: 100px;
+  }
+  #lunch-thanks .score span {
+    font-weight: bold;
+    font-size: 5em;
+    line-height: 100px;
+    color: black;
+  }
