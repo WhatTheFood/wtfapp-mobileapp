@@ -14,7 +14,7 @@ function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $http, r
     {index: 2, title:'On peut y réviser ses partiels', img:'img/clock_red.png'}
   ];
 
-  $scope.sendVote = function(index) {
+  $scope.sendVote = function (index) {
     console.log(index);
 
     if($scope.currentRu == null) return "error";
@@ -26,11 +26,9 @@ function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $http, r
       data: '{"timeSlotIndex": '+ index +'}',
       headers: {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer "+ loginservice.gettoken()
+        "Authorization": "Bearer "+ loginservice.gettoken()
       }
     };
-
-    console.log(req);
 
     $http(req)
     .success(function (data, status, headers, config) {

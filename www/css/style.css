@@ -570,16 +570,42 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
    margin: 5px;
 }
 
-#lunch-thanks .score { overflow: auto; }
-  #lunch-thanks .score span, #lunch-thanks .score img {
+.score { overflow: auto; }
+  .score span, .score img {
     float: left;
   }
-  #lunch-thanks .score img {
-    height: 100px;
+  .score img {
+    height: 50px;
+    margin-right: 10px;
   }
-  #lunch-thanks .score span {
+  .score span {
     font-weight: bold;
-    font-size: 5em;
-    line-height: 100px;
+    font-size: 2em;
+    line-height: 50px;
     color: black;
+  }
+
+#stats {}
+  #stats h2 { text-align: center; }
+  #stats .queue-feedbacks-count,
+  #stats .lunch-feedbacks-count {
+    overflow: auto;
+  }
+  #stats .queue-feedbacks-count img,
+  #stats .lunch-feedbacks-count img {
+    height: 50px;
+    margin-right: 10px;
+  }
+  #stats .queue-feedbacks-count img,
+  #stats .lunch-feedbacks-count img,
+  #stats .queue-feedbacks-count p,
+  #stats .lunch-feedbacks-count p {
+    float: left;
+  }
+  #stats .queue-feedbacks-count p.count,
+  #stats .lunch-feedbacks-count p.count {
+    float: right;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1em;
   }

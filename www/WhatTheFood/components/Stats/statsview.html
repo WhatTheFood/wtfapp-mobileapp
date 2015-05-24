@@ -1,26 +1,27 @@
 <ion-view view-title="Statistiques">
-  <ion-content>
+  <ion-content id="stats" class="padding">
+    <h2>Ma participation</h2>
 
-    <div class="item most-wasted-element" ng-show="user.mostWastedElement">
-      <p>Je laisse principalement du {{user.mostWastedElement}}.</p>
+    <div>
+      <div class="item stats-points">
+        <p class="score">
+          <img src="img/coupe.png">
+          <span>{{user.points || 0}} pts</span>
+        </p>
+      </div>
+
+      <div class="item queue-feedbacks-count">
+        <img src="img/file.png">
+        <p>J'ai informé<br>sur la file d'attente</p>
+        <p class="count">{{user.queueFeedbacksCount || 0}}x</p>
+      </div>
+
+      <div class="item lunch-feedbacks-count">
+        <img src="img/partage.png">
+        <p>J'ai partagé mes repas</p>
+        <p class="count">{{user.lunchFeedbacksCount || 0}}x</p>
+      </div>
     </div>
-
-    <div class="item less-wasted-element" ng-show="user.lessWastedElement">
-      <p>Je ne laisse jamais du {{user.lessWastedElement}}.</p>
-    </div>
-
-    <div class="item stats-points">
-      <p>{{user.points || 0}} points</p>
-    </div>
-
-    <div class="item queue-feedbacks-count">
-      <p>J'ai informé sur la file d'attente <span>{{user.queueFeedbacksCount || 0}}x</span></p>
-    </div>
-
-    <div class="item lunch-feedbacks-count">
-      <p>J'ai partagé mes repas <span>{{user.lunchFeedbacksCount || 0}}x</span></p>
-    </div>
-
   </ion-content>
 </ion-view>
 

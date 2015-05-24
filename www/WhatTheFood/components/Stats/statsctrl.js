@@ -8,7 +8,6 @@ function ($scope, $sessionStorage, $state, loginservice, User) {
   });
 
   $scope.$watch('user', function (user) {
-    console.debug(user);
     if (user !== undefined) {
       render(user);
     }
