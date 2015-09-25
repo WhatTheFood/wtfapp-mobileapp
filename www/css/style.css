@@ -87,6 +87,10 @@ p , h1, h2, h3, h4, h5{
   color: black;
 }
 
+.question-lunch > .small-question {
+  font-size: 0.7em;
+}
+
 .lunch-scale {
   background: -webkit-linear-gradient(left, #13E6A4, #B3D72B, #FB4D26);
   height: 10px;
