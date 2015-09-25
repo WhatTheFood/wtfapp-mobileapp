@@ -6,23 +6,26 @@ We're using git flow, [so check it out](http://jeffkreeftmeijer.com/2010/why-are
 _master_ is for releases tag only
 _develop_ is the main branch
 
-When you work, start a new feature with `git flow feature start <name>`.
-Commit as usual.
-When finished, `git flow feature finish <name>`.
+When you work, start a new feature with `git flow feature start <name>`.  
+Commit as usual.  
+When finished, `git flow feature finish <name>`.  
+
+You can also directly commit to _develop_ for quick modifications that doesn't belong to features.
 
 If you need to make a fix :
 
-`git flow hotfix start <name>`.
-Commit as usual.
-Then `git flow hotfix finish <name>`.
+`git flow hotfix start <name>`.  
+Commit as usual.  
+Then `git flow hotfix finish <name>`.  
 
 Please install gitflow before you start working on this repo!
 
-Release command for repo admins:
-`git flow release start <version (ex:1.0.0)>`
-Commit LAST MINUTE FIXES.
-Bump version number.
-`git flow release finish <version>`
+Release command for repo admins:  
+`git flow release start <version (ex:1.0.0)>`  
+Commit LAST MINUTE FIXES.  
+Bump version number.  
+`git flow release finish <version>`  
+Then push to the server: `git push origin --tags`
 
 # How to compile
 
