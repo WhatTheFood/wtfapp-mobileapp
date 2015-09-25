@@ -48,7 +48,7 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
    */
   $scope.getClockImage = function(queuevalue) {
     if(queuevalue === 0)
-      return 'img/clock_grey.png';
+      return 'img/clock_green.png';
 
     if(queuevalue > 66)
       return clockImages[2];
