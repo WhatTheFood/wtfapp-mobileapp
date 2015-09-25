@@ -2,6 +2,7 @@
 
 Welcome to the repo!
 We're using git flow, [so check it out](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
+Install link is [there](https://github.com/nvie/gitflow/wiki/Installation).
 
 _master_ is for releases tag only
 _develop_ is the main branch
