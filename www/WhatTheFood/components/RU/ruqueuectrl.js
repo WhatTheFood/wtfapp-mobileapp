@@ -2,7 +2,7 @@ wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$statePar
 
 function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
     template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'

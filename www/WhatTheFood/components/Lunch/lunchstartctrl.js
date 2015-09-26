@@ -2,7 +2,7 @@ wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'r
 function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
   /* return to login if not connected */
-  if (loginservice.gettoken() === null) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $scope.entree = 0;
   $scope.plat = 0;

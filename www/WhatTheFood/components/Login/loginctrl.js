@@ -1,14 +1,10 @@
 wtf.controller('loginctrl', ['$scope', '$state', '$http', 'loginservice', '$cordovaOauth', '$sessionStorage', '$ionicLoading', '$ionicPopup',
 function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $ionicLoading, $ionicPopup) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) {
-    console.info('Redirecting user to login page, not logged in.');
-    $state.go('login'); return;
-  }
-  else {
+  if (loginservice.islogged()) {
     console.info('Redirecting user to list of RU, already logged in.');
     $state.go('wtf.rulist');
-
+    return;
   }
 
   $scope.gohome = function (){
