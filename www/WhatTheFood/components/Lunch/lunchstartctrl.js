@@ -41,8 +41,8 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
 
   $scope.next = function(entree, plat, dessert, pain) {
     if(entree === 0 && plat === 0 && dessert === 0 && pain === 0) {
+      rulistservice.feedback = [entree, plat, dessert, pain];
       $state.go('wtf.thanks');
-
     } else {
       rulistservice.feedback = [entree, plat, dessert, pain];
       $state.go('wtf.quizz');
