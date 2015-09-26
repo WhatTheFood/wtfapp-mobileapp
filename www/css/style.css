@@ -89,6 +89,7 @@ p , h1, h2, h3, h4, h5{
 
 .question-lunch > .small-question {
   font-size: 0.7em;
+  padding-top: 6px;
 }
 
 .lunch-scale {
@@ -574,10 +575,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
    margin: 5px;
 }
 
-.score { overflow: auto !important; }
-  .score span, .score img {
-    float: left;
-  }
+.score { margin: auto; width: 160px;}
   .score img {
     height: 50px;
     margin-right: 10px;

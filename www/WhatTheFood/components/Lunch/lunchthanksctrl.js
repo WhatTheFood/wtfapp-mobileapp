@@ -42,15 +42,15 @@ function ($scope, $sessionStorage, $state, loginservice, rulistservice, User) {
     var win = angular.element($window);
 
     var textListGood = [];
-    textListGood[0] = 'Wow ! Bravo pour le zéro gachi, un jour on les gouvernera tous !';
-    textListGood[1] = 'Wow ! Bravo pour le zéro gachi #teamglouton';
-    textListGood[2] = 'Ouh Yeah ! Pas une miette de rab sur le plateau';
-    textListGood[3] = 'Ouh Yeah ! Pas une miette de rab sur le plateau';
+    textListGood[0] = 'Wow ! Bravo pour le zéro gâchis, un jour on les gouvernera tous !';
+    textListGood[1] = 'Wow ! Bravo pour le zéro gâchis #teamglouton';
+    textListGood[2] = 'Oh Yeah ! Pas une miette de rab sur le plateau !';
+    textListGood[3] = 'Oh Yeah ! Pas une miette de rab sur le plateau !';
     textListGood[4] = 'Il ne te reste rien ? Youpi, en route pour la gloire !';
 
     var textListAverage = [];
     textListAverage[0] = 'Eh, il ne te reste pas tant que ça, bravo copain !';
-    textListAverage[1] = 'On me signale un plateau presque vide JE REPETE : un plateau presque vide !';
+    textListAverage[1] = 'On me signale un plateau presque vide JE RÉPETE : un plateau presque vide !';
 
     var textListBad = [];
     textListBad[0] = 'Il te reste beaucoup sur ton plateau, tu as passé un mauvais déjeuner ?';
