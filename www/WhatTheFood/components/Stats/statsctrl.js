@@ -3,7 +3,7 @@ function ($scope, $sessionStorage, $state, loginservice, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  User.query($sessionStorage.userId).then(function (response) {
+  User.query('me').then(function (response) {
     $scope.user = response.data;
   });
 
