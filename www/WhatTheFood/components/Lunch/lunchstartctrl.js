@@ -5,7 +5,7 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
   $scope.defineRestaurants = function () {
