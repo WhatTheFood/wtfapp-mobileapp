@@ -24,7 +24,7 @@
           </ion-option-button>
         </ion-item>
         <div class="rumenu list" ng-if="$first" >
-          <div ng-repeat="category in ru.menu.meal[0].foodcategory | filter: showDishCategory">
+          <div ng-repeat="category in ru.menus[0].meal[0].foodcategory | filter: showDishCategory">
             <div ng-repeat="dish in category.dishes" style="white-space: normal;">
               {{dish.name}}
             </div>
