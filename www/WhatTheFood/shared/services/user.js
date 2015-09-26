@@ -53,7 +53,7 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
           action: 'increase_points',
           reason: action
         },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
@@ -71,7 +71,7 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
         method: 'PUT',
         dataType: 'json',
         data: { preference: item },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()

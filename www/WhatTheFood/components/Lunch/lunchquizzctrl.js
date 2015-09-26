@@ -192,15 +192,14 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     response.menus[0].feedback = [];
 
     /* get thrown values */
-    userId = $sessionStorage.userId;
     if(rulistservice.feedback[0] > -1)
-      $scope.currentEntree && $scope.currentEntree.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[0]});
+      $scope.currentEntree && $scope.currentEntree.feedback.push({'thrown': rulistservice.feedback[0]});
     if(rulistservice.feedback[1] > -1)
-      $scope.currentPlat && $scope.currentPlat.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[1]});
+      $scope.currentPlat && $scope.currentPlat.feedback.push({'thrown': rulistservice.feedback[1]});
     if(rulistservice.feedback[2] > -1)
-      $scope.currentGrillage && $scope.currentGrillade.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[2]});
+      $scope.currentGrillage && $scope.currentGrillade.feedback.push({'thrown': rulistservice.feedback[2]});
     if(rulistservice.feedback[3] > -1)
-      $scope.currentDessert && $scope.currentDessert.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[3]});
+      $scope.currentDessert && $scope.currentDessert.feedback.push({'thrown': rulistservice.feedback[3]});
 
     /* get quizz answers */
     quizz = {};
@@ -264,8 +263,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
      "_id":"54df23b6842142426fdfa003",
      "feedback": [
      {
-     "thrown": 3,
-     "user_id":"54def8a5769859a454e39974"
+     "thrown": 3
      }
      ]
      }

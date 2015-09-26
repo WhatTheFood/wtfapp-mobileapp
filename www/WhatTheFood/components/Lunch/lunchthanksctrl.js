@@ -22,7 +22,7 @@ function ($scope, $sessionStorage, $state, loginservice, rulistservice, User) {
   };
 
   if (!User.storage._id) {
-    User.query($sessionStorage.userId).then(function (response) {
+    User.query('me').then(function (response) {
       $scope.user = response.data;
     });
 
