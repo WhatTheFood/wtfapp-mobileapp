@@ -3,11 +3,12 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
   var factory = {
     storage: {},
 
+    /* Will return ALL users with an avatar */
     getToques: function () {
       var req = {
         method: 'GET',
         dataType: 'json',
-        url: loginservice.getServerAPI() +'/users/toques',
+        url: loginservice.getServerAPI() +'/users/toques?avatar=true',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer "+ loginservice.gettoken()
