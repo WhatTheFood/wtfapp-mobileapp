@@ -11,8 +11,9 @@ function ($scope, $sessionStorage, $state, loginservice, rulistservice, User) {
   $scope.averageDishScore = 0;
 
   if(rulistservice.feedback != undefined && rulistservice.feedback.length > 0) {
-    var sum = rulistservice.feedback.reduce(function(a, b) { return parseInt(a) + parseInt(b); });
-    var avg = sum / rulistservice.feedback.length;
+    var table = rulistservice.feedback.slice(0, 4);
+    var sum = table.reduce(function(a, b) { return parseInt(a) + parseInt(b); });
+    var avg = sum / table.length;
     $scope.averageDishScore = Math.floor(avg);
   }
 
