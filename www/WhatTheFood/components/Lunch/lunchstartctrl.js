@@ -4,6 +4,50 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   /* return to login if not connected */
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
+  $ionicLoading.show({
+    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+  });
+
+  $scope.defineRestaurants = function () {
+    console.log("Define restaurants called");
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        console.log("restaurants success callback");
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        console.log("restaurants error callback");
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+    } else {
+      console.log("restaurants already defined, populating list");
+      $scope.rulist = rulistservice.restaurants;
+      $ionicLoading.hide();
+    }
+  };
+
+  $scope.init = function() {
+    $scope.updateDate();
+    $scope.defineRestaurants();
+  };
+
+  /* populate combobox */
+  $scope.$watch('rulist', function (newValue, oldValue) {
+    if (newValue === undefined && oldValue === undefined) { return; }
+
+    if (newValue !== undefined) {
+      $scope.currentRu = $scope.rulist[0];
+    }
+  });
+
+  $scope.currentRu = undefined;
+
   $scope.entree = 0;
   $scope.plat = 0;
   $scope.dessert = 0;
@@ -44,7 +88,7 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
       $state.go('wtf.thanks');
 
     } else {
-      rulistservice.feedback = [entree, plat, dessert, pain];
+      rulistservice.feedback = [entree, plat, dessert, pain, $scope.currentRu];
       $state.go('wtf.quizz');
     }
   };

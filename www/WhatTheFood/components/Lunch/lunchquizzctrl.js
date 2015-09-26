@@ -6,50 +6,13 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
 
   if (rulistservice.feedback === undefined || rulistservice.feedback.length === 0) { $state.go('wtf.lunch'); return; }
 
-  $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
-  });
-
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      var errorCallback = function (error, data) {
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-    } else {
-      $scope.rulist = rulistservice.restaurants;
-      $ionicLoading.hide();
-    }
-  };
-
-  defineRestaurants();
-
-  /* populate combobox */
-  $scope.$watch('rulist', function (newValue, oldValue) {
-    if (newValue === undefined && oldValue === undefined) { return; }
-
-    if (newValue !== undefined) {
-      $scope.currentRu = $scope.rulist[0];
-    }
-  });
-
-  $scope.currentRu = undefined;
-  $scope.$watch('currentRu', function (newValue, oldValue) {
-    console.log(newValue);
-    $scope.updateDishes();
-  });
-
   /* Update the dish question */
   $scope.updateDishes = function() {
-    if ($scope.currentRu === undefined) { return null; }
+    if (rulistservice.feedback[4] === undefined) { console.log("current ru undefined!"); return null; }
+    else {
+      console.log("current ru defined, updating dishes!");
+      console.log(rulistservice.feedback[4]);
+    }
     // Reset display
     $scope.entree = null;
     $scope.plat = null;
@@ -57,11 +20,11 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     $scope.dessert = null;
 
     // If there is a menu in this restaurant
-    if ($scope.currentRu.menus !== undefined && $scope.currentRu.menus.length > 0) {
+    if (rulistservice.feedback[4].menus !== undefined && rulistservice.feedback[4].menus.length > 0) {
       // Counter
       var counter = 0;
       // Get the food categories
-      var foodcategories = $scope.currentRu.menus[0].meal[0].foodcategory;
+      var foodcategories = rulistservice.feedback[4].menus[0].meal[0].foodcategory;
       // For each food categories, assign the corresponding array of dishes
       for (var i in foodcategories) {
         switch (foodcategories[i].name) {
@@ -135,6 +98,12 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
         $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
       }
     } else {
+      if(rulistservice.feedback[4].menus === undefined) {
+        console.log("Menus are undefined for this RU");
+      }
+      else if(rulistservice.feedback[4].menus.length == 0) {
+        console.log("Menus lenth is zero for this RU");
+      }
       $state.go('wtf.thanks');
     }
   };
@@ -226,7 +195,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
   };
 
   $scope.sendFeedback = function() {
-    response = {'menus': $scope.currentRu.menus};
+    response = {'menus': rulistservice.feedback[4].menus};
     response.menus[0].feedback = [];
 
     /* get thrown values */
@@ -260,7 +229,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     var req = {
       method: 'PUT',
       dataType: "json",
-      url: loginservice.getServerAPI() +'/restaurants/'+ $scope.currentRu.id +'/menu',
+      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/menu',
       data: response,
       headers: {
         "Content-Type" : "application/json",
