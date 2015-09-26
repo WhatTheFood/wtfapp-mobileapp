@@ -2,8 +2,7 @@ wtf.controller('lunchthanksctrl', ['$scope', '$sessionStorage', '$state', 'login
 
 function ($scope, $sessionStorage, $state, loginservice, rulistservice, User) {
 
-  /* return to login if not connected */
-  if (loginservice.gettoken() === null) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $scope.goToStats = function () {
     $state.go('wtf.stats');

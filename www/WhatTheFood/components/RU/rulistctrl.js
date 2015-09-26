@@ -3,9 +3,7 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
 
   console.info('Accessing list of RU.');
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) {
-    console.info('Redirecting user to login form.');
-    $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
     template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'

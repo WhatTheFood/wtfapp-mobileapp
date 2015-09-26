@@ -2,7 +2,7 @@ wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', '
 
 function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   User.query($sessionStorage.userId).then(function (response) {
     $scope.user = response.data;

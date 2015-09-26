@@ -155,6 +155,10 @@ function($http, $q, $sessionStorage) {
       return $storage.facebook;
     },
 
+    islogged: function () {
+      return $storage.token !== null && $sessionStorage.userId !== null && $sessionStorage.userId !== undefined;
+    },
+
     settoken: function (data) {
       $storage.token = data;
     }
