@@ -30,7 +30,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
   // FB init
-  openFB.init({appId: '576723975798203'});
+  openFB.init({appId: '443745395811172'});
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
