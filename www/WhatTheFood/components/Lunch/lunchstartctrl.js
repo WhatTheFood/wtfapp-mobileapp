@@ -9,24 +9,20 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   });
 
   $scope.defineRestaurants = function () {
-    console.log("Define restaurants called");
     // Ensure restaurants are defined as we depend on it
     if (rulistservice.restaurants === undefined) {
       var successCallback = function (data) {
-        console.log("restaurants success callback");
         $scope.rulist = data;
         $ionicLoading.hide();
       };
 
       var errorCallback = function (error, data) {
-        console.log("restaurants error callback");
         $scope.rulist = data;
         $ionicLoading.hide();
       };
 
       rulistservice.defineRUList(successCallback, errorCallback);
     } else {
-      console.log("restaurants already defined, populating list");
       $scope.rulist = rulistservice.restaurants;
       $ionicLoading.hide();
     }

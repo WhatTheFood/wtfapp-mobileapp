@@ -10,7 +10,6 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
   $scope.updateDishes = function() {
     if (rulistservice.feedback[4] === undefined) { console.log("current ru undefined!"); return null; }
     else {
-      console.log("current ru defined, updating dishes!");
       console.log(rulistservice.feedback[4]);
     }
     // Reset display
@@ -98,12 +97,6 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
         $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
       }
     } else {
-      if(rulistservice.feedback[4].menus === undefined) {
-        console.log("Menus are undefined for this RU");
-      }
-      else if(rulistservice.feedback[4].menus.length == 0) {
-        console.log("Menus lenth is zero for this RU");
-      }
       $state.go('wtf.thanks');
     }
   };
