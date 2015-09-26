@@ -30,11 +30,23 @@ Then push to the server: `git push origin --tags`
 
 # How to compile
 
+First, install the dependencies using bower:
+
+```
+$ bower install
+```
+
 When getting the source code from Git, you can compile from Android doing the following :
 
 ```
 $ ionic platform add android
 $ ionic run android
+```
+
+To run on your computer (please use Chrome, there may be issues with other browsers, in particular Firefox)
+
+```
+$ ionic serve
 ```
 
 If you have some issues, try the following :
