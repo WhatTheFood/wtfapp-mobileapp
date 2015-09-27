@@ -1,4 +1,4 @@
-wtf.factory('User', ['loginservice', '$http', function (loginservice, $http) {
+wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginservice, $http, $localStorage) {
 
   var factory = {
     /*Warning, there may be a problem with that:
@@ -7,6 +7,21 @@ wtf.factory('User', ['loginservice', '$http', function (loginservice, $http) {
      In the current code the only queried user is "me", so we should consider using 2 different variables
      */
     storage: {},
+    
+    userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreference : {
+      'vegetarian': false,
+      'vegan': false,
+      'nopork': false,
+      'noveal': false,
+      'nogluten': false,
+      'nopeanut': false,
+      'nonut': false,
+      'noeggs': false,
+      'nomilk': false,
+      'nofish': false,
+      'nocrustacean': false,
+      'nopotato': false
+    },
 
     /* Will return ALL users with an avatar */
     getToques: function () {
@@ -73,11 +88,13 @@ wtf.factory('User', ['loginservice', '$http', function (loginservice, $http) {
     },
 
     updatePreferences: function (item) {
+      factory.userPreferences[item.field_id] = item.checked;
+      $localStorage.userPreferences = factory.userPreferences;
       var req = {
         method: 'PUT',
         dataType: 'json',
-        data: { preference: item },
-        url: loginservice.getServerAPI() +'/users/me',
+        data: { preferences: factory.userPreferences },
+        url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
