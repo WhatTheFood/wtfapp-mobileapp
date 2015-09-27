@@ -7,17 +7,20 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
      In the current code the only queried user is "me", so we should consider using 2 different variables
      */
     storage: {},
-
+    
     userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreference : {
       'vegetarian': false,
       'vegan': false,
       'nopork': false,
       'noveal': false,
       'nogluten': false,
-      'nocrustacean': false,
+      'nopeanut': false,
+      'nonut': false,
       'noeggs': false,
+      'nomilk': false,
       'nofish': false,
-      'nosoya': false
+      'nocrustacean': false,
+      'nopotato': false
     },
 
     /* Will return ALL users with an avatar */
