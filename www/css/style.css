@@ -257,6 +257,24 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
     border-width: 0px;
 }
 
+a.disconnect {
+	font-weight: 800;
+    border-width: 0px;
+    border-color: #eb5d3d;
+    background-color: #fff;
+    color: #eb5d3d;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.activated {
   background: #761818;
 }

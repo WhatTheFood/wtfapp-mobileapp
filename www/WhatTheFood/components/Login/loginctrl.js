@@ -23,7 +23,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     if (form.email.$valid && form.password.$valid && password == password_confirmation) {
 
       $ionicLoading.show({
-        template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+        template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
       });
 
       var user = {
@@ -61,7 +61,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     if (form.email.$valid && form.password.$valid) {
 
       $ionicLoading.show({
-        template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+        template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
       });
 
       loginservice.signin(email, password).then(
@@ -92,7 +92,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
 
   $scope.fblogin = function () {
     $ionicLoading.show({
-      template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+      template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
     });
 
     loginservice.loginfb().then(

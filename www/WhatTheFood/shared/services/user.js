@@ -3,11 +3,12 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
   var factory = {
     storage: {},
 
+    /* Will return ALL users with an avatar */
     getToques: function () {
       var req = {
         method: 'GET',
         dataType: 'json',
-        url: loginservice.getServerAPI() +'/users/toques',
+        url: loginservice.getServerAPI() +'/users/toques?avatar=true',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer "+ loginservice.gettoken()
@@ -53,7 +54,7 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
           action: 'increase_points',
           reason: action
         },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
@@ -71,7 +72,7 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
         method: 'PUT',
         dataType: 'json',
         data: { preference: item },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()

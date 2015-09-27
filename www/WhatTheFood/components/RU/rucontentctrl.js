@@ -5,7 +5,7 @@ function($scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, log
 
   if (rulistservice.restaurants.length > 0) {
     $ionicLoading.show({
-      template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+      template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
     });
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {

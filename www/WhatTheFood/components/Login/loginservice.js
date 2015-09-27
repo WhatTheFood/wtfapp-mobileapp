@@ -38,8 +38,7 @@ function($http, $q, $sessionStorage) {
           firstname: data.firstname,
           lastname: data.lastname,
           email: data.email,
-          password: data.password,
-          auth_token: utf8_to_b64(data.email + ":" + data.password)
+          password: data.password
         },
         headers: {"Content-Type": "application/json"}
       };
@@ -47,7 +46,6 @@ function($http, $q, $sessionStorage) {
       return $http(req)
       .success(function (data, status, headers, config) {
         factory.settoken(data['token']);
-        $storage.userId = data['_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
@@ -56,7 +54,7 @@ function($http, $q, $sessionStorage) {
           return null;
 
         } else {
-          console.error("Error: ", data);
+          console.error("Error: " + JSON.stringify(data) + ", status: " + status);
           return data;
         }
       });
@@ -64,21 +62,21 @@ function($http, $q, $sessionStorage) {
 
     signin: function (email, pwd) {
       var req = {
-        method: 'GET',
-        url: factory.getServerAPI() + '/users/login',
-        headers: {
-          Authorization: "Basic " + utf8_to_b64(email + ":" + pwd)
+        method: 'POST',
+        url: factory.getServerAPI() + '/auth/local',
+        data: {
+          email: email,
+          password: pwd
         }
       };
 
       return $http(req)
       .success(function (data, status, headers, config) {
-        factory.settoken(data['user_token']);
-        $storage.userId = data['user_id'];
+        factory.settoken(data['token']);
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.error("Error: " + data);
+        console.error("Error: " + JSON.stringify(data) + ", status: " + status);
         return data;
       });
     },
@@ -98,7 +96,6 @@ function($http, $q, $sessionStorage) {
         $http(req)
         .success(function (data, status, headers, config) {
           factory.settoken(data['user_token']);
-          $storage.userId = data['user_id'];
           $storage.facebook = true;
           defer.resolve(true, data);
         })
@@ -156,7 +153,7 @@ function($http, $q, $sessionStorage) {
     },
 
     islogged: function () {
-      return $storage.token !== null && $sessionStorage.userId !== null && $sessionStorage.userId !== undefined;
+      return $storage.token !== null;
     },
 
     settoken: function (data) {
