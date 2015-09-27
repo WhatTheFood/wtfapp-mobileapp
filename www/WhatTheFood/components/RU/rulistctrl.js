@@ -67,7 +67,7 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
   };
 
   $scope.showDishCategory = function(category){
-    return category.name == 'Plats' || category.name == 'Grillades';
+    return category.name == 'Plats' || category.name == 'Grillades' || category.name == 'Pizzas';
   };
 
   $scope.goEatAt = function ( ruId ) {

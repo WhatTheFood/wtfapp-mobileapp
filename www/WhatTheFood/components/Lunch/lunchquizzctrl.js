@@ -44,6 +44,8 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
           case "grillades":
           case "grillade":
           case "steak":
+          case "pizza":
+          case "pizzas":
             if (rulistservice.feedback[1]>0) {
               $scope.plat = foodcategories[i].dishes;
               $scope.currentPlat = $scope.plat[0];
