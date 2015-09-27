@@ -567,6 +567,10 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   transform: translateY(-50%);
 }
 
+.slider-pager-page {
+	color: white !important;
+}
+
 .popup h3 {
   color: black;
 }

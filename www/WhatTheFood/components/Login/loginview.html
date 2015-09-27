@@ -2,12 +2,37 @@
   <ion-side-menu-content>
     <ion-nav-view name="menuContent">
       <ion-view view-title="À propos" ng-app>
-        <ion-content style="background-image: url(img/home_bg.png); background-repeat: no-repeat; background-size:cover;" >
-
-          <img src="img/logo_wtf.png" width="100" />
-          <br /><br /><br />
+        <ion-content style="background-color: #eb5d3d;" >
           <div style="text-align: center;">
-            <img src="img/separator.png" height="20" /><br />
+            <img src="img/logo_wtf.png" width="100" style="margin-top: 2%; border: 1px solid rgba(255, 255, 255, .3);" /><br />
+            
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" style="height: 320px; color: white;">
+				<ion-slide>
+					<div class="box">
+						<img src="img/picto_login_1.png" width="198" />
+						<p>L'appli qui te permet de manger en prenant ton temps et ta fourchette.</p>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="box">
+						<img src="img/picto_login_2.png" width="198" />
+						<p>L'appli qui te permet de manger en choisissant ton menu à l'avance... Salade, tomate, oignons ?!</p>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="box">
+						<img src="img/picto_login_3.png" width="198" />
+						<p>L'appli qui te permet de manger en repérant où sont tes amis... pour ne plus manger la tête dans ta purée le jeudi !</p>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="box">
+						<img src="img/picto_login_4.png" width="198" />
+						<p>L'appli qui te permet de manger en te connectant avec ton CROUS pour faire évoluer les menus et manger comme chez Mamie !</p>
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+
 
             <div ng-hide="signup || signin">
               <label style="margin:10px;">
