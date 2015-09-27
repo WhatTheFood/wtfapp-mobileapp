@@ -1,6 +1,6 @@
-wtf.controller('lunchthanksctrl', ['$scope', '$sessionStorage', '$state', 'loginservice', 'rulistservice', 'User',
+wtf.controller('lunchthanksctrl', ['$scope', '$state', 'loginservice', 'rulistservice', 'User',
 
-function ($scope, $sessionStorage, $state, loginservice, rulistservice, User) {
+function ($scope, $state, loginservice, rulistservice, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 

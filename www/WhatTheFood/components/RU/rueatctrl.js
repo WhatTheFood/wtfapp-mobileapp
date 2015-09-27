@@ -1,5 +1,5 @@
-wtf.controller('rueatctrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice',
-function($scope, $sessionStorage, $state, $stateParams, $http, rulistservice, loginservice) {
+wtf.controller('rueatctrl', ['$scope', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice',
+function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 

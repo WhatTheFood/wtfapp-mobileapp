@@ -2,11 +2,11 @@
   <ion-side-menu-content>
     <ion-nav-view name="menuContent">
       <ion-view view-title="À propos" ng-app>
-        <ion-content style="background-color: #eb5d3d;" >
+        <ion-content style="background-color: #eb5d3d;" locking="false">
           <div style="text-align: center;">
             <img src="img/logo_wtf.png" width="100" style="margin-top: 2%; border: 1px solid rgba(255, 255, 255, .3);" /><br />
             
-            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" style="height: 320px; color: white;">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" style="height: 340px; color: white;">
 				<ion-slide>
 					<div class="box">
 						<img src="img/picto_login_1.png" width="198" />
@@ -35,15 +35,15 @@
 
 
             <div ng-hide="signup || signin">
-              <label style="margin:10px;">
+              <label style="margin:8px; display: inline-block">
                 <button class="button facebook button-block button-positive" style="background-color: #37355e; opacity: 0.9;" ng-click="fblogin()">
-                  Connexion avec Facebook
+                  Connexion Facebook
                 </button>
               </label>
 
-              <label style="margin:10px;">
-                <button class="button button-block button-assertive" style="background-color: #dcb2a8; opacity: 0.9;"  ng-click="signin = true;">
-                  Connexion par email
+              <label style="margin:8px; display: inline-block">
+                <button class="button button-block button-assertive" style="border-color: #eb5d3d; background-color: #fff; color: #eb5d3d;"  ng-click="signin = true;">
+                  Connexion email
                 </button>
               </label>
 
@@ -94,7 +94,7 @@
               </label>
 
               <label style="margin:10px;">
-                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Créer mon profil" ng-click="submitFormSignUp(formSignUp)">
+                <input type="submit" class="button button-block" style="background-color: #fff; color: #eb5d3d; opacity: 0.9; border: 0px;" value="Créer mon profil" ng-click="submitFormSignUp(formSignUp)">
               </label>
 
               <a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signup = false;">Retour</a>
@@ -124,7 +124,7 @@
               </label>
 
               <label style="margin:10px;">
-                <input type="submit" class="button button-block" style="background-color: #fff955; opacity: 0.9; color: black; border: 0px;" value="Se connecter" ng-click="submitFormSignIn(formSignIn,email,password)">
+                <input type="submit" class="button button-block" style="background-color: #fff; color: #eb5d3d; opacity: 0.9; border: 0px;" value="Se connecter" ng-click="submitFormSignIn(formSignIn,email,password)">
               </label>
 
               <a class="item" style="background: none; border: 0px; opacity: 0.9; text-decoration: underline; color: white;" ng-click="signin = false;">Retour</a>

@@ -1,6 +1,11 @@
-wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function (loginservice, $http, $q, $sessionStorage) {
+wtf.factory('User', ['loginservice', '$http', function (loginservice, $http) {
 
   var factory = {
+    /*Warning, there may be a problem with that:
+     it is used both to store "toques", which is a list of users
+     and a user query response, directly at the root.
+     In the current code the only queried user is "me", so we should consider using 2 different variables
+     */
     storage: {},
 
     /* Will return ALL users with an avatar */

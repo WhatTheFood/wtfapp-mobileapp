@@ -1,5 +1,5 @@
-wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
+function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
 
   /* return to login if not connected */
   if (!loginservice.islogged()) { $state.go('login'); return; }
@@ -80,6 +80,12 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   };
 
   $scope.next = function(entree, plat, dessert, pain) {
+    if($scope.currentRu === undefined) {
+      $ionicPopup.alert({
+        title: 'Sélectionnez votre RU !'
+      });
+      return;
+    }
     if(entree === 0 && plat === 0 && dessert === 0 && pain === 0) {
       rulistservice.feedback = [entree, plat, dessert, pain];
       $state.go('wtf.thanks');

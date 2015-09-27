@@ -1,7 +1,7 @@
 <ion-view view-title="Mon profil">
   <ion-content>
     <div class="item" id="profile">
-      <img ng-src="{{user.avatar || 'img/picto_profil.png'}}" alt="photo" align="left" />
+      <img ng-src="{{user.avatar || 'img/picto_noavatar.png'}}" alt="photo" align="left" />
       <p ng-show="user.first_name && user.last_name">
         <span class="firstname" ng-show="user.first_name">{{user.first_name}}</span>
         <span class="lastname" ng-show="user.last_name">{{user.last_name}}</span>

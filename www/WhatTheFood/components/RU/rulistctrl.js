@@ -1,5 +1,5 @@
-wtf.controller('rulistctrl', ['$scope', '$sessionStorage', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
-function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
+function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
   console.info('Accessing list of RU.');
 

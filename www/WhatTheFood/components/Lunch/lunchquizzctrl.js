@@ -1,6 +1,6 @@
-wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$sessionStorage', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
+wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
 
-function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
+function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
   /* return to login if not connected */
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -19,12 +19,13 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     $scope.pain = null;
 
     // If there is a menu in this restaurant
-    if (rulistservice.feedback[4].menus !== undefined && rulistservice.feedback[4].menus.length > 0) {
+    if ( rulistservice.feedback[4].menus !== undefined && rulistservice.feedback[4].menus.length > 0 ) {
       // Counter
       var counter = 0;
       // Get the food categories
       var foodcategories = rulistservice.feedback[4].menus[0].meal[0].foodcategory;
       // For each food categories, assign the corresponding array of dishes
+      // TODO : refactoring : nouvel attribut type (starter/main/dessert/) vs le nom de la catégorie
       for (var i in foodcategories) {
         switch (foodcategories[i].name.toLowerCase()) {
           case "entrées":
@@ -118,7 +119,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
   questions = {
     'food': [
       {
-        'question': 'Serais-tu prèt à reprendre ce plat la prochaine fois ?',
+        'question': 'Serais-tu pret à reprendre ce plat la prochaine fois ?',
         'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
         'target': 'enjoyed_my_meal',
         'value': null
@@ -248,7 +249,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     var req = {
       method: 'PUT',
       dataType: "json",
-      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/menu',
+      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/feedback',
       data: response,
       headers: {
         "Content-Type" : "application/json",

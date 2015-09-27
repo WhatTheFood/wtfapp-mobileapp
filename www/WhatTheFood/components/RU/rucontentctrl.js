@@ -1,5 +1,5 @@
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$sessionStorage', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-function($scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
+function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
