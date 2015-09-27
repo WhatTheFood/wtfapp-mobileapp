@@ -1,6 +1,7 @@
 wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
 function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
+
   console.info('Accessing list of RU.');
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
@@ -73,4 +74,11 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
   $scope.goEatAt = function ( ruId ) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
+
+  // Caption
+  $scope.demoCaption2 = "This is demoing the second classic transparency walk-through.\nit has a caption, " +
+      "regular marking of DOM element,\n 'arrow' to DOM element as icon\n and a button to close the walkthrough";
+  $scope.demoActive2 = true;
+  console.log("HELL!")
+
 }]);

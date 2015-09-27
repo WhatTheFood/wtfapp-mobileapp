@@ -12,6 +12,6 @@
     "ngCordova": "~0.1.14-alpha",
     "angular-cookies": "~1.3.15",
     "openfb": "*",
-    "angular-tour": "~0.2.4"
+    "ng-walkthrough": "~0.2.4"
   }
 }

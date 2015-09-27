@@ -5,7 +5,7 @@
       <div class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
         <input type="search" placeholder="Rechercher un RU" ng-model="data.searchQuery">
-        <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+        <i id="fake-focus" class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
       </div>
     </div>
 
@@ -40,5 +40,16 @@
       </ion-item>
     </ion-list>
 
+    <walkthrough
+            id="Demo2"
+            walkthrough-type="transparency"
+            focus-element-id="fake-focus"
+            icon="arrow"
+            main-caption="{{demoCaption2}}"
+            icon-padding-left="0"
+            icon-padding-top="0"
+            is-active="demoActive2"
+            use-button="false">
+    </walkthrough>
   </ion-content>
 </ion-view>
