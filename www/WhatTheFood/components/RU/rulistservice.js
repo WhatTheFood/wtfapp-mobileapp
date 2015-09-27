@@ -50,7 +50,7 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
 
           if (result.data.length > 0) {
             var data2 = result.data.map(function(val){
-              val.distance = Math.round(val.distance * 6378.137);
+              val.distance = Math.round(val.distance);
               return val;
             });
 
