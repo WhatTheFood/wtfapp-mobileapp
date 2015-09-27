@@ -36,22 +36,20 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
   $scope.groups = [
     {
-      'name': 'Mes habitudes alimentaires',
+      'name': 'Mes préférences alimentaires',
       'items': [
         {'name': 'Végétarien',  'checked': false},
         {'name': 'Végétalien',  'checked': false},
-        {'name': 'Pas de porc', 'checked': false},
-        {'name': 'Pas de veau', 'checked': false}
-      ]
-    },
-    {
-      'name': 'Mes allergies',
-      'items': [
-        {'name': 'Gluten',    'checked': false},
-        {'name': 'Crustacés', 'checked': false},
-        {'name': 'Œufs',      'checked': false},
-        {'name': 'Poisson',   'checked': false},
-        {'name': 'Soja',      'checked': false}
+        {'name': 'Sans porc', 'checked': false},
+        {'name': 'Sans veau',  'checked': false},
+        {'name': 'Sans gluten',  'checked': false},
+        {'name': 'Sans arachide', 'checked': false},
+        {'name': 'Sans fruits à coque', 'checked': false},
+        {'name': 'Sans oeufs',  'checked': false},
+        {'name': 'Sans lait',  'checked': false},
+        {'name': 'Sans poissons', 'checked': false},
+        {'name': 'Sans crustacés', 'checked': false},
+        {'name': 'Sans patates :)', 'checked': false}
       ]
     }
   ];
