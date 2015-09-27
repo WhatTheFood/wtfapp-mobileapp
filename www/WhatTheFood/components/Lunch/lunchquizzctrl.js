@@ -249,7 +249,7 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
     var req = {
       method: 'PUT',
       dataType: "json",
-      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/menu',
+      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/feedback',
       data: response,
       headers: {
         "Content-Type" : "application/json",
