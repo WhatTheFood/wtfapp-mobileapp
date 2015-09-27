@@ -34,8 +34,8 @@ function($http, $q, $sessionStorage, $localStorage) {
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
         data: {
-          firstname: data.firstname,
-          lastname: data.lastname,
+          first_name: data.firstname,
+          last_name: data.lastname,
           email: data.email,
           password: data.password
         },
