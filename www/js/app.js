@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage'])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage','angular-tour'])
 
 .run(['$ionicPlatform', function($ionicPlatform) {
   $ionicPlatform.ready(function () {
