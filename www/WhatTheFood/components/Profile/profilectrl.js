@@ -38,20 +38,20 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
     {
       'name': 'Mes habitudes alimentaires',
       'items': [
-        {'name': 'Végétarien',  'checked': false},
-        {'name': 'Végétalien',  'checked': false},
-        {'name': 'Pas de porc', 'checked': false},
-        {'name': 'Pas de veau', 'checked': false}
+        {'name': 'Végétarien',  'checked': false, 'field_id' : 'vegetarian'},
+        {'name': 'Végétalien',  'checked': false, 'field_id' : 'vegan'},
+        {'name': 'Pas de porc', 'checked': false, 'field_id' : 'nopork'},
+        {'name': 'Pas de veau', 'checked': false, 'field_id' : 'noveal'}
       ]
     },
     {
       'name': 'Mes allergies',
       'items': [
-        {'name': 'Gluten',    'checked': false},
-        {'name': 'Crustacés', 'checked': false},
-        {'name': 'Œufs',      'checked': false},
-        {'name': 'Poisson',   'checked': false},
-        {'name': 'Soja',      'checked': false}
+        {'name': 'Gluten',    'checked': false, 'field_id' : 'nogluten'},
+        {'name': 'Crustacés', 'checked': false, 'field_id' : 'nocrustacean'},
+        {'name': 'Œufs',      'checked': false, 'field_id' : 'noeggs'},
+        {'name': 'Poisson',   'checked': false, 'field_id' : 'nofish'},
+        {'name': 'Soja',      'checked': false, 'field_id' : 'nosoya'}
       ]
     }
   ];
