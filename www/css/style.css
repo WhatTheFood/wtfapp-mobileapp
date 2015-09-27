@@ -15,6 +15,11 @@ p , h1, h2, h3, h4, h5{
     width: 100%;
 }
 
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before, .checkbox input {
+  background: #eb5d3d !important;
+  border-color: #eb5d3d !important;
+}
+
 .search-wrapper-light {
     border-bottom: 2px solid rgba(255,255,255,0.5);
     background: none;
@@ -438,6 +443,8 @@ input[placeholder] {
   padding-top: 0;
   padding-bottom: 0;
   transition: 0.09s all linear;
+  background-color: #eb5d3d;
+  color: white;
 }
 .list .item.item-accordion.ng-hide {
   line-height: 0px;

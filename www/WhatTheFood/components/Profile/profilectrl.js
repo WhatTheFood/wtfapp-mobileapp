@@ -36,22 +36,20 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
   $scope.groups = [
     {
-      'name': 'Mes habitudes alimentaires',
+      'name': 'Mes préférences alimentaires',
       'items': [
         {'name': 'Végétarien',  'checked': false, 'field_id' : 'vegetarian'},
         {'name': 'Végétalien',  'checked': false, 'field_id' : 'vegan'},
-        {'name': 'Pas de porc', 'checked': false, 'field_id' : 'nopork'},
-        {'name': 'Pas de veau', 'checked': false, 'field_id' : 'noveal'}
-      ]
-    },
-    {
-      'name': 'Mes allergies',
-      'items': [
-        {'name': 'Gluten',    'checked': false, 'field_id' : 'nogluten'},
-        {'name': 'Crustacés', 'checked': false, 'field_id' : 'nocrustacean'},
-        {'name': 'Œufs',      'checked': false, 'field_id' : 'noeggs'},
-        {'name': 'Poisson',   'checked': false, 'field_id' : 'nofish'},
-        {'name': 'Soja',      'checked': false, 'field_id' : 'nosoya'}
+        {'name': 'Sans porc', 'checked': false, 'field_id' : 'nopork'},
+        {'name': 'Sans veau',  'checked': false, 'field_id' : 'noveal'},
+        {'name': 'Sans gluten',  'checked': false, 'field_id' : 'nogluten'},
+        {'name': 'Sans arachide', 'checked': false, 'field_id' : 'nopeanut'},
+        {'name': 'Sans fruits à coque', 'checked': false, 'field_id' : 'nonut'},
+        {'name': 'Sans oeufs',  'checked': false, 'field_id' : 'noeggs'},
+        {'name': 'Sans lait',  'checked': false, 'field_id' : 'nomilk'},
+        {'name': 'Sans poissons', 'checked': false, 'field_id' : 'nofish'},
+        {'name': 'Sans crustacés', 'checked': false, 'field_id' : 'nocrustacean'},
+        {'name': 'Sans patates :)', 'checked': false, 'field_id' : 'nopotato'}
       ]
     }
   ];
