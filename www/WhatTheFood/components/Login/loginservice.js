@@ -1,10 +1,9 @@
-wtf.factory('loginservice', ['$http', '$q', '$sessionStorage',
-function($http, $q, $sessionStorage) {
+wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', '$localStorage',
+function($http, $q, $sessionStorage, $localStorage) {
 
   var $storage = $sessionStorage.$default({
     facebook: false,
-    token: null,
-    userId: null
+    token: null
   });
 
   var serverAPIHTTPS = true;
@@ -128,6 +127,12 @@ function($http, $q, $sessionStorage) {
       );
 
       return defer.promise;
+    },
+
+    logout: function () {
+      factory.settoken(null);
+      $storage.facebook = false;
+      $localStorage.clear();
     },
 
     getfriendlist: function() {

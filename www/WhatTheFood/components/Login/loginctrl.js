@@ -1,6 +1,9 @@
-wtf.controller('loginctrl', ['$scope', '$state', '$http', 'loginservice', '$cordovaOauth', '$sessionStorage', '$ionicLoading', '$ionicPopup',
-function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $ionicLoading, $ionicPopup) {
+wtf.controller('loginctrl', ['$scope', '$state', '$stateParams', '$http', 'loginservice', '$cordovaOauth', '$ionicLoading', '$ionicPopup',
+function ($scope, $state, $stateParams, $http, loginservice, $cordovaOauth, $ionicLoading, $ionicPopup) {
 
+  if($stateParams.logout !== undefined && $stateParams.logout) {
+    loginservice.logout();
+  }
   if (loginservice.islogged()) {
     console.info('Redirecting user to list of RU, already logged in.');
     $state.go('wtf.rulist');
