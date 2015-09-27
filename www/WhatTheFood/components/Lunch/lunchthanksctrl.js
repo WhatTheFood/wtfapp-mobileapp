@@ -1,10 +1,13 @@
-wtf.controller('lunchthanksctrl', ['$scope', '$state', 'loginservice', 'rulistservice', 'User',
+wtf.controller('lunchthanksctrl', ['$scope', '$state', '$ionicHistory', 'loginservice', 'rulistservice', 'User',
 
-function ($scope, $state, loginservice, rulistservice, User) {
+function ($scope, $state, $ionicHistory, loginservice, rulistservice, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $scope.goToStats = function () {
+    $ionicHistory.nextViewOptions({
+      historyRoot: true
+    });
     $state.go('wtf.stats');
   };
 

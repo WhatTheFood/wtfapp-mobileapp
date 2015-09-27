@@ -1,11 +1,9 @@
-wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
+wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$stateParams', '$ionicHistory', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
 
-function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
+function ($http, $scope, $sce, $state, $stateParams, $ionicHistory, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
   /* return to login if not connected */
   if (!loginservice.islogged()) { $state.go('login'); return; }
-
-  if (rulistservice.feedback === undefined || rulistservice.feedback.length === 0) { $state.go('wtf.lunch'); return; }
-
+  
   /* Update the dish question */
   $scope.updateDishes = function() {
     if (rulistservice.feedback[4] === undefined) { console.log("current ru undefined!"); return null; }
@@ -112,6 +110,9 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
       }
     } else {
       $ionicPopup.alert({title: "Désolé, ce restaurant n'est pas ouvert aujourd'hui :("});
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
       $state.go('wtf.lunch');
       return;
     }
@@ -263,6 +264,10 @@ function ($http, $scope, $sce, $state, $stateParams, rulistservice, loginservice
     .success(function (data, status, headers, config) {
       // this callback will be called asynchronously
       // when the response is available
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
+
       $state.go('wtf.thanks');
       return data;
     })
