@@ -1,6 +1,6 @@
-wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
+wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
 
-function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDelegate, User) {
+function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 

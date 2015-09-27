@@ -1,6 +1,6 @@
-wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
+wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
 
-function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
+function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 

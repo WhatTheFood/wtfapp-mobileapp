@@ -1,5 +1,5 @@
-wtf.controller('statsctrl', ['$scope', '$sessionStorage', '$state', 'loginservice', 'User',
-function ($scope, $sessionStorage, $state, loginservice, User) {
+wtf.controller('statsctrl', ['$scope', '$state', 'loginservice', 'User',
+function ($scope, $state, loginservice, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 

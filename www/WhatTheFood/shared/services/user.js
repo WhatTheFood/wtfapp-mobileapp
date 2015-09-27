@@ -1,4 +1,4 @@
-wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function (loginservice, $http, $q, $sessionStorage) {
+wtf.factory('User', ['loginservice', '$http', function (loginservice, $http) {
 
   var factory = {
     storage: {},
