@@ -12,3 +12,4 @@ plugins/
 node_modules/
 
 package.json
+*.iml
