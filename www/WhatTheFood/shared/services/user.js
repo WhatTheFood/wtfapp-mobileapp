@@ -66,15 +66,14 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       }
     },
 
-    updatePoints: function (action) {
+    updatePoints: function () {
       var req = {
-        method: 'PUT',
+        method: 'POST',
         dataType: 'json',
         data: {
-          action: 'increase_points',
-          reason: action
+          action: 'increase_points'
         },
-        url: loginservice.getServerAPI() +'/users/me',
+        url: loginservice.getServerAPI() +'/users/me/action',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
