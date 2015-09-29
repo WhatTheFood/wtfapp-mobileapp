@@ -11,7 +11,7 @@ function($http, $q, $sessionStorage, $localStorage) {
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad
-  //var serverAPI = "192.168.0.23:5000/api"; // Home
+  //var serverAPI = "localhost:9000/api"; // Home
   //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
 
   function utf8_to_b64(str) {
@@ -87,8 +87,8 @@ function($http, $q, $sessionStorage, $localStorage) {
         var req = {
           method: 'PUT',
           dataType: "json",
-          url: factory.getServerAPI() +'/users/login/facebook',
-          data: '{"email":"'+ user.email +'","token":"'+ response.authResponse.token +'"}',
+          url: factory.getServerAPI() +'/auth/facebook/',
+          data: '{"email":"'+ user.email +'","token":"'+ response.authResponse.accessToken +'"}',
           headers: { "Content-Type" : "application/json" }
         };
 
@@ -108,22 +108,27 @@ function($http, $q, $sessionStorage, $localStorage) {
 
       var facebookLoginHandler = function (response) {
         if (response.status === 'connected') {
-          openFB.api({path: '/me',
-                     success: function(user) {
-                       return facebookApiRequestSuccessHandler(response, user);
-                     },
-                     error: function() {
-                       defer.reject(false, 'Impossible de récupérer l\'email');
-                     }
+
+          openFB.api({
+            path: '/v2.4/me',
+            params: {
+              fields: ['id','first_name','last_name','email']
+            },
+            success: function(user) {
+              return facebookApiRequestSuccessHandler(response, user);
+            },
+            error: function(error) {
+              defer.reject(false, 'Impossible de récupérer l\'email');
+            }
           });
         } else {
-          alert('Login Facebook impossible...');
+          defer.reject(false, 'Login Facebook impossible...');
         }
       };
 
       openFB.login(
         function(response) { return facebookLoginHandler(response); },
-        {scope: 'email,user_friends'}
+        {scope: 'public_profile,email,user_friends', return_scopes: true}
       );
 
       return defer.promise;
