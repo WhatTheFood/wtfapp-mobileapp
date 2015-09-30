@@ -1,14 +1,13 @@
-wtf.controller('rulistctrl', ['$scope', '$sessionStorage', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
-function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
+function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
+
 
   console.info('Accessing list of RU.');
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) {
-    console.info('Redirecting user to login form.');
-    $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
   var defineRestaurants = function () {
@@ -48,7 +47,7 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
    */
   $scope.getClockImage = function(queuevalue) {
     if(queuevalue === 0)
-      return 'img/clock_grey.png';
+      return 'img/clock_green.png';
 
     if(queuevalue > 66)
       return clockImages[2];
@@ -69,10 +68,11 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
   };
 
   $scope.showDishCategory = function(category){
-    return category.name == 'Plats' || category.name == 'Grillades';
+    return category.name == 'Plats' || category.name == 'Grillades' || category.name == 'Pizzas';
   };
 
   $scope.goEatAt = function ( ruId ) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
+
 }]);

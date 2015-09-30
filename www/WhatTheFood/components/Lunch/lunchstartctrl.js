@@ -1,8 +1,48 @@
-wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
+function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
 
   /* return to login if not connected */
-  if (loginservice.gettoken() === null) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
+
+  $ionicLoading.show({
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
+  });
+
+  $scope.defineRestaurants = function () {
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+    } else {
+      $scope.rulist = rulistservice.restaurants;
+      $ionicLoading.hide();
+    }
+  };
+
+  $scope.init = function() {
+    $scope.updateDate();
+    $scope.defineRestaurants();
+  };
+
+  /* populate combobox */
+  $scope.$watch('rulist', function (newValue, oldValue) {
+    if (newValue === undefined && oldValue === undefined) { return; }
+
+    if (newValue !== undefined) {
+      $scope.currentRu = $scope.rulist[0];
+    }
+  });
+
+  $scope.currentRu = undefined;
 
   $scope.entree = 0;
   $scope.plat = 0;
@@ -40,11 +80,17 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   };
 
   $scope.next = function(entree, plat, dessert, pain) {
+    if($scope.currentRu === undefined) {
+      $ionicPopup.alert({
+        title: 'Sélectionnez votre RU !'
+      });
+      return;
+    }
     if(entree === 0 && plat === 0 && dessert === 0 && pain === 0) {
-      $state.go('wtf.thanks');
-
-    } else {
       rulistservice.feedback = [entree, plat, dessert, pain];
+      $state.go('wtf.thanks');
+    } else {
+      rulistservice.feedback = [entree, plat, dessert, pain, $scope.currentRu];
       $state.go('wtf.quizz');
     }
   };

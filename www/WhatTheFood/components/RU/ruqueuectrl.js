@@ -1,11 +1,11 @@
-wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
+wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
 
-function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
+function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
   var defineRestaurants = function () {

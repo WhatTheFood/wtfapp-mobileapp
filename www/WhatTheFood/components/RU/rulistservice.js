@@ -50,7 +50,7 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
 
           if (result.data.length > 0) {
             var data2 = result.data.map(function(val){
-              val.distance = Math.round(val.distance * 6378.137);
+              val.distance = Math.round(val.distance);
               return val;
             });
 
@@ -80,8 +80,8 @@ function ($cordovaGeolocation, $http, $localStorage, $q, loginservice) {
         // when the response is available
         factory.storage.restaurants = data.map(function(restaurant){
           // Force the date to a date where there is a menu (no menu on week-ends)
-          var now = new Date(Date.parse("2015-03-30T00:00:00.000Z")); // DEBUG HANDY!
-          //var now = new Date();
+          // var now = new Date(Date.parse("2015-03-30T00:00:00.000Z")); // DEBUG HANDY!
+          var now = new Date();
           var menus = restaurant.menus.filter(function(menu) {
             var menuDate = new Date(Date.parse(menu.date));
             return (now.getDate() == menuDate.getDate()

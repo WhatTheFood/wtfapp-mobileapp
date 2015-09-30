@@ -1,10 +1,10 @@
-wtf.controller('profilectrl', ['$scope', '$sessionStorage', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
+wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
 
-function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDelegate, User) {
+function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  User.query($sessionStorage.userId).then(function (response) {
+  User.query('me').then(function (response) {
     $scope.user = response.data;
   });
 
@@ -36,22 +36,20 @@ function($scope, $sessionStorage, $state, $http, loginservice, $ionicScrollDeleg
 
   $scope.groups = [
     {
-      'name': 'Mes habitudes alimentaires',
+      'name': 'Mes préférences alimentaires',
       'items': [
-        {'name': 'Végétarien',  'checked': false},
-        {'name': 'Végétalien',  'checked': false},
-        {'name': 'Pas de porc', 'checked': false},
-        {'name': 'Pas de veau', 'checked': false}
-      ]
-    },
-    {
-      'name': 'Mes allergies',
-      'items': [
-        {'name': 'Gluten',    'checked': false},
-        {'name': 'Crustacés', 'checked': false},
-        {'name': 'Œufs',      'checked': false},
-        {'name': 'Poisson',   'checked': false},
-        {'name': 'Soja',      'checked': false}
+        {'name': 'Végétarien',  'checked': false, 'field_id' : 'vegetarian'},
+        {'name': 'Végétalien',  'checked': false, 'field_id' : 'vegan'},
+        {'name': 'Sans porc', 'checked': false, 'field_id' : 'nopork'},
+        {'name': 'Sans veau',  'checked': false, 'field_id' : 'noveal'},
+        {'name': 'Sans gluten',  'checked': false, 'field_id' : 'nogluten'},
+        {'name': 'Sans arachide', 'checked': false, 'field_id' : 'nopeanut'},
+        {'name': 'Sans fruits à coque', 'checked': false, 'field_id' : 'nonut'},
+        {'name': 'Sans oeufs',  'checked': false, 'field_id' : 'noeggs'},
+        {'name': 'Sans lait',  'checked': false, 'field_id' : 'nomilk'},
+        {'name': 'Sans poissons', 'checked': false, 'field_id' : 'nofish'},
+        {'name': 'Sans crustacés', 'checked': false, 'field_id' : 'nocrustacean'},
+        {'name': 'Sans patates :)', 'checked': false, 'field_id' : 'nopotato'}
       ]
     }
   ];

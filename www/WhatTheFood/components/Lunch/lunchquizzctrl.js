@@ -1,74 +1,35 @@
-wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$sessionStorage', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
+wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$stateParams', '$ionicHistory', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
 
-function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+function ($http, $scope, $sce, $state, $stateParams, $ionicHistory, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
   /* return to login if not connected */
-  if (loginservice.gettoken() === null) { $state.go('login'); return; }
-
-  if (rulistservice.feedback === undefined || rulistservice.feedback.length === 0) { $state.go('wtf.lunch'); return; }
-
-  $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
-  });
-
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      var errorCallback = function (error, data) {
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-    } else {
-      $scope.rulist = rulistservice.restaurants;
-      $ionicLoading.hide();
-    }
-  };
-
-  defineRestaurants();
-
-  /* populate combobox */
-  $scope.$watch('rulist', function (newValue, oldValue) {
-    if (newValue === undefined && oldValue === undefined) { return; }
-
-    if (newValue !== undefined) {
-      $scope.currentRu = $scope.rulist[0];
-    }
-  });
-
-  $scope.currentRu = undefined;
-  $scope.$watch('currentRu', function (newValue, oldValue) {
-    console.log(newValue);
-    $scope.updateDishes();
-  });
-
+  if (!loginservice.islogged()) { $state.go('login'); return; }
+  
   /* Update the dish question */
   $scope.updateDishes = function() {
-    if ($scope.currentRu === undefined) { return null; }
+    if (rulistservice.feedback[4] === undefined) { console.log("current ru undefined!"); return null; }
+    else {
+      console.log(rulistservice.feedback[4]);
+    }
     // Reset display
     $scope.entree = null;
     $scope.plat = null;
-    $scope.grillade = null;
     $scope.dessert = null;
+    $scope.pain = null;
 
     // If there is a menu in this restaurant
-    if ($scope.currentRu.menus !== undefined && $scope.currentRu.menus.length > 0) {
+    if ( rulistservice.feedback[4].menus !== undefined && rulistservice.feedback[4].menus.length > 0 ) {
       // Counter
       var counter = 0;
       // Get the food categories
-      var foodcategories = $scope.currentRu.menus[0].meal[0].foodcategory;
+      var foodcategories = rulistservice.feedback[4].menus[0].meal[0].foodcategory;
       // For each food categories, assign the corresponding array of dishes
+      // TODO : refactoring : nouvel attribut type (starter/main/dessert/) vs le nom de la catégorie
       for (var i in foodcategories) {
-        switch (foodcategories[i].name) {
-          case "Entrées":
-          case "Entrée":
-          case "ENTREES":
-          case "ENTREE":
+        switch (foodcategories[i].name.toLowerCase()) {
+          case "entrées":
+          case "entrée":
+          case "entrees":
+          case "entree":
             if (rulistservice.feedback[0]>0) {
               $scope.entree = foodcategories[i].dishes;
               $scope.currentEntree = $scope.entree[0];
@@ -76,10 +37,13 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
               counter++;
             }
             break;
-          case "Plats":
-          case "Plat":
-          case "PLATS":
-          case "PLAT":
+          case "plats":
+          case "plat":
+          case "grillades":
+          case "grillade":
+          case "steak":
+          case "pizza":
+          case "pizzas":
             if (rulistservice.feedback[1]>0) {
               $scope.plat = foodcategories[i].dishes;
               $scope.currentPlat = $scope.plat[0];
@@ -87,21 +51,9 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
               counter++;
             }
             break;
-          case "Grillades":
-          case "Grillade":
-          case "GRILLADES":
-          case "GRILLADE":
-            if (rulistservice.feedback[1]>0) {
-              $scope.grillade = foodcategories[i].dishes;
-              $scope.currentGrillade = $scope.grillade[0];
-              $scope.currentGrillade.feedback = [];
-              counter++;
-            }
-            break;
-          case "Desserts":
-          case "Dessert":
-          case "DESSERTS":
-          case "DESSERT":
+          case "desserts":
+          case "dessert":
+          case "glace":
             if (rulistservice.feedback[2]>0) {
               $scope.dessert = foodcategories[i].dishes;
               $scope.currentDessert = $scope.dessert[0];
@@ -113,18 +65,40 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
         }
       }
 
+      /* special case : bread */
+      if (rulistservice.feedback[3]>0) {
+        $scope.pain = foodcategories[i].dishes;
+        $scope.currentPain = $scope.pain[0];
+        $scope.currentPain.feedback = [];
+        counter++;
+      }
+
       /*
-       * Gâché 1 plat : 1 question bonus aléatoire nourriture
-       * Gâché 2 plats : 1 question bonus aléatoire nourriture et 1 contexte
-       * Gâché 3 ou 4 plats : 2 questions bonus aléatoires nourriture et 1 contexte
+       * Gâché 1 plat : 1 question aléatoire nourriture
+       * Gâché 2 plats : 1 question aléatoire nourriture et 1 contexte
+       * Gâché 3 ou 4 plats : 2 questions aléatoires nourriture et 1 contexte
+       * Pain -> contexte uniquement
+       * Préparation du plat -> uniquement si reste plat
+       * Ru convivial -> une seule fois
+       *
+       * ルールだよ！ Those are the ruuuules!
        */
       $scope.questions = [];
       if (counter === 1) {
-        $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
+        /* 1 seul gaché */
+        if(rulistservice.feedback[3]>0) {
+          /* mais c'est du pain */
+          $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
+        } else {
+          /* pour le reste */
+          $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
+        }
       } else if (counter === 2) {
+        /* 2 plats gachés */
         $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
         $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
       } else if (counter >= 3) {
+        /* 3 plats ou plus gachés */
         rand1 = (Math.random() * questions['food'].length | 0);
         rand2 = rand1;
         while (rand1 === rand2) {
@@ -135,7 +109,12 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
         $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
       }
     } else {
-      $state.go('wtf.thanks');
+      $ionicPopup.alert({title: "Désolé, ce restaurant n'est pas ouvert aujourd'hui :("});
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
+      $state.go('wtf.lunch');
+      return;
     }
   };
 
@@ -143,15 +122,9 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
   questions = {
     'food': [
       {
-        'question': 'Serais-tu prèt à reprendre ce plat la prochaine fois ?',
+        'question': 'Serais-tu pret à reprendre ce plat la prochaine fois ?',
         'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
         'target': 'enjoyed_my_meal',
-        'value': null
-      },
-      {
-        'question': 'Comment était la préparation de ce plat ?',
-        'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
-        'target': 'cooking',
         'value': null
       },
       {
@@ -186,7 +159,27 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
         'target': 'convivial_restaurant',
         'value': null
       }
-    ]
+    ],
+    'specific': { // TODO
+      // 'entree': {
+      //   'question': 'Comment était la préparation de l\'entrée ?',
+      //   'answers': {0: '', 1: 'Comme il faut', 2: ''},
+      //   'target': 'cooking_appetizer',
+      //   'value': null
+      // },
+      'plat': {
+        'question': 'Comment était la préparation de ce plat ?',
+        'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
+        'target': 'cooking',
+        'value': null
+      },
+      // 'dessert': {
+      //   'question': 'Comment était la préparation de ce plat ?',
+      //   'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
+      //   'target': 'cooking',
+      //   'value': null
+      // }
+    }
   };
 
   /* Update the date at the top */
@@ -226,28 +219,27 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
   };
 
   $scope.sendFeedback = function() {
-    response = {'menus': $scope.currentRu.menus};
+    response = {'menus': rulistservice.feedback[4].menus};
     response.menus[0].feedback = [];
 
     /* get thrown values */
-    userId = $sessionStorage.userId;
     if(rulistservice.feedback[0] > -1)
-      $scope.currentEntree && $scope.currentEntree.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[0]});
+      $scope.currentEntree && $scope.currentEntree.feedback.push({'thrown': rulistservice.feedback[0]});
     if(rulistservice.feedback[1] > -1)
-      $scope.currentPlat && $scope.currentPlat.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[1]});
+      $scope.currentPlat && $scope.currentPlat.feedback.push({'thrown': rulistservice.feedback[1]});
     if(rulistservice.feedback[2] > -1)
-      $scope.currentGrillage && $scope.currentGrillade.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[2]});
+      $scope.currentDessert && $scope.currentDessert.feedback.push({'thrown': rulistservice.feedback[2]});
     if(rulistservice.feedback[3] > -1)
-      $scope.currentDessert && $scope.currentDessert.feedback.push({'user_id': userId, 'thrown': rulistservice.feedback[3]});
+      $scope.currentPain && $scope.currentPain.feedback.push({'thrown': rulistservice.feedback[3]});
 
     /* get quizz answers */
     quizz = {};
-    questions['food'].forEach(function(q, index){
+    questions['context'].forEach(function(q, index){
       if(q.value !== null) {
         quizz[q.target] = q.value;
       }
     });
-    questions['context'].forEach(function(q, index){
+    questions['food'].forEach(function(q, index){
       if(q.value !== null) {
         quizz[q.target] = q.value;
       }
@@ -260,7 +252,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     var req = {
       method: 'PUT',
       dataType: "json",
-      url: loginservice.getServerAPI() +'/restaurants/'+ $scope.currentRu.id +'/menu',
+      url: loginservice.getServerAPI() +'/restaurants/'+ rulistservice.feedback[4].id +'/feedback',
       data: response,
       headers: {
         "Content-Type" : "application/json",
@@ -272,6 +264,10 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
     .success(function (data, status, headers, config) {
       // this callback will be called asynchronously
       // when the response is available
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
+
       $state.go('wtf.thanks');
       return data;
     })
@@ -302,8 +298,7 @@ function ($http, $scope, $sce, $sessionStorage, $state, $stateParams, rulistserv
      "_id":"54df23b6842142426fdfa003",
      "feedback": [
      {
-     "thrown": 3,
-     "user_id":"54def8a5769859a454e39974"
+     "thrown": 3
      }
      ]
      }

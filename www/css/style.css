@@ -3,7 +3,7 @@
   src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
 }
 
-* {
+body {
   font-family: OpenSans;
 }
 
@@ -13,6 +13,11 @@ p , h1, h2, h3, h4, h5{
 
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
+}
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before, .checkbox input {
+  background: #eb5d3d !important;
+  border-color: #eb5d3d !important;
 }
 
 .search-wrapper-light {
@@ -45,8 +50,8 @@ p , h1, h2, h3, h4, h5{
 
 .bar.bar-positive .title {
     color: white;
-    font-weight: bold;
-    font-size: 20pt;
+    font-weight: normal;
+    font-size: 18pt;
 }
 
 .bar .title {
@@ -85,6 +90,11 @@ p , h1, h2, h3, h4, h5{
   font-size: 1.5em;
   text-align: center;
   color: black;
+}
+
+.question-lunch > .small-question {
+  font-size: 0.7em;
+  padding-top: 6px;
 }
 
 .lunch-scale {
@@ -252,6 +262,24 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
     border-width: 0px;
 }
 
+a.disconnect {
+	font-weight: 800;
+    border-width: 0px;
+    border-color: #eb5d3d;
+    background-color: #fff;
+    color: #eb5d3d;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.activated {
   background: #761818;
 }
@@ -415,6 +443,8 @@ input[placeholder] {
   padding-top: 0;
   padding-bottom: 0;
   transition: 0.09s all linear;
+  background-color: #eb5d3d;
+  color: white;
 }
 .list .item.item-accordion.ng-hide {
   line-height: 0px;
@@ -448,8 +478,8 @@ input[placeholder] {
   min-height: 0px;
 }
 .item-thumbnail-left, .item-thumbnail-left .item-content {
-padding-top: 8px;
-padding-left: 6px;
+padding-top: 16px;
+padding-left: 16px;
 min-height: 100px;
 }
 .item-thumbnail-left img, .item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image, .item-thumbnail-left .item-content > img:first-child, .item-thumbnail-left .item-content .item-image {
@@ -544,6 +574,10 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
   transform: translateY(-50%);
 }
 
+.slider-pager-page {
+	color: white !important;
+}
+
 .popup h3 {
   color: black;
 }
@@ -570,10 +604,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
    margin: 5px;
 }
 
-.score { overflow: auto !important; }
-  .score span, .score img {
-    float: left;
-  }
+.score { margin: auto; width: 160px;}
   .score img {
     height: 50px;
     margin-right: 10px;

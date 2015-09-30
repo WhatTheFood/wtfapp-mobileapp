@@ -1,11 +1,11 @@
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$sessionStorage', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-function($scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
+function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   if (rulistservice.restaurants.length > 0) {
     $ionicLoading.show({
-      template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+      template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
     });
 
     var restaurant = rulistservice.restaurants.filter(function(restaurant) {
@@ -59,7 +59,9 @@ function($scope, $sce, $sessionStorage, $state, $stateParams, rulistservice, log
     }
 
     if ($scope.ru) {
-      $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/:/g, ":<br />").replace(/  /g, "<br />"));
+      // BEHOLD the wonderful regex of 3:14 AM !
+      // It matches any number that are directly followed by any letter except 'h' and 'H', and adds a line break there! すばらしい！
+      $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/[[0-9](?=[a-zA-Z])(?=[^hH])/g, "$&<br />"));
       $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
     }
   }

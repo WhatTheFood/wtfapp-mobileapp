@@ -1,9 +1,9 @@
-wtf.controller('statsctrl', ['$scope', '$sessionStorage', '$state', 'loginservice', 'User',
-function ($scope, $sessionStorage, $state, loginservice, User) {
+wtf.controller('statsctrl', ['$scope', '$state', 'loginservice', 'User',
+function ($scope, $state, loginservice, User) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  User.query($sessionStorage.userId).then(function (response) {
+  User.query('me').then(function (response) {
     $scope.user = response.data;
   });
 

@@ -1,15 +1,18 @@
 <ion-view view-title="Mon plateau" ng-app>
   <ion-content>
+    <div id="lunch-gif" class="list item-text-wrap no-border-list" gifthanks>
+      <div id="thanks-gif-text" class="item"></div>
+      <img id="thanks-gif-image"/>
+    </div>
     <div id="lunch-thanks" class="list item-text-wrap no-border-list">
       <div class="item jumbotron">
-        <h2>Merci de ta participation !</h2>
+        <h2>You are a champion !</h2>
 
-        <p>En nous informant chaque jour, tu aides à lutter contre le gaspillage.</p>
-
-        <p class="score">
+        <p>Merci pour les infos que tu as partagées avec nous. Grâce à tes retours, le CROUS se rapproche de plus en plus du 4 étoiles et ton plateau sera bientôt aussi vide à la fin du repas qu'un amphi à 8h du matin. En cadeau des petits points rien que pour toi ! </p>
+        <div class="score">
           <img src="img/coupe.png">
           <span>+ 5pts</span>
-        </p>
+        </div>
       </div>
 
       <a class="item button button-full button-positive no-margin" ng-click="goToStats()">

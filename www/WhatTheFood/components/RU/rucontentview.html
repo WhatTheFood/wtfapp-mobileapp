@@ -9,7 +9,7 @@
       </ion-item>
 
       <div class="item item-thumbnail-left">
-        <img src="img/picto_calendrier.png" class="vcenter">
+        Les horaires de ce RU :<br />
         <p ng-bind-html="operationalhours" class="vcenter"></p>
       </div>
 
@@ -66,9 +66,6 @@
             </div>
             <div class="item item-accordion" ng-show="ru.description">
               {{ru.description}}
-            </div>
-            <div class="item item-accordion" ng-show="ru.contact.tel">
-              <a href="tel:{{ru.contact.tel}}"><button class="button button-stable">Appeler ({{ru.contact.tel}})</button></a>
             </div>
             <div class="item item-accordion" ng-show="ru.contact.email">
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>

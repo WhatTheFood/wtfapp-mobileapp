@@ -1,13 +1,34 @@
-wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function (loginservice, $http, $q, $sessionStorage) {
+wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginservice, $http, $localStorage) {
 
   var factory = {
+    /*Warning, there may be a problem with that:
+     it is used both to store "toques", which is a list of users
+     and a user query response, directly at the root.
+     In the current code the only queried user is "me", so we should consider using 2 different variables
+     */
     storage: {},
+    
+    userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreference : {
+      'vegetarian': false,
+      'vegan': false,
+      'nopork': false,
+      'noveal': false,
+      'nogluten': false,
+      'nopeanut': false,
+      'nonut': false,
+      'noeggs': false,
+      'nomilk': false,
+      'nofish': false,
+      'nocrustacean': false,
+      'nopotato': false
+    },
 
+    /* Will return ALL users with an avatar */
     getToques: function () {
       var req = {
         method: 'GET',
         dataType: 'json',
-        url: loginservice.getServerAPI() +'/users/toques',
+        url: loginservice.getServerAPI() +'/users/toques?avatar=true',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer "+ loginservice.gettoken()
@@ -45,15 +66,14 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
       }
     },
 
-    updatePoints: function (action) {
+    updatePoints: function () {
       var req = {
-        method: 'PUT',
+        method: 'POST',
         dataType: 'json',
         data: {
-          action: 'increase_points',
-          reason: action
+          action: 'increase_points'
         },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me/action',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
@@ -67,11 +87,13 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
     },
 
     updatePreferences: function (item) {
+      factory.userPreferences[item.field_id] = item.checked;
+      $localStorage.userPreferences = factory.userPreferences;
       var req = {
         method: 'PUT',
         dataType: 'json',
-        data: { preference: item },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        data: { preferences: factory.userPreferences },
+        url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
