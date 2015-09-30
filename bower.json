@@ -1,5 +1,5 @@
 {
-  "name": "Ionic-WhatThefood",
+  "name": "WhatThefood App",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.14"

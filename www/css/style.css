@@ -3,7 +3,7 @@
   src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
 }
 
-* {
+body {
   font-family: OpenSans;
 }
 

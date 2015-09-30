@@ -75,10 +75,4 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
 
-  // Caption
-  $scope.demoCaption2 = "This is demoing the second classic transparency walk-through.\nit has a caption, " +
-      "regular marking of DOM element,\n 'arrow' to DOM element as icon\n and a button to close the walkthrough";
-  $scope.demoActive2 = true;
-  console.log("HELL!")
-
 }]);

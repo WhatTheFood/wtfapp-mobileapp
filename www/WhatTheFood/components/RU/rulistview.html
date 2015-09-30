@@ -1,11 +1,12 @@
 <ion-view view-title="Mes RUs">
+  
   <ion-content>
 
     <div id="search-box" class="bar bar-header item-input-inset" ng-show="data.showSearch">
       <div class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
         <input type="search" placeholder="Rechercher un RU" ng-model="data.searchQuery">
-        <i id="fake-focus" class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
+        <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
       </div>
     </div>
 
@@ -39,17 +40,5 @@
         </ion-option-button>
       </ion-item>
     </ion-list>
-
-    <walkthrough
-            id="Demo2"
-            walkthrough-type="transparency"
-            focus-element-id="fake-focus"
-            icon="arrow"
-            main-caption="{{demoCaption2}}"
-            icon-padding-left="0"
-            icon-padding-top="0"
-            is-active="demoActive2"
-            use-button="false">
-    </walkthrough>
   </ion-content>
 </ion-view>
