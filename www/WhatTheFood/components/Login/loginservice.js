@@ -94,7 +94,7 @@ function($http, $q, $sessionStorage, $localStorage) {
 
         $http(req)
         .success(function (data, status, headers, config) {
-          factory.settoken(data['user_token']);
+          factory.settoken(data['token']);
           $storage.facebook = true;
           defer.resolve(true, data);
         })
