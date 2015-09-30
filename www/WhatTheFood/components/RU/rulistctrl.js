@@ -1,6 +1,7 @@
 wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
 function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
+
   console.info('Accessing list of RU.');
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
@@ -73,4 +74,5 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
   $scope.goEatAt = function ( ruId ) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
+
 }]);

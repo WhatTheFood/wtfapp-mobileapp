@@ -6,8 +6,8 @@ function($http, $q, $sessionStorage, $localStorage) {
     token: null
   });
 
-  var serverAPIHTTPS = true;
-  var serverAPI = "whatthefood.herokuapp.com/api";
+  var serverAPIHTTPS = false;
+  var serverAPI = "wtfapp.ayb.fr/api";
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad

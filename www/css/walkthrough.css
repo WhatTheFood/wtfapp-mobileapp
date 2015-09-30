@@ -1,0 +1,23 @@
+/* fixes pre font :( */
+pre{
+    font-family: OpenSans!important; /*fixes pre in ng-walkthrough */
+    font-size: 125%;
+    font-weight: bold;
+    line-height: 130%;
+}
+
+
+/**
+ * This stylesheet is for place masks on walkthrough items
+ * when it doesn't work easily by using an id on the element to focus
+ */
+
+#showQueue{
+    position: absolute;
+    top:0px;
+    right:2px;
+    width: 42px;
+    height: 42px;
+    border: 0px solid;
+}
+
