@@ -1,40 +1,85 @@
 <ion-side-menus enable-menu-with-back-views="false">
 
-  <ion-side-menu-content>
-    <ion-nav-bar class="bar-positive">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </ion-nav-buttons>
+            <ion-nav-buttons side="left">
 
-      <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear" ng-click="showQueue()">
-          <img class="title-image" src="img/clock_green.png"  width="30" height="30">
-        </button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
 
-    <ion-nav-view name="menuContent"></ion-nav-view>
-  </ion-side-menu-content>
 
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-assertive">
-      <h1 class="title">What the Food</h1>
-    </ion-header-bar>
-    <ion-content>
-      <ul class="list">
-        <a href="#/wtf/rulist" class="item" menu-close><img src="img/picto_restau.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Mes RUs</div></a>
-        <a href="#/wtf/lunch" class="item" menu-close><img src="img/picto_repas.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Mon plateau</div></a>
-        <a href="#/wtf/profile" class="item" menu-close><img src="img/picto_profil.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Mon profil</div></a>
-        <a href="#/wtf/stats" class="item" menu-close><img src="img/picto_stats.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Mes stats</div></a>
-        <a href="#/wtf/about" class="item" menu-close><img src="img/picto_propos.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Les toqués ?</div></a>
-        <a class="item" href="mailto:contact@whatthefoodapp.org?subject=Feedback" target="_blank" menu-close><img src="img/picto_contact.png" class="menu-icon vcenter"><div class="vcenter menu-text-item">Contactez-nous</div></a>
-        <a href="#/wtf/login?logout=true" class="disconnect" menu-close>Déconnexion</a>
-      </ul>
-    </ion-content>
-  </ion-side-menu>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear "
+                        ng-click="showQueue()">
+                    <img class="title-image" src="img/clock_white.png" width="30" height="30">
 
+                </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-assertive">
+            <h1 class="title">What the Food</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ul class="list">
+                <a ng-click="clickOnRuList()" href="#/wtf/rulist" class="item" menu-close><img src="img/picto_restau.png"
+                                                                    class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Mes RUs</div>
+                </a>
+                <a href="#/wtf/lunch" class="item" menu-close><img src="img/picto_repas.png" class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Mon plateau</div>
+                </a>
+                <a href="#/wtf/profile" class="item" menu-close><img src="img/picto_profil.png"
+                                                                     class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Mon profil</div>
+                </a>
+                <a href="#/wtf/stats" class="item" menu-close><img src="img/picto_stats.png" class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Mes stats</div>
+                </a>
+                <a href="#/wtf/about" class="item" menu-close><img src="img/picto_propos.png" class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Les toqués ?</div>
+                </a>
+                <a class="item" href="mailto:contact@whatthefoodapp.org?subject=Feedback" target="_blank"
+                   menu-close><img src="img/picto_contact.png" class="menu-icon vcenter">
+
+                    <div class="vcenter menu-text-item">Contactez-nous</div>
+                </a>
+                <a href="#/wtf/login?logout=true" class="disconnect" menu-close>Déconnexion</a>
+            </ul>
+
+        </ion-content>
+
+    </ion-side-menu>
+
+    <div id="showQueue"></div>
+    <walkthrough
+            id="showQueueTip"
+            walkthrough-type="transparency"
+            focus-element-id="showQueue"
+            icon="arrow"
+            main-caption="{{showQueueTip}}"
+            icon-padding-left="24"
+            icon-padding-top="0"
+            is-active="showQueueTipActive"
+            use-button="false"
+            tip-location="TOP"
+            is-round="true"
+            >
+
+    </walkthrough>
 </ion-side-menus>
+

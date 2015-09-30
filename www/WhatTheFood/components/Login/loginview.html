@@ -5,8 +5,8 @@
         <ion-content style="background-color: #eb5d3d;" locking="false">
           <div style="text-align: center;">
             <img src="img/logo_wtf.png" width="100" style="margin-top: 2%; border: 1px solid rgba(255, 255, 255, .3);" /><br />
-            
-            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" style="height: 340px; color: white;">
+            <div class="padding">
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" style="height: 340px; color: white;" >
 				<ion-slide>
 					<div class="box">
 						<img src="img/picto_login_1.png" width="198" />
@@ -32,7 +32,7 @@
 					</div>
 				</ion-slide>
 			</ion-slide-box>
-
+            </div>
 
             <div ng-hide="signup || signin">
               <label style="margin:8px; display: inline-block">
