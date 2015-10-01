@@ -19,7 +19,7 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
       group.items.forEach(function (item) {
         userPreference = userPreferences[item.field_id];
         if (userPreference !== undefined) {
-          item.checked = userPreference.checked;
+          item.checked = userPreference;
         }
       });
     });
