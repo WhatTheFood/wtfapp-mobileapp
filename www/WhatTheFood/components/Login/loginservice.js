@@ -6,8 +6,8 @@ function($http, $q, $sessionStorage, $localStorage) {
     token: null
   });
 
-  var serverAPIHTTPS = false;
-  var serverAPI = "wtfapp.ayb.fr/api";
+  var serverAPIHTTPS = true;
+  var serverAPI = "/api";
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad
