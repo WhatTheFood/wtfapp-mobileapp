@@ -17,10 +17,7 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
   var initGroups = function (groups, userPreferences) {
     groups.forEach(function (group) {
       group.items.forEach(function (item) {
-        userPreference = userPreferences.filter(function (value) {
-          return value.name === item.name;
-        })[0];
-
+        userPreference = userPreferences[item.field_id];
         if (userPreference !== undefined) {
           item.checked = userPreference.checked;
         }
