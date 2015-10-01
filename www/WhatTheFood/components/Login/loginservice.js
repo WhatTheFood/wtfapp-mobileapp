@@ -6,8 +6,7 @@ function($http, $q, $sessionStorage, $localStorage) {
     token: null
   });
 
-  var serverAPIHTTPS = false;
-  var serverAPI = "wtfapp.ayb.fr/api";
+  var serverAPI = "/api";
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad
@@ -21,12 +20,13 @@ function($http, $q, $sessionStorage, $localStorage) {
   var factory = {
 
     getServerAPI: function() {
-      return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
+      return serverAPI;
     },
-
+    /*
     getServerAPILogin: function(user, password) {
-      return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
+      return "/" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
     },
+    */
 
     signup: function (data) {
       var req = {
