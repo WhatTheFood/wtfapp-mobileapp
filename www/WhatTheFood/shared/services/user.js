@@ -8,7 +8,7 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
      */
     storage: {},
     
-    userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreference : {
+    userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreferences : {
       'vegetarian': false,
       'vegan': false,
       'nopork': false,
