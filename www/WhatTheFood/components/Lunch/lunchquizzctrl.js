@@ -17,7 +17,15 @@ function ($http, $scope, $sce, $state, $stateParams, $ionicHistory, rulistservic
     $scope.pain = null;
 
     // If there is a menu in this restaurant
-    if ( rulistservice.feedback[4].menus !== undefined && rulistservice.feedback[4].menus.length > 0 ) {
+    var feedback = rulistservice.feedback[4].menus;
+
+    if ( feedback.menus === undefined) {
+      feedback.menus = {
+
+      }
+    }
+
+    if ( feedback !== undefined && feedback.menus.length > 0 ) {
       // Counter
       var counter = 0;
       // Get the food categories
@@ -109,7 +117,8 @@ function ($http, $scope, $sce, $state, $stateParams, $ionicHistory, rulistservic
         $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
       }
     } else {
-      $ionicPopup.alert({title: "Désolé, ce restaurant n'est pas ouvert aujourd'hui :("});
+      /* $ionicPopup.alert({title: "Désolé, ce restaurant n'est pas ouvert aujourd'hui :("}); */
+      $ionicPopup.alert({title: "Désolé, nous ne connaissons pas le menu de ce restaurant aujourd'hui :("});
       $ionicHistory.nextViewOptions({
         historyRoot: true
       });

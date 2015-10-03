@@ -1,37 +1,61 @@
 <ion-view view-title="Mes Stats">
-        <ion-tabs id="stats">
+        <ion-tabs id="stats" class="tabs-top">
 
             <ion-tab title="Moi">
-                <ion-content>
+                <ion-content class="padding">
                 <div>
+
+                    <div class="item level">
+                        Votre niveau : Mini Toqué:
+
+                    </div>
+
                     <div class="item stats-points">
+                        <p>
+                        Mon implication assidue sur WTF m’a permis de cuisiner :
+                        </p>
                         <p class="score">
                             <img src="img/coupe.png">
-                            <span>{{user.points || 0}} pts</span>
+                            <span>{{stats.me.score || 0}} PTS (Patates Trop Stylées)</span>
                         </p>
-                    </div>
 
-                    <div class="item queue-feedbacks-count">
-                        <img src="img/file.png">
-                        <p>J'ai informé<br>sur la file d'attente</p>
-                        <p class="count">{{user.queueFeedbacksCount || 0}}x</p>
-                    </div>
-
-                    <div class="item lunch-feedbacks-count">
-                        <img src="img/partage.png">
-                        <p>J'ai partagé mes repas</p>
-                        <p class="count">{{user.lunchFeedbacksCount || 0}}x</p>
+                        <p>
+                            Grâce à moi, le CROUS va prendre en compte nos feedbacks et je finirai mon plateau à chaque repas à m’en lécher les babines car le gaspi salsifis!
+                        </p>
                     </div>
                 </div>
                 </ion-content>
+
             </ion-tab>
 
             <ion-tab title="RUs">
-                <!-- Tab 2 content -->
+                <ion-content class="padding">
+                    <div class="item ">
+                    En continuant de m’impliquer chaque jour, je fais grimper mon RU dans le classement grâce à mes PTS !
+
+                    A chaque fois que mon RU atteint 100.000 points avant les autres,  tous les Toqués remportent une surprise collective car l’oignon fait la force !
+                    </div>
+
+                    <div class="podium">
+                        <div class="item row podium-{{$index}}"  ng-repeat="friend in friends.scores">
+                            <div class="col-10 rang">{{$index + 1}}</div>
+                            <div class="col-66 name">{{friend.name}}</div>
+                            <div class="col pts">{{friend.score}}</div>
+                        </div>
+                    </div>
+                </ion-content>
             </ion-tab>
 
             <ion-tab title="Amis">
-                <!-- Tab 3 content -->
+                <ion-content>
+                    <div class="podium">
+                    <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
+                        <div class="col-10 rang">{{$index + 1}}</div>
+                        <div class="col-66 name">{{restaurant.name}}</div>
+                        <div class="col pts">{{restaurant.score}}</div>
+                    </div>
+                    </div>
+                </ion-content>
             </ion-tab>
 
         </ion-tabs>

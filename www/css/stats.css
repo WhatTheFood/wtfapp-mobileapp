@@ -3,7 +3,7 @@
 }
 
 #stats ion-content {
-    padding-top:6em;
+    padding-top:94px;
 }
 
 #stats h2 {
@@ -34,4 +34,29 @@
     font-size: 2em;
     font-weight: bold;
     line-height: 1em;
+}
+
+.podium{
+}
+.podium .row{
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+}
+.podium .rang{
+    text-align: right;
+    padding-right: 8px;
+}
+.podium .pts{
+    text-align: right;
+}
+.row .podium-0 {
+ }
+.podium-0 {
+   font-size: 32px;
+    font-weight: 800;
+}
+.podium-1 {
+    font-size: 24px;
+    font-weight: 400;
 }
