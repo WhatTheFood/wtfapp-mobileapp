@@ -6,7 +6,7 @@ function($http, $q, $sessionStorage, $localStorage) {
     token: null
   });
 
-  var serverAPI = "/api";
+  var serverAPI = "http://localhost:5000/api";
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad

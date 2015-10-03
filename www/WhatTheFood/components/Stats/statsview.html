@@ -1,27 +1,41 @@
 <ion-view view-title="Mes Stats">
-  <ion-content id="stats" class="padding">
-    <h2>Ma participation</h2>
+        <ion-tabs id="stats">
 
-    <div>
-      <div class="item stats-points">
-        <p class="score">
-          <img src="img/coupe.png">
-          <span>{{user.points || 0}} pts</span>
-        </p>
-      </div>
+            <ion-tab title="Moi">
+                <ion-content>
+                <div>
+                    <div class="item stats-points">
+                        <p class="score">
+                            <img src="img/coupe.png">
+                            <span>{{user.points || 0}} pts</span>
+                        </p>
+                    </div>
 
-      <div class="item queue-feedbacks-count">
-        <img src="img/file.png">
-        <p>J'ai informé<br>sur la file d'attente</p>
-        <p class="count">{{user.queueFeedbacksCount || 0}}x</p>
-      </div>
+                    <div class="item queue-feedbacks-count">
+                        <img src="img/file.png">
+                        <p>J'ai informé<br>sur la file d'attente</p>
+                        <p class="count">{{user.queueFeedbacksCount || 0}}x</p>
+                    </div>
 
-      <div class="item lunch-feedbacks-count">
-        <img src="img/partage.png">
-        <p>J'ai partagé mes repas</p>
-        <p class="count">{{user.lunchFeedbacksCount || 0}}x</p>
-      </div>
-    </div>
-  </ion-content>
+                    <div class="item lunch-feedbacks-count">
+                        <img src="img/partage.png">
+                        <p>J'ai partagé mes repas</p>
+                        <p class="count">{{user.lunchFeedbacksCount || 0}}x</p>
+                    </div>
+                </div>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="RUs">
+                <!-- Tab 2 content -->
+            </ion-tab>
+
+            <ion-tab title="Amis">
+                <!-- Tab 3 content -->
+            </ion-tab>
+
+        </ion-tabs>
+
+
 </ion-view>
 
