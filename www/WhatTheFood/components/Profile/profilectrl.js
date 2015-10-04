@@ -17,7 +17,7 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
 
   $scope.$watch('currentRu', function (newValue) {
     if (newValue !== undefined) {
-      
+      $scope.updateFavPreference(newValue._id);
     }
   });
 
