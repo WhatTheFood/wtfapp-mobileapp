@@ -15,6 +15,12 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
     }
   });
 
+  $scope.$watch('currentRu', function (newValue) {
+    if (newValue !== undefined) {
+      
+    }
+  });
+
   var initGroups = function (groups, userPreferences) {
     groups.forEach(function (group) {
       group.items.forEach(function (item) {
@@ -80,7 +86,7 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
   var initFavRU = function (userPreferences) {
     defineRestaurants();
     if(userPreferences.favorite_ru !== undefined)
-      $scope.currentRu = findById($scope.rulist, userPreferences.favorite_ru);
+      $scope.currentRu = findBy('_id', $scope.rulist, userPreferences.favorite_ru);
   }
 
   /*
@@ -104,8 +110,12 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
     return $scope.shownGroup === group;
   };
 
-  $scope.updatePreferences = function (item) {
-    User.updatePreferences(item);
+  $scope.updateFoodPreferences = function (item) {
+    User.updatePreferences(item.field_id, item.checked);
+  };
+
+  $scope.updateFavPreference = function (item) {
+    User.updatePreferences('favorite_ru', item);
   };
 
 }]);
