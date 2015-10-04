@@ -1,6 +1,6 @@
-wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
+wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', 'rulistservice', '$ionicScrollDelegate', '$ionicLoading', 'User',
 
-function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
+function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegate, $ionicLoading, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -11,6 +11,7 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
   $scope.$watch('user', function (newValue) {
     if (newValue !== undefined) {
       initGroups($scope.groups, newValue.preferences);
+      initFavRU(newValue.preferences);
     }
   });
 
@@ -50,6 +51,37 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
       ]
     }
   ];
+
+  /* get restaurant list (for favorite RU selection) */
+  var defineRestaurants = function () {
+    // Ensure restaurants are defined as we depend on it
+    if (rulistservice.restaurants === undefined) {
+      var successCallback = function (data) {
+        $scope.rulist = data;
+        $scope.currentRu = $scope.rulist[0];
+        $ionicLoading.hide();
+      };
+
+      var errorCallback = function (error, data) {
+        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
+        $scope.rulist = data;
+        $ionicLoading.hide();
+      };
+
+      rulistservice.defineRUList(successCallback, errorCallback);
+
+    } else {
+      $scope.rulist = rulistservice.restaurants;
+      $scope.currentRu = $scope.rulist[0];
+      $ionicLoading.hide();
+    }
+  };
+
+  var initFavRU = function (userPreferences) {
+    defineRestaurants();
+    if(userPreferences.favorite_ru !== undefined)
+      $scope.currentRu = findById($scope.rulist, userPreferences.favorite_ru);
+  }
 
   /*
    * if given group is the selected group, deselect it
