@@ -1,6 +1,6 @@
-wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', '$ionicScrollDelegate', 'User',
+wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', 'rulistservice', '$ionicScrollDelegate', '$ionicLoading', 'User',
 
-function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
+function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegate, $ionicLoading, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -11,6 +11,13 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
   $scope.$watch('user', function (newValue) {
     if (newValue !== undefined) {
       initGroups($scope.groups, newValue.preferences);
+      initFavRU(newValue.preferences);
+    }
+  });
+
+  $scope.$watch('currentRu', function (newValue) {
+    if (newValue !== undefined) {
+      $scope.updateFavPreference(newValue._id);
     }
   });
 
@@ -51,6 +58,23 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
     }
   ];
 
+  $scope.init = function() {
+    rulistservice.getRestaurants(function(restaurants){
+      $scope.rulist = restaurants;
+      $scope.currentRu = $scope.rulist[0];
+    });
+    rulistservice.getMenus( function(menus){
+      $scope.menus = menus
+    });
+  };
+
+  $scope.init();
+
+  var initFavRU = function (userPreferences) {
+    if(userPreferences.favorite_ru !== undefined)
+      $scope.currentRu = findBy('_id', $scope.rulist, userPreferences.favorite_ru);
+  }
+
   /*
    * if given group is the selected group, deselect it
    * else, select the given group
@@ -72,8 +96,12 @@ function($scope, $state, $http, loginservice, $ionicScrollDelegate, User) {
     return $scope.shownGroup === group;
   };
 
-  $scope.updatePreferences = function (item) {
-    User.updatePreferences(item);
+  $scope.updateFoodPreferences = function (item) {
+    User.updatePreferences(item.field_id, item.checked);
+  };
+
+  $scope.updateFavPreference = function (item) {
+    User.updatePreferences('favorite_ru', item);
   };
 
 }]);

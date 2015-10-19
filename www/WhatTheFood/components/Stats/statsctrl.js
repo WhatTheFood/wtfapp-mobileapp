@@ -1,18 +1,13 @@
-wtf.controller('statsctrl', ['$scope', '$state', 'loginservice', 'User',
-function ($scope, $state, loginservice, User) {
+wtf.controller('statsctrl', ['$scope', '$state', 'loginservice', 'Stats',
+function ($scope, $state, loginservice, Stats) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  User.query('me').then(function (response) {
-    $scope.user = response.data;
+  Stats.getStats().then(function (response) {
+    $scope.stats = response.data;
+    $scope.friends = response.data.friends;
+    $scope.restaurants = response.data.restaurants;
+    console.log("get stats");
   });
 
-  $scope.$watch('user', function (user) {
-    if (user !== undefined) {
-      render(user);
-    }
-  });
-
-  var render = function (user) {
-  };
 }]);
