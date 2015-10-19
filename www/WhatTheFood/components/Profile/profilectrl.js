@@ -58,33 +58,19 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
     }
   ];
 
-  /* get restaurant list (for favorite RU selection) */
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.rulist = data;
-        $scope.currentRu = $scope.rulist[0];
-        $ionicLoading.hide();
-      };
-
-      var errorCallback = function (error, data) {
-        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-
-    } else {
-      $scope.rulist = rulistservice.restaurants;
+  $scope.init = function() {
+    rulistservice.getRestaurants(function(restaurants){
+      $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
-      $ionicLoading.hide();
-    }
+    });
+    rulistservice.getMenus( function(menus){
+      $scope.menus = menus
+    });
   };
 
+  $scope.init();
+
   var initFavRU = function (userPreferences) {
-    defineRestaurants();
     if(userPreferences.favorite_ru !== undefined)
       $scope.currentRu = findBy('_id', $scope.rulist, userPreferences.favorite_ru);
   }

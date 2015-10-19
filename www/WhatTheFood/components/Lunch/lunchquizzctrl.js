@@ -6,7 +6,9 @@ function ($http, $scope, $sce, $state, $stateParams, $ionicHistory, rulistservic
   
   /* Update the dish question */
   $scope.updateDishes = function() {
-    if (rulistservice.feedback[4] === undefined) { console.log("current ru undefined!"); return null; }
+    if (rulistservice.feedback[4] === undefined) {
+      console.log("current ru undefined!"); return null;
+    }
     else {
       console.log(rulistservice.feedback[4]);
     }
