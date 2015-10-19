@@ -291,7 +291,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll 
 }
 
 .center {
-  text-align: center;
+  text-align: center !important; 
 }
 
 .menu-text-item {

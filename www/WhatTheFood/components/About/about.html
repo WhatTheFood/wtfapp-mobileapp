@@ -1,52 +1,50 @@
-<ion-view view-title="À propos" ng-app>
+<ion-view view-title="Les Toqués ?" ng-app>
   <ion-content class="padding">
     <div class="list item-text-wrap" id="about">
       <div class="item">
-        <h2>What the Food, c'est quoi ?</h2>
+        <h2>Les toqués ? Vous avez dit les Toqués ?</h2>
 
-        <p>
-          En France, une moyenne de 135g de nourriture / plateau / jour est gaspillée, soit l'équivalent d'une assiette de pâtes.
+        <p class="center">
+          Qui s'en fout du gaspillage alimentaire ?
+        </p>
+        
+        <p class="center">
+			<img src="img/handsup.gif" width="280">
         </p>
 
-        <p>
-          L'application What the Food a pour mission de réduire les quantités de nourriture jetées en permettant à ses utilisateurs, la communauté des Toqués, de manger malin et de partager plus avec son Restaurant Universitaire !
+        <p class="center">
+          Et bah pas nous, et pas toi puisque tu utilises WTF,<br />
+          alors déjà bravo à toi
         </p>
-
-        <p>
-          Pour le moment utilisable dans les RUs de Censier, Dauphine et la Halle aux Farines pendant les phases pilotes.
-        </p>
+        
+        <p class="center">
+		  <img class="center" src="img/cheers.jpg">
+		</p>
+      
+		<p class="center">
+			La légende dit qu'un jour, des étudiants qui mangeaient souvent dans leur cantine se sont dit &laquo; Et si on avait un moyen de connaître le temps d'attente avant de se poser pour manger ? &raquo;. Et bam, What The Food est née. Une appli maligne qui indique, grâce à la participation de tout le monde, le temps de queue dans ton RU préféré, mais aussi les menus !
+		</p>
+		
+		<p class="center">
+			En te connectant avec ton profil Facebook, tu peux aussi voir quels sont tes amis Facebook Toqués qui mangent dans ton RU. Facile d'organiser ton repas, tu leur indiques juste quand tu y es ne donnant l'info sur la queue et tout le monde s'y retrouve.
+		</p>
+		
+		<p class="center">
+			What The Food, ça te permet aussi de réduire le gaspillage en collectant ton avis sur les repas servis et en évaluant ce qui reste sur les plateaux. Ton petit doigt clique sur la quantuté que tu as laissé sur ton plateau, et tout ça permet au CROUS d'adapter ses repas !
+		</p>
       </div>
 
-      <div>
-        <img src="img/je_suis_toque.png">
+      <div class="center">
+		<img src="img/picto_login_1.png" width="120" />
+		<img src="img/picto_login_2.png" width="120" />
+		<img src="img/picto_login_3.png" width="120" />
+		<img src="img/picto_login_4.png" width="120" />
+        <p>Des repas que tu aimes, c'est moins de gaspillage et plus de sourires.</p>
+        <p>Merci ! on est fiers de toi, fiers de vous ! Vive la RUvolution et vive les Toqués les plus connectés !</p>
       </div>
 
       <div class="item">
-        <h2>What the Food, c'est qui ?</h2>
-
-        <p>
-          What the Food, c'est le premier collectif initié par une équipe d'étudiants motivés, une entreprise sociale engagée (Zéro Gâchis) et un organisme public national (le CROUS/CNOUS) ayant la volonté de mettre fin ensemble au gaspillage alimentaire dans tous les restaurants universitaires de France. C'est aussi de nombreux Toqués qui ont rejoint la RUvolution en marche et … toi, qui fait partie des premiers utilisateurs de l'app, félicitations au passage ;)
-        </p>
-
-        <p>
-          Envie d'en savoir plus ? De contribuer ? De nous rencontrer ? Un petit mail et le tour est joué :
-        </p>
-
-        <p>
-          <a href="mailto:contact@whatthefoodapp.org">contact@whatthefoodapp.org</a>
-        </p>
-      </div>
-
-      <div>
-        <img src="img/wtf_title.png">
-      </div>
-
-      <div class="item">
-        <h2>MILLE MERCIS</h2>
-        <h2>À nos contributeurs les plus Toqués !</h2>
         <img class="toque" ng-src="{{user.avatar || 'img/picto_profil.png'}}" ng-repeat="user in toques">
-        <h2>À nos partenaires dans cette RUvolution</h2>
-        <img src="img/partners.png">
       </div>
     </div>
   </ion-content>
