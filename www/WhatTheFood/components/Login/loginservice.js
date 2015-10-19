@@ -6,13 +6,12 @@ function($http, $q, $sessionStorage, $localStorage) {
     token: null
   });
 
-  //var serverAPI = "/api";
+  var serverAPI = "/api";
   // Debug handy
   //var serverAPIHTTPS = false;
   //var serverAPI = "192.168.8.100:5000/api"; // Nomad
   //var serverAPI = "localhost:9000/api"; // Home
   //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
-  var serverAPI = "https://m.whatthefoodapp.fr/api";
 
   function utf8_to_b64(str) {
     return window.btoa(unescape(encodeURIComponent(str)));

@@ -8,31 +8,18 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
     template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.rulist = data;
-        $scope.currentRu = $scope.rulist[0];
-        $ionicLoading.hide();
-      };
 
-      var errorCallback = function (error, data) {
-        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-
-    } else {
-      $scope.rulist = rulistservice.restaurants;
+  $scope.init = function() {
+    rulistservice.getRestaurants(function(restaurants){
+      $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
-      $ionicLoading.hide();
-    }
+    });
+    rulistservice.getMenus( function(menus){
+      $scope.menus = menus
+    });
   };
 
-  defineRestaurants();
+  $scope.init();
 
   /* waiting times */
   $scope.waitingTimes = [

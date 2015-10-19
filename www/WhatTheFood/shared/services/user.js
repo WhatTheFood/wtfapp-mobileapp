@@ -7,21 +7,6 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
      In the current code the only queried user is "me", so we should consider using 2 different variables
      */
     storage: {},
-    
-    userPreferences: $localStorage.userPreferences !== undefined ? $localStorage.userPreferences : {
-      'vegetarian': false,
-      'vegan': false,
-      'nopork': false,
-      'noveal': false,
-      'nogluten': false,
-      'nopeanut': false,
-      'nonut': false,
-      'noeggs': false,
-      'nomilk': false,
-      'nofish': false,
-      'nocrustacean': false,
-      'nopotato': false
-    },
 
     /* Will return ALL users with an avatar */
     getToques: function () {
@@ -86,13 +71,12 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       });
     },
 
-    updatePreferences: function (item) {
-      factory.userPreferences[item.field_id] = item.checked;
-      $localStorage.userPreferences = factory.userPreferences;
+    updatePreferences: function (field_id, value) {
+      factory.storage.preferences[field_id] = value;
       var req = {
         method: 'PUT',
         dataType: 'json',
-        data: { preferences: factory.userPreferences },
+        data: { preferences: factory.storage.preferences },
         url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
