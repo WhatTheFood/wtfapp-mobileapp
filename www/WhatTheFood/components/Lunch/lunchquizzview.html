@@ -1,8 +1,8 @@
-<ion-view view-title="Mon plateau" ng-app>
+<ion-view view-title="Mon plateau" >
   <ion-content ng-init="init()">
     <div class="list item-text-wrap no-border-list">
       <div class="item fork-red-bg fork-red-content">
-        <div class="current-date">{{ date }}</div>
+        <div class="current-date">{{ date | amDateFormat:'dddd Do MMMM'  }}</div>
       </div>
       <div class="item question-lunch">
         Pourquoi n'as-tu pas terminé ton plateau ?<br />

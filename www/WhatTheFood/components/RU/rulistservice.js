@@ -8,6 +8,10 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
     var factory = {
+
+      menusCallbacks:[],
+      restaurantsCallbacks:[],
+
       storage: $localStorage.$default({
         restaurants: [],
         feedback: [],
@@ -54,9 +58,15 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
       },
 
       getMenus: function (callback) {
-        console.log("factory.menus",factory.menus)
-        if (factory.menus === undefined || factory.menus.length == 0) {
-          var req = {
+       if (factory.menus === undefined || factory.menus.length == 0) {
+
+         factory.menusCallbacks.push(callback);
+
+         if (factory.menusCallbacks[0] != callback){
+           return;
+         }
+
+         var req = {
             method: 'GET',
             url: loginservice.getServerAPI() + '/menus/list',
             headers: {
@@ -67,7 +77,10 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           $http(req).success(
             function (menus) {
               factory.menus = menus;
-              callback(factory.menus);
+              factory.menusCallbacks.forEach(function (cb){
+                cb(factory.menus);
+                factory.menusCallbacks=[];
+              })
             }
           ).error(this.ERROR_HANDLER);
         } else {
@@ -75,13 +88,26 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         }
       },
 
+
+
       getRestaurants: function (callback) {
         // Ensure restaurants are defined as we depend on it
         if (factory.restaurants === undefined || factory.restaurants.length == 0) {
+
+          factory.restaurantsCallbacks.push(callback);
+
+          if (factory.restaurantsCallbacks[0] != callback){
+            return;
+          }
+
           var successCallback = function (data) {
             this.msg = "Voici les RUs près de vous";
             factory.restaurants = data;
-            callback(factory.restaurants);
+            factory.restaurantsCallbacks.forEach(function (cb){
+              cb(factory.restaurants);
+            })
+            factory.restaurantsCallbacks = [];
+
             $ionicLoading.hide();
           };
 

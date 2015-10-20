@@ -6,9 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough'])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough','angularMoment'])
 
-  .run(['$ionicPlatform', function ($ionicPlatform) {
+  .run(['$ionicPlatform', function ($ionicPlatform,amMoment) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
