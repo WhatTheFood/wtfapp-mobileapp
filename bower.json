@@ -1,22 +1,18 @@
 {
   "name": "WhatThefood App",
   "private": "true",
-  "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
-  },
-  "resolutions": {
-    "angular": "~1.4.7",
-    "ionic": "1.1.0",
-    "angular-animate": "1.4.3",
-    "angular-sanitize": "1.4.3"
-  },
   "dependencies": {
+
+    "angular": "1.4.7",
     "ionic": "1.1.0",
     "ngstorage": "0.3.0",
     "ngCordova": "0.1.20-alpha",
-    "angular-moment": "0.10.3",
     "angular-cookies": "1.4.7",
     "openfb": "*",
-    "ng-walkthrough": "WhatTheFood/ng-walkthrough#0.2.5.wtf"
+    "ng-walkthrough": "WhatTheFood/ng-walkthrough#0.2.5.wtf",
+    "angular-momentjs": "~0.2.2"
+  },
+  "resolutions": {
+    "angular": "1.4.7"
   }
 }

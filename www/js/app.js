@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough','angularMoment'])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough','angular-momentjs'])
 
   .run(['$ionicPlatform', function ($ionicPlatform,amMoment) {
     $ionicPlatform.ready(function () {
@@ -171,3 +171,9 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
   }]);
+
+
+wtf.constant('angularMomentConfig', {
+    preprocess: 'utc',
+    timezone: 'Europe/Paris'
+  });
