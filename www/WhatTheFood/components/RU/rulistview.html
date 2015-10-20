@@ -17,6 +17,7 @@
             <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
             <div>{{ru.title}}</div>
             <div class="subtitle">{{ru.openingNow}}</div>
+            <div class="subtitle">{{ru.queueInfoUpdatedAt | amTimeAgo }} </div>
             <i class="icon ion-chevron-right"></i>
           </div>
         </ion-item>
@@ -33,6 +34,7 @@
         <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
         <div>{{ru.title}}</div>
         <div class="subtitle">{{ru.openingNow}}</div>
+        <div class="subtitle">{{ru.queueInfoUpdatedAt | amTimeAgo }} </div>
         <i class="icon ion-chevron-right"></i>
         <ion-option-button class="button-info"
           ng-click="goEatAt(ru.id)">

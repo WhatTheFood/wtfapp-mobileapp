@@ -10,7 +10,7 @@
     "angular-cookies": "1.4.7",
     "openfb": "*",
     "ng-walkthrough": "WhatTheFood/ng-walkthrough#0.2.5.wtf",
-    "angular-momentjs": "~0.2.2"
+    "angular-moment": "0.10.3"
   },
   "resolutions": {
     "angular": "1.4.7"

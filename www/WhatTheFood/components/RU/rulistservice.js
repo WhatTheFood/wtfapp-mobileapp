@@ -192,6 +192,9 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
               return "Pas d'informations";
             });
             restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
+
+            restaurant.queueInfoUpdatedAt = new Date();
+
             return restaurant;
           });
 
