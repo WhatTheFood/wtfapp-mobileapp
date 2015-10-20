@@ -8,7 +8,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
     var factory = {
-
+      lastUpdate : new Date(),
       menusCallbacks:[],
       restaurantsCallbacks:[],
 
@@ -193,7 +193,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
             });
             restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
 
-            restaurant.queueInfoUpdatedAt = new Date();
+            restaurant.queueInfoUpdatedAt = factory.lastUpdate;
 
             return restaurant;
           });
