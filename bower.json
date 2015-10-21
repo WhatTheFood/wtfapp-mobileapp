@@ -2,7 +2,6 @@
   "name": "WhatThefood App",
   "private": "true",
   "dependencies": {
-
     "angular": "1.4.7",
     "ionic": "1.1.0",
     "ngstorage": "0.3.0",
@@ -10,9 +9,11 @@
     "angular-cookies": "1.4.7",
     "openfb": "*",
     "ng-walkthrough": "WhatTheFood/ng-walkthrough#0.2.5.wtf",
-    "angular-moment": "0.10.3"
+    "angular-moment": "0.10.3",
+    "angular-animate": "angular/bower-angular-animate#1.4.7"
   },
   "resolutions": {
-    "angular": "1.4.7"
+    "angular": "1.4.7",
+    "angular-animate": "1.4.7"
   }
 }
