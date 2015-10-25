@@ -22,8 +22,21 @@
           </div>
         </ion-item>
         <div class="rumenu list" ng-if="$first" >
-          <div ng-repeat="category in ru.menus[0].meal[0].foodcategory | filter: showDishCategory">
-            <div ng-repeat="dish in category.dishes" style="white-space: normal;">
+          <div ng-repeat="menu in ru.menusToday">
+            <strong>
+            Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
+              </strong>
+            <br>
+            <strong>Entrées</strong>
+            <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" style="white-space: normal;">
+              {{dish.name}}
+            </div>
+            <strong>Plats</strong>
+            <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" style="white-space: normal;">
+              {{dish.name}}
+            </div>
+            <strong>Desserts</strong>
+            <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" style="white-space: normal;">
               {{dish.name}}
             </div>
           </div>

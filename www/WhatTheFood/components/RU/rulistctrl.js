@@ -15,9 +15,9 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
-    });
-    rulistservice.getMenus( function(menus){
-      $scope.menus = menus
+      rulistservice.getMenus( function(menus){
+        $scope.menus = menus;
+      });
     });
   };
 
@@ -52,10 +52,6 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
     setTimeout(function() {
       $state.go('wtf.rueat', {ruId: ruId});
     }, 500);
-  };
-
-  $scope.showDishCategory = function(category){
-    return category.name == 'Plats' || category.name == 'Grillades' || category.name == 'Pizzas';
   };
 
   $scope.goEatAt = function ( ruId ) {

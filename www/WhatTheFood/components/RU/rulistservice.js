@@ -57,6 +57,44 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         return "error";
       },
 
+      updateMenusInRestaurants: function (){
+        factory.restaurantsById = {};
+
+        factory.restaurants.forEach(
+          function(restaurant) {
+            restaurant.menusByDay={};
+            factory.restaurantsById[restaurant.id] = restaurant;
+          });
+
+        factory.menus.forEach(function (menu){
+          if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] ) {
+            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date].push(menu);
+          }
+          else {
+            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [ menu ];
+          }
+
+        })
+
+        factory.restaurants.forEach(function(restaurant){
+          restaurant.menusToday = restaurant.menusByDay[moment().format("YYYY-MM-DD")];
+          if (!restaurant.menusToday){
+            restaurant.menusToday = [];
+            var daymin;
+            for (day in restaurant.menusByDay){
+              if (!daymin){
+                daymin = day;
+              } else if (daymin>day){
+                daymin =day
+              }
+            }
+            restaurant.menusToday  = restaurant.menusByDay[daymin];
+          }
+        })
+
+        console.log(factory.restaurants);
+      },
+
       getMenus: function (callback) {
        if (factory.menus === undefined || factory.menus.length == 0) {
 
@@ -76,7 +114,9 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
           $http(req).success(
             function (menus) {
+              console.log(menus);
               factory.menus = menus;
+              factory.updateMenusInRestaurants();
               factory.menusCallbacks.forEach(function (cb){
                 cb(factory.menus);
                 factory.menusCallbacks=[];

@@ -6,7 +6,9 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
      and a user query response, directly at the root.
      In the current code the only queried user is "me", so we should consider using 2 different variables
      */
-    storage: {},
+    storage: {
+      preferences:[]
+    },
 
     /* Will return ALL users with an avatar */
     getToques: function () {
@@ -51,14 +53,12 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       }
     },
 
-    updatePoints: function () {
+    updatePreferences: function (preferences) {
       var req = {
         method: 'POST',
         dataType: 'json',
-        data: {
-          action: 'increase_points'
-        },
-        url: loginservice.getServerAPI() +'/users/me/action',
+        data: preferences,
+        url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
@@ -71,12 +71,11 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       });
     },
 
-    updatePreferences: function (field_id, value) {
-      factory.storage.preferences[field_id] = value;
+
+    getPreferences: function (preferences) {
       var req = {
-        method: 'PUT',
+        method: 'GET',
         dataType: 'json',
-        data: { preferences: factory.storage.preferences },
         url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
@@ -85,10 +84,11 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       };
 
       return $http(req)
-      .error(function (data, status, headers, config) {
-        console.error('Error: ', data);
-      });
+        .error(function (data, status, headers, config) {
+          console.error('Error: ', data);
+        });
     }
+
   };
 
   return factory;

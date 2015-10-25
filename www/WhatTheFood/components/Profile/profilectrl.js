@@ -4,24 +4,32 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  User.query('me').then(function (response) {
-    $scope.user = response.data;
-  });
 
   $scope.$watch('user', function (newValue) {
+    console.log(newValue);
     if (newValue !== undefined) {
       initGroups($scope.groups, newValue.preferences);
       initFavRU(newValue.preferences);
     }
+    return newValue;
+  });
+
+
+  User.query('me').then(function (response) {
+    $scope.user = response.data;
   });
 
   $scope.$watch('currentRu', function (newValue) {
     if (newValue !== undefined) {
       $scope.updateFavPreference(newValue._id);
     }
+    return newValue;
   });
 
   var initGroups = function (groups, userPreferences) {
+    if (userPreferences === undefined){
+      return;
+    }
     groups.forEach(function (group) {
       group.items.forEach(function (item) {
         userPreference = userPreferences[item.field_id];
@@ -71,7 +79,7 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
   $scope.init();
 
   var initFavRU = function (userPreferences) {
-    if(userPreferences.favorite_ru !== undefined)
+    if(userPreferences && userPreferences.favorite_ru !== undefined)
       $scope.currentRu = findBy('_id', $scope.rulist, userPreferences.favorite_ru);
   }
 

@@ -14,9 +14,9 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
-    });
-    rulistservice.getMenus( function(menus){
-      $scope.menus = menus
+      rulistservice.getMenus( function(menus){
+        $scope.menus = menus
+      });
     });
   };
 
