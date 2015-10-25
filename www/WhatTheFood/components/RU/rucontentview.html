@@ -28,26 +28,21 @@
       </div>
 
       <div ng-repeat="menu in ru.menus">
-        <div ng-repeat="meal in menu.meal">
-          <div class="item" ng-if="meal.foodcategory">
-            <div ng-repeat-start="category in meal.foodcategory" ng-if="$first">
-              <strong>{{category.name}}</strong>
-              <br />
-              <div ng-repeat="dish in category.dishes">
-                - {{dish.name}}
-              </div>
-            </div>
-
-            <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
-              <div ng-class="paddingtop-menuitem">
-                <strong>{{category.name}}</strong>
-                <br />
-                <div ng-repeat="dish in category.dishes">
-                  - {{dish.name}}
-                </div>
-              </div>
-            </div>
-          </div>
+        <strong>
+          Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
+        </strong>
+        <br>
+        <strong>Entrées</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" style="white-space: normal;">
+          {{dish.name}}
+        </div>
+        <strong>Plats</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" style="white-space: normal;">
+          {{dish.name}}
+        </div>
+        <strong>Desserts</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" style="white-space: normal;">
+          {{dish.name}}
         </div>
       </div>
 

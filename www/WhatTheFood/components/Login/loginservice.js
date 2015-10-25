@@ -135,7 +135,9 @@ function($http, $q, $sessionStorage, $localStorage) {
     logout: function () {
       factory.settoken(null);
       $storage.facebook = false;
-      $localStorage.clear();
+      $sessionStorage.$reset();
+      $localStorage.$reset();
+      return false;
     },
 
     getfriendlist: function() {

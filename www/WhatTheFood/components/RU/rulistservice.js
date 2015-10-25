@@ -1,10 +1,6 @@
 wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '$q', 'loginservice', '$ionicLoading',
   function ($cordovaGeolocation, $http, $localStorage, $q, loginservice, $ionicLoading) {
 
-    var req = {
-      method: 'GET',
-      url: loginservice.getServerAPI() + '/restaurants'
-    };
 
 
     var factory = {
@@ -131,6 +127,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
       getRestaurants: function (callback) {
+
         // Ensure restaurants are defined as we depend on it
         if (factory.restaurants === undefined || factory.restaurants.length == 0) {
 
@@ -199,9 +196,17 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
       getrulist: function (lat, lng) {
-        req.params = {
-          lat: lat,
-          lng: lng
+        var req = {
+          method: 'GET',
+          url: loginservice.getServerAPI() + '/restaurants',
+          headers: {
+            "Authorization": "Bearer " + loginservice.gettoken()
+          },
+
+          params: {
+            lat: lat,
+            lng: lng
+          }
         };
 
         return $http(req).success(function (data, status, headers, config) {
