@@ -7,6 +7,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
       lastUpdate : new Date(),
       menusCallbacks:[],
       restaurantsCallbacks:[],
+      restaurantsById : {},
 
       storage: $localStorage.$default({
         restaurants: [],
@@ -88,7 +89,6 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           }
         })
 
-        console.log(factory.restaurants);
       },
 
       getMenus: function (callback) {
@@ -110,7 +110,6 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
           $http(req).success(
             function (menus) {
-              console.log(menus);
               factory.menus = menus;
               factory.updateMenusInRestaurants();
               factory.menusCallbacks.forEach(function (cb){
@@ -238,7 +237,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
             });
             restaurant.openingNow = restaurant.openingString[(now.getDay() + 6) % 7];
 
-            restaurant.queueInfoUpdatedAt = factory.lastUpdate;
+            restaurant.queueInfoUpdatedAt = new Date(restaurant.queue.updatedAt || factory.lastUpdate);
 
             return restaurant;
           });

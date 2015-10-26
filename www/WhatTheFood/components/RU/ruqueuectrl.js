@@ -13,9 +13,10 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
-    });
-    rulistservice.getMenus( function(menus){
-      $scope.menus = menus
+      rulistservice.getMenus( function(menus){
+        $scope.menus = menus
+        rulistservice.updateMenusInRestaurants();
+      });
     });
   };
 
@@ -44,13 +45,17 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
     };
 
     $http(req)
-    .success(function (data, status, headers, config) {
+    .success(function (data) {
       // this callback will be called asynchronously
       // when the response is available
       $ionicHistory.goBack();
+        var restaurant = rulistservice.restaurantsById[$scope.currentRu.id]
+        restaurant.queue.value = data.queue.value;
+        restaurant.queueInfoUpdatedAt = new Date(data.queue.updatedAt || rulistservice.lastUpdate);
+        console.log("queue info updated")
       return data;
     })
-    .error(function (data, status, headers, config) {
+    .error(function (data) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
       console.log(data);

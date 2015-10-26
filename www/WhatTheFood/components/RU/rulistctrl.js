@@ -17,6 +17,7 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
       $scope.currentRu = $scope.rulist[0];
       rulistservice.getMenus( function(menus){
         $scope.menus = menus;
+        rulistservice.updateMenusInRestaurants();
       });
     });
   };
