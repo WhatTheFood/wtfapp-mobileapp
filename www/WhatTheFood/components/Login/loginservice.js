@@ -7,10 +7,10 @@ function($http, $q, $sessionStorage, $localStorage) {
   });
 
 
-  //var serverAPI = "/api";
+  // var serverAPI = "/api";
   // Debug handy
-  var serverAPI = "http://localhost:5000/api"; // Local
-  // var serverAPI = "https://m.whatthefoodapp.fr/api"; //prod
+  //var serverAPI = "http://localhost:5000/api"; // Local
+  var serverAPI = "https://m.whatthefoodapp.fr/api"; //prod
 
   function utf8_to_b64(str) {
     return window.btoa(unescape(encodeURIComponent(str)));
