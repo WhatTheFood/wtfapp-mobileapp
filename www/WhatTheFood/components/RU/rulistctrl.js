@@ -1,9 +1,6 @@
 wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
 function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
 
-
-  console.info('Accessing list of RU.');
-
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
@@ -11,7 +8,6 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
   });
 
   $scope.update = function() {
-    console.info('INIT');
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];

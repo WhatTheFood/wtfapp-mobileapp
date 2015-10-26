@@ -16,6 +16,13 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
       $scope.currentRu = $scope.rulist[0];
       rulistservice.getMenus( function(menus){
         $scope.menus = menus
+        rulistservice.updateMenusInRestaurants();
+
+        $scope.currentRu = rulistservice.getCurrentRu();
+        if (! $scope.currentRu.id){
+          $scope.currentRu = rulistservice.getFavoriteRu();
+        }
+
       });
     });
   };
@@ -23,15 +30,6 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   $scope.init();
 
   /* populate combobox */
-  $scope.$watch('rulist', function (newValue, oldValue) {
-    if (newValue === undefined && oldValue === undefined) { return; }
-
-    if (newValue !== undefined) {
-      $scope.currentRu = $scope.rulist[0];
-    }
-  });
-
-  $scope.currentRu = undefined;
 
   $scope.entree = 0;
   $scope.plat = 0;

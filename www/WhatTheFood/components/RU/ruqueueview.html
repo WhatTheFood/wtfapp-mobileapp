@@ -1,4 +1,4 @@
-<ion-view view-title="File d'attente">
+<ion-view view-title="File d'attente"  cache-view="false">
     <ion-content class="padding">
         <div class="list item-text-wrap">
             <div class="item">
@@ -7,7 +7,7 @@
                 <div class="input-label">
                     Du RU :
                 </div>
-                <select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist"></select>
+                <select ng-model="$parent.currentRu" ng-options="r as r.title for r in rulist  | orderBy:['-favorite','distance']"></select>
             </label>
             <ion-list class="list">
                 <ion-item class="item item-icon-left item-icon-right"

@@ -2,18 +2,54 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
   function ($cordovaGeolocation, $http, $localStorage, $q, loginservice, $ionicLoading) {
 
 
-
     var factory = {
-      lastUpdate : new Date(),
-      menusCallbacks:[],
-      restaurantsCallbacks:[],
-      restaurantsById : {},
+      lastUpdate: new Date(),
+      menusCallbacks: [],
+      restaurantsCallbacks: [],
+      restaurantsById: {},
+
+      currentRu: 0,
+      currentRuSelected: new moment(0),
+      favoriteRu: 0,
 
       storage: $localStorage.$default({
         restaurants: [],
         feedback: [],
-        menus: []
+        menus: [],
+        currentRu: 0,
+        currentRuSelected: new moment(0),
+        favoriteRu: 0
       }),
+
+
+      setFavoriteRu: function (idFavoriteRu) {
+        factory.getFavoriteRu().favorite = 0;
+        factory.storage.favoriteRu = idFavoriteRu;
+        factory.getFavoriteRu().favorite = 1;
+      },
+
+      getFavoriteRu: function () {
+        if (factory.storage.favoriteRu && factory.storage.favoriteRu > 0) {
+          return factory.restaurantsById[factory.storage.favoriteRu];
+        } else {
+          return {};
+        }
+      },
+
+      getCurrentRu: function () {
+        if (factory.storage.currentRu && factory.storage.currentRu > 0) {
+          return factory.restaurantsById[factory.storage.currentRu];
+        } else {
+          return {};
+        }
+      },
+
+
+      setCurrentRu: function (favoriteRu) {
+        factory.storage.currentRu = currentRu;
+        factory.storage.currentRuSelected = new moment();
+      },
+
 
       getPosition: function (errorCallback) {
         var defer = $q.defer();
@@ -54,53 +90,53 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         return "error";
       },
 
-      updateMenusInRestaurants: function (){
+      updateMenusInRestaurants: function () {
         factory.restaurantsById = {};
 
         factory.restaurants.forEach(
-          function(restaurant) {
-            restaurant.menusByDay={};
+          function (restaurant) {
+            restaurant.menusByDay = {};
             factory.restaurantsById[restaurant.id] = restaurant;
           });
 
-        factory.menus.forEach(function (menu){
-          if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] ) {
+        factory.menus.forEach(function (menu) {
+          if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date]) {
             factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date].push(menu);
           }
           else {
-            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [ menu ];
+            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [menu];
           }
 
         })
 
-        factory.restaurants.forEach(function(restaurant){
+        factory.restaurants.forEach(function (restaurant) {
           restaurant.menusToday = restaurant.menusByDay[moment().format("YYYY-MM-DD")];
-          if (!restaurant.menusToday){
+          if (!restaurant.menusToday) {
             restaurant.menusToday = [];
             var daymin;
-            for (day in restaurant.menusByDay){
-              if (!daymin){
+            for (day in restaurant.menusByDay) {
+              if (!daymin) {
                 daymin = day;
-              } else if (daymin>day){
-                daymin =day
+              } else if (daymin > day) {
+                daymin = day
               }
             }
-            restaurant.menusToday  = restaurant.menusByDay[daymin];
+            restaurant.menusToday = restaurant.menusByDay[daymin];
           }
         })
 
       },
 
       getMenus: function (callback) {
-       if (factory.menus === undefined || factory.menus.length == 0) {
+        if (factory.menus === undefined || factory.menus.length == 0) {
 
-         factory.menusCallbacks.push(callback);
+          factory.menusCallbacks.push(callback);
 
-         if (factory.menusCallbacks[0] != callback){
-           return;
-         }
+          if (factory.menusCallbacks[0] != callback) {
+            return;
+          }
 
-         var req = {
+          var req = {
             method: 'GET',
             url: loginservice.getServerAPI() + '/menus/list',
             headers: {
@@ -112,9 +148,9 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
             function (menus) {
               factory.menus = menus;
               factory.updateMenusInRestaurants();
-              factory.menusCallbacks.forEach(function (cb){
+              factory.menusCallbacks.forEach(function (cb) {
                 cb(factory.menus);
-                factory.menusCallbacks=[];
+                factory.menusCallbacks = [];
               })
             }
           ).error(this.ERROR_HANDLER);
@@ -124,7 +160,6 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
       },
 
 
-
       getRestaurants: function (callback) {
 
         // Ensure restaurants are defined as we depend on it
@@ -132,14 +167,14 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
           factory.restaurantsCallbacks.push(callback);
 
-          if (factory.restaurantsCallbacks[0] != callback){
+          if (factory.restaurantsCallbacks[0] != callback) {
             return;
           }
 
           var successCallback = function (data) {
             this.msg = "Voici les RUs près de vous";
             factory.restaurants = data;
-            factory.restaurantsCallbacks.forEach(function (cb){
+            factory.restaurantsCallbacks.forEach(function (cb) {
               cb(factory.restaurants);
             })
             factory.restaurantsCallbacks = [];
@@ -169,6 +204,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
             if (result.data.length > 0) {
               var data2 = result.data.map(function (val) {
                 val.distance = Math.round(val.distance);
+                val.favorite = ( val.id == factory.storage.favoriteRu)
                 return val;
               });
 
