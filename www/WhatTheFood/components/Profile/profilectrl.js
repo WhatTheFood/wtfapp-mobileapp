@@ -51,10 +51,7 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
       rulistservice.getMenus( function(menus){
-        $scope.menus = menus
-        rulistservice.updateMenusInRestaurants();
-
-
+        $scope.menus = menus;
         User.query('me').then(function (response) {
           $scope.user = response.data;
           initGroups($scope.groups, response.data.preferences);

@@ -1,6 +1,6 @@
-wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
+wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice','User',
 
-function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
+function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice,User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -11,20 +11,25 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
   $scope.init = function() {
 
-    rulistservice.getRestaurants(function(restaurants){
-      $scope.rulist = restaurants;
+    User.query('me').then(function(res) {
+      var user = res.data;
+      rulistservice.getRestaurants(function (restaurants) {
+        $scope.rulist = restaurants;
 
-      rulistservice.getMenus( function(menus){
-        $scope.menus = menus
-        rulistservice.updateMenusInRestaurants();
+        rulistservice.getMenus(function (menus) {
+          $scope.menus = menus
+          if (user.currentRu){
+            rulistservice.setCurrentRu(user.currentRu)
+          }
+          $scope.currentRu = rulistservice.getCurrentRu();
+          if (!$scope.currentRu.id) {
+            $scope.currentRu = rulistservice.getFavoriteRu() || restaurants[0];
+          }
+          if (!$scope.currentRu.id) {
+            $scope.currentRu = restaurants[0];
+          }
 
-        if (!$scope.currentRu){
-          $scope.currentRu =  rulistservice.getFavoriteRu();
-        } else {
-          $scope.currentRu = {};
-        }
-
-
+        });
       });
     });
   };
@@ -55,13 +60,12 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
     $http(req)
     .success(function (data) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $ionicHistory.goBack();
-        var restaurant = rulistservice.restaurantsById[$scope.currentRu.id]
+        rulistservice.setCurrentRu($scope.currentRu.id)
+        var restaurant = $scope.currentRu;
         restaurant.queue.value = data.queue.value;
         restaurant.queueInfoUpdatedAt = new Date(data.queue.updatedAt || rulistservice.lastUpdate);
-        console.log("queue info updated")
+        $scope.currentRu = rulistservice.getCurrentRu();
+        $ionicHistory.goBack();
       return data;
     })
     .error(function (data) {

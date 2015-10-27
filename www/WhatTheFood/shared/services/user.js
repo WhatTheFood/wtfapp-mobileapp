@@ -42,9 +42,16 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
         };
 
         return $http(req)
-        .success(function (data, status, headers, config) {
-          factory.storage = data;
-          return data;
+        .success(function (user, status, headers, config) {
+            factory.storage = user; // ??
+            if (user.lastQueueFeeback){
+              var lastQueueFeeback = user.lastQueueFeeback;
+              if (moment(lastQueueFeeback.currentRuSelectedAt).diff(moment(),'minutes') < 60){
+                user.currentRu = lastQueueFeeback.currentRu;
+                user.currentRuSelectedAt = lastQueueFeeback.currentRuSelectedAt;
+              }
+            }
+          return user;
         })
         .error(function (data, status, headers, config) {
           console.error("Error: ", data);

@@ -9,7 +9,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
       restaurantsById: {},
 
       currentRu: 0,
-      currentRuSelected: new moment(0),
+      currentRuSelectedAt: new moment(0),
       favoriteRu: 0,
 
       storage: $localStorage.$default({
@@ -17,7 +17,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         feedback: [],
         menus: [],
         currentRu: 0,
-        currentRuSelected: new moment(0),
+        currentRuSelectedAt: new moment(0),
         favoriteRu: 0
       }),
 
@@ -36,6 +36,13 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         }
       },
 
+      setCurrentRu: function (idFavoriteRu) {
+        factory.getCurrentRu().current = 0;
+        factory.storage.currentRu = idFavoriteRu;
+        factory.getCurrentRu().current = 1;
+        factory.storage.currentRuSelectedAt = new moment();
+      },
+
       getCurrentRu: function () {
         if (factory.storage.currentRu && factory.storage.currentRu > 0) {
           return factory.restaurantsById[factory.storage.currentRu];
@@ -43,13 +50,6 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           return {};
         }
       },
-
-
-      setCurrentRu: function (favoriteRu) {
-        factory.storage.currentRu = currentRu;
-        factory.storage.currentRuSelected = new moment();
-      },
-
 
       getPosition: function (errorCallback) {
         var defer = $q.defer();

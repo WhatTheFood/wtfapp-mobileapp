@@ -20,6 +20,10 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User
             if (user.favoriteRu) {
               rulistservice.setFavoriteRu(user.favoriteRu)
             }
+            if (user.currentRuUpdated && user.currentRuUpdate) {
+              rulistservice.setCurrentRu(user.favoriteRu)
+            }
+
           });
         });
       })
