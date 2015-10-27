@@ -25,24 +25,13 @@ wtf.controller('lunchthanksctrl', ['$scope', '$state', '$ionicHistory', 'loginse
       $scope.averageDishScore = Math.floor(avg);
     }
 
-    var execute = function () {
-      User.updatePoints('lunch-quizz');
-    };
+    User.query('me')
+      .then(function(res) {
+        var user = res.data;
+        $scope.user = user;
+      }
+    );
 
-    if (!User.storage._id) {
-      User.query('me').then(function (response) {
-        $scope.user = response.data;
-      });
-
-      $scope.$watch('user', function (newValue) {
-        if (newValue !== undefined) {
-          execute();
-        }
-      });
-
-    } else {
-      execute();
-    }
 
   }])
 

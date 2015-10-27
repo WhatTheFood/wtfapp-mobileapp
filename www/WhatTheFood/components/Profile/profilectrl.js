@@ -46,7 +46,8 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
   ];
 
   $scope.init = function() {
- rulistservice.getRestaurants(function(restaurants){
+
+    rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       $scope.currentRu = $scope.rulist[0];
       rulistservice.getMenus( function(menus){

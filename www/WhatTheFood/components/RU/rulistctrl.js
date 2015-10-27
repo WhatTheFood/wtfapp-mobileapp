@@ -1,5 +1,5 @@
-wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
-function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice','User',
+function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -8,15 +8,23 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
   });
 
   $scope.update = function() {
-    rulistservice.getRestaurants(function(restaurants){
-      $scope.rulist = restaurants;
-      $scope.currentRu = $scope.rulist[0];
-      rulistservice.getMenus( function(menus){
-        $scope.menus = menus;
-        rulistservice.updateMenusInRestaurants();
-      });
-    });
+    User.query('me')
+      .then(
+      function(res) {
+        var user = res.data;
+        rulistservice.getRestaurants(function (restaurants) {
+          $scope.rulist = restaurants;
+          $scope.currentRu = $scope.rulist[0];
+          rulistservice.getMenus(function (menus) {
+            $scope.menus = menus;
+            if (user.favoriteRu) {
+              rulistservice.setFavoriteRu(user.favoriteRu)
+            }
+          });
+        });
+      })
   };
+
   $scope.isFreshInfo = function(updatedAt){
     return moment().diff(updatedAt,'minutes') < 15
   }
