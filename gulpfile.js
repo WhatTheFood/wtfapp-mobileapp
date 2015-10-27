@@ -12,7 +12,7 @@ var minify = require('gulp-minify');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  js: ['./www/js/*.js','./www/WhatTheFood/shared/*.js','./www/WhatTheFood/components/**/*.js']
+  js: ['./www/js/*.js','./www/WhatTheFood/shared/*.js','./www/WhatTheFood/shared/**/*.js','./www/WhatTheFood/components/**/*.js']
 };
 
 

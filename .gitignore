@@ -6,6 +6,7 @@
 
 www/lib
 
+dist/
 platforms/
 plugins/
 node_modules/
