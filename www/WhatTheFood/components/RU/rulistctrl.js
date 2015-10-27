@@ -17,6 +17,9 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice) {
       });
     });
   };
+  $scope.isFreshInfo = function(updatedAt){
+    return moment().diff(updatedAt,'minutes') < 15
+  }
 
   $scope.update();
 
