@@ -624,22 +624,3 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
     background: #666;
     margin: 5px;
 }
-
-.score {
-    margin: auto;
-    width: 160px;
-}
-
-.score img {
-    height: 50px;
-    margin-right: 10px;
-}
-
-.score span {
-    font-weight: bold;
-    font-size: 2em;
-    line-height: 50px;
-    color: black;
-}
-
-
