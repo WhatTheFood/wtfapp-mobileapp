@@ -70,6 +70,7 @@ p, h1, h2, h3, h4, h5 {
 
 .item-ru > a {
     background: -webkit-linear-gradient(left, #943b27, #ea5d3d);
+    background: linear-gradient(to right, #943b27, #ea5d3d);
 }
 
 .item-ru {
@@ -87,6 +88,7 @@ p, h1, h2, h3, h4, h5 {
 
 .question-lunch {
     background: -webkit-linear-gradient(left, #ffffff, #8C8C8C);
+    background: linear-gradient(to right, #ffffff, #8C8C8C);
     font-size: 1.5em;
     text-align: center;
     color: black;
@@ -99,6 +101,7 @@ p, h1, h2, h3, h4, h5 {
 
 .lunch-scale {
     background: -webkit-linear-gradient(left, #13E6A4, #B3D72B, #FB4D26);
+    background: linear-gradient(to right, #13E6A4, #B3D72B, #FB4D26);
     height: 10px;
     position: absolute;
     top: 30px;
@@ -257,6 +260,7 @@ body > ion-nav-view > ion-side-menus > ion-side-menu-content > a.item {
 
 body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content > div.scroll > ul > a.item {
     background: -webkit-linear-gradient(left, #943b27, #ea5d3d);
+    background: linear-gradient(to right, #943b27, #ea5d3d);
     color: #fff;
     font-weight: 800;
     border-width: 0px;
@@ -620,22 +624,3 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
     background: #666;
     margin: 5px;
 }
-
-.score {
-    margin: auto;
-    width: 160px;
-}
-
-.score img {
-    height: 50px;
-    margin-right: 10px;
-}
-
-.score span {
-    font-weight: bold;
-    font-size: 2em;
-    line-height: 50px;
-    color: black;
-}
-
-

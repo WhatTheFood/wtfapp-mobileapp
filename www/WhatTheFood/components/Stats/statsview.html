@@ -2,22 +2,38 @@
         <ion-tabs id="stats" class="tabs-top">
 
             <ion-tab title="Moi">
-                <ion-content class="padding">
-                <div>
+                <ion-content class="no-padding">
+                <div class="list item-text-wrap no-border-list no-padding lunchmenu">
 
                     <div class="item level">
-                        Votre niveau : Mini Toqué:
-
+                        Votre niveau : Mini Toqué
+                        <div class="level-icon">
+                            <img src="img/picto_level_1_orange.png" width="100" height="100" />
+                            <img src="img/picto_level_2.png" width="70" height="70"/>
+                            <img src="img/picto_level_3.png" width="70" height="70"/>
+                            <img src="img/picto_level_4.png" width="70" height="70"/>
+                        </div>
+                        <div class="level-progress">
+                            <div class="level-step"></div>
+                        </div>
+                        <div class="level-text">
+                            <div>&nbsp;</div>
+                            <div>50</div>
+                            <div>250</div>
+                            <div>650</div>
+                            <div>&nbsp;</div>
+                        </div>
                     </div>
 
                     <div class="item stats-points">
                         <p>
                         Mon implication assidue sur WTF m’a permis de cuisiner :
                         </p>
-                        <p class="score">
-                            <img src="img/coupe.png">
-                            <span>{{stats.me.score || 0}} PTS (Patates Trop Stylées)</span>
-                        </p>
+                        <div class="score">
+                            <img src="img/coupe.png" />
+                            <div>{{stats.me.score || 0}} PTS</div><br />
+                            <div class="small">(Patates Trop Stylées)</div>
+                        </div>
 
                         <p>
                             Grâce à moi, le CROUS va prendre en compte nos feedbacks et je finirai mon plateau à chaque repas à m’en lécher les babines car le gaspi salsifis!
@@ -29,7 +45,22 @@
             </ion-tab>
 
             <ion-tab title="RUs">
-                <ion-content class="padding">
+                <ion-content class="no-padding">
+                <div class="list item-text-wrap no-border-list no-padding lunchmenu">
+                    <div class="podium">
+                    <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
+                        <div class="col-10 rang">{{$index + 1}}</div>
+                        <div class="col-66 name">{{restaurant.name}}</div>
+                        <div class="col pts">{{restaurant.score}}</div>
+                    </div>
+                    </div>
+                </div>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Amis">
+                <ion-content class="no-padding">
+                <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="item ">
                     En continuant de m’impliquer chaque jour, je fais grimper mon RU dans le classement grâce à mes PTS !
 
@@ -43,18 +74,7 @@
                             <div class="col pts">{{friend.score}}</div>
                         </div>
                     </div>
-                </ion-content>
-            </ion-tab>
-
-            <ion-tab title="Amis">
-                <ion-content>
-                    <div class="podium">
-                    <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
-                        <div class="col-10 rang">{{$index + 1}}</div>
-                        <div class="col-66 name">{{restaurant.name}}</div>
-                        <div class="col pts">{{restaurant.score}}</div>
-                    </div>
-                    </div>
+                </div>
                 </ion-content>
             </ion-tab>
 
