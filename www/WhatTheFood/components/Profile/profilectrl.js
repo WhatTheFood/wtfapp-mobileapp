@@ -46,47 +46,49 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
   ];
 
   $scope.init = function() {
+    User.query('me')
+      .then(function (response) {
+        $scope.user = response.data;
+        rulistservice.getRestaurants(function (restaurants) {
+          rulistservice.getMenus(function (menus) {
 
-    rulistservice.getRestaurants(function(restaurants){
-      $scope.rulist = restaurants;
-      $scope.currentRu = $scope.rulist[0];
-      rulistservice.getMenus( function(menus){
-        $scope.menus = menus;
-        User.query('me').then(function (response) {
-          $scope.user = response.data;
-          initGroups($scope.groups, response.data.preferences);
-          if ($scope.user.favoriteRu) {
-            rulistservice.setFavoriteRu($scope.user.favoriteRu)
-          }
-          $scope.favoriteRu = rulistservice.getFavoriteRu();
+            $scope.rulist = restaurants;
+            $scope.currentRu = $scope.rulist[0];
+            $scope.menus = menus;
+            rulistservice.updateUserPreference($scope.user);
+            initGroups($scope.groups, response.data.preferences);
+            $scope.favoriteRu = rulistservice.getFavoriteRu();
 
-          $scope.$watch('user.favoriteRu', function (newValue,oldValue) {
 
-            if ( oldValue &&  (newValue != oldValue)) {
-              User.updatePreferences('favoriteRu',newValue);
-            }
-            return newValue;
-          });
+            console.log("VEFORE WATCH", response);
+            $scope.$watch('favoriteRu', function (newValue, oldValue) {
+              console.log(2, "\n", newValue, "\n", oldValue)
+              if (newValue) {
 
-        });
+                if( $scope.user.favoriteRu != newValue.id ) {
+                  User.updatePreferences('favoriteRu', newValue.id);
+                }
 
+                rulistservice.setFavoriteRu(newValue.id);
+
+                if ($scope.user.favoriteRu != newValue.id) {
+                  $scope.user.favoriteRu = newValue.id
+                }
+              }
+              return newValue;
+            });
+
+
+
+          })
+        })
       });
 
-    });
-  };
+  }
 
   $scope.init();
 
 
-  $scope.$watch('favoriteRu', function (newValue) {
-    if (newValue) {
-      rulistservice.setFavoriteRu(newValue.id);
-      if ($scope.user.favoriteRu != newValue.id){
-        $scope.user.favoriteRu = newValue.id
-      }
-    }
-    return newValue;
-  });
 
 
   /*

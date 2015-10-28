@@ -14,18 +14,13 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User
         var user = res.data;
         rulistservice.getRestaurants(function (restaurants) {
           $scope.rulist = restaurants;
-          $scope.currentRu = $scope.rulist[0];
           rulistservice.getMenus(function (menus) {
+            rulistservice.updateUserPreference(user);
             $scope.menus = menus;
-            if (user.favoriteRu) {
-              rulistservice.setFavoriteRu(user.favoriteRu)
-            }
-            if (user.currentRuUpdated && user.currentRuUpdate) {
-              rulistservice.setCurrentRu(user.favoriteRu)
-            }
-
+            $scope.currentRu = rulistservice.getCurrentRu();
           });
         });
+
       })
   };
 

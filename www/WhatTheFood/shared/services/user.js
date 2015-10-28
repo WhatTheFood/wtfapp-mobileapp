@@ -46,7 +46,7 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
             factory.storage = user; // ??
             if (user.lastQueueFeeback){
               var lastQueueFeeback = user.lastQueueFeeback;
-              if (moment(lastQueueFeeback.currentRuSelectedAt).diff(moment(),'minutes') < 60){
+              if (moment().diff(lastQueueFeeback.updatedAt,'minutes') < 60){
                 user.currentRu = lastQueueFeeback.currentRu;
                 user.currentRuSelectedAt = lastQueueFeeback.currentRuSelectedAt;
               }

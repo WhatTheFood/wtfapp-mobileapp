@@ -11,12 +11,11 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
 
 
   $scope.init = function() {
-    console.log("init",rulistservice.getCurrentRu())
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
       rulistservice.getMenus( function(menus){
         $scope.menus = menus
-        $scope.currentRu = rulistservice.getCurrentRu();
+        $scope.currentRu = rulistservice.getDefaultCurrentRu();
       });
     });
   };

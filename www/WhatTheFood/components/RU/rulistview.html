@@ -11,7 +11,7 @@
     </div>
 
     <ion-list class="list" can-swipe="true">
-      <div ng-if="data.searchQuery" ng-repeat="ru in rulist  | orderBy:['-favorite','distance'] |  filter: data.searchQuery">
+      <div ng-if="data.searchQuery" ng-repeat="ru in rulist  | orderBy:['-current','-favorite','distance'] |  filter: data.searchQuery">
         <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}" ng-if="$first">
           <div>
             <img ng-if="getClockImage(ru.queue.value)" ng-src="{{getClockImage(ru.queue.value)}}" class="clock" alt="clock" />
@@ -22,7 +22,7 @@
           </div>
         </ion-item>
       </div>
-      <div ng-if="!data.searchQuery" ng-repeat="ru in rulist  | orderBy:['-favorite','distance']">
+      <div ng-if="!data.searchQuery" ng-repeat="ru in rulist  | orderBy:['-current','-favorite','distance']">
 
       <ion-item class="item item-icon-left item-icon-right item-ru" href="#/wtf/rucontent/{{ru.id}}">
 

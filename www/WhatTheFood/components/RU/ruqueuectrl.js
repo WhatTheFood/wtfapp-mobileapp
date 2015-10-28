@@ -13,22 +13,12 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
     User.query('me').then(function(res) {
       var user = res.data;
+      console.log(user)
       rulistservice.getRestaurants(function (restaurants) {
         $scope.rulist = restaurants;
-
         rulistservice.getMenus(function (menus) {
-          $scope.menus = menus
-          if (user.currentRu){
-            rulistservice.setCurrentRu(user.currentRu)
-          }
-          $scope.currentRu = rulistservice.getCurrentRu();
-          if (!$scope.currentRu.id) {
-            $scope.currentRu = rulistservice.getFavoriteRu() || restaurants[0];
-          }
-          if (!$scope.currentRu.id) {
-            $scope.currentRu = restaurants[0];
-          }
-
+          rulistservice.updateUserPreference(user);
+          $scope.currentRu = rulistservice.getDefaultCurrentRu();
         });
       });
     });

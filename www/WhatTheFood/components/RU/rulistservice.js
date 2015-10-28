@@ -50,8 +50,18 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           return {};
         }
       },
+      getDefaultCurrentRu: function () {
+        var defaultRu = factory.getCurrentRu();
+        if (!defaultRu.id) {
+          defaultRu = factory.getFavoriteRu();
+        }
+        if (!defaultRu.id) {
+          defaultRu = factory.restaurants[0];
+        }
+        return defaultRu;
+      },
 
-      getPosition: function (errorCallback) {
+    getPosition: function (errorCallback) {
         var defer = $q.defer();
 
         var positionOptions = {
@@ -127,7 +137,12 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
       },
 
-      getMenus: function (callback) {
+      updateUserPreference: function(user) {
+        factory.setCurrentRu(user.currentRu || 0);
+        factory.setFavoriteRu(user.favoriteRu || 0);
+      },
+
+    getMenus: function (callback) {
         if (factory.menus === undefined || factory.menus.length == 0) {
 
           factory.menusCallbacks.push(callback);
@@ -204,7 +219,8 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
             if (result.data.length > 0) {
               var data2 = result.data.map(function (val) {
                 val.distance = Math.round(val.distance);
-                val.favorite = ( val.id == factory.storage.favoriteRu)
+                val.favorite = ( val.id == factory.storage.favoriteRu)?1:0;
+                val.current = (val.id == factory.storage.currentRu)?1:0;
                 return val;
               });
 
