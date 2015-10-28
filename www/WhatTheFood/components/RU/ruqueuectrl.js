@@ -13,7 +13,7 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
     User.query('me').then(function(res) {
       var user = res.data;
-      console.log(user)
+
       rulistservice.getRestaurants(function (restaurants) {
         $scope.rulist = restaurants;
         rulistservice.getMenus(function (menus) {
@@ -61,7 +61,7 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
     .error(function (data) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
-      console.log(data);
+      console.error(data);
       return "error";
     });
   };
