@@ -53,11 +53,16 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       }
     },
 
-    updatePreferences: function (preferences) {
+    updatePreferences: function (key,value) {
       var req = {
-        method: 'POST',
+        method: 'PUT',
         dataType: 'json',
-        data: preferences,
+        data: {
+          preferences: [{
+            key:key,
+            value:value
+          }]
+        },
         url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
@@ -75,10 +80,8 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
     getPreferences: function (preferences) {
       var req = {
         method: 'GET',
-        dataType: 'json',
         url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
         }
       };

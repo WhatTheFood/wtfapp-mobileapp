@@ -10,12 +10,21 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
 
   $scope.init = function() {
+
     rulistservice.getRestaurants(function(restaurants){
       $scope.rulist = restaurants;
-      $scope.currentRu = $scope.rulist[0];
+
       rulistservice.getMenus( function(menus){
         $scope.menus = menus
         rulistservice.updateMenusInRestaurants();
+
+        if (!$scope.currentRu){
+          $scope.currentRu =  rulistservice.getFavoriteRu();
+        } else {
+          $scope.currentRu = {};
+        }
+
+
       });
     });
   };

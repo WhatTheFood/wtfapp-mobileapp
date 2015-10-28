@@ -10,7 +10,8 @@
     "openfb": "*",
     "ng-walkthrough": "WhatTheFood/ng-walkthrough#0.2.5.wtf",
     "angular-moment": "0.10.3",
-    "angular-animate": "angular/bower-angular-animate#1.4.7"
+    "angular-animate": "angular/bower-angular-animate#1.4.7",
+    "moment-timezone": "~0.4.1"
   },
   "resolutions": {
     "angular": "1.4.7",

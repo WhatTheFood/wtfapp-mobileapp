@@ -7,11 +7,37 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
+var minify = require('gulp-minify');
+
+
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  js: ['./www/js/*.js','./www/WhatTheFood/shared/*.js','./www/WhatTheFood/shared/**/*.js','./www/WhatTheFood/components/**/*.js']
 };
 
-gulp.task('default', ['sass']);
+
+/*
+ gulp.task('watch', function() {
+ gulp.watch(paths.js, ['concat']);
+ });
+ */
+
+
+gulp.task('concat', function() {
+  return gulp.src(paths.js)
+    .pipe(concat('app-bundle.js'))
+    .pipe(gulp.dest('./www/dist/'));
+});
+
+
+gulp.task('minify', ['concat'],function() {
+  return gulp.src('./www/dist/app-bundle.js')
+    .pipe(minify({mangle:false}))
+    .pipe(gulp.dest('./www/dist'));
+});
+
+
+
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -48,3 +74,7 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+gulp.task('concat-and-minify', ['concat','minify']);
+
+gulp.task('default', ['concat-and-minify']);
