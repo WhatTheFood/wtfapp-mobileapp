@@ -59,27 +59,18 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
             initGroups($scope.groups, response.data.preferences);
             $scope.favoriteRu = rulistservice.getFavoriteRu();
 
-
-            console.log("VEFORE WATCH", response);
             $scope.$watch('favoriteRu', function (newValue, oldValue) {
-              console.log(2, "\n", newValue, "\n", oldValue)
               if (newValue) {
-
                 if( $scope.user.favoriteRu != newValue.id ) {
                   User.updatePreferences('favoriteRu', newValue.id);
                 }
-
                 rulistservice.setFavoriteRu(newValue.id);
-
                 if ($scope.user.favoriteRu != newValue.id) {
                   $scope.user.favoriteRu = newValue.id
                 }
               }
               return newValue;
             });
-
-
-
           })
         })
       });
