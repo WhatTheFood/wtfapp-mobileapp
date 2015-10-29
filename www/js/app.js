@@ -28,7 +28,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
     $ionicConfigProvider.backButton.icon('ion-chevron-left');
   }])
 
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
 
     // FB init
     openFB.init({appId: '443745395811172'});
@@ -37,6 +38,20 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
+
+      var FULLRESOLVER =  {
+        rulist: function (rulistservice) {
+
+          return rulistservice.getRestaurantsD()
+        },
+        menus: function (rulistservice) {
+          return  rulistservice.getMenusD()
+        },
+        user: function (User) {
+          return User.queryD('me')
+        }
+      }
+
     $stateProvider
 
       // setup an abstract state for the tabs directive
@@ -76,16 +91,10 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/RU/rulistview.html',
             controller: 'rulistctrl'
           }
-        } /* FIXME ??? : contrairement à ce que dis la doc ça ne fonctionne pas ( ?? pb de version ??? )
-        c.f. https://github.com/angular-ui/ui-router/wiki
-        ,
-        controller: function($scope){
-         $scope.showQueueTipActive = false;
         },
-        onEnter: function(showQueueTipActive){ <-- error
-         showQueueTipActive = true;
-        }
-        */
+        resolve: FULLRESOLVER
+
+
       })
 
       .state('wtf.rucontent', {
@@ -115,7 +124,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/RU/ruqueueview.html',
             controller: 'ruqueuectrl'
           }
-        }
+        },
+        resolve: FULLRESOLVER
       })
 
       .state('wtf.lunch', {
@@ -125,7 +135,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Lunch/lunchstartview.html',
             controller: 'lunchstartctrl'
           }
-        }
+        },
+        resolve: FULLRESOLVER
       })
 
       .state('wtf.quizz', {
@@ -135,7 +146,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Lunch/lunchquizzview.html',
             controller: 'lunchquizzctrl'
           }
-        }
+        },
+        resolve: FULLRESOLVER
       })
 
       .state('wtf.thanks', {
@@ -155,7 +167,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Profile/profileview.html',
             controller: 'profilectrl'
           }
-        }
+        },
+        resolve: FULLRESOLVER
       })
 
       .state('wtf.stats', {
@@ -177,3 +190,4 @@ wtf.constant('angularMomentConfig', {
     preprocess: 'utc',
     timezone: 'Europe/Paris'
   });
+

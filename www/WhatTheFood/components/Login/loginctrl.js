@@ -3,13 +3,13 @@ function ($scope, $state, $stateParams, $http, loginservice, $cordovaOauth, $ion
 
   if (loginservice.islogged()) {
     console.info('Redirecting user to list of RU, already logged in.');
-    $state.go('wtf.rulist');
+    console.log( $state.go('wtf.rulist') );
     return;
   }
 
   $scope.gohome = function (){
     console.info('Redirecting user to list of RU.');
-    $state.go('wtf.rulist');
+    $state.go('wtf.rulist')
   };
 
   $scope.submitFormSignUp = function (form) {

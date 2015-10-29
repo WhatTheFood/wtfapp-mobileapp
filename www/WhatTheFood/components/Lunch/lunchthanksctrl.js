@@ -1,6 +1,6 @@
-wtf.controller('lunchthanksctrl', ['$scope', '$state', '$ionicHistory', 'loginservice', 'rulistservice', 'User',
+wtf.controller('lunchthanksctrl', ['$scope', '$state', '$ionicHistory', 'loginservice', 'rulistservice', 'user','rulist','menus',
 
-  function ($scope, $state, $ionicHistory, loginservice, rulistservice, User) {
+  function ($scope, $state, $ionicHistory, loginservice, rulistservice, user,rulist,menus) {
 
     if (!loginservice.islogged()) {
       $state.go('login');
@@ -25,13 +25,7 @@ wtf.controller('lunchthanksctrl', ['$scope', '$state', '$ionicHistory', 'loginse
       $scope.averageDishScore = Math.floor(avg);
     }
 
-    User.query('me')
-      .then(function(res) {
-        var user = res.data;
-        $scope.user = user;
-      }
-    );
-
+    $scope.user = user;
 
   }])
 

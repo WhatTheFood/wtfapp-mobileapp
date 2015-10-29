@@ -1,34 +1,31 @@
-wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice','User',
-function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User) {
+
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice','user','rulist','menus',
+function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, user,rulist,menus) {
+
+
+  console.log(user,rulist,menus);
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
+  /*
   $ionicLoading.show({
     template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
+*/
 
-  $scope.update = function() {
-    User.query('me')
-      .then(
-      function(res) {
-        var user = res.data;
-        rulistservice.getRestaurants(function (restaurants) {
-          $scope.rulist = restaurants;
-          rulistservice.getMenus(function (menus) {
-            rulistservice.updateUserPreference(user);
-            $scope.menus = menus;
-            $scope.currentRu = rulistservice.getCurrentRu();
-          });
-        });
+  rulistservice.updateMenusInRestaurants();
+  rulistservice.updateUserPreference(user);
 
-      })
-  };
+  $scope.rulist = rulist;
+
+  $scope.currentRu = rulistservice.getCurrentRu();
+  console.log($scope)
+  $scope.menus = menus;
 
   $scope.isFreshInfo = function(updatedAt){
     return moment().diff(updatedAt,'minutes') < 15
   }
 
-  $scope.update();
 
   $scope.data = {};
   $scope.data.showSearch = true;

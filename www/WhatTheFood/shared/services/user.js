@@ -42,7 +42,7 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
         };
 
         return $http(req)
-        .success(function (user, status, headers, config) {
+          .success(function (user, status, headers, config) {
             factory.storage = user; // ??
             if (user.lastQueueFeeback){
               var lastQueueFeeback = user.lastQueueFeeback;
@@ -51,12 +51,45 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
                 user.currentRuSelectedAt = lastQueueFeeback.currentRuSelectedAt;
               }
             }
-          return user;
-        })
-        .error(function (data, status, headers, config) {
-          console.error("Error: ", data);
-          return data;
-        });
+            return user;
+          })
+          .error(function (data, status, headers, config) {
+            console.error("Error: ", data);
+            return data;
+          });
+      }
+    },
+
+    queryD: function (userId) {
+      if (userId !== null && userId !== undefined) {
+
+        var req = {
+          method: 'GET',
+          dataType: 'json',
+          url: loginservice.getServerAPI() +'/users/'+ userId,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + loginservice.gettoken()
+          }
+        };
+
+        return $http(req)
+          .then(function (res) {
+            var user = res.data
+            factory.storage = user; // ??
+            if (user.lastQueueFeeback){
+              var lastQueueFeeback = user.lastQueueFeeback;
+              if (moment().diff(lastQueueFeeback.updatedAt,'minutes') < 60){
+                user.currentRu = lastQueueFeeback.currentRu;
+                user.currentRuSelectedAt = lastQueueFeeback.currentRuSelectedAt;
+              }
+            }
+            return user;
+          },function (data, status, headers, config) {
+            console.error("Error: ", data);
+            return data;
+          })
+
       }
     },
 

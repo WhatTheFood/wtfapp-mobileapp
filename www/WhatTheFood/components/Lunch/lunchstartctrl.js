@@ -1,26 +1,15 @@
-wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup',
-function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup) {
+wtf.controller('lunchstartctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', '$ionicPopup','user','rulist','menus',
+function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, $ionicPopup,user,rulist,menus) {
 
   /* return to login if not connected */
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
-  $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
-  });
 
-
-
-  $scope.init = function() {
-    rulistservice.getRestaurants(function(restaurants){
-      $scope.rulist = restaurants;
-      rulistservice.getMenus( function(menus){
-        $scope.menus = menus
-        $scope.currentRu = rulistservice.getDefaultCurrentRu();
-      });
-    });
-  };
-
-  $scope.init();
+  $scope.user = user;
+  $scope.rulist = rulist;
+  $scope.menus = menus;
+  rulistservice.updateUserPreference(user);
+  $scope.currentRu = rulistservice.getDefaultCurrentRu();
 
   /* populate combobox */
 
