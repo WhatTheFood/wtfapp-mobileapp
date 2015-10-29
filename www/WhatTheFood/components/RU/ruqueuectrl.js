@@ -33,6 +33,43 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
     {index: 2, title:'On peut y réviser ses partiels', img:'img/clock_red.png'}
   ];
 
+
+  $scope.checkin = function(index) {
+
+    if($scope.currentRu == null) return "error";
+
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var req = {
+      method: 'POST',
+      dataType: "json",
+      url: loginservice.getServerAPI() +'/users/me/restaurant',
+      data: '{"restaurantId": '+ $scope.currentRu.id +', "when": "' + hour + ':' + min + '"}',
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer "+ loginservice.gettoken()
+      }
+    };
+
+    $http(req)
+    .success(function (data) {
+      return data;
+    })
+    .error(function (data) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.error(data);
+      return "error";
+    });
+  }
+
+
   $scope.sendVote = function (index) {
 
     if($scope.currentRu == null) return "error";
@@ -50,7 +87,8 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
     $http(req)
     .success(function (data) {
-        rulistservice.setCurrentRu($scope.currentRu.id)
+        $scope.checkin($scope.currentRu.id);
+        rulistservice.setCurrentRu($scope.currentRu.id);
         var restaurant = $scope.currentRu;
         restaurant.queue.value = data.queue.value;
         restaurant.queueInfoUpdatedAt = new Date(data.queue.updatedAt || rulistservice.lastUpdate);
