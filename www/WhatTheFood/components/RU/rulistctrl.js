@@ -3,7 +3,6 @@ wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$io
 function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, user,rulist,menus) {
 
 
-  console.log(user,rulist,menus);
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -14,7 +13,9 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, user
 */
 
   rulistservice.updateMenusInRestaurants();
+
   rulistservice.updateUserPreference(user);
+  console.log(user,rulist,menus,rulistservice);
 
   $scope.rulist = rulist;
 

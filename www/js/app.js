@@ -35,7 +35,6 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 
     var RESOLVER = {
       rulist: function (rulistservice) {
-
         return rulistservice.getRestaurantsD()
       },
       menus: function (rulistservice) {
@@ -164,7 +163,8 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Profile/profileview.html',
             controller: 'profilectrl'
           }
-        }
+        },
+        resolve:RESOLVER
       })
 
       .state('wtf.stats', {

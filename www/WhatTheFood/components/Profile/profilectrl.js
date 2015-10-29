@@ -1,6 +1,6 @@
-wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', 'rulistservice', '$ionicScrollDelegate', '$ionicLoading', 'User',
+wtf.controller('profilectrl', ['$scope', '$state', '$http', 'loginservice', 'rulistservice', '$ionicScrollDelegate', '$ionicLoading', 'user','rulist','menus','User',
 
-function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegate, $ionicLoading, User) {
+function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegate, $ionicLoading, user,rulist,menus,User) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
@@ -46,38 +46,32 @@ function($scope, $state, $http, loginservice, rulistservice, $ionicScrollDelegat
   ];
 
   $scope.init = function() {
-    User.query('me')
-      .then(function (response) {
-        $scope.user = response.data;
-        rulistservice.getRestaurants(function (restaurants) {
-          rulistservice.getMenus(function (menus) {
-
-            $scope.rulist = restaurants;
-            $scope.currentRu = $scope.rulist[0];
-            $scope.menus = menus;
-            rulistservice.updateUserPreference($scope.user);
-            initGroups($scope.groups, response.data.preferences);
-            $scope.favoriteRu = rulistservice.getFavoriteRu();
-
-            $scope.$watch('favoriteRu', function (newValue, oldValue) {
-              if (newValue) {
-                if( $scope.user.favoriteRu != newValue.id ) {
-                  User.updatePreferences('favoriteRu', newValue.id);
-                }
-                rulistservice.setFavoriteRu(newValue.id);
-                if ($scope.user.favoriteRu != newValue.id) {
-                  $scope.user.favoriteRu = newValue.id
-                }
-              }
-              return newValue;
-            });
-          })
-        })
-      });
+    $scope.user = user;
+    rulistservice.updateMenusInRestaurants();
+    rulistservice.updateUserPreference(user);
+    $scope.rulist = rulist;
+    $scope.currentRu = rulist[0];
+    $scope.menus = menus;
+    initGroups($scope.groups, user.preferences);
+    $scope.favoriteRu = rulistservice.getFavoriteRu();
 
   }
 
   $scope.init();
+
+
+  $scope.$watch('favoriteRu', function (newValue, oldValue) {
+    if (newValue) {
+      if( $scope.user.favoriteRu != newValue.id ) {
+        User.updatePreferences('favoriteRu', newValue.id);
+      }
+      rulistservice.setFavoriteRu(newValue.id);
+      if ($scope.user.favoriteRu != newValue.id) {
+        $scope.user.favoriteRu = newValue.id
+      }
+    }
+    return newValue;
+  });
 
 
 

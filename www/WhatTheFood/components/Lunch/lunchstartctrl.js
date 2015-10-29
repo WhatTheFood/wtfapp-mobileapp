@@ -8,6 +8,7 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
   $scope.user = user;
   $scope.rulist = rulist;
   $scope.menus = menus;
+  rulistservice.updateMenusInRestaurants();
   rulistservice.updateUserPreference(user);
   $scope.currentRu = rulistservice.getDefaultCurrentRu();
 
