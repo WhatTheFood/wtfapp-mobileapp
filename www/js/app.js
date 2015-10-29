@@ -28,30 +28,31 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
     $ionicConfigProvider.backButton.icon('ion-chevron-left');
   }])
 
-  .config(['$stateProvider', '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
     // FB init
     openFB.init({appId: '443745395811172'});
+
+    var RESOLVER = {
+      rulist: function (rulistservice) {
+
+        return rulistservice.getRestaurantsD()
+      },
+      menus: function (rulistservice) {
+
+        return  rulistservice.getMenusD()
+      },
+      user: function (User) {
+        return User.queryD('me')
+      }
+    }
+
+
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
-
-      var FULLRESOLVER =  {
-        rulist: function (rulistservice) {
-
-          return rulistservice.getRestaurantsD()
-        },
-        menus: function (rulistservice) {
-          return  rulistservice.getMenusD()
-        },
-        user: function (User) {
-          return User.queryD('me')
-        }
-      }
-
     $stateProvider
 
       // setup an abstract state for the tabs directive
@@ -92,9 +93,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             controller: 'rulistctrl'
           }
         },
-        resolve: FULLRESOLVER
-
-
+        resolve:RESOLVER
       })
 
       .state('wtf.rucontent', {
@@ -124,8 +123,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/RU/ruqueueview.html',
             controller: 'ruqueuectrl'
           }
-        },
-        resolve: FULLRESOLVER
+        }
       })
 
       .state('wtf.lunch', {
@@ -136,7 +134,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             controller: 'lunchstartctrl'
           }
         },
-        resolve: FULLRESOLVER
+        resolve:RESOLVER
       })
 
       .state('wtf.quizz', {
@@ -146,8 +144,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Lunch/lunchquizzview.html',
             controller: 'lunchquizzctrl'
           }
-        },
-        resolve: FULLRESOLVER
+        }
       })
 
       .state('wtf.thanks', {
@@ -167,8 +164,7 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
             templateUrl: 'WhatTheFood/components/Profile/profileview.html',
             controller: 'profilectrl'
           }
-        },
-        resolve: FULLRESOLVER
+        }
       })
 
       .state('wtf.stats', {
@@ -181,13 +177,12 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
         }
       });
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
   }]);
 
 
 wtf.constant('angularMomentConfig', {
-    preprocess: 'utc',
-    timezone: 'Europe/Paris'
-  });
-
+  preprocess: 'utc',
+  timezone: 'Europe/Paris'
+});
