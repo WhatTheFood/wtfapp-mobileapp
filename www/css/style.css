@@ -217,10 +217,12 @@ p, h1, h2, h3, h4, h5 {
 
 .fork-red-bg {
     background-image: url(../img/fork_red_bg.png);
+    background-size: cover;
 }
 
 .lunchmenu {
     background-image: url(../img/fork_bg.png);
+    background-size: cover;
 }
 
 .lunchmenu .item {
@@ -231,10 +233,12 @@ p, h1, h2, h3, h4, h5 {
     color: black;
     padding: 20px;
     background-image: url(../img/fork_bg.png);
+    background-size: cover;
 }
 
 .jumbotron {
     background-image: url(../img/fork_bg.png);
+    background-size: cover;
     padding: 20px;
 }
 
