@@ -56,15 +56,30 @@
 }
 
 .level {
+    text-align: center;
 }
 
-.level .level-icon {
+.level .level-icons {
     display: flex;
     justify-content: space-between;
 }
 
-.level .level-icon img {
+.level .level-icons img {
     align-self: center;
+}
+
+.level .level-icons .level-current {
+    width: 100px;
+    height: 100px;
+}
+
+.level .level-icons .level-normal {
+    width: 70px;
+    height: 70px;
+}
+
+.level .level-gold {
+    margin: auto;
 }
 
 .level .level-progress{
