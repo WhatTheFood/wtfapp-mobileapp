@@ -11,6 +11,13 @@ p, h1, h2, h3, h4, h5 {
     color: white;
 }
 
+/* The salvation has come!
+   The border slavery is finaly over!
+   Be free my friends! */
+.item {
+    border: none;
+}
+
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
 }
@@ -121,6 +128,8 @@ p, h1, h2, h3, h4, h5 {
     width: 32px;
     overflow: hidden;
     border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .item-lunch-check .radio-icon {
@@ -627,4 +636,21 @@ body > ion-nav-view > ion-side-menus > ion-side-menu > ion-content {
     height: 50px;
     background: #666;
     margin: 5px;
+}
+
+.score-lunch {
+    margin: auto;
+    width: 160px;
+}
+
+.score-lunch img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.score-lunch span {
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 50px;
+    color: black;
 }

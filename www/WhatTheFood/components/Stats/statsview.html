@@ -9,7 +9,7 @@
                         <p>
                             Ton niveau : <strong>{{ level }}</strong><br />
                             <span ng-if="level_id < 3">Il te manque {{ next_level_pts }} PTS pour changer de toque !</span>
-                            <span ng-if="level_id == 3">Félicitations ! Tu as atteint le niveau maximum, t'es le daron du resto. Mais il reste une petite surprise pour toi : sauras-tu décrocher les 2000 points et passer dans la légende ?</span>
+                            <span ng-if="level_id == 3">Félicitations ! Tu as atteint le niveau maximum, t'es le daron du resto. Mais il reste une petite surprise pour toi : sauras-tu décrocher les 2000 PTS et passer dans la légende ?</span>
                         </p>
                         <div class="level-icons">
                             <img ng-src="img/picto_level_1{{ level_1_orange }}" class="{{ level_1_class }}" />
@@ -59,9 +59,18 @@
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="podium">
                     <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
-                        <div class="col-10 rang">{{$index + 1}}</div>
-                        <div class="col-66 name">{{restaurant.name}}</div>
-                        <div class="col pts">{{restaurant.score}}</div>
+                        <div class="col">
+                            <div class="coupe-orange" ng-if="$index < 3">
+                                <div class="index">{{$index + 1}}</div>
+                            </div>
+                            <div class="coupe" ng-if="$index >= 3">
+                                <div class="index">{{$index + 1}}</div>
+                            </div>
+                        </div>
+                        <div class="col-66 col-center">
+                            <div class="row">{{restaurant.name}}</div>
+                            <div class="row">{{restaurant.score || 0}} PTS</div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -72,16 +81,25 @@
                 <ion-content class="no-padding">
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="item ">
-                    En continuant de m’impliquer chaque jour, je fais grimper mon RU dans le classement grâce à mes PTS !
-
-                    A chaque fois que mon RU atteint 100.000 points avant les autres,  tous les Toqués remportent une surprise collective car l’oignon fait la force !
+                    En continuant de m’impliquer chaque jour, je fais <strong>grimper mon RU dans le classement grâce à mes PTS !</strong><br />
+                    <br />
+                    A chaque fois que mon RU atteint 100.000 points avant les autres,  tous les Toqués remportent une <strong>surprise</strong> collective car l’oignon fait la force !
                     </div>
 
                     <div class="podium">
                         <div class="item row podium-{{$index}}"  ng-repeat="friend in friends.scores">
-                            <div class="col-10 rang">{{$index + 1}}</div>
-                            <div class="col-66 name">{{friend.name}}</div>
-                            <div class="col pts">{{friend.score}}</div>
+                            <div class="col">
+                                <div class="coupe-orange" ng-if="$index < 3">
+                                    <div class="index">{{$index + 1}}</div>
+                                </div>
+                                <div class="coupe" ng-if="$index >= 3">
+                                    <div class="index">{{$index + 1}}</div>
+                                </div>
+                            </div>
+                            <div class="col-66 col-center">
+                                <div class="row">{{friend.name}}</div>
+                                <div class="row">{{friend.score || 0}} PTS</div>
+                            </div>
                         </div>
                     </div>
                 </div>

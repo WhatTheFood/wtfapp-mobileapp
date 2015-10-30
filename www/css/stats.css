@@ -104,25 +104,64 @@
 
 .podium{
 }
-.podium .row{
-    padding-top: 16px;
-    padding-bottom: 16px;
-
-}
-.podium .rang{
-    text-align: right;
-    padding-right: 8px;
-}
-.podium .pts{
-    text-align: right;
-}
-.row .podium-0 {
- }
 .podium-0 {
-   font-size: 32px;
+    font-size: 32px;
     font-weight: 800;
 }
 .podium-1 {
     font-size: 24px;
     font-weight: 400;
+}
+
+.podium-0 .row+.row {
+    margin-top: 5px;
+    padding-top: inherit;
+}
+
+.podium .coupe, .podium .coupe-orange {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    margin: 0 auto;
+
+    color: white;
+    font-weight: bold;
+    line-height: 45px;
+}
+
+.podium-0 .coupe-orange {
+    width: 100px;
+    height: 100px;
+    line-height: 95px;
+}
+
+.podium-1 .coupe-orange {
+    width: 75px;
+    height: 75px;
+    line-height: 70px;
+}
+
+.podium .coupe {
+    background-image: url(../img/coupe.png);
+}
+
+.podium .coupe-orange {
+    background-image: url(../img/coupe_orange.png);
+}
+
+.podium .coupe .index {
+    text-shadow: #414042 -2px 0px, #414042 2px 0px, #414042 0px -2px, #414042 0px 2px,
+    #414042 -1px 1px, #414042 1px 1px, #414042 1px -1px, #414042 -1px -1px;
+
+    text-align: center;
+}
+
+.podium .coupe-orange .index {
+    text-shadow: #F05946 -2px 0px, #F05946 2px 0px, #F05946 0px -2px, #F05946 0px 2px,
+    #F05946 -1px 1px, #F05946 1px 1px, #F05946 1px -1px, #F05946 -1px -1px;
+
+    text-align: center;
 }
