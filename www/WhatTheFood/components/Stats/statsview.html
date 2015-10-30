@@ -5,16 +5,20 @@
                 <ion-content class="no-padding">
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
 
-                    <div class="item level">
-                        Votre niveau : Mini Toqué
-                        <div class="level-icon">
-                            <img src="img/picto_level_1_orange.png" width="100" height="100" />
-                            <img src="img/picto_level_2.png" width="70" height="70"/>
-                            <img src="img/picto_level_3.png" width="70" height="70"/>
-                            <img src="img/picto_level_4.png" width="70" height="70"/>
+                    <div class="item level" ng-if="level_id < 4">
+                        <p>
+                            Ton niveau : <strong>{{ level }}</strong><br />
+                            <span ng-if="level_id < 3">Il te manque {{ next_level_pts }} PTS pour changer de toque !</span>
+                            <span ng-if="level_id == 3">Félicitations ! Tu as atteint le niveau maximum, t'es le daron du resto. Mais il reste une petite surprise pour toi : sauras-tu décrocher les 2000 PTS et passer dans la légende ?</span>
+                        </p>
+                        <div class="level-icons">
+                            <img ng-src="img/picto_level_1{{ level_1_orange }}" class="{{ level_1_class }}" />
+                            <img ng-src="img/picto_level_2{{ level_2_orange }}" class="{{ level_2_class }}"/>
+                            <img ng-src="img/picto_level_3{{ level_3_orange }}" class="{{ level_3_class }}"/>
+                            <img ng-src="img/picto_level_4{{ level_4_orange }}" class="{{ level_4_class }}"/>
                         </div>
                         <div class="level-progress">
-                            <div class="level-step"></div>
+                            <div class="level-step" ng-style="{width: {{ level_width }} + '%'}"></div>
                         </div>
                         <div class="level-text">
                             <div>&nbsp;</div>
@@ -23,6 +27,12 @@
                             <div>650</div>
                             <div>&nbsp;</div>
                         </div>
+                    </div>
+
+                    <div class="item level" ng-if="level_id == 4">
+                        <div>OH MY TOQUE!</div>
+                        <img class="level-gold" src="img/picto_level_gold.png" />
+                        <div>Tu es Toqué d'Or !</div>
                     </div>
 
                     <div class="item stats-points">
@@ -36,7 +46,7 @@
                         </div>
 
                         <p>
-                            Grâce à moi, le CROUS va prendre en compte nos feedbacks et je finirai mon plateau à chaque repas à m’en lécher les babines car le gaspi salsifis!
+                            Grâce à moi, le CROUS va prendre en compte nos feedbacks et je finirai mon plateau à chaque repas à m’en lécher les babines car le gaspi.. salsifis!
                         </p>
                     </div>
                 </div>
@@ -49,9 +59,18 @@
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="podium">
                     <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
-                        <div class="col-10 rang">{{$index + 1}}</div>
-                        <div class="col-66 name">{{restaurant.name}}</div>
-                        <div class="col pts">{{restaurant.score}}</div>
+                        <div class="col">
+                            <div class="coupe-orange" ng-if="$index < 3">
+                                <div class="index">{{$index + 1}}</div>
+                            </div>
+                            <div class="coupe" ng-if="$index >= 3">
+                                <div class="index">{{$index + 1}}</div>
+                            </div>
+                        </div>
+                        <div class="col-66 col-center">
+                            <div class="row">{{restaurant.name}}</div>
+                            <div class="row">{{restaurant.score || 0}} PTS</div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -62,16 +81,25 @@
                 <ion-content class="no-padding">
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="item ">
-                    En continuant de m’impliquer chaque jour, je fais grimper mon RU dans le classement grâce à mes PTS !
-
-                    A chaque fois que mon RU atteint 100.000 points avant les autres,  tous les Toqués remportent une surprise collective car l’oignon fait la force !
+                    En continuant de m’impliquer chaque jour, je fais <strong>grimper mon RU dans le classement grâce à mes PTS !</strong><br />
+                    <br />
+                    A chaque fois que mon RU atteint 100.000 points avant les autres,  tous les Toqués remportent une <strong>surprise</strong> collective car l’oignon fait la force !
                     </div>
 
                     <div class="podium">
                         <div class="item row podium-{{$index}}"  ng-repeat="friend in friends.scores">
-                            <div class="col-10 rang">{{$index + 1}}</div>
-                            <div class="col-66 name">{{friend.name}}</div>
-                            <div class="col pts">{{friend.score}}</div>
+                            <div class="col">
+                                <div class="coupe-orange" ng-if="$index < 3">
+                                    <div class="index">{{$index + 1}}</div>
+                                </div>
+                                <div class="coupe" ng-if="$index >= 3">
+                                    <div class="index">{{$index + 1}}</div>
+                                </div>
+                            </div>
+                            <div class="col-66 col-center">
+                                <div class="row">{{friend.name}}</div>
+                                <div class="row">{{friend.score || 0}} PTS</div>
+                            </div>
                         </div>
                     </div>
                 </div>
