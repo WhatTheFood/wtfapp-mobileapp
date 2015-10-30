@@ -1,7 +1,7 @@
 
 wtf.service('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '$q', 'loginservice', '$ionicLoading',
   function ($cordovaGeolocation, $http, $localStorage, $q, loginservice, $ionicLoading) {
-
+    console.log("RU LIST SERVICE");
     var factory = {
         lastUpdate: new Date(),
         menusCallbacks: [],
@@ -147,7 +147,10 @@ wtf.service('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         },
 
         getMenusD: function () {
-          console.log("d")
+
+          if (factory.menus){
+            return $q.when(factory.menus);
+          }
           var req = {
             method: 'GET',
             url: loginservice.getServerAPI() + '/menus/list',
@@ -159,7 +162,6 @@ wtf.service('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           return $http(req).then(
             function (res) {
               var menus = res.data
-              console.log(menus);
               factory.menus = menus;
               factory.menusCallbacks.forEach(function (cb) {
                 cb(menus);
@@ -172,6 +174,9 @@ wtf.service('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
         getRestaurantsD: function () {
+          if (factory.restaurants){
+            return $q.when(factory.restaurants);
+          }
           var defer = $q.defer()
           var successCallback = function (data) {
             factory.msg = "Voici les RUs près de vous";

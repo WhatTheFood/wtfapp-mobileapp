@@ -35,11 +35,12 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
 
     var RESOLVER = {
       rulist: function (rulistservice) {
+        console.log(rulistservice);
         return rulistservice.getRestaurantsD()
-      },
+      }
+      ,
       menus: function (rulistservice) {
-
-        return  rulistservice.getMenusD()
+          return rulistservice.getMenusD()
       },
       user: function (User) {
         return User.queryD('me')

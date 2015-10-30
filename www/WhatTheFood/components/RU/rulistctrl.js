@@ -15,12 +15,12 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, user
   rulistservice.updateMenusInRestaurants();
 
   rulistservice.updateUserPreference(user);
-  console.log(user,rulist,menus,rulistservice);
+
 
   $scope.rulist = rulist;
 
   $scope.currentRu = rulistservice.getCurrentRu();
-  console.log($scope)
+
   $scope.menus = menus;
 
   $scope.isFreshInfo = function(updatedAt){
