@@ -123,8 +123,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           else {
             factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [menu];
           }
-
-        })
+        });
 
         factory.restaurants.forEach(function (restaurant) {
           restaurant.menusToday = restaurant.menusByDay[moment().format("YYYY-MM-DD")];
