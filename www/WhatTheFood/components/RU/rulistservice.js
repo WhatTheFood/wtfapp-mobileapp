@@ -110,14 +110,15 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           });
 
         factory.menus.forEach(function (menu) {
-          if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date]) {
-            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date].push(menu);
+          if(menu.idRestaurant in factory.restaurantsById) {
+            if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date]) {
+              factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date].push(menu);
+            }
+            else {
+              factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [menu];
+            }
           }
-          else {
-            factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [menu];
-          }
-
-        })
+        });
 
         factory.restaurants.forEach(function (restaurant) {
           restaurant.menusToday = restaurant.menusByDay[moment().format("YYYY-MM-DD")];
