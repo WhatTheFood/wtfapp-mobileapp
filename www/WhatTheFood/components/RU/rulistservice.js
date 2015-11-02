@@ -23,21 +23,25 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
 
       setFavoriteRu: function (idFavoriteRu) {
-        factory.getFavoriteRu().favorite = 0;
+        if(factory.getFavoriteRu()) {
+          factory.getFavoriteRu().favorite = 0;
+        }
         factory.storage.favoriteRu = idFavoriteRu;
         factory.getFavoriteRu().favorite = 1;
       },
 
       getFavoriteRu: function () {
         if (factory.storage.favoriteRu && factory.storage.favoriteRu > 0) {
-          return factory.restaurantsById[factory.storage.favoriteRu];
+          return factory.restaurantsById[factory.storage.favoriteRu] || {};
         } else {
           return {};
         }
       },
 
       setCurrentRu: function (idFavoriteRu) {
-        factory.getCurrentRu().current = 0;
+        if(factory.getCurrentRu()) {
+          factory.getCurrentRu().current = 0;
+        }
         factory.storage.currentRu = idFavoriteRu;
         factory.getCurrentRu().current = 1;
         factory.storage.currentRuSelectedAt = new moment();
@@ -45,7 +49,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
       getCurrentRu: function () {
         if (factory.storage.currentRu && factory.storage.currentRu > 0) {
-          return factory.restaurantsById[factory.storage.currentRu];
+          return factory.restaurantsById[factory.storage.currentRu] || {};
         } else {
           return {};
         }
@@ -110,6 +114,9 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           });
 
         factory.menus.forEach(function (menu) {
+          if(! factory.restaurantsById[menu.idRestaurant]){
+            return;
+          }
           if (factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date]) {
             factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date].push(menu);
           }
