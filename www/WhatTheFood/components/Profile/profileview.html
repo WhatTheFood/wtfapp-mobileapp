@@ -1,12 +1,19 @@
-<ion-view view-title="Mon profil">
+<ion-view view-title="Mon profil" cache-view="false">
   <ion-content>
     <div class="item" id="profile">
-      <img ng-src="{{user.avatar || 'img/picto_profil.png'}}" alt="photo" align="left" />
+      <img ng-src="{{user.avatar || 'img/picto_noavatar.png'}}" alt="photo" align="left" />
       <p ng-show="user.first_name && user.last_name">
         <span class="firstname" ng-show="user.first_name">{{user.first_name}}</span>
         <span class="lastname" ng-show="user.last_name">{{user.last_name}}</span>
       </p>
     </div>
+
+    <label class="item item-input item-select">
+        <div class="input-label">
+           RU Favori :
+        </div>
+        <select ng-model="$parent.favoriteRu" ng-options="r as r.title for r in rulist"></select>
+    </label>
 
     <div ng-show="user.university" class="item university">
       {{user.university}}
@@ -25,7 +32,7 @@
         <ion-checkbox class="item-accordion"
           ng-repeat="item in group.items"
           ng-show="isGroupShown(group)"
-          ng-click="updatePreferences(item)"
+          ng-click="updateFoodPreferences(item)"
           ng-model="item.checked">
           {{item.name}}
         </ion-checkbox>

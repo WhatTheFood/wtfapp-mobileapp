@@ -4,11 +4,12 @@
 .idea/
 .python-version
 
-www/WhatTheFood/shared/#basecontent.html#
 www/lib
 
+dist/
 platforms/
 plugins/
 node_modules/
+build/
 
-package.json
+*.iml

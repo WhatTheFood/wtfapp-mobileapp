@@ -1,7 +1,7 @@
-wtf.controller('rueatctrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice',
-function($scope, $sessionStorage, $state, $stateParams, $http, rulistservice, loginservice) {
+wtf.controller('rueatctrl', ['$scope', '$state', '$stateParams', '$http', 'rulistservice', 'loginservice',
+function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   var restaurant = rulistservice.restaurants.filter(function (restaurant) {
     return restaurant.id == $stateParams.ruId;

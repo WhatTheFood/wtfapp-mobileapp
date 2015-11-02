@@ -1,19 +1,16 @@
-wtf.factory('loginservice', ['$http', '$q', '$sessionStorage',
-function($http, $q, $sessionStorage) {
+wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', '$localStorage',
+function($http, $q, $sessionStorage, $localStorage) {
 
   var $storage = $sessionStorage.$default({
     facebook: false,
-    token: null,
-    userId: null
+    token: null
   });
 
-  var serverAPIHTTPS = true;
-  var serverAPI = "whatthefood.herokuapp.com/api";
+
+  // var serverAPI = "/api";
   // Debug handy
-  //var serverAPIHTTPS = false;
-  //var serverAPI = "192.168.8.100:5000/api"; // Nomad
-  //var serverAPI = "192.168.0.23:5000/api"; // Home
-  //var serverAPI = "192.168.2.48:5000/api"; // Make Sense
+  //var serverAPI = "http://localhost:5000/api"; // Local
+  var serverAPI = "https://m.whatthefoodapp.fr/api"; //prod
 
   function utf8_to_b64(str) {
     return window.btoa(unescape(encodeURIComponent(str)));
@@ -22,12 +19,13 @@ function($http, $q, $sessionStorage) {
   var factory = {
 
     getServerAPI: function() {
-      return "http" + (serverAPIHTTPS ? "s" : "") + "://" + serverAPI;
+      return serverAPI;
     },
-
+    /*
     getServerAPILogin: function(user, password) {
-      return "http" + (serverAPIHTTPS ? "s" : "") + "://" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
+      return "/" + user.replace("@","%40") + ":" + password + "@" + serverAPI;
     },
+    */
 
     signup: function (data) {
       var req = {
@@ -35,11 +33,10 @@ function($http, $q, $sessionStorage) {
         dataType: "json",
         url: factory.getServerAPI()+'/users/',
         data: {
-          firstname: data.firstname,
-          lastname: data.lastname,
+          first_name: data.firstname,
+          last_name: data.lastname,
           email: data.email,
-          password: data.password,
-          auth_token: utf8_to_b64(data.email + ":" + data.password)
+          password: data.password
         },
         headers: {"Content-Type": "application/json"}
       };
@@ -47,7 +44,6 @@ function($http, $q, $sessionStorage) {
       return $http(req)
       .success(function (data, status, headers, config) {
         factory.settoken(data['token']);
-        $storage.userId = data['_id'];
         return data;
       })
       .error(function (data, status, headers, config) {
@@ -56,7 +52,7 @@ function($http, $q, $sessionStorage) {
           return null;
 
         } else {
-          console.error("Error: ", data);
+          console.error("Error: " + JSON.stringify(data) + ", status: " + status);
           return data;
         }
       });
@@ -64,21 +60,21 @@ function($http, $q, $sessionStorage) {
 
     signin: function (email, pwd) {
       var req = {
-        method: 'GET',
-        url: factory.getServerAPI() + '/users/login',
-        headers: {
-          Authorization: "Basic " + utf8_to_b64(email + ":" + pwd)
+        method: 'POST',
+        url: factory.getServerAPI() + '/auth/local',
+        data: {
+          email: email,
+          password: pwd
         }
       };
 
       return $http(req)
       .success(function (data, status, headers, config) {
-        factory.settoken(data['user_token']);
-        $storage.userId = data['user_id'];
+        factory.settoken(data['token']);
         return data;
       })
       .error(function (data, status, headers, config) {
-        console.error("Error: " + data);
+        console.error("Error: " + JSON.stringify(data) + ", status: " + status);
         return data;
       });
     },
@@ -90,15 +86,14 @@ function($http, $q, $sessionStorage) {
         var req = {
           method: 'PUT',
           dataType: "json",
-          url: factory.getServerAPI() +'/users/login/facebook',
-          data: '{"email":"'+ user.email +'","token":"'+ response.authResponse.token +'"}',
+          url: factory.getServerAPI() +'/auth/facebook/',
+          data: '{"email":"'+ user.email +'","token":"'+ response.authResponse.accessToken +'"}',
           headers: { "Content-Type" : "application/json" }
         };
 
         $http(req)
         .success(function (data, status, headers, config) {
-          factory.settoken(data['user_token']);
-          $storage.userId = data['user_id'];
+          factory.settoken(data['token']);
           $storage.facebook = true;
           defer.resolve(true, data);
         })
@@ -112,25 +107,38 @@ function($http, $q, $sessionStorage) {
 
       var facebookLoginHandler = function (response) {
         if (response.status === 'connected') {
-          openFB.api({path: '/me',
-                     success: function(user) {
-                       return facebookApiRequestSuccessHandler(response, user);
-                     },
-                     error: function() {
-                       defer.reject(false, 'Impossible de récupérer l\'email');
-                     }
+
+          openFB.api({
+            path: '/v2.4/me',
+            params: {
+              fields: ['id','first_name','last_name','email']
+            },
+            success: function(user) {
+              return facebookApiRequestSuccessHandler(response, user);
+            },
+            error: function(error) {
+              defer.reject(false, 'Impossible de récupérer l\'email');
+            }
           });
         } else {
-          alert('Login Facebook impossible...');
+          defer.reject(false, 'Login Facebook impossible...');
         }
       };
 
       openFB.login(
         function(response) { return facebookLoginHandler(response); },
-        {scope: 'email,user_friends'}
+        {scope: 'public_profile,email,user_friends', return_scopes: true}
       );
 
       return defer.promise;
+    },
+
+    logout: function () {
+      factory.settoken(null);
+      $storage.facebook = false;
+      $sessionStorage.$reset();
+      $localStorage.$reset();
+      return false;
     },
 
     getfriendlist: function() {
@@ -153,6 +161,10 @@ function($http, $q, $sessionStorage) {
 
     isfbconnected: function () {
       return $storage.facebook;
+    },
+
+    islogged: function () {
+      return $storage.token !== null;
     },
 
     settoken: function (data) {

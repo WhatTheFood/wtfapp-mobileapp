@@ -1,41 +1,34 @@
-wtf.controller('rulistctrl', ['$scope', '$sessionStorage', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice',
-function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, loginservice) {
+wtf.controller('rulistctrl', ['$scope', '$http', '$state', 'rulistservice', '$ionicLoading', 'loginservice','User',
+function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User) {
 
-  console.info('Accessing list of RU.');
-
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) {
-    console.info('Redirecting user to login form.');
-    $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.msg = "Voici les RUs près de vous";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
+  $scope.update = function() {
+    User.query('me')
+      .then(
+      function(res) {
+        var user = res.data;
+        rulistservice.getRestaurants(function (restaurants) {
+          $scope.rulist = restaurants;
+          rulistservice.getMenus(function (menus) {
+            rulistservice.updateUserPreference(user);
+            $scope.menus = menus;
+            $scope.currentRu = rulistservice.getCurrentRu();
+          });
+        });
 
-      var errorCallback = function (error, data) {
-        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
-
-      rulistservice.defineRUList(successCallback, errorCallback);
-
-    } else {
-      $scope.msg = "Voici les RUs près de vous";
-      $scope.rulist = rulistservice.restaurants;
-      $ionicLoading.hide();
-    }
+      })
   };
 
-  defineRestaurants();
+  $scope.isFreshInfo = function(updatedAt){
+    return moment().diff(updatedAt,'minutes') < 15
+  }
+
+  $scope.update();
 
   $scope.data = {};
   $scope.data.showSearch = true;
@@ -48,7 +41,7 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
    */
   $scope.getClockImage = function(queuevalue) {
     if(queuevalue === 0)
-      return 'img/clock_grey.png';
+      return 'img/clock_green.png';
 
     if(queuevalue > 66)
       return clockImages[2];
@@ -68,11 +61,8 @@ function($scope, $sessionStorage, $http, $state, rulistservice, $ionicLoading, l
     }, 500);
   };
 
-  $scope.showDishCategory = function(category){
-    return category.name == 'Plats' || category.name == 'Grillades';
-  };
-
   $scope.goEatAt = function ( ruId ) {
     $state.go('wtf.rueat', {ruId: ruId});
   };
+
 }]);

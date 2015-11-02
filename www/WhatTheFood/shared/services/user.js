@@ -1,13 +1,21 @@
-wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function (loginservice, $http, $q, $sessionStorage) {
+wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginservice, $http, $localStorage) {
 
   var factory = {
-    storage: {},
+    /*Warning, there may be a problem with that:
+     it is used both to store "toques", which is a list of users
+     and a user query response, directly at the root.
+     In the current code the only queried user is "me", so we should consider using 2 different variables
+     */
+    storage: {
+      preferences:[]
+    },
 
+    /* Will return ALL users with an avatar */
     getToques: function () {
       var req = {
         method: 'GET',
         dataType: 'json',
-        url: loginservice.getServerAPI() +'/users/toques',
+        url: loginservice.getServerAPI() +'/users/toques?avatar=true',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer "+ loginservice.gettoken()
@@ -34,9 +42,16 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
         };
 
         return $http(req)
-        .success(function (data, status, headers, config) {
-          factory.storage = data;
-          return data;
+        .success(function (user, status, headers, config) {
+            factory.storage = user; // ??
+            if (user.lastQueueFeeback){
+              var lastQueueFeeback = user.lastQueueFeeback;
+              if (moment().diff(lastQueueFeeback.updatedAt,'minutes') < 60){
+                user.currentRu = lastQueueFeeback.currentRu;
+                user.currentRuSelectedAt = lastQueueFeeback.currentRuSelectedAt;
+              }
+            }
+          return user;
         })
         .error(function (data, status, headers, config) {
           console.error("Error: ", data);
@@ -45,15 +60,17 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
       }
     },
 
-    updatePoints: function (action) {
+    updatePreferences: function (key,value) {
       var req = {
         method: 'PUT',
         dataType: 'json',
         data: {
-          action: 'increase_points',
-          reason: action
+          preferences: [{
+            key:key,
+            value:value
+          }]
         },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
@@ -66,23 +83,22 @@ wtf.factory('User', ['loginservice', '$http', '$q', '$sessionStorage', function 
       });
     },
 
-    updatePreferences: function (item) {
+
+    getPreferences: function (preferences) {
       var req = {
-        method: 'PUT',
-        dataType: 'json',
-        data: { preference: item },
-        url: loginservice.getServerAPI() +'/users/'+ $sessionStorage.userId,
+        method: 'GET',
+        url: loginservice.getServerAPI() +'/users/me/preferences',
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + loginservice.gettoken()
         }
       };
 
       return $http(req)
-      .error(function (data, status, headers, config) {
-        console.error('Error: ', data);
-      });
+        .error(function (data, status, headers, config) {
+          console.error('Error: ', data);
+        });
     }
+
   };
 
   return factory;

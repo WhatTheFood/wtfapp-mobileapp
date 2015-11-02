@@ -1,7 +1,11 @@
-wtf.controller('loginctrl', ['$scope', '$state', '$http', 'loginservice', '$cordovaOauth', '$sessionStorage', '$ionicLoading', '$ionicPopup',
-function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $ionicLoading, $ionicPopup) {
+wtf.controller('loginctrl', ['$scope', '$state', '$stateParams', '$http', 'loginservice', '$cordovaOauth', '$ionicLoading', '$ionicPopup',
+function ($scope, $state, $stateParams, $http, loginservice, $cordovaOauth, $ionicLoading, $ionicPopup) {
 
-  if (loginservice.gettoken() !== null && $sessionStorage.userId !== null && $sessionStorage.userId !== undefined) { $state.go('login'); return; }
+  if (loginservice.islogged()) {
+    console.info('Redirecting user to list of RU, already logged in.');
+    $state.go('wtf.rulist');
+    return;
+  }
 
   $scope.gohome = function (){
     console.info('Redirecting user to list of RU.');
@@ -19,7 +23,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     if (form.email.$valid && form.password.$valid && password == password_confirmation) {
 
       $ionicLoading.show({
-        template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+        template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
       });
 
       var user = {
@@ -57,7 +61,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
     if (form.email.$valid && form.password.$valid) {
 
       $ionicLoading.show({
-        template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+        template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
       });
 
       loginservice.signin(email, password).then(
@@ -88,7 +92,7 @@ function ($scope, $state, $http, loginservice, $cordovaOauth, $sessionStorage, $
 
   $scope.fblogin = function () {
     $ionicLoading.show({
-      template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+      template: '<i class="button-icon icon ion-loading-a"></i><br> ' + get_random_funny_wait_msgs()
     });
 
     loginservice.loginfb().then(

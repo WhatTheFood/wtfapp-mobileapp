@@ -1,38 +1,30 @@
-wtf.controller('ruqueuectrl', ['$scope', '$sessionStorage', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice',
+wtf.controller('ruqueuectrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicLoading', '$http', 'rulistservice', 'loginservice','User',
 
-function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice) {
+function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rulistservice, loginservice,User) {
 
-  if (loginservice.gettoken() === null || $sessionStorage.userId === null || $sessionStorage.userId === undefined) { $state.go('login'); return; }
+  if (!loginservice.islogged()) { $state.go('login'); return; }
 
   $ionicLoading.show({
-    template: '<i class="button-icon icon ion-loading-a"></i><br> Veuillez patienter.'
+    template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
   });
 
-  var defineRestaurants = function () {
-    // Ensure restaurants are defined as we depend on it
-    if (rulistservice.restaurants === undefined) {
-      var successCallback = function (data) {
-        $scope.rulist = data;
-        $scope.currentRu = $scope.rulist[0];
-        $ionicLoading.hide();
-      };
 
-      var errorCallback = function (error, data) {
-        $scope.msg = "Impossible de se connecter pour récupérer la liste des restaurants";
-        $scope.rulist = data;
-        $ionicLoading.hide();
-      };
+  $scope.init = function() {
 
-      rulistservice.defineRUList(successCallback, errorCallback);
+    User.query('me').then(function(res) {
+      var user = res.data;
 
-    } else {
-      $scope.rulist = rulistservice.restaurants;
-      $scope.currentRu = $scope.rulist[0];
-      $ionicLoading.hide();
-    }
+      rulistservice.getRestaurants(function (restaurants) {
+        $scope.rulist = restaurants;
+        rulistservice.getMenus(function (menus) {
+          rulistservice.updateUserPreference(user);
+          $scope.currentRu = rulistservice.getDefaultCurrentRu();
+        });
+      });
+    });
   };
 
-  defineRestaurants();
+  $scope.init();
 
   /* waiting times */
   $scope.waitingTimes = [
@@ -40,6 +32,43 @@ function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLo
     {index: 1, title:'Juste le temps de rêvasser', img:'img/clock_orange.png'},
     {index: 2, title:'On peut y réviser ses partiels', img:'img/clock_red.png'}
   ];
+
+
+  $scope.checkin = function(index) {
+
+    if($scope.currentRu == null) return "error";
+
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var req = {
+      method: 'POST',
+      dataType: "json",
+      url: loginservice.getServerAPI() +'/users/me/restaurant',
+      data: '{"restaurantId": '+ $scope.currentRu.id +', "when": "' + hour + ':' + min + '"}',
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization": "Bearer "+ loginservice.gettoken()
+      }
+    };
+
+    $http(req)
+    .success(function (data) {
+      return data;
+    })
+    .error(function (data) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.error(data);
+      return "error";
+    });
+  }
+
 
   $scope.sendVote = function (index) {
 
@@ -57,16 +86,20 @@ function ($scope, $sessionStorage, $state, $stateParams, $ionicHistory, $ionicLo
     };
 
     $http(req)
-    .success(function (data, status, headers, config) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $ionicHistory.goBack();
+    .success(function (data) {
+        $scope.checkin($scope.currentRu.id);
+        rulistservice.setCurrentRu($scope.currentRu.id);
+        var restaurant = $scope.currentRu;
+        restaurant.queue.value = data.queue.value;
+        restaurant.queueInfoUpdatedAt = new Date(data.queue.updatedAt || rulistservice.lastUpdate);
+        $scope.currentRu = rulistservice.getCurrentRu();
+        $ionicHistory.goBack();
       return data;
     })
-    .error(function (data, status, headers, config) {
+    .error(function (data) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
-      console.log(data);
+      console.error(data);
       return "error";
     });
   };

@@ -1,4 +1,4 @@
-<ion-view view-title="{{ru.title}}" ng-app>
+<ion-view view-title="{{ru.title}}">
   <ion-content>
     <div class="list item-text-wrap">
       <ion-item class="item-stable item-icon-left" ng-if="clockIndex > -1">
@@ -9,7 +9,7 @@
       </ion-item>
 
       <div class="item item-thumbnail-left">
-        <img src="img/picto_calendrier.png" class="vcenter">
+        Les horaires de ce RU :<br />
         <p ng-bind-html="operationalhours" class="vcenter"></p>
       </div>
 
@@ -28,26 +28,21 @@
       </div>
 
       <div ng-repeat="menu in ru.menus">
-        <div ng-repeat="meal in menu.meal">
-          <div class="item" ng-if="meal.foodcategory">
-            <div ng-repeat-start="category in meal.foodcategory" ng-if="$first">
-              <strong>{{category.name}}</strong>
-              <br />
-              <div ng-repeat="dish in category.dishes">
-                - {{dish.name}}
-              </div>
-            </div>
-
-            <div ng-repeat-end ng-if="!$first" class="paddingtop-menuitem">
-              <div ng-class="paddingtop-menuitem">
-                <strong>{{category.name}}</strong>
-                <br />
-                <div ng-repeat="dish in category.dishes">
-                  - {{dish.name}}
-                </div>
-              </div>
-            </div>
-          </div>
+        <strong>
+          Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
+        </strong>
+        <br>
+        <strong>Entrées</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" style="white-space: normal;">
+          {{dish.name}}
+        </div>
+        <strong>Plats</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" style="white-space: normal;">
+          {{dish.name}}
+        </div>
+        <strong>Desserts</strong>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" style="white-space: normal;">
+          {{dish.name}}
         </div>
       </div>
 
@@ -66,9 +61,6 @@
             </div>
             <div class="item item-accordion" ng-show="ru.description">
               {{ru.description}}
-            </div>
-            <div class="item item-accordion" ng-show="ru.contact.tel">
-              <a href="tel:{{ru.contact.tel}}"><button class="button button-stable">Appeler ({{ru.contact.tel}})</button></a>
             </div>
             <div class="item item-accordion" ng-show="ru.contact.email">
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
