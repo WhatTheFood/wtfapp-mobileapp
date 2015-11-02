@@ -1,5 +1,7 @@
 # WhatTheFood Ionic Application
 
+Current released version: 2.0.0 (Alfredo)
+
 Welcome to the repo!
 We're using git flow, [so check it out](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
 Install link is [there](https://github.com/nvie/gitflow/wiki/Installation).
