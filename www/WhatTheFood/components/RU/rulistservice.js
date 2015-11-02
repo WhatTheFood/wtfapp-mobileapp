@@ -85,8 +85,8 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
 
             } else {
               // more generic error
-              defer.reject("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.");
-              alert("Nous sommes désolé, nous ne sommes pas capables\nde récupérer votre position.");
+              defer.reject("T'as pas de GPS sur ton téléphone ? Bon... on va essayer de faire sans ! ;)");
+              alert("T'as pas de GPS sur ton téléphone ? Bon... on va essayer de faire sans ! ;)");
             }
 
             if (errorCallback) {
@@ -123,8 +123,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           else {
             factory.restaurantsById[menu.idRestaurant].menusByDay[menu.date] = [menu];
           }
-
-        })
+        });
 
         factory.restaurants.forEach(function (restaurant) {
           restaurant.menusToday = restaurant.menusByDay[moment().format("YYYY-MM-DD")];
@@ -249,7 +248,19 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
               errorCallback(e, []);
             }
           });
-        });
+        })
+        .catch(function (err) {
+          // handle errors
+          return self.getrulist().then(function (result) {
+                if (successCallback) {
+                  successCallback(result.data);
+                }
+            }, function (e) {
+            if (errorCallback) {
+              errorCallback(e, []);
+            }
+          });
+        })
       },
 
 
