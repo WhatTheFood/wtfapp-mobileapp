@@ -3,9 +3,29 @@ function($scope, $state, $stateParams, $http, rulistservice, loginservice) {
 
   if (!loginservice.islogged()) { $state.go('login'); return; }
 
+  $scope.update = function() {
+    User.query('me')
+      .then(
+        function(res) {
+          var user = res.data;
+          rulistservice.getRestaurants(function (restaurants) {
+            $scope.rulist = restaurants;
+            rulistservice.getMenus(function (menus) {
+              rulistservice.updateUserPreference(user);
+              $scope.menus = menus;
+              $scope.currentRu = rulistservice.getCurrentRu();
+            });
+          });
+
+        })
+  };
+
   var restaurant = rulistservice.restaurants.filter(function (restaurant) {
     return restaurant.id == $stateParams.ruId;
   });
+
+
+  $scope.update();
 
   $scope.ru = restaurant[0];
   $scope.setContextRu($scope.ru);
