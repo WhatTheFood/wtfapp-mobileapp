@@ -105,7 +105,7 @@
 .podium{
 }
 .podium-0 {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 800;
 }
 .podium-1 {
@@ -133,15 +133,31 @@
 }
 
 .podium-0 .coupe-orange {
-    width: 100px;
-    height: 100px;
-    line-height: 95px;
-}
-
-.podium-1 .coupe-orange {
     width: 75px;
     height: 75px;
     line-height: 70px;
+}
+
+.podium-1 .coupe-orange {
+    width: 62px;
+    height: 62px;
+    line-height: 57px;
+}
+
+.podium .col img {
+    margin: 0px auto;
+    display: block;
+    border-radius: 50%;
+}
+
+.podium-0 .col img {
+    width: 75px;
+    height: 75px;
+}
+
+.podium-1 .col img {
+    width: 62px;
+    height: 62px;
 }
 
 .podium .coupe {
