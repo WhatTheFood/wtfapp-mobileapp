@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.whatthefoodapp.app" version="Alfredo (2.0.0)" android-versionCode="200009" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.whatthefoodapp.app" version="Alfredo (2.0.1)" android-versionCode="200010" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>What The Food</name>
     <description>L'application What the Food a été pensée pour baisser les quantités de nourriture jetées, sensibiliser les jeunes au gaspillage alimentaire et plus largement les reconnecter aux aliments et au plaisir de manger.</description>
     <author email="contact@whatthefoodapp.org" href="http://www.whatthefoodapp.org/">Les bénévoles de WTF</author>
