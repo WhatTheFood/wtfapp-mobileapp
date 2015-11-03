@@ -238,13 +238,6 @@ p, h1, h2, h3, h4, h5 {
     background-color: transparent;
 }
 
-.rumenu {
-    color: black;
-    padding: 20px;
-    background-image: url(../img/fork_bg.png);
-    background-size: cover;
-}
-
 .jumbotron {
     background-image: url(../img/fork_bg.png);
     background-size: cover;

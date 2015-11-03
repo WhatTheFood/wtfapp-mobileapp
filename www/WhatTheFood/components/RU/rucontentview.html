@@ -1,19 +1,39 @@
 <ion-view view-title="{{ru.title}}">
   <ion-content>
-    <div class="list item-text-wrap">
+    <div class="item-text-wrap">
       <ion-item class="item-stable item-icon-left" ng-if="clockIndex > -1">
         <div class="queue-status-container">
-          <img src="" ng-src="{{clockImage}}" class="clock" alt="clock"/>
-          <p>{{clockTitle}}</p>
+          <img src="" ng-src="{{clockImage}}" class="clock" alt="clock"/><span>{{clockTitle}}</span>
         </div>
+
       </ion-item>
 
-      <div class="item item-thumbnail-left">
+      <div class="item">
         Les horaires de ce RU :<br />
-        <p ng-bind-html="operationalhours" class="vcenter"></p>
+        <p ng-bind-html="operationalhours"></p>
       </div>
 
-      <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0"><p>Ils y sont en ce moment et kiffent leurs coquillettes :</p></div>
+      <div class="item rumenu" ng-repeat="menu in ru.menusToday">
+        <div class="menuDay">
+          Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
+        </div>
+        <div class="menuCategory">Entrées</div>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" class="menuDishes">
+          {{dish.name}}
+        </div>
+        <div class="menuCategory">Plats</div>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" class="menuDishes">
+          {{dish.name}}
+        </div>
+        <div class="menuCategory">Desserts</div>
+        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" class="menuDishes">
+          {{dish.name}}
+        </div>
+      </div>
+
+      <div class="item item-divider" ng-if="facebookFriendsAtThisRu.length > 0">
+        <p>Ils y sont en ce moment et kiffent leurs coquillettes :</p>
+      </div>
 
       <div class="item"  ng-if="facebookFriendsAtThisRu.length > 0">
         <div ng-repeat="friend in facebookFriendsAtThisRu" class="center">
@@ -24,25 +44,6 @@
           {{ friend.last_name}}
           <br />
           {{ friend.booking.when}}
-        </div>
-      </div>
-
-      <div ng-repeat="menu in ru.menus">
-        <strong>
-          Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
-        </strong>
-        <br>
-        <strong>Entrées</strong>
-        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" style="white-space: normal;">
-          {{dish.name}}
-        </div>
-        <strong>Plats</strong>
-        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" style="white-space: normal;">
-          {{dish.name}}
-        </div>
-        <strong>Desserts</strong>
-        <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" style="white-space: normal;">
-          {{dish.name}}
         </div>
       </div>
 
@@ -59,9 +60,14 @@
             <div class="item item-accordion item-image" ng-show="ru.photo.src">
               <img ng-src="{{ru.photo.src}}"/>
             </div>
-            <div class="item item-accordion" ng-show="ru.description">
-              {{ru.description}}
+            <div class="item">
+              <strong>{{ru.shortdesc}}</strong>
+
+              <p ng-repeat="paragraph in ru.longdesc">{{paragraph}}</p>
             </div>
+
+
+
             <div class="item item-accordion" ng-show="ru.contact.email">
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
               </a>
