@@ -23,7 +23,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           rulistservice.facebookFriendsAtThisRu(restaurant[0].id, loginservice).then(function (result) {
             $scope.facebookFriendsAtThisRu = result.data;
             $ionicLoading.hide();
-            console.log("FRIENDS: ", JSON.stringify($scope.facebookFriendsAtThisRu));
+            //console.log("FRIENDS: ", JSON.stringify($scope.facebookFriendsAtThisRu));
           }, function (data) {
             // In case of error, just hide the loading
             $ionicLoading.hide();
@@ -33,7 +33,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         $scope.ru = restaurant[0];
         $scope.menus = menus
         $scope.ru = restaurant[0];
-        console.log($scope.ru)
+        // console.log($scope.ru)
         $scope.setContextRu($scope.ru);
 
         /* estimated time */
