@@ -72,6 +72,14 @@
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
               </a>
             </div>
+            <div id="map" class="item item-accordion" ng-show="ru.lat">
+              <ion-content data-tap-disabled="true" has-header="true" has-tabs="true" overflow-scroll="true">
+                <div style="position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;">
+                  <leaflet defaults="defaults" center="center" width="100%" height="100%">
+                  </leaflet>
+                </div>
+              </ion-content>
+            </div>
           </div>
         </ion-list>
       </div>

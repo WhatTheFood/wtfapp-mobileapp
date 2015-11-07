@@ -1,11 +1,21 @@
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-  function ($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', 'leafletData',
+  function ($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, leafletData) {
 
     if (!loginservice.islogged()) {
       $state.go('login');
       return;
     }
 
+    angular.extend($scope, {
+      center: {
+          lat: 0,
+          lng: 0,
+          zoom: 8
+      },
+      defaults: {
+            scrollWheelZoom: false
+        }
+    });
 
     rulistservice.getRestaurants(function (restaurants) {
       $scope.rulist = restaurants;
@@ -74,6 +84,15 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/[[0-9](?=[a-zA-Z])(?=[^hH])/g, "$&<br />"));
           $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
         }
+
+        angular.extend($scope, {
+          center: {
+              lat: $scope.ru.lat,
+              lng: $scope.ru.lon,
+              zoom: 16
+          }
+        });
+
       });
     });
 
@@ -99,10 +118,15 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
       }
       setTimeout(function () {
         $ionicScrollDelegate.scrollBottom(true);
+        // force map size refresh
+        leafletData.getMap().then(function(map) {
+          map.invalidateSize();
+        });
       }, 120);
     };
 
     $scope.isGroupShown = function (group) {
       return $scope.shownGroup === group;
     };
-  }]);
+
+}]);
