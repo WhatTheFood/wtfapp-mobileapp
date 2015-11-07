@@ -36,22 +36,22 @@
           Je mange ici ce midi !
         </ion-option-button>
       </ion-item>
+
           <div class="rumenu list" ng-if="$first" >
               <div ng-repeat="menu in ru.menusToday">
-                  <strong>
+                  <div class="menuDay">
                       Menu du {{menu.date | amDateFormat: 'dddd DD MMMM'}}&nbsp;{{ menu.name}}
-                  </strong>
-                  <br>
-                  <strong>Entrées</strong>
-                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" style="white-space: normal;">
+                  </div>
+                  <div class="menuCategory">Entrées</div>
+                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'STARTER'" class="menuDishes">
                       {{dish.name}}
                   </div>
-                  <strong>Plats</strong>
-                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" style="white-space: normal;">
+                  <div class="menuCategory">Plats</div>
+                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'MAIN'" class="menuDishes">
                       {{dish.name}}
                   </div>
-                  <strong>Desserts</strong>
-                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" style="white-space: normal;">
+                  <div class="menuCategory">Desserts</div>
+                  <div ng-repeat="dish in menu.dishes  | filter : dish.category = 'DESERT'" class="menuDishes">
                       {{dish.name}}
                   </div>
               </div>

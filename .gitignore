@@ -13,3 +13,5 @@ node_modules/
 build/
 
 *.iml
+*.keystore
+*.apk

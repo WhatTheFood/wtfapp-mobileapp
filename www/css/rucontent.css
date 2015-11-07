@@ -1,0 +1,32 @@
+
+.rumenu { /* also used in rulistview */
+    color: black;
+    padding:16px;
+    padding-top: 4px;
+    background-image: url(../img/fork_bg.png);
+    background-size: cover;
+    font-size: 16px;
+}
+
+
+.menuDishes {
+    text-align: center;
+
+}
+.menuCategory {
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.menuDay{
+    margin-bottom: 8px;
+    margin-top: 0px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.queue-status-container img{
+    float: left;
+    margin-right: 16px;
+}

@@ -8,6 +8,8 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
 
 
     rulistservice.getRestaurants(function (restaurants) {
+      $scope.rulist = restaurants;
+      rulistservice.getMenus(function (menus) {
 
         $ionicLoading.show({
           template: '<i class="button-icon icon ion-loading-a"></i><br>' + get_random_funny_wait_msgs()
@@ -21,7 +23,7 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           rulistservice.facebookFriendsAtThisRu(restaurant[0].id, loginservice).then(function (result) {
             $scope.facebookFriendsAtThisRu = result.data;
             $ionicLoading.hide();
-            console.log("FRIENDS: " + $scope.facebookFriendsAtThisRu);
+            //console.log("FRIENDS: ", JSON.stringify($scope.facebookFriendsAtThisRu));
           }, function (data) {
             // In case of error, just hide the loading
             $ionicLoading.hide();
@@ -29,6 +31,9 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
         }
 
         $scope.ru = restaurant[0];
+        $scope.menus = menus
+        $scope.ru = restaurant[0];
+        // console.log($scope.ru)
         $scope.setContextRu($scope.ru);
 
         /* estimated time */
@@ -69,8 +74,8 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/[[0-9](?=[a-zA-Z])(?=[^hH])/g, "$&<br />"));
           $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
         }
-      }
-    );
+      });
+    });
 
     /**
      * Restaurants are loaded
