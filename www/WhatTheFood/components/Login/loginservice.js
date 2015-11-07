@@ -145,9 +145,11 @@ function($http, $q, $sessionStorage, $localStorage) {
       var defer = $q.defer();
       openFB.api({path: '/me/friends',
                  success: function(friendlist) {
+                   console.log(friendlist);
                    defer.resolve(friendlist);
                  },
-                 error: function() {
+                 error: function(e) {
+                   console.log(e);
                    defer.reject('Impossible de récupérer la liste d\'amis');
                  }
       });
