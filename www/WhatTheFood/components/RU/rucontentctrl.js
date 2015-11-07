@@ -1,11 +1,22 @@
-wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading',
-  function ($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading) {
+wtf.controller('rucontentctrl', ['$scope', '$location', '$sce', '$state', '$stateParams', 'rulistservice', 'loginservice', '$ionicScrollDelegate', '$ionicLoading', 'leafletData',
+  function ($scope, $location, $sce, $state, $stateParams, rulistservice, loginservice, $ionicScrollDelegate, $ionicLoading, leafletData) {
 
     if (!loginservice.islogged()) {
       $state.go('login');
       return;
     }
 
+    $scope.map = {
+      center: {
+          lat: 0,
+          lng: 0,
+          zoom: 8
+      },
+      defaults: {
+          scrollWheelZoom: false
+      },
+      markers: {}
+    }
 
     rulistservice.getRestaurants(function (restaurants) {
       $scope.rulist = restaurants;
@@ -74,6 +85,21 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           $scope.operationalhours = $sce.trustAsHtml($scope.ru.operationalhours.replace(/[[0-9](?=[a-zA-Z])(?=[^hH])/g, "$&<br />"));
           $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
         }
+
+        $scope.map.center = {
+            lat: $scope.ru.lat,
+            lng: $scope.ru.lon,
+            zoom: 16
+        }
+
+        $scope.map.markers = {
+          main: {
+            lat: $scope.ru.lat,
+            lng: $scope.ru.lon,
+            message: $scope.ru.address
+          }
+        }
+
       });
     });
 
@@ -94,15 +120,25 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
     $scope.toggleGroup = function (group) {
       if ($scope.isGroupShown(group)) {
         $scope.shownGroup = null;
+        $location.hash("");
+        setTimeout(function () {
+          $ionicScrollDelegate.scrollTop(true);
+        }, 120);
       } else {
         $scope.shownGroup = group;
+        $location.hash("moreinfo");
+        setTimeout(function () {
+          $ionicScrollDelegate.anchorScroll(true);
+          // force map size refresh
+          leafletData.getMap().then(function(map) {
+            map.invalidateSize();
+          });
+        }, 120);
       }
-      setTimeout(function () {
-        $ionicScrollDelegate.scrollBottom(true);
-      }, 120);
     };
 
     $scope.isGroupShown = function (group) {
       return $scope.shownGroup === group;
     };
-  }]);
+
+}]);

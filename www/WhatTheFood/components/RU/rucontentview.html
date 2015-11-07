@@ -49,7 +49,7 @@
 
       <ion-list>
         <div ng-repeat="group in groups">
-          <ion-item class="item-stable item-icon-right"
+          <ion-item id="moreinfo" class="item-stable item-icon-right"
             ng-click="toggleGroup(group)"
             ng-class="{active: isGroupShown(group)}">
             <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
@@ -71,6 +71,14 @@
             <div class="item item-accordion" ng-show="ru.contact.email">
               <a href="mailto:{{ru.contact.email}}"><button class="button button-stable">&Eacute;crire<br />({{ru.contact.email}})</button>
               </a>
+            </div>
+            <div id="map" class="item item-accordion" ng-show="ru.lat">
+              <ion-content data-tap-disabled="true" has-header="true" has-tabs="true" overflow-scroll="true">
+                <div style="position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;">
+                  <leaflet defaults="map.defaults" center="map.center" markers="map.markers" width="100%" height="100%">
+                  </leaflet>
+                </div>
+              </ion-content>
             </div>
           </div>
         </ion-list>
