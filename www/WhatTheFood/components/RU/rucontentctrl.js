@@ -6,16 +6,17 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
       return;
     }
 
-    angular.extend($scope, {
+    $scope.map = {
       center: {
           lat: 0,
           lng: 0,
           zoom: 8
       },
       defaults: {
-            scrollWheelZoom: false
-        }
-    });
+          scrollWheelZoom: false
+      },
+      markers: {}
+    }
 
     rulistservice.getRestaurants(function (restaurants) {
       $scope.rulist = restaurants;
@@ -85,13 +86,19 @@ wtf.controller('rucontentctrl', ['$scope', '$sce', '$state', '$stateParams', 'ru
           $scope.access = $sce.trustAsHtml($scope.ru.access.replace(/[?]/g, "?<br />"));
         }
 
-        angular.extend($scope, {
-          center: {
-              lat: $scope.ru.lat,
-              lng: $scope.ru.lon,
-              zoom: 16
+        $scope.map.center = {
+            lat: $scope.ru.lat,
+            lng: $scope.ru.lon,
+            zoom: 16
+        }
+
+        $scope.map.markers = {
+          main: {
+            lat: $scope.ru.lat,
+            lng: $scope.ru.lon,
+            message: $scope.ru.address
           }
-        });
+        }
 
       });
     });
