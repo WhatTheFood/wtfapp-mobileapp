@@ -55,14 +55,4 @@ function($scope, $http, $state, rulistservice, $ionicLoading, loginservice, User
     $scope.data.searchQuery = '';
   };
 
-  $scope.swipeleft = function(ruId) {
-    setTimeout(function() {
-      $state.go('wtf.rueat', {ruId: ruId});
-    }, 500);
-  };
-
-  $scope.goEatAt = function ( ruId ) {
-    $state.go('wtf.rueat', {ruId: ruId});
-  };
-
 }]);
