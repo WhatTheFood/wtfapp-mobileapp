@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough','angularMoment'])
+var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'whatthefood.services', 'ngCordova', 'ngStorage', 'ng-walkthrough','angularMoment','leaflet-directive'])
 
   .run(['$ionicPlatform', function ($ionicPlatform,amMoment) {
     $ionicPlatform.ready(function () {
@@ -94,16 +94,6 @@ var wtf = angular.module('whatthefood', ['ionic', 'whatthefood.controllers', 'wh
           'menuContent': {
             templateUrl: 'WhatTheFood/components/RU/rucontentview.html',
             controller: 'rucontentctrl'
-          }
-        }
-      })
-
-      .state('wtf.rueat', {
-        url: '/rueat/:ruId',
-        views: {
-          'menuContent': {
-            templateUrl: 'WhatTheFood/components/RU/rueatview.html',
-            controller: 'rueatctrl'
           }
         }
       })

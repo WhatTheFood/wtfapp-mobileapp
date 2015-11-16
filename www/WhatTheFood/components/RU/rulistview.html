@@ -31,10 +31,6 @@
         <div class="subtitle">{{ru.openingNow}}</div>
         <div class="subtitle" ng-if="isFreshInfo(ru.queueInfoUpdatedAt)">{{ru.queueInfoUpdatedAt | amTimeAgo }} </div>
         <i class="icon ion-chevron-right"></i>
-        <ion-option-button class="button-info"
-          ng-click="goEatAt(ru.id)">
-          Je mange ici ce midi !
-        </ion-option-button>
       </ion-item>
 
           <div class="rumenu list" ng-if="$first" >
