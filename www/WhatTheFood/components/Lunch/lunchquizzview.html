@@ -8,41 +8,33 @@
         Pourquoi n'as-tu pas terminé ton plateau ?<br />
         <div class="small-question">Promis on cafte pas, c'est pour améliorer ton repas !</div>
       </div>
-      <div class="item response-lunch" ng-repeat="(cat, qs) in questions" ng-if="qs.length > 0">
+      <div class="item response-lunch">
 
-        <label class="item item-quizz" ng-if='qs.length > 0 && cat != "CONTEXT"'>
-          <label class="item item-input item-select item-quizz-select" ng-if='cat == "STARTER"'>
+        <label class="item item-quizz">
+          <div ng-hide="$parent.entree==null && $parent.plat==null && $parent.dessert==null">Tu as pris</div>
+          <label class="item item-input item-select item-quizz-select" ng-hide="$parent.entree==null">
             <div class="input-label">
-              En entrée, tu as pris
+              Entrée
             </div>
             <select class="select-food" ng-model="$parent.currentEntree" ng-options="r as r.name for r in entree"></select>
           </label>
-          <label class="item item-input item-select item-quizz-select" ng-if='cat == "MAIN"'>
+          <label class="item item-input item-select item-quizz-select" ng-hide="$parent.plat==null">
             <div class="input-label">
-              En plat, tu as pris
+              Plat
             </div>
             <select class="select-food" ng-model="$parent.currentPlat" ng-options="r as r.name for r in plat"></select>
           </label>
-          <label class="item item-input item-select item-quizz-select" ng-if='cat == "DESSERT"'>
+          <label class="item item-input item-select item-quizz-select" ng-hide="$parent.dessert==null">
             <div class="input-label">
-              En dessert, tu as pris
+              Dessert
             </div>
             <select class="select-food" ng-model="$parent.currentDessert" ng-options="r as r.name for r in dessert"></select>
           </label>
         </label>
 
-        <label class="item item-quizz" ng-repeat="q in qs">
+        <label class="item item-quizz" ng-repeat="q in questions">
           <div>{{q.question}}</div>
-
-          <div ng-if="q.multiselect">
-            <div class="row" ng-repeat="line in q.answers">
-              <div class="col" ng-repeat="(i, a) in line">
-                <ion-checkbox ng-model="q.value[i]">{{a}}</ion-checkbox>
-              </div>
-            </div>
-          </div>
-
-          <ion-radio ng-if="!q.multiselect" ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.value" ng-value="{{i}}">{{a}}</ion-radio>
+          <ion-radio ng-repeat="(i, a) in q.answers" name="{{q.target}}" ng-model="q.value" ng-value="{{i}}">{{a}}</ion-radio>
         </label>
 
       </div>
