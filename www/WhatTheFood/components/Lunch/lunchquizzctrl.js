@@ -115,7 +115,7 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
           'answers': [{0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop gras'},
                       {3: 'Trop fade', 4: 'Trop froid', 5: 'Trop servi'},
                       {6: 'Mais j\'ai bien aimé hein!'}],
-          'value': [false, false, false, false, false, // seasoning
+          'value': [false, false, false, false, false, false, // seasoning
                     false], // enjoyed_my_meal
           'target': ['seasoning', 'enjoyed_my_meal'],
           'multiselect': true // you can check multiple values
