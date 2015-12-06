@@ -36,8 +36,6 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
         $state.go('wtf.lunch');
         return;
       }
-      // Counter
-      var counter = 0; // ???
       // Get the food categories
       var entrees = feedback.menu.dishes.filter(function (m) {
         return m.category == "STARTER";
@@ -48,14 +46,14 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
       var desserts = feedback.menu.dishes.filter(function (m) {
         return m.category == "DESSERT"
       });
-      var counter = 0;
+      var counter = 0; // number of wasted dish
       if (rulistservice.feedback[0] > 0 && entrees.length > 0) {
         $scope.entree = entrees;
         $scope.currentEntree = $scope.entree[0];
         $scope.currentEntree.feedback = [];
         counter++;
       }
-      if (rulistservice.feedback[1] >0 && plats.length > 0) {
+      if (rulistservice.feedback[1] > 0 && plats.length > 0) {
         $scope.plat = plats;
         $scope.currentPlat = $scope.plat[0];
         $scope.currentPlat.feedback = [];
@@ -77,41 +75,34 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
       }
 
       /*
-       * Gâché 1 plat : 1 question aléatoire nourriture
-       * Gâché 2 plats : 1 question aléatoire nourriture et 1 contexte
-       * Gâché 3 ou 4 plats : 2 questions aléatoires nourriture et 1 contexte
+       * Gâché 1 plat : 1 question nourriture
+       * Gâché 2 plats : 1 question nourriture et 1 contexte aléatoire
+       * Gâché 3 ou 4 plats : 2 questions nourriture et 1 contexte aléatoire
        * Pain -> contexte uniquement
        * Préparation du plat -> uniquement si reste plat
-       * Ru convivial -> une seule fois
+       * Ru convivial -> une seule fois (TODO)
        *
        * ルールだよ！ Those are the ruuuules!
        */
 
-      $scope.questions = [];
-      if (counter === 1) {
-        /* 1 seul gaché */
-        if (rulistservice.feedback[3] > 0) {
-          /* mais c'est du pain */
-          $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
-        } else {
-          /* pour le reste */
-          $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
-        }
-      } else if (counter === 2) {
-        /* 2 plats gachés */
-        $scope.questions.push(questions['food'][(Math.random() * questions['food'].length | 0)]);
-        $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
-      } else if (counter >= 3) {
-        /* 3 plats ou plus gachés */
-        rand1 = (Math.random() * questions['food'].length | 0);
-        rand2 = rand1;
-        while (rand1 === rand2) {
-          rand2 = (Math.random() * questions['food'].length | 0);
-        }
-        $scope.questions.push(questions['food'][rand1]);
-        $scope.questions.push(questions['food'][rand2]);
-        $scope.questions.push(questions['context'][(Math.random() * questions['context'].length | 0)]);
-      }
+      $scope.questions = {'STARTER': [], 'MAIN': [], 'DESSERT': [], 'CONTEXT': []};
+
+      // multiselect question always displayed for each meal
+      if($scope.entree != null)
+        $scope.questions['STARTER'].push(questions['food'][0]);
+      if($scope.plat != null)
+        $scope.questions['MAIN'].push(questions['food'][0]);
+      if($scope.dessert != null)
+        $scope.questions['DESSERT'].push(questions['food'][0]);
+
+      // add a context question
+      var random_ctx = questions['context'][(Math.random() * questions['context'].length | 0)];
+      if(counter > 1 || (counter == 1 && $scope.pain != null))
+        $scope.questions['CONTEXT'].push(random_ctx);
+
+      // add the cooking question
+      if(counter > 2 && $scope.plat != null)
+        $scope.questions['MAIN'].push(questions['food'][1]);
     }
 
 
@@ -119,15 +110,20 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
     questions = {
       'food': [
         {
-          'question': 'Serais-tu pret à reprendre ce plat la prochaine fois ?',
-          'answers': {0: 'Oui', 1: 'Non ce n\'était pas bon', 2: 'Non je n\'aime pas ça'},
-          'target': 'enjoyed_my_meal',
-          'value': null
+          // this first question is special and does not display the same way
+          'question': 'Comment était la préparation de ce plat ?',
+          'answers': [{0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop gras'},
+                      {3: 'Trop fade', 4: 'Trop froid', 5: 'Trop servi'},
+                      {6: 'Mais j\'ai bien aimé hein!'}],
+          'value': [false, false, false, false, false, // seasoning
+                    false], // enjoyed_my_meal
+          'target': ['seasoning', 'enjoyed_my_meal'],
+          'multiselect': true // you can check multiple values
         },
         {
           'question': 'Comment était la préparation de ce plat ?',
-          'answers': {0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop huileux', 3: 'Trop fade', 4: 'Pas assez chaud'},
-          'target': 'seasoning',
+          'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
+          'target': 'cooking',
           'value': null
         }
       ],
@@ -156,27 +152,7 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
           'target': 'convivial_restaurant',
           'value': null
         }
-      ],
-      'specific': { // TODO
-        // 'entree': {
-        //   'question': 'Comment était la préparation de l\'entrée ?',
-        //   'answers': {0: '', 1: 'Comme il faut', 2: ''},
-        //   'target': 'cooking_appetizer',
-        //   'value': null
-        // },
-        'plat': {
-          'question': 'Comment était la préparation de ce plat ?',
-          'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
-          'target': 'cooking',
-          'value': null
-        },
-        // 'dessert': {
-        //   'question': 'Comment était la préparation de ce plat ?',
-        //   'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
-        //   'target': 'cooking',
-        //   'value': null
-        // }
-      }
+      ]
     };
 
     $scope.date = new Date();
@@ -214,8 +190,13 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
         }
       });
       questions['food'].forEach(function (q, index) {
-        if (q.value !== null) {
-          quizz[q.target] = q.value;
+        if(q.multiselect) {
+          quizz[q.target[0]] = q.value.slice(0, 6); // seasoning
+          quizz[q.target[1]] = q.value[6] ? 1 : 0; // enjoyed_my_meal
+        } else {
+          if (q.value !== null) {
+            quizz[q.target] = q.value;
+          }
         }
       });
 
