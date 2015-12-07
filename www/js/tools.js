@@ -14,3 +14,16 @@ function findBy(what, source, val) {
         return +obj[what] === +val;
     })[ 0 ];
 }
+
+/* usage:
+ * var l = [1, 2, 3, 4, 5, 6, 7];
+ * cut(l, 3);
+ * // result : [[1, 2, 3], [4, 5, 6], [7]]
+*/
+function cut(iterable, chunksize) {
+    var result = [];
+    for(i=0; i < iterable.length; i += chunksize) {
+        result.push(iterable.slice(i, i+chunksize));
+    }
+    return result;
+}
