@@ -89,11 +89,11 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
 
       // multiselect question always displayed for each meal
       if($scope.entree != null)
-        $scope.questions['STARTER'].push(questions['food'][0]);
+        $scope.questions['STARTER'].push(cloneJson(questions['food'][0]));
       if($scope.plat != null)
-        $scope.questions['MAIN'].push(questions['food'][0]);
+        $scope.questions['MAIN'].push(cloneJson(questions['food'][0]));
       if($scope.dessert != null)
-        $scope.questions['DESSERT'].push(questions['food'][0]);
+        $scope.questions['DESSERT'].push(cloneJson(questions['food'][0]));
 
       // add a context question
       var random_ctx = questions['context'][(Math.random() * questions['context'].length | 0)];
@@ -121,7 +121,7 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
           'multiselect': true // you can check multiple values
         },
         {
-          'question': 'Comment était la préparation de ce plat ?',
+          'question': 'Comment était la cuisson de ce plat ?',
           'answers': {0: 'Pas assez cuit', 1: 'Bien cuit', 2: 'Trop cuit'},
           'target': 'cooking',
           'value': null

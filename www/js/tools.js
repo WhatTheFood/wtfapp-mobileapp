@@ -27,3 +27,7 @@ function cut(iterable, chunksize) {
     }
     return result;
 }
+
+function cloneJson(object) {
+    return JSON.parse(JSON.stringify(object)); 
+}
