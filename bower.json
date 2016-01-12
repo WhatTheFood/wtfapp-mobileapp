@@ -12,7 +12,8 @@
     "angular-moment": "0.10.3",
     "angular-animate": "angular/bower-angular-animate#1.4.7",
     "moment-timezone": "~0.4.1",
-    "angular-leaflet-directive": "~0.9.0"
+    "angular-leaflet-directive": "~0.9.0",
+    "angular-simple-logger": "~0.1.5"
   },
   "resolutions": {
     "angular": "1.4.7",
