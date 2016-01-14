@@ -2,11 +2,8 @@
   "name": "ionic-whatthefood",
   "version": "1.0.0",
   "description": "Ionic-WhatThefood: An Ionic project",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
-    "node-gyp": "^3.0.3",
     "bower": "^1.6.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
@@ -15,8 +12,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-util": "^3.0.7",
+    "node-gyp": "^3.2.1",
     "node-sass": "^3.4.1",
-    "shelljs": "^0.5.3"
+    "shelljs": "^0.5.3",
+    "yargs": "^3.31.0"
   },
   "cordovaPlugins": [
     "com.ionic.keyboard",

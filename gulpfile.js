@@ -9,12 +9,33 @@ var sh = require('shelljs');
 
 var minify = require('gulp-minify');
 
+var argv = require('yargs').argv;
+var mid = 0;
+
+for (arg in argv){
+  if (argv[arg] === true){
+    mid = parseInt(arg,16); // yeah, counting to f ;)
+  }
+}
+var libs= [
+  "./www/lib/ionic/release/js/ionic.bundle.js",
+  "./www/lib/moment/min/moment.min.js","./www/lib/angular-moment/angular-moment.min.js","./www/lib/moment/locale/fr.js","./www/lib/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js","./www/lib/openfb/openfb.js",
+  "./www/lib/ngstorage/ngStorage.min.js","./www/lib/leaflet/dist/leaflet.js","./www/lib/angular-simple-logger/dist/angular-simple-logger.js","./www/lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js","./www/lib/ngCordova/dist/ng-cordova.min.js","./www/cordova.js"
+  //, /* BUGGY */ "./www/lib/ng-walkthrough/ng-walkthrough.js"
+]
+
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  js: ['./www/js/*.js','./www/WhatTheFood/shared/*.js','./www/WhatTheFood/shared/**/*.js','./www/WhatTheFood/components/**/*.js']
-};
+  js: [
+    './www/js/*.js','./www/WhatTheFood/shared/*.js','./www/WhatTheFood/shared/**/*.js','./www/WhatTheFood/components/**/*.js'
+  ],
+  lib: libs,
 
+  lib1: libs.slice(0,mid),
+  mid : libs[mid],
+  lib2: libs.slice(mid + 1)
+};
 
 /*
  gulp.task('watch', function() {
@@ -22,16 +43,48 @@ var paths = {
  });
  */
 
+gulp.task('dbg', ['concat-lib1','concat-lib2','concat-mid']);
 
-gulp.task('concat', function() {
+gulp.task('concat-lib1',function(){
+  return gulp.src(paths.lib1)
+    .pipe(concat('lib1-bundle.js'))
+    .pipe(gulp.dest('./www/dist/'));
+})
+gulp.task('concat-lib2',function(){
+  return gulp.src(paths.lib2)
+    .pipe(concat('lib2-bundle.js'))
+    .pipe(gulp.dest('./www/dist/'));
+})
+gulp.task('concat-mid',function(){
+  return gulp.src(paths.mid)
+    .pipe(concat('mid-bundle.js'))
+    .pipe(gulp.dest('./www/dist/'));
+})
+
+
+gulp.task('concat', ['concat-src','concat-lib']);
+
+gulp.task('concat-all', ['minify'],function(){
+  return gulp.src(['./www/dist/lib-bundle-min.js','./www/dist/app-bundle-min.js'])
+    .pipe(concat('bundle-min.js'))
+    .pipe(gulp.dest('./www/dist/'));
+})
+
+gulp.task('concat-src', function() {
   return gulp.src(paths.js)
     .pipe(concat('app-bundle.js'))
     .pipe(gulp.dest('./www/dist/'));
 });
 
+gulp.task('concat-lib', function() {
+  return gulp.src(paths.lib)
+    .pipe(concat('lib-bundle.js'))
+    .pipe(gulp.dest('./www/dist/'));
+});
+
 
 gulp.task('minify', ['concat'],function() {
-  return gulp.src('./www/dist/app-bundle.js')
+  return gulp.src(['./www/dist/app-bundle.js','./www/dist/lib-bundle.js'])
     .pipe(minify({mangle:false}))
     .pipe(gulp.dest('./www/dist'));
 });
