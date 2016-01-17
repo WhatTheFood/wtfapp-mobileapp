@@ -114,7 +114,7 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
           'question': 'Comment était la préparation de ce plat ?',
           'answers': [{0: 'Trop salé', 1: 'Trop sucré', 2: 'Trop gras'},
                       {3: 'Trop fade', 4: 'Trop froid', 5: 'Trop servi'},
-                      {6: 'Mais j\'ai bien aimé hein!'}],
+                      {6: 'Mais j\'ai bien aimé hein! (coche si tu en reprendras la prochaine fois)'}],
           'value': [false, false, false, false, false, false, // seasoning
                     false], // enjoyed_my_meal
           'target': ['seasoning', 'enjoyed_my_meal'],
@@ -172,35 +172,42 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
       var feedback = {};
 
       feedback.dishes = [];
-      var thrownsDishes = [$scope.currentEntree,$scope.currentPlat,$scope.currentDessert,$scope.currentPain];
+      var thrownDishes = [$scope.currentEntree,$scope.currentPlat,$scope.currentDessert,$scope.currentPain];
       for (var i = 0 ;i<4;i++){
-        if (thrownsDishes[i]){
-          feedback.dishes.push({
-              dish: thrownsDishes[i],
-              thrown: rulistservice.feedback[i]
+        if (thrownDishes[i]){
+          if(thrownDishes[i].category in $scope.questions) {
+            /* parse answers */
+            thrownDishes[i].feedback = {};
+            for(var j = 0; j<$scope.questions[thrownDishes[i].category].length; j++) {
+                var q = $scope.questions[thrownDishes[i].category][j];
+                if(q.multiselect) {
+                    thrownDishes[i].feedback[q.target[0]] = q.value.slice(0, 6); // seasoning
+                    thrownDishes[i].feedback[q.target[1]] = q.value[6] ? 1 : 0; // enjoyed_my_meal
+                } else {
+                    if (q.value !== null) {
+                        thrownDishes[i].feedback[q.target] = q.value;
+                    }
+                }
+            }
+
+            feedback.dishes.push({
+                dish: thrownDishes[i],
+                thrown: rulistservice.feedback[i]
             });
+          }
         }
       }
 
       /* get quizz answers */
       var quizz = {};
-      questions['context'].forEach(function (q, index) {
+      $scope.questions['CONTEXT'].forEach(function (q, index) {
         if (q.value !== null) {
           quizz[q.target] = q.value;
         }
       });
-      questions['food'].forEach(function (q, index) {
-        if(q.multiselect) {
-          quizz[q.target[0]] = q.value.slice(0, 6); // seasoning
-          quizz[q.target[1]] = q.value[6] ? 1 : 0; // enjoyed_my_meal
-        } else {
-          if (q.value !== null) {
-            quizz[q.target] = q.value;
-          }
-        }
-      });
 
       feedback.quizz = quizz;
+
       console.info(feedback);
       /* send feedback outta spaaace */
       var req = {
