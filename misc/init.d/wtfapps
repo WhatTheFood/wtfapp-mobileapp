@@ -8,16 +8,17 @@ touch /var/lock/wtfapps
 
 WTFAPP=/home/wtf/wtfapp-mobileapp
 WTFAPI=/home/wtf/wtfapp-website
+USER=admin
 
 # Carry out specific functions when asked to by the system
 case "$1" in
   start)
     echo "Starting script wtfapps "
     cd $WTFAPP
-    fuser nohup.out || sudo -u wtf nohup ./start.sh &
+    fuser nohup.out || sudo -u $USER nohup ./start.sh &
 
     cd WTFAPI
-    fuser /home/admin/wtfapp-website/api.logs || sudo -u wtf ./start.sh
+    fuser /home/admin/wtfapp-website/api.logs || sudo -u $USER ./start.sh
 
     ;;
   stop)
