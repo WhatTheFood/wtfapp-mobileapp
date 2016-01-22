@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash
 # /etc/init.d/wtfapps
 # startup script for wtf applications (api+website)
 
@@ -6,25 +6,23 @@
 touch /var/lock/wtfapps
 
 
+USER=admin
 WTFAPP=/home/$USER/wtfapp-mobileapp
 WTFAPI=/home/$USER/wtfapp-website
-USER=admin
 
 # Carry out specific functions when asked to by the system
 case "$1" in
   start)
     echo "Starting script wtfapps "
     cd $WTFAPP
-    fuser $WTFAPP/nohup.out || sudo -u $USER nohup ./start.sh &
-
-    cd WTFAPI
+    fuser $WTFAPP/start.sh || sudo -u $USER  screen -d -m  ./start.sh
+    cd $WTFAPI
+echo    "fuser $WTFAPI/api.logs || sudo -u $USER ./start.sh"
     fuser $WTFAPI/api.logs || sudo -u $USER ./start.sh
 
     ;;
   stop)
-    echo "Stopping script blah"
-    echo "Could do more here"
-    fuser -k $WTFAPP/nohup.out $WTFAPI/api.logs
+    fuser -k $WTFAPP/start.sh $WTFAPI/api.logs
     ;;
   *)
     echo "Usage: /etc/init.d/wtfapps {start|stop}"
