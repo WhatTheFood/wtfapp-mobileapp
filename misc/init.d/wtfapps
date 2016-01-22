@@ -15,15 +15,16 @@ case "$1" in
   start)
     echo "Starting script wtfapps "
     cd $WTFAPP
-    fuser nohup.out || sudo -u $USER nohup ./start.sh &
+    fuser $WTFAPP/nohup.out || sudo -u $USER nohup ./start.sh &
 
     cd WTFAPI
-    fuser /home/admin/wtfapp-website/api.logs || sudo -u $USER ./start.sh
+    fuser $WTFAPI/api.logs || sudo -u $USER ./start.sh
 
     ;;
   stop)
     echo "Stopping script blah"
     echo "Could do more here"
+    fuser -k $WTFAPP/nohup.out $WTFAPI/api.logs
     ;;
   *)
     echo "Usage: /etc/init.d/wtfapps {start|stop}"
