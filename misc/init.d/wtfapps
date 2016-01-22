@@ -6,8 +6,8 @@
 touch /var/lock/wtfapps
 
 
-WTFAPP=/home/wtf/wtfapp-mobileapp
-WTFAPI=/home/wtf/wtfapp-website
+WTFAPP=/home/$USER/wtfapp-mobileapp
+WTFAPI=/home/$USER/wtfapp-website
 USER=admin
 
 # Carry out specific functions when asked to by the system
