@@ -1,0 +1,33 @@
+#!/bin/bash -v
+# /etc/init.d/wtfapps
+# startup script for wtf applications (api+website)
+
+# Some things that run always
+touch /var/lock/wtfapps
+
+
+WTFAPP=/home/wtf/wtfapp-mobileapp
+WTFAPI=/home/wtf/wtfapp-website
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting script wtfapps "
+    cd $WTFAPP
+    fuser nohup.out || sudo -u wtf nohup ./start.sh &
+
+    cd WTFAPI
+    fuser /home/admin/wtfapp-website/api.logs || sudo -u wtf ./start.sh
+
+    ;;
+  stop)
+    echo "Stopping script blah"
+    echo "Could do more here"
+    ;;
+  *)
+    echo "Usage: /etc/init.d/wtfapps {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
