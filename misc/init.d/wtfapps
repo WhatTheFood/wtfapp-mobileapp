@@ -17,7 +17,6 @@ case "$1" in
     cd $WTFAPP
     fuser $WTFAPP/start.sh || sudo -u $USER  screen -d -m  ./start.sh
     cd $WTFAPI
-echo    "fuser $WTFAPI/api.logs || sudo -u $USER ./start.sh"
     fuser $WTFAPI/api.logs || sudo -u $USER ./start.sh
 
     ;;
