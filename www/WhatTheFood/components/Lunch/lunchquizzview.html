@@ -1,5 +1,12 @@
 <ion-view view-title="Mon plateau" >
   <ion-content ng-init="init()">
+
+    <style>
+      .answer-checked {
+        background-color:green;
+      }
+    </style>
+
     <div class="list item-text-wrap no-border-list">
       <div class="item fork-red-bg fork-red-content">
         <div class="current-date">{{ date | amDateFormat:'dddd Do MMMM'  }}</div>
@@ -37,7 +44,7 @@
           <div ng-if="q.multiselect">
             <div class="row" ng-repeat="line in q.answers">
               <div class="col" ng-repeat="(i, a) in line">
-                <ion-checkbox ng-model="q.value[i]">{{a}}</ion-checkbox>
+                <ion-checkbox ng-class="{'answer-checked': q.value[i] }" ng-model="q.value[i]">{{a}} - {{q.value[i]}}</ion-checkbox>
               </div>
             </div>
           </div>
