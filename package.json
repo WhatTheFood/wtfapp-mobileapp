@@ -2,13 +2,14 @@
   "name": "ionic-whatthefood",
   "version": "1.0.0",
   "description": "Ionic-WhatThefood: An Ionic project",
-  "dependencies": {},
+  "dependencies": {
+    "ionic": "^1.7.15"
+  },
   "devDependencies": {
     "bower": "^1.6.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-minify": "0.0.5",
-    "gulp-minify-css": "^1.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-util": "^3.0.7",
@@ -25,5 +26,12 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-whitelist"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "locator": "browser"
+    }
+  ]
+
 }

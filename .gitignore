@@ -11,6 +11,8 @@ platforms/
 plugins/
 node_modules/
 build/
+android/
+
 
 *.iml
 *.keystore
