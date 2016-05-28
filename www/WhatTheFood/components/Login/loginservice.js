@@ -1,7 +1,7 @@
-wtf.factory('loginservice', ['$http', '$q', '$sessionStorage', '$localStorage',
-function($http, $q, $sessionStorage, $localStorage) {
+wtf.factory('loginservice', ['$http', '$q', '$localStorage',
+function($http, $q, $localStorage) {
 
-  var $storage = $sessionStorage.$default({
+  var $storage = $localStorage.$default({
     facebook: false,
     token: null
   });
@@ -136,7 +136,6 @@ function($http, $q, $sessionStorage, $localStorage) {
     logout: function () {
       factory.settoken(null);
       $storage.facebook = false;
-      $sessionStorage.$reset();
       $localStorage.$reset();
       return false;
     },
