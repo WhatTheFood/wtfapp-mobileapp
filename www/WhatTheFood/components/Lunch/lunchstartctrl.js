@@ -38,6 +38,11 @@ function($scope, $sce, $state, $stateParams, rulistservice, loginservice, $ionic
       });
       return;
     }
+    if (!$scope.currentRu.menusToday) {
+      $ionicPopup.alert({title: "Désolé, nous ne connaissons pas le menu de ce restaurant aujourd'hui :("});
+      $state.go('wtf.lunch');
+			return;
+    }
     if(entree === 0 && plat === 0 && dessert === 0 && pain === 0) {
       rulistservice.feedback = [entree, plat, dessert, pain];
       $state.go('wtf.thanks');
