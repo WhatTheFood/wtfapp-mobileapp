@@ -132,6 +132,7 @@ function($http, $q, $localStorage) {
     logout: function () {
       factory.settoken(null);
       $storage.facebook = false;
+      $sessionStorage.$reset();
       $localStorage.$reset();
       return false;
     },
