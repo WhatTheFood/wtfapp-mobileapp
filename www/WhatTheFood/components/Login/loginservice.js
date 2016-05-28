@@ -176,7 +176,6 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
             settoken: function (data) {
                 $storage.token = data;
                 $localStorage.token = data;
-                $localStorage.tkn = data;
             }
         };
 
