@@ -1,5 +1,5 @@
-wtf.controller('basectrl', ['$scope', '$state', '$cordovaInAppBrowser','loginservice',
-  function($scope, $state, $cordovaInAppBrowser,loginservice) {
+wtf.controller('basectrl', ['$scope', '$state', '$cordovaInAppBrowser','loginservice','$localStorage','$sessionStorage',
+  function($scope, $state, $cordovaInAppBrowser,loginservice,$localStorage,$sessionStorage) {
 
     $scope.ru = undefined;
     $scope.showQueue = function () {
@@ -26,6 +26,13 @@ wtf.controller('basectrl', ['$scope', '$state', '$cordovaInAppBrowser','loginser
 
   // RESET   localStorage["walkthrough"] = undefined;
 
+    if (! $sessionStorage.facebook) {
+      $sessionStorage.facebook = $localStorage.facebook;
+    }
+    if (! $sessionStorage.token) {
+      $sessionStorage.token = $localStorage.token;
+    }
+    
   $scope.clickOnRuList = function() {
     var walkthrough;
     try {
