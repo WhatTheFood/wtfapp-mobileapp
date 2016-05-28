@@ -4,7 +4,8 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
         var $storage = $sessionStorage.$default(
             $localStorage.$default({
                 facebook: false,
-                token: null
+                token: null,
+                tkn:null
             })
         );
 
@@ -175,6 +176,7 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
             settoken: function (data) {
                 $storage.token = data;
                 $localStorage.token = data;
+                $localStorage.tkn = data;
             }
         };
 

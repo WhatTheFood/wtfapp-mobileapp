@@ -30,7 +30,7 @@ wtf.controller('basectrl', ['$scope', '$state', '$cordovaInAppBrowser','loginser
       $sessionStorage.facebook = $localStorage.facebook;
     }
     if (! $sessionStorage.token) {
-      $sessionStorage.token = $localStorage.token;
+      $sessionStorage.token = $localStorage.tkn;
     }
     
   $scope.clickOnRuList = function() {
