@@ -5,6 +5,10 @@
   "dependencies": {
     "ionic": "^1.7.15"
   },
+  "scripts": {
+    "build": "./node_modules/.bin/gulp",
+    "ionic": "./node_modules/.bin/ionic serve -a -b -d"
+  },
   "devDependencies": {
     "bower": "^1.6.5",
     "gulp": "^3.9.0",
