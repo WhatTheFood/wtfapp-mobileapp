@@ -1,4 +1,4 @@
-wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginservice, $http, $localStorage) {
+wtf.factory('User', ['loginservice', '$http', '$localStorage', '$sessionStorage', function (loginservice, $http, $localStorage,$sessionStorage) {
 
   var factory = {
     /*Warning, there may be a problem with that:
@@ -29,7 +29,11 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
       });
     },
 
-    query: function (userId) {
+    query: function (userId,reset) {
+      if (reset){
+        console.log("reset asked");
+        loginservice.logout();
+      }
       if (userId !== null && userId !== undefined) {
         var req = {
           method: 'GET',
@@ -41,8 +45,7 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
           }
         };
 
-        return $http(req)
-        .success(function (user, status, headers, config) {
+        return $http(req).success(function (user) {
             factory.storage = user; // ??
             if (user.lastQueueFeeback){
               var lastQueueFeeback = user.lastQueueFeeback;
@@ -52,9 +55,9 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', function (loginse
               }
             }
           return user;
-        })
-        .error(function (data, status, headers, config) {
-          console.error("Error: ", data);
+        }).error(function (error) {
+          console.log("Error, trigger with reset : ", error);
+          factory.query(user,true);
           return data;
         });
       }
