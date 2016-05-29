@@ -59,7 +59,7 @@
                 <div class="list item-text-wrap no-border-list no-padding lunchmenu">
                     <div class="podium">
                     <div class="item row podium-{{$index}}"  ng-repeat="restaurant in restaurants.scores">
-                        <div class="col">
+                        <div class="col-33 col-center">
                             <div class="coupe-orange" ng-if="$index < 3">
                                 <div class="index">{{$index + 1}}</div>
                             </div>
@@ -67,7 +67,7 @@
                                 <div class="index">{{$index + 1}}</div>
                             </div>
                         </div>
-                        <div class="col-66 col-center">
+                        <div class="col col-67 col-center">
                             <div class="row">{{restaurant.name}}</div>
                             <div class="row">{{restaurant.score || 0}} PTS</div>
                         </div>
@@ -88,7 +88,7 @@
 
                     <div class="podium">
                         <div class="item row podium-{{$index}}"  ng-repeat="friend in friends.scores">
-                            <div class="col">
+                            <div class="col col-center">
                                 <div class="coupe-orange" ng-if="$index < 3">
                                     <div class="index">{{$index + 1}}</div>
                                 </div>
@@ -96,10 +96,10 @@
                                     <div class="index">{{$index + 1}}</div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col col-center">
                                 <img src="" ng-src="{{ friend.picture }}" class="avatar-min" />
                             </div>
-                            <div class="col-66 col-center">
+                            <div class="col col-50 col-center">
                                 <div class="row">{{friend.name}}</div>
                                 <div class="row">{{friend.score || 0}} PTS</div>
                             </div>

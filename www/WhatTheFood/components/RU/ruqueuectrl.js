@@ -16,10 +16,8 @@ function ($scope, $state, $stateParams, $ionicHistory, $ionicLoading, $http, rul
 
       rulistservice.getRestaurants(function (restaurants) {
         $scope.rulist = restaurants;
-        rulistservice.getMenus(function (menus) {
-          rulistservice.updateUserPreference(user);
-          $scope.currentRu = rulistservice.getDefaultCurrentRu();
-        });
+        rulistservice.updateUserPreference(user);
+        $scope.currentRu = rulistservice.getDefaultCurrentRu();
       });
     });
   };

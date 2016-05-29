@@ -333,10 +333,9 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
         }
 
         var req = {
-          method: 'PUT',
+          method: 'GET',
           dataType: "json",
-          url: loginservice.getServerAPI() + '/users/me/friends/restaurant',
-          data: {"restaurantId": id},
+          url: loginservice.getServerAPI() + '/users/me/friends/restaurant/' + id,
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + loginservice.gettoken()
@@ -347,7 +346,7 @@ wtf.factory('rulistservice', ['$cordovaGeolocation', '$http', '$localStorage', '
           return data;
 
         }).error(function (data, status, headers, config) {
-          console.log("Error - fbfriend: " + data);
+          console.log("Error - fbfriend: ", data);
           return data;
         });
       }
