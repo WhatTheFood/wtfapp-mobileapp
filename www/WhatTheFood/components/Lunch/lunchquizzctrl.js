@@ -234,10 +234,10 @@ wtf.controller('lunchquizzctrl', ['$http', '$scope', '$sce', '$state', '$statePa
           $state.go('wtf.thanks');
           return data;
         })
-        .error(function (data, status, headers, config) {
+        .error(function (error) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          console.log(data);
+          console.log(error);
           return "error";
         });
     };

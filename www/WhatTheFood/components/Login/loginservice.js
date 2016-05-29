@@ -4,16 +4,15 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
         var $storage = $sessionStorage.$default(
             $localStorage.$default({
                 facebook: false,
-                token: null,
-                tkn:null
+                token: null
             })
         );
 
 
-        // var serverAPI = "/api";
+
         // Debug handy
-        // var serverAPI = "http://localhost:5000/api"; // Local
-        var serverAPI = "https://m.whatthefoodapp.fr/api"; //prod
+        var serverAPI = "//localhost:5000/api";
+        serverAPI = "/api"; // prod
 
         var factory = {
 
@@ -149,7 +148,7 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
                 openFB.api({
                     path: '/me/friends',
                     success: function (friendlist) {
-                        console.log(friendlist);
+                        // console.log(friendlist);
                         defer.resolve(friendlist);
                     },
                     error: function (e) {
