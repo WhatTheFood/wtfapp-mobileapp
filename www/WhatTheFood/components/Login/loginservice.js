@@ -12,7 +12,7 @@ wtf.factory('loginservice', ['$http', '$q', '$localStorage', '$sessionStorage',
 
         // Debug handy
         var serverAPI = "//localhost:5000/api";
-        serverAPI = "/api"; // prod
+        serverAPI = "https://m.whatthefoodapp.fr"; // prod
 
         var factory = {
 
