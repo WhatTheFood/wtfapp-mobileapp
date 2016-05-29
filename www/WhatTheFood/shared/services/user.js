@@ -57,7 +57,7 @@ wtf.factory('User', ['loginservice', '$http', '$localStorage', '$sessionStorage'
           return user;
         }).error(function (error) {
           console.log("Error, trigger with reset : ", error);
-          factory.query(user,true);
+          factory.query(userId,true);
           return data;
         });
       }
