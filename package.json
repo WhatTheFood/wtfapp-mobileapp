@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/gulp",
-    "ionic": "./node_modules/.bin/ionic serve -a -b -d"
+    "ionic": "./node_modules/.bin/ionic serve -a -b -d",
+    "serve": "./node_modules/.bin/ionic serve --nogulp --address localhost -b -d"
   },
   "devDependencies": {
     "bower": "^1.6.5",
